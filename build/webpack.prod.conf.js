@@ -118,13 +118,13 @@ function getEntry(globPath) {
   return entries;
 }
 
-var pages = getEntry('./src/modules/**/*.html');
+var pages = getEntry('./src/modules/**/*.js');
 
 for (var pathname in pages) {
   // 配置生成的html文件，定义路径等
   var conf = {
     filename: pathname.replace("modules/","") + '.html',
-    template: pages[pathname], // 模板路径
+    template: 'index.html', // 模板路径
     chunks: [pathname, 'vendor', 'manifest'], // 每个html引用的js模块
     inject: true              // js插入位置
   };

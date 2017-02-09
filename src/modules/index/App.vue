@@ -2,6 +2,7 @@
   <div id="app">
     <img class="logo" src="../../assets/logo.png">
     <hello></hello>
+	<a href="/authorize.html">授权</a>
     <p>
       Welcome to your Vue.js app!
     </p>
