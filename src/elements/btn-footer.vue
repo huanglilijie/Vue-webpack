@@ -14,11 +14,11 @@
       }
     },
     props: [
-      'isItemSelected'
+      'is-item-selected'
     ],
     computed: {
       itemSelected () {
-        return this.isItemSelected !== null
+        return this.selectedItem !== null
       }
     },
     methods: {

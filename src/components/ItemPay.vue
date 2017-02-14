@@ -16,7 +16,7 @@
    	<p class="agreen">
    		<span>我同意意向金规则</span><input type="checkbox" />
    	</p>
-    <btn-footer :isItemSelected="selectedItem">开启宠爱之旅</btn-footer>
+    <btn-footer :is-item-selected="selectedItem">开启宠爱之旅</btn-footer>
   </div>
 </template>
 
@@ -51,13 +51,14 @@
       // 选中后页面跳转
       submit () {
         if (!this.selectedItem) {
+          this.$alert('请选择支付方式')
           return false
         }
         // 这里发起支付请求
         // 请求成功后跳转到下个路由
         // 注意要使用token防止重复下单
-        this.$router.push({
-          path: '/item/' + this.$parent.id + '/' + this.$parent.token + '/success',
+        this.$router.go({
+          path: '/item/itemSuccess',
           params: rst
         })
       }
