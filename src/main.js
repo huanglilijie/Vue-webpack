@@ -43,25 +43,25 @@ router.map({
       require(['./components/User.vue'], resolve)
     }
   },
-  '/item/:token': {
+  '/item': {
     name: 'item',
     component: function (resolve) {
       require(['./components/Item.vue'], resolve)
     },
-    children: [
-      {
-        path: 'itempay',
+    subRoutes: {
+      'itempay': {
+        name: 'itempay',
         component: function (resolve) {
           require(['./components/ItemPay.vue'], resolve)
         }
       },
-      {
-        path: 'itemSuccess',
+      'itemSuccess': {
+        name: 'itemSuccess',
         component: function (resolve) {
           require(['./components/ItemSuccess.vue'], resolve)
         }
       }
-    ]
+    }
   }
 })
 
