@@ -1,0 +1,141 @@
+<template>
+  <div id='allmap' v-bind:style='mapStyle'></div>
+</template>
+
+<script>
+  import BMap from 'BMap'
+  export default{
+    data () {
+      return {
+        mapStyle: {
+          width: '100%',
+          height: this.mapHeight + 'px'
+        },
+        mapData: {},
+        location: {}
+      }
+    },
+    props: {
+      // 地图在该视图上的高度
+      mapHeight: {
+        type: Number,
+        default: 500
+      },
+      // 经度
+      longitude: {
+        type: Number,
+        default: 116.395645
+      },
+      // 纬度
+      latitude: {
+        type: Number,
+        default: 39.929986
+      },
+      description: {
+        type: String,
+        default: '北京'
+      }
+    },
+    ready () {
+    },
+    methods: {
+      initMap (data) {
+        // var markerArr = data
+        // 创建Map实例
+        var map = new BMap.Map('allmap')
+        // 设置地图中心点
+        var point
+        if (data) {
+          point = new BMap.Point(data.longitude, data.latitude)
+        } else {
+          point = new BMap.Point(this.longitude, this.latitude)
+        }
+        var marker = new BMap.Marker(point, 13)
+        map.addOverlay(marker)
+        // 初始化地图,设置中心点坐标和地图级别。
+        map.centerAndZoom(point, 12)
+        // 向地图中添加缩放控件
+        var ctrlNav = new window.BMap.NavigationControl({
+          // anchor: BMAP_ANCHOR_TOP_LEFT,
+          // type: BMAP_NAVIGATION_CONTROL_LARGE
+        })
+        map.addControl(ctrlNav)
+        // 向地图中添加比例尺控件
+        var ctrlSca = new window.BMap.ScaleControl({
+          // anchor: BMAP_ANCHOR_BOTTOM_LEFT
+        })
+        map.addControl(ctrlSca)
+        map.enableScrollWheelZoom(true)
+        this.myMap = map
+        // this.point = point
+        // this.marker = marker
+      },
+      mapDealerShow (data) {
+        var markerArr = data
+        // 存放标注点经纬信息的数组
+        var points = []
+        // 存放标注点对象的数组
+        var markers = []
+        // 存放提示信息窗口对象的数组
+        // var info = new Array()
+        // 存放检索信息窗口对象的数组
+        // var searchInfoWindow = new Array()
+        if (data) {
+          for (var i = 0; i < markerArr.length; i++) {
+            var p0 = markerArr[i].lat
+            // 按照原数组的point格式将地图点坐标的经纬度分别提出来
+            var p1 = markerArr[i].lng
+            // 循环生成新的地图点
+            points[i] = new window.BMap.Point(p0, p1)
+            // 按照地图点坐标生成标记
+            markers[i] = new window.BMap.Marker(points[i])
+            this.myMap.addOverlay(markers[i])
+            // 跳动的动画
+            // markers[i].setAnimation(BMAP_ANIMATION_BOUNCE)
+            var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) })
+            markers[i].setLabel(label)
+          }
+        }
+      },
+      // 获取城市信息
+      getCity () {
+
+      }
+    },
+    events: {
+      'show-bmap': function (data) {
+        this.data = data
+        // this.initMap()
+      },
+      'get-city': function (data) {
+        console.log('get-city' + data)
+        console.log('get-city' + this.data)
+        this.initMap(data)
+        this.data = data
+        console.log(this.data)
+        // 获取城市ID
+        var myGeo = new BMap.Geocoder()
+        myGeo.getLocation(new BMap.Point(this.data.latitude, this.data.longitude), function (result) {
+          console.log('result' + result)
+          if (result.address) {
+            console.log('result.address' + result.address)
+          } else {
+            this.$parent.$alert('无法获取地址信息')
+          }
+        })
+        var cityId = '123456'
+        this.$dispatch('get-dealers', cityId)
+      },
+      'show-dealers-onmap': function (data) {
+        console.log('show-dealers-onmap data' + data)
+        console.log('show-dealers-onmap this.data' + this.data)
+        this.mapDealerShow(data)
+      }
+    }
+}
+</script>
+
+<!--Add'scoped' attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>

@@ -37,6 +37,9 @@
 </script>
 
 <style scoped>
+  .item{
+    background-color: #fff;
+  }
 	.item img:nth-child(1){
 		width: 100%;
 	}
@@ -55,6 +58,9 @@
 		font-size: 16px;
 		overflow:hidden;
 	}
+  .car-style2 p{
+      margin:0 auto;
+  }
 	.car-style2 p:first-child{
 		float: left;
 	}

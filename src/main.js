@@ -1,12 +1,26 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import Validator from 'vue-validator'
+import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 /* import router from './router' */
 import 'assets/css/style.css'
 
+Vue.use(Validator)
 Vue.use(VueRouter)
+Vue.use(VueResource)
 Vue.use(Alert)
+
+Vue.validator(
+  'phone', function (val) {
+    if (val.length === 0) {
+      return true
+    } else {
+      return /^1[34578]\d{9}$/.test(val)
+    }
+  })
+
 const router = new VueRouter({
   hashbang: false,
   history: true
@@ -49,6 +63,12 @@ router.map({
       require(['./components/Item.vue'], resolve)
     },
     subRoutes: {
+      'itempayinfo': {
+        name: 'itempayinfo',
+        component: function (resolve) {
+          require(['./components/ItemPayInfo.vue'], resolve)
+        }
+      },
       'itempay': {
         name: 'itempay',
         component: function (resolve) {
@@ -62,7 +82,27 @@ router.map({
         }
       }
     }
+  },
+  'whereru': {
+    name: 'whereru',
+    component: function (resolve) {
+      require(['./components/WhereRU.vue'], resolve)
+    }
+  },
+  'orderconfirm': {
+    name: 'orderconfirm',
+    component: function (resolve) {
+      require(['./components/OrderConfirm.vue'], resolve)
+    }
+  },
+  'ruler': {
+    name: 'ruler',
+    component: function (resolve) {
+      require(['./components/Ruler.vue'], resolve)
+    }
   }
 })
-
+router.redirect({
+  '*': '/index'
+})
 router.start(App, 'app')

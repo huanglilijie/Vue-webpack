@@ -5,7 +5,11 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    vendors: ['vue-resource']
+  },
+  externals: {
+    "BMap": "BMap"
   },
   output: {
     path: config.build.assetsRoot,
