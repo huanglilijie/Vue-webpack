@@ -51,9 +51,9 @@
    */
   let data = {
     lists: [
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.jpg', 'intentionFee': '4999'},
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.jpg', 'intentionFee': '4999'},
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.jpg', 'intentionFee': '4999'}
+      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'},
+      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'},
+      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'}
 //    {id: 4, selected: false, title: 'Smart Fortwo', priceFrom: '12500元', priceTo: '17600元', 'imgSrc': '/static/images/smart-list1.png'}
     ],
     selectedItem: null,
