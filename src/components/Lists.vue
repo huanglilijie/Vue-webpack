@@ -44,7 +44,7 @@
 
 <script>
   import Btn from '../elements/btn-footer'
-  import Config from '../config/config'
+  import Config from '../../config/config'
   /**
    * 填充数据的方法
    * data.lists = JSON
