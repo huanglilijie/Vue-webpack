@@ -51,6 +51,12 @@ router.map({
       require(['./components/Lists.vue'], resolve)
     }
   },
+  '/listsfullquota': {
+    name: 'listsfullquota',
+    component: function (resolve) {
+      require(['./components/ListsFullQuota.vue'], resolve)
+    }
+  },
   '/user': {
     name: 'user',
     component: function (resolve) {
@@ -99,6 +105,12 @@ router.map({
     name: 'ruler',
     component: function (resolve) {
       require(['./components/Ruler.vue'], resolve)
+    }
+  },
+  'myfundraising': {
+    name: 'myfundraising',
+    component: function (resolve) {
+      require(['./components/MyFundraising.vue'], resolve)
     }
   }
 })

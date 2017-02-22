@@ -1,5 +1,5 @@
 <template>
-  <div class="lists" v-if="orders_number < 400">
+  <div class="lists">
     <!-- 列表页 -->
     <ul class="p-list">
       <li class="p-list-item" v-for="item in lists" @click="select($index)">
@@ -18,28 +18,6 @@
     <!-- 底部按钮 -->
     <btn-footer :is-item-selected="selectedItem">就它啦</btn-footer>
   </div>
-  <!-- 活动名额已满 -->
-  <div class="lists" v-else>
-    <!-- 列表页 -->
-    <ul class="p-list">
-      <li class="p-list-item" v-for="item in lists">
-        <div :class="['p-list-item-label']">
-          <div class="p-list-item-title"></div>
-          <div class="p-list-item-price">
-            <h4></h4>
-            <p></p>
-            <p></p>
-            <img class="p-list-item-color" :src=""/>
-          </div>
-        </div>
-        <img class="p-list-item-img" :src="item.picture">
-      </li>
-    </ul>
-    <!-- 底部按钮 -->
-    <p class="text1">本次活动名额已满</p>
-    <p class="text2">奔驰世界，无限精彩</p>
-    <p class="text2">https://estore.mercedes-benz.com.cn</p>
-  </div>
 </template>
 
 <script>
@@ -50,12 +28,7 @@
    * data.lists = JSON
    */
   let data = {
-    lists: [
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'},
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'},
-      {id: 1, code: '21314210-CBA', name: 'smart fortwo 1', price: '300000', 'picture': '/static/images/smart.png', 'intentionFee': '4999'}
-//    {id: 4, selected: false, title: 'Smart Fortwo', priceFrom: '12500元', priceTo: '17600元', 'imgSrc': '/static/images/smart-list1.png'}
-    ],
+    lists: [],
     selectedItem: null,
     selected: [false, false, false],
     orders_number: 0
@@ -84,22 +57,18 @@
         // 获取订单数量
         this.$http.get(Config.API_ROOT + 'orders-number')
         .then((response) => {
-          console.log(response.data != null)
-          if (response.data != null) {
-            this.$set('orders_number', response.data)
-            console.log(this.orders_number)
+          this.$set('orders_number', response.data)
+          console.log(this.orders_number)
+          if (this.orders_number >= 400) {
+            this.$router.go({path: '/listsfullquota/'})
           }
-          console.log(response.data)
         }).catch((response) => {
           console.log(response)
         })
         // 获取车型列表
         this.$http.get(Config.API_ROOT + 'vehicles/models')
         .then((response) => {
-          if (response.data != null) {
-            this.$set('lists', response.data)
-          }
-          console.log(response.data)
+          this.$set('lists', response.data)
         }).catch((response) => {
           console.log(response)
         })
