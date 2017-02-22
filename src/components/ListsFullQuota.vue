@@ -53,7 +53,7 @@
       // 选中一个item
       setData: function () {
         // 获取车型列表
-        this.$http.get(Config.API_ROOT + 'vehicles/models')
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/vehicles/models')
         .then((response) => {
           this.$set('lists', response.data)
         }).catch((response) => {

@@ -55,7 +55,7 @@
       // 选中一个item
       setData: function () {
         // 获取订单数量
-        this.$http.get(Config.API_ROOT + 'orders-number')
+        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
         .then((response) => {
           this.$set('orders_number', response.data)
           console.log(this.orders_number)
@@ -66,7 +66,7 @@
           console.log(response)
         })
         // 获取车型列表
-        this.$http.get(Config.API_ROOT + 'vehicles/models')
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/vehicles/models')
         .then((response) => {
           this.$set('lists', response.data)
         }).catch((response) => {
