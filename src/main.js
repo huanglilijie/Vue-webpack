@@ -51,6 +51,12 @@ router.map({
       require(['./components/Lists.vue'], resolve)
     }
   },
+  '/listsfullquota': {
+    name: 'listsfullquota',
+    component: function (resolve) {
+      require(['./components/ListsFullQuota.vue'], resolve)
+    }
+  },
   '/user': {
     name: 'user',
     component: function (resolve) {

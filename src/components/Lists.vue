@@ -68,11 +68,6 @@
         // 获取车型列表
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/vehicles/models')
         .then((response) => {
-          /* var data = response.data
-          for (var i in data) {
-            data[i].selected = false
-          }
-          console.log(data)*/
           this.$set('lists', response.data)
         }).catch((response) => {
           console.log(response)
