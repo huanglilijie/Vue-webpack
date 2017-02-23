@@ -100,6 +100,30 @@ router.map({
     component: function (resolve) {
       require(['./components/Ruler.vue'], resolve)
     }
+  },
+  '/createmydear': {
+    name: 'createmydear',
+    component: function (resolve) {
+      require(['./components/CreateMyDear.vue'], resolve)
+    }
+  },
+  '/endfundraising': {
+    name: 'endfundraising',
+    component: function (resolve) {
+      require(['./components/EndFundraising.vue'], resolve)
+    }
+  },
+  '/completefundraising': {
+    name: 'completefundraising',
+    component: function (resolve) {
+      require(['./components/CompleteFundraising.vue'], resolve)
+    }
+  },
+  '/carpad': {
+    name: 'carpad',
+    component: function (resolve) {
+      require(['./components/CarPad.vue'], resolve)
+    }
   }
 })
 router.redirect({

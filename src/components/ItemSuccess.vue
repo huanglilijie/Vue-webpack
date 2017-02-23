@@ -7,7 +7,7 @@
 	    <p>快去筹款吧！</p>
 	  </div>
 	  <div>
-	 		<p class="btn-footer-1">马上行动</p>
+	 		<p class="btn-footer-1" @click="jump">马上行动</p>
 	 		<p class="btn-footer-2">查看详情</p>
 	  </div>
     
@@ -27,6 +27,11 @@
 
       // 向服务器请求数据，返回结果如下
       this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
+    },
+    methods: {
+      jump () {
+        this.$router.go({name: 'createmydear'})
+      }
     },
     components: {
       'btn-footer': Btn

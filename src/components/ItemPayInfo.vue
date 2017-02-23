@@ -1,5 +1,5 @@
 <template>
-  <div class="item-pay-info">
+  <div class="item-pay-info" id="item-pay-info">
     <div class="car-style"> 支付定金：{{price}}</div>
     <div class="car-style2">
     <div class="car-style"> 姓名:{{username}}</div>
@@ -9,23 +9,24 @@
       <p>距离活动结束还有<span>8</span>天</p>
       <p>美好时光不等待，快支付订金呦!</p>
     </div>
-    <div class="mask"></div>
-    <div class="pump">
-      <img src="/static/pump.png"/>
-      <p>你确定这样做吗?</p>
-      <a href="###" class="mask-reselect">再考虑一下</a>
-      <a href="###" class="mask-submit">确定</a>
+    <div v-if='checks'>
+      <div class="mask"></div>
+      <div class="pump">
+        <img src="/static/pump.png"/>
+        <p>你确定这样做吗?</p>
+        <a class="mask-reselect" @click="pumpshow()">再考虑一下</a>
+        <a class="mask-submit" @click="goBack()">确定</a>
+      </div>
     </div>
-   	<a href="###" class="btn submit" @click="submit">确认开启宠爱之旅</a>
-    <a href="###" class="btn reselect">重新选择</a>
+    <a class="btn submit" @click="submit">确认开启宠爱之旅</a>
+    <a class="btn reselect" @click="pumpshow()">重新选择</a>
   </div>
 </template>
 
-<script>
-  import Btn from '../elements/btn-footer'
+<script type="text/babel">
+  import Config from '../../config/config'
   let rst = {
   }
-
   export default {
     name: 'item-pay-info',
     data () {
@@ -35,11 +36,11 @@
         afrensh: false,
         username: '',
         phone: '',
-        price: ''
+        price: '',
+        checks: false
       }
     },
     components: {
-      'btn-footer': Btn
     },
     created () {
       this.id = this.$route.params.id
@@ -58,7 +59,22 @@
     methods: {
       // 选中后页面跳转
       submit () {
+        this.$http.get(Config.API_ROOT + 'customers/' + this.username + '/orders/', {params: {productId: this.phone, dealerId: this.telCode, contactName: this.username,
+          contactMobile: this.phone}}).then((response) => {
+            if (response.data != null) {
+              this.$set('returnCode', response.data)
+              this.$router.go({name: 'itempay', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})
+            }
+          }).catch((response) => {
+            console.log(response)
+          })
         this.$router.go({name: 'itempay', query: {price: this.price, rst: rst}})
+      },
+      pumpshow () {
+        this.checks = !this.checks
+      },
+      goBack () {
+        this.$router.go({name: 'home'})
       }
     }
   }
@@ -80,6 +96,7 @@ img{
   margin: 0 auto;
   padding:5px 0;
   border-bottom: 1px dashed #000000;
+  font-size: 16px;
 }
 .car-style2{
   width: 100%;
@@ -133,7 +150,6 @@ img{
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.5);
-  display: none;
   z-index: 2;
 }
 .pump{
@@ -143,7 +159,6 @@ img{
   top: 5vh;
   left: 7.5%;
   z-index: 3;
-  display: none;
 }
 .pump p{
   position: absolute;
