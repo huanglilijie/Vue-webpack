@@ -2,7 +2,7 @@
   <div class="item-success">
     <p class="pay_mon">支付订金：{{rst.price}} 元</p>
     <div class="pay_success">
-    	<p>已成功预订 即可开启筹款</p>
+    	<p>已成功预订 即刻开启筹款</p>
 	    <p>距离活动结束还有<span>{{dates}}</span>天</p>
 	    <p>快去筹款吧！</p>
 	  </div>
@@ -10,7 +10,7 @@
 	 		<p class="btn-footer-1" @click="jump">马上行动</p>
 	 		<p class="btn-footer-2" @click="orderDetail">查看详情</p>
 	  </div>
-    
+
   </div>
 </template>
 
@@ -97,7 +97,7 @@
   }
   .pay_mon{
   	width: 90%;
-		margin: 0 auto;	
+		margin: 0 auto;
 		font-size: 16px;
   }
 </style>

@@ -15,9 +15,9 @@
           <p class="sayMing">{{item.thankway}}</p>
         </div>
       </li>
-      <a class="btn" @click="submit">开启宠爱之旅</a>
       <p class="text3">*内容确定后不能修改哦</p>
     </div>
+    <a class="btn" @click="submit">开启宠爱之旅</a>
     <div v-if='checks'>
       <div class="mask" @click="submit"></div>
 <!--       <img class="mask-img" src="/static/images/pump-bg.png"/> -->
@@ -148,6 +148,9 @@
 		border-radius: 10px;
 		background-color: #F7B835;
 		margin-top: 30px;
+    position: fixed;
+    left: 5%;
+    bottom: 0;
 	}
 	.text3{
 		width: 40%;
@@ -155,6 +158,7 @@
 		margin: 0 auto;
 		margin-top: 10px;
 		padding-bottom: 15px;
+    margin-bottom: 50px;
 	}
 	.mask{
     position: fixed;
@@ -186,10 +190,7 @@
     z-index: 3;
   }
   .pump p{
-
-
     text-align: center;
-    
   }
   .pump p:first-child{
     margin-top: 10px;
@@ -203,7 +204,7 @@
     margin-top: -135px;
   }
 	.text2-change{
-		background: url(/static/images/text-bg-checked.png) no-repeat;
+		background: url(/static/images/text-bg-checked.png) no-repeat center;
 		background-size: contain;
 	}
   .mask-img{

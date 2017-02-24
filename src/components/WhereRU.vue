@@ -21,7 +21,7 @@
     align-items: center;
     height: 40px;
     line-height: 40px;
-  } 
+  }
   .top img{
     display: block;
     width: 5%;
@@ -31,7 +31,7 @@
     font-size: 1.2rem;
   }
   .middle{
-    background-color: #F5F5F5; 
+    background-color: #F5F5F5;
     padding-bottom: 70px;
   }
   .middle img:first-child{
@@ -80,7 +80,7 @@
   .btn{
     display: block;
     width: 100%;
-    height: 50px; 
+    height: 50px;
     line-height: 50px;
     text-align: center;
     font-size: 1.5rem;
@@ -92,6 +92,38 @@
   }
   .checked{
     background-color: #F6BA38 !important;
+  }
+  .mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /*z-index: 5;*/
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .area{
+    position: absolute;;
+    bottom:0;
+    background-color: #eee;
+    width: 100%;
+    height: 240px;
+  }
+  .area .sureButton{
+    background: #fff;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    color: blue;
+    line-height: 40px;
+    font-size: 1.5rem;
+  }
+  .area .sureButton span.no{
+    float: left;
+    padding-left:10px;
+  }
+  .area .sureButton span.yes{
+    float: right;
+    padding-right: 10px;
   }
 </style>
 <template>
@@ -132,6 +164,15 @@
       </div>
       <!-- 底部按钮 -->
       <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
+      <div class="mask" v-if="mask">
+        <div class="area">
+          <div class="sureButton">
+            <span class="no">取消</span>
+            <span class="yes">确认</span>
+          </div>
+          <mt-picker :slots="slots" @change="demos"></mt-picker>
+        </div>
+      </div>
     </div>
   </body>
 </template>
@@ -147,7 +188,14 @@
           data: {},
           currentCity: '',
           selectedItem: null,
-          cityList: []
+          cityList: [],
+          slots: [{
+            flex: 1,
+            values: ['北京', '上海', '郑州', '南京', '大哥大', '哈撒给'],
+            className: 'slot1',
+            textAlign: 'center'
+          }],
+          mask: false
         }
       },
       components: {
@@ -158,6 +206,8 @@
       },
       beforeDestroy () {},
       methods: {
+        demos (picker, values) {
+        },
         // 选中后页面跳转
         submit () {
           console.log(this.selectedItem)
@@ -168,7 +218,6 @@
           // 路由跳转页面带参数传递
           this.$router.go({path: '/user', query: {selectedItem: this.selectedItem}})
         },
-
         getCityDealers (data) {
           this.currentCity = data.cityName
           this.$http.get(Config.API_ROOT + 'ecommerce/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})

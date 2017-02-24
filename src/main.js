@@ -6,6 +6,8 @@ import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 /* import router from './router' */
 import 'assets/css/style.css'
+import { Picker } from 'mint-ui'
+Vue.component(Picker.name, Picker)
 
 Vue.use(Validator)
 Vue.use(VueRouter)

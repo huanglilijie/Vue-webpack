@@ -2,10 +2,10 @@
   <div class="item">
   	<img src="/static/paysuccess-img.jpg"/>
     <div class="car-style"> 车型信息：{{ rst.pname }}</div>
-    <div class="car-style2"> 
+    <div class="car-style2">
     	<p>经销商信息：</p>
     	<p>
-    		<div>{{ rst.dealer }}</div> 
+    		<div>{{ rst.dealer }}</div>
     		<div class="phontnum">{{ rst.photonum }}</div>
     	</p>
     </div>

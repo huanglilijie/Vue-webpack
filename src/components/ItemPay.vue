@@ -7,10 +7,10 @@
   	</div>
     <div class="item_pay_way">
       <div class="pay-style">
-      	<label><img src="/static/images/alipay.png"/></label><input type="radio" value="alipay" v-model="paytype">     	
+      	<label><img src="/static/images/alipay.png"/></label><input type="radio" value="alipay" v-model="paytype">
       </div>
       <div class="pay-style">
-      	<label><img src="/static/images/wechatpay.png"/></label><input type="radio" value="wechat" v-model="paytype">	
+      	<label><img src="/static/images/wechatpay.png"/></label><input type="radio" value="wechat" v-model="paytype">
       </div>
     </div>
    	<p class="agreen">
@@ -136,6 +136,7 @@
 	margin-top: 15px;
 	text-align: center;
 	vertical-align: middle;
+  margin-bottom: 50px;
 }
 .agreen input{
 	width: 15px;
