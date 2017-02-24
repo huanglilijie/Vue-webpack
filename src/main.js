@@ -33,6 +33,12 @@ router.map({
       require(['./components/Home.vue'], resolve)
     }
   },
+  /* '/': {
+    name: 'authredirect',
+    component: function (resolve) {
+      require(['./components/AuthRedirect.vue'], resolve)
+    }
+  },*/
   '/index': {
     name: 'home',
     component: function (resolve) {
@@ -89,19 +95,19 @@ router.map({
       }
     }
   },
-  'whereru': {
+  '/whereru': {
     name: 'whereru',
     component: function (resolve) {
       require(['./components/WhereRU.vue'], resolve)
     }
   },
-  'orderconfirm': {
+  '/orderconfirm': {
     name: 'orderconfirm',
     component: function (resolve) {
       require(['./components/OrderConfirm.vue'], resolve)
     }
   },
-  'ruler': {
+  '/ruler': {
     name: 'ruler',
     component: function (resolve) {
       require(['./components/Ruler.vue'], resolve)

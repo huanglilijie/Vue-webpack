@@ -19,7 +19,7 @@
       // 地图在该视图上的高度
       mapHeight: {
         type: Number,
-        default: 500
+        default: 200
       },
       // 经度
       longitude: {
@@ -37,8 +37,47 @@
       }
     },
     ready () {
+      // 获取定位
+      if (navigator.geolocation) {
+        this.agree_obtain_location()
+      } else {
+        this.$dispatch('show-subs-alert', '不支持地理位置接口,定位失败，默认北京市')
+        //  默认北京
+        var location = {
+          latitude: this.latitude,
+          longitude: this.longitude
+        }
+        this.getCity(location)
+      }
     },
     methods: {
+      agree_obtain_location () {
+        var option = {
+          enableHighAccuracy: true,
+          timeout: Infinity,
+          maximumAge: 0
+        }
+        navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
+      },
+      geoSuccess (event) {
+        var location = {
+          latitude: event.coords.latitude,
+          longitude: event.coords.longitude
+        }
+        // 经纬度初始值
+        this.longitude = location.longitude
+        this.latitude = location.latitude
+        this.getCity(location)
+      },
+      geoError (event) {
+        this.$dispatch('show-subs-alert', '获取位置信息失败')
+        //  默认北京
+        var location = {
+          latitude: 39.929986,
+          longitude: 116.395645
+        }
+        this.getCity(location)
+      },
       initMap (data) {
         // var markerArr = data
         // 创建Map实例
@@ -53,22 +92,27 @@
         var marker = new BMap.Marker(point, 13)
         map.addOverlay(marker)
         // 初始化地图,设置中心点坐标和地图级别。
-        map.centerAndZoom(point, 12)
+        map.centerAndZoom(point, 13)
         // 向地图中添加缩放控件
         var ctrlNav = new window.BMap.NavigationControl({
-          // anchor: BMAP_ANCHOR_TOP_LEFT,
-          // type: BMAP_NAVIGATION_CONTROL_LARGE
+          anchor: 'BMAP_ANCHOR_BOTTOM_LEFT',
+          type: 'BMAP_NAVIGATION_CONTROL_LARGE'
         })
         map.addControl(ctrlNav)
         // 向地图中添加比例尺控件
         var ctrlSca = new window.BMap.ScaleControl({
-          // anchor: BMAP_ANCHOR_BOTTOM_LEFT
+          anchor: 'BMAP_ANCHOR_BOTTOM_LEFT'
         })
         map.addControl(ctrlSca)
+        /* map.addControl(new BMap.CityListControl({
+          anchor: 'BMAP_ANCHOR_TOP_LEFT',
+          offset: new BMap.Size(80, 20),
+          onChangeAfter: this.cityChanged
+        }))*/
         map.enableScrollWheelZoom(true)
+        map.enableInertialDragging(true)
+        map.enableContinuousZoom(true)
         this.myMap = map
-        // this.point = point
-        // this.marker = marker
       },
       mapDealerShow (data) {
         var markerArr = data
@@ -92,14 +136,43 @@
             this.myMap.addOverlay(markers[i])
             // 跳动的动画
             // markers[i].setAnimation(BMAP_ANIMATION_BOUNCE)
-            var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) })
+            var label = new window.BMap.Label(markerArr[i].name, { offset: new window.BMap.Size(20, -10) })
             markers[i].setLabel(label)
           }
         }
       },
+      getCityIdFunc (result) {
+        var cityId
+        var cityName
+        if (result) {
+          cityId = result.code
+          cityName = result.name
+        } else {
+          // 默认北京市代码
+          cityId = 131
+          cityName = '北京市'
+        }
+        var param = {
+          cityId: cityId,
+          cityName: cityName,
+          latitude: this.latitude,
+          longitude: this.longitude
+        }
+        this.$dispatch('get-dealers', param)
+      },
       // 获取城市信息
-      getCity () {
-
+      getCity (location) {
+        // 初始化地图
+        this.initMap(location)
+        var mycity = new BMap.LocalCity()
+        mycity.get(this.getCityIdFunc)
+      },
+      cityChanged (data) {
+        // 获得切换城市后的地图中心点坐标
+        var changedPoint = new BMap.Point(data.longitude, data.latitude)
+        // 初始化地图,设置中心点坐标和地图级别。
+        this.myMap.centerAndZoom(changedPoint, 13)
+        this.myMap.panTo(changedPoint, 0)
       }
     },
     events: {
@@ -107,29 +180,11 @@
         this.data = data
         // this.initMap()
       },
-      'get-city': function (data) {
-        console.log('get-city' + data)
-        console.log('get-city' + this.data)
-        this.initMap(data)
-        this.data = data
-        console.log(this.data)
-        // 获取城市ID
-        var myGeo = new BMap.Geocoder()
-        myGeo.getLocation(new BMap.Point(this.data.latitude, this.data.longitude), function (result) {
-          console.log('result' + result)
-          if (result.address) {
-            console.log('result.address' + result.address)
-          } else {
-            this.$parent.$alert('无法获取地址信息')
-          }
-        })
-        var cityId = '123456'
-        this.$dispatch('get-dealers', cityId)
-      },
       'show-dealers-onmap': function (data) {
-        console.log('show-dealers-onmap data' + data)
-        console.log('show-dealers-onmap this.data' + this.data)
         this.mapDealerShow(data)
+      },
+      'change-city': function (data) {
+        this.cityChanged(data)
       }
     }
 }

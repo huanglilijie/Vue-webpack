@@ -98,7 +98,7 @@
           return false
         }
         // 路由跳转页面带参数传递
-        this.$router.go({name: 'user', query: {id: selected.id, price: '66666'}})
+        this.$router.go({name: 'whereru', query: {id: selected.id, price: '66666'}})
       }
     }
   }

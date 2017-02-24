@@ -1,26 +1,153 @@
-<style scoped>
-
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  html,body{
+    font-size: 12px;
+    font-family: "微软雅黑";
+  }
+  @media (max-width: 350px) {
+    html,body {
+      font-size: 10px !important;
+    }
+    li{
+      list-style: none;
+    }
+  }
+  .top{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    line-height: 40px;
+  } 
+  .top img{
+    display: block;
+    width: 5%;
+  }
+  .top a{
+    color: #000000;
+    font-size: 1.2rem;
+  }
+  .middle{
+    background-color: #F5F5F5; 
+    padding-bottom: 70px;
+  }
+  .middle img:first-child{
+    width: 100%;
+    display: block;
+  }
+  .select-agency{
+    width: 96%;
+    margin: 0 auto;
+  }
+  .select-agency>p:first-child{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  .select-agency ul li{
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-top: 10px;-
+    margin-bottom: 10px;
+    padding: 5px 0;
+  }
+  .select-agency ul li p{
+    width: 94%;
+    margin: 3px auto;
+  }
+  .distance{
+    overflow: hidden;
+  }
+  .distance label{
+    float: left;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .distance span{
+    float: right;
+  }
+  .tip{
+    text-align: center;
+    margin-top: 30px;
+  }
+  .tip a{
+    color: #000000;
+    font-weight: 600;
+  }
+  .btn{
+    display: block;
+    width: 100%;
+    height: 50px; 
+    line-height: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 0px;
+    background-color: #969DA3;
+  }
+  .checked{
+    background-color: #F6BA38 !important;
+  }
 </style>
 <template>
-    <h1></h1>
-    <b-map-component v-ref:bmap></b-map-component>
-    <div>
-      <ul style="width: 100%">
-        <li v-for="item in data">{{item.title}}</li>
-      </ul>
-      </select>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <title>在哪提车呢</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <img src="/static/images/location.png"/>
+        <h2>{{currentCity}}</h2>
+        <a href="#" @click="changeCity">更换城市</a>
+      </div>
+      <div class="middle">
+        <b-map-component v-ref:bmap></b-map-component>
+        <div class="select-agency">
+          <p>选择经销商</p>
+          <ul class="adders">
+            <li v-for="item in data" @click="selectDealer($index)" :class="[{'checked':item.selected}]">
+              <p class="distance">
+                <label>{{item.name}}</label>
+                <span>距离{{item.distance}}米</span>
+              </p>
+              <p>
+                <label>地址：</label>
+                <span>{{item.address}}</span>
+              </p>
+              <p>
+                <label>电话：</label>
+                <span>{{item.telephone}}</span>
+              </p>
+            </li>
+          </ul>
+          <p class="tip">我已阅读 <a href="###">关于上牌城市的说明</a><input type="checkbox" name="" id="" value="" /></p>
+        </div>
+      </div>
+      <!-- 底部按钮 -->
+      <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
     </div>
-    <!-- 底部按钮 -->
-    <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
+  </body>
 </template>
 <script>
     import BMapComponent from '../elements/BMapComponent.vue'
     import Btn from '../elements/btn-footer'
+    import Config from '../../config/config'
+    // var selectedItem
     module.exports = {
       name: 'whereru',
       data () {
         return {
-          data: {}
+          data: {},
+          currentCity: '',
+          selectedItem: null,
+          cityList: []
         }
       },
       components: {
@@ -28,57 +155,66 @@
         'btn-footer': Btn
       },
       ready () {
-        if (navigator.geolocation) {
-          this.agree_obtain_location()
-        } else {
-          this.$alert('不支持地理位置接口')
-        }
       },
       beforeDestroy () {},
       methods: {
         // 选中后页面跳转
         submit () {
+          console.log(this.selectedItem)
+          if (!this.selectedItem) {
+            this.$alert('请选择经销商')
+            return
+          }
           // 路由跳转页面带参数传递
-          this.$router.go({path: '/test'})
+          this.$router.go({path: '/user', query: {selectedItem: this.selectedItem}})
         },
-        agree_obtain_location () {
-          var option = {
-            enableHighAccuracy: true,
-            timeout: Infinity,
-            maximumAge: 0
+
+        getCityDealers (data) {
+          this.currentCity = data.cityName
+          this.$http.get(Config.API_ROOT + 'ecommerce/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})
+            .then((response) => {
+              var data = response.data
+              for (var i in data) {
+                data[i].selected = false
+              }
+              this.$set('data', data)
+              this.$refs.bmap.$emit('show-dealers-onmap', data)
+            }).catch((response) => {
+              this.$alert('获取经销商列表失败')
+            })
+        },
+        selectDealer (index) {
+          // 将已选择的置为未选择
+          if (this.selectedItem != null) {
+            this.data[this.selectedItem].selected = false
           }
-          navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
+          // 将本次选择的置为选中
+          this.data[index].selected = true
+          // 将序列赋值给selectedItem
+          this.selectedItem = index
         },
-        geoSuccess (event) {
-          console.log(event.coords.latitude + ', ' + event.coords.longitude)
-          var location = {
-            latitude: event.coords.latitude,
-            longitude: event.coords.longitude
+        changeCity () {
+          var param = {
+            // 广州市
+            cityId: 257,
+            cityName: '广州市',
+            latitude: 23.134274,
+            longitude: 113.372867
           }
-          this.$refs.bmap.$emit('get-city', location)
-        },
-        geoError (event) {
-          console.log('Error code ' + event.code + '. ' + event.message)
+          this.$refs.bmap.$emit('change-city', param)
+          // 加载变更城市经销商
+          this.getCityDealers(param)
         }
       },
       events: {
         'get-dealers': function (data) {
-          console.log(data + 'get-dealers')
-          this.$http.get('http://localhost:8081/api/cities')
-          .then((response) => {
-            console.log(response)
-            console.log(response.body)
-            var markerArr = [
-              { title: '名称：广州火车站', lat: 113.264531, lng: 23.157003, address: '广东省广州市广州火车站', tel: '12306' },
-              { title: '名称：广州塔（赤岗塔）', lat: 113.330934, lng: 23.113401, address: '广东省广州市广州塔（赤岗塔） ', tel: '18500000000' },
-              { title: '名称：广州动物园', lat: 113.312213, lng: 23.147267, address: '广东省广州市广州动物园', tel: '18500000000' },
-              { title: '名称：天河公园', lat: 113.372867, lng: 23.134274, address: '广东省广州市天河公园', tel: '18500000000' }
-            ]
-            this.data = markerArr
-            this.$refs.bmap.$emit('show-dealers-onmap', markerArr)
-          }).catch((response) => {
-            console.log(response)
-          })
+          this.getCityDealers(data)
+        },
+        'show-subs-alert': function (data) {
+          this.$alert(data)
+        },
+        'change-current-city': function (data) {
+          this.currentCity = data.cityName
         }
       }
     }
