@@ -3,12 +3,12 @@
     <p class="pay_mon">支付订金：{{rst.price}} 元</p>
     <div class="pay_success">
     	<p>已成功预订 即可开启筹款</p>
-	    <p>距离活动结束还有<span>8</span>天</p>
+	    <p>距离活动结束还有<span>{{dates}}</span>天</p>
 	    <p>快去筹款吧！</p>
 	  </div>
 	  <div>
 	 		<p class="btn-footer-1" @click="jump">马上行动</p>
-	 		<p class="btn-footer-2">查看详情</p>
+	 		<p class="btn-footer-2" @click="orderDetail">查看详情</p>
 	  </div>
     
   </div>
@@ -19,7 +19,15 @@
   export default {
     name: 'item-success',
     data () {
-      return {}
+      var nd = new Date()
+      var ld = new Date('2017-04-30')
+      var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+      if (dates <= 0) {
+        dates = 0
+      }
+      return {
+        dates: dates
+      }
     },
     created () {
       this.id = this.$route.params.id
@@ -31,6 +39,9 @@
     methods: {
       jump () {
         this.$router.go({name: 'createmydear'})
+      },
+      orderDetail () {
+        this.$router.go({name: 'orderpayment'})
       }
     },
     components: {

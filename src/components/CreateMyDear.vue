@@ -19,8 +19,8 @@
       <p class="text3">*内容确定后不能修改哦</p>
     </div>
     <div v-if='checks'>
-      <div class="mask"></div>
-      <img src="/static/pump.png"/>
+      <div class="mask" @click="submit"></div>
+<!--       <img class="mask-img" src="/static/images/pump-bg.png"/> -->
       <div class="pump">
         <p>撒娇模式已上线</p>
         <p>快让大家来宠爱你吧！</p>
@@ -117,7 +117,7 @@
   }
   .text2{
   	padding: 25px 0px;
-  	background: url(/static/text-bg.png) no-repeat;
+  	background: url(/static/text-bg.png) no-repeat center;
   	background-size: contain;
   	width: 85%;
   	height: 40px;
@@ -126,7 +126,7 @@
   	font-size: 1.4rem;
   	font-weight: 600;
   	margin-top:20px ;
-  	line-height: 10px;
+  	line-height: 40px;
   }
   .sayMing{
   	display: inline;
@@ -157,7 +157,7 @@
 		padding-bottom: 15px;
 	}
 	.mask{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -165,23 +165,50 @@
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
   }
-	.pump{
+/*	.pump{
     width: 85%;
     margin: 0 auto;
     position: absolute;
     top: 5vh;
     left: 7.5%;
-    z-index: 3;
-	}
-  .pump p{
+
+	}*/
+  .pump{
     position: absolute;
+    top: 28vh;
+    height: 300px;
     width: 80%;
     text-align: center;
     left: 10%;
-    top: 17vh;
+    background: url(/static/images/pump-bg.png) no-repeat;
+    background-size: contain;
+    /*display: none;*/
+    z-index: 3;
+  }
+  .pump p{
+
+
+    text-align: center;
+    
+  }
+  .pump p:first-child{
+    margin-top: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height:300px;
+  }
+  .pump p:last-child{
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: -135px;
   }
 	.text2-change{
 		background: url(/static/images/text-bg-checked.png) no-repeat;
 		background-size: contain;
 	}
+  .mask-img{
+    position:absolute;
+    top:0;
+    z-index: 2;
+  }
 </style>

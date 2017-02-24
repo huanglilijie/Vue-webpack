@@ -12,15 +12,6 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Alert)
 
-Vue.validator(
-  'phone', function (val) {
-    if (val.length === 0) {
-      return true
-    } else {
-      return /^1[34578]\d{9}$/.test(val)
-    }
-  })
-
 const router = new VueRouter({
   hashbang: false,
   history: true
@@ -135,6 +126,30 @@ router.map({
     name: 'carpad',
     component: function (resolve) {
       require(['./components/CarPad.vue'], resolve)
+    }
+  },
+  '/orderpayment': {
+    name: 'orderpayment',
+    component: function (resolve) {
+      require(['./components/OrderPayment.vue'], resolve)
+    }
+  },
+  '/orderfundraising': {
+    name: 'orderfundraising',
+    component: function (resolve) {
+      require(['./components/OrderFundraising.vue'], resolve)
+    }
+  },
+  '/orderfundraisingend': {
+    name: 'orderfundraisingend',
+    component: function (resolve) {
+      require(['./components/OrderFundraisingEnd.vue'], resolve)
+    }
+  },
+  '/orderfundraisingfinish': {
+    name: 'orderfundraisingfinish',
+    component: function (resolve) {
+      require(['./components/OrderFundraisingFinish.vue'], resolve)
     }
   }
 })

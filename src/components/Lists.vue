@@ -31,7 +31,8 @@
     lists: [],
     selectedItem: null,
     selected: [false, false, false],
-    orders_number: 0
+    orders_number: 0,
+    price: 0
   }
 
   export default {
@@ -47,9 +48,6 @@
     },
     ready: function () {
       this.setData()
-    },
-    beforeDestory: function () {
-
     },
     methods: {
       // 选中一个item
@@ -82,7 +80,6 @@
         this.selected.$set(index, true)
         // 将序列赋值给selectedItem
         this.selectedItem = index
-        console.log(this.selectedItem)
       },
       getSelected () {
         if (this.selectedItem == null) {

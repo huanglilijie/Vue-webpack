@@ -6,7 +6,7 @@
     <div class="car-style2"></div>
     <div class="car-style"> 联系电话:{{phone}}</div>
     <div class="amount-activity">
-      <p>距离活动结束还有<span>8</span>天</p>
+      <p>距离活动结束还有<span>{{dates}}</span>天</p>
       <p>美好时光不等待，快支付订金呦!</p>
     </div>
     <div v-if='checks'>
@@ -30,6 +30,12 @@
   export default {
     name: 'item-pay-info',
     data () {
+      var nd = new Date()
+      var ld = new Date('2017-04-30')
+      var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+      if (dates <= 0) {
+        dates = 0
+      }
       return {
         paytype: '',
         selectedItem: null,
@@ -37,7 +43,8 @@
         username: '',
         phone: '',
         price: '',
-        checks: false
+        checks: false,
+        dates: dates
       }
     },
     components: {

@@ -14,7 +14,7 @@
       </div>
     </div>
    	<p class="agreen">
-   		<span>我同意意向金规则</span><input type="checkbox" />
+   		<span>我同意</span><a href="">意向金规则</a><input type="checkbox" v-model="state"/>
    	</p>
     <btn-footer :is-item-selected="selectedItem">开启宠爱之旅</btn-footer>
   </div>
@@ -29,7 +29,8 @@
     data () {
       return {
         paytype: '',
-        selectedItem: null
+        selectedItem: null,
+        state: false
       }
     },
     components: {
@@ -52,6 +53,10 @@
       submit () {
         if (!this.selectedItem) {
           this.$alert('请选择支付方式')
+          return false
+        }
+        if (!this.state) {
+          this.$alert('请先阅读意向金规则')
           return false
         }
         // 这里发起支付请求
