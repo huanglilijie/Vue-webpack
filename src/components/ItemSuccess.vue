@@ -45,19 +45,15 @@
         dealerTelephone: dealerTelephone
       }
       this.$set('pageParam', param)
-
-      // this.id = this.$route.params.id
-      // this.token = this.$route.params.token
-
-      // 向服务器请求数据，返回结果如下
-      // this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
     },
     methods: {
       jump () {
         this.$router.go({name: 'createmydear'})
       },
       orderDetail () {
-        this.$router.go({name: 'orderpayment'})
+        this.$router.go({
+          name: 'orderpayment',
+          query: this.pageParam})
       }
     },
     components: {

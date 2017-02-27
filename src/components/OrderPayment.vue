@@ -16,11 +16,11 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">预定时间:</label>
-          <div>2017-1-03</div>    
+          <div>{{createTime}}</div>    
         </li>
         <li class="car-message clearfloat">
           <label for="">车型信息:</label>
-          <div>全新smart forfour 4门4座车</div>
+          <div>{{carName}}</div>
         </li>
         <li class="car-message clearfloat">
           <label for="">经销商信息:</label>
@@ -31,15 +31,15 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">订单金额:</label>
-          <div>{{product[0].price}}元</div>
+          <div>{{product[0].intentionFee}}元</div>
         </li>
       </ul>
       <p class="text"><span>已成功预订</span><span>即刻开启筹款</span></p>
       <p class="text1">距离活动结束还有<span>{{dates}}</span>天</p>
       <p class="text">快去筹款吧！</p>
       <div class="btn-more">
-        <input type="button" value="创建我的宠爱之旅"/>
-        <input type="button" value="放弃宠爱之旅"/>
+        <input type="button" @click="jump" value="创建我的宠爱之旅"/>
+        <input type="button" @click="cancelMyDear" value="放弃宠爱之旅"/>
       </div>
     </div>    
   </div>
@@ -56,19 +56,20 @@
         dates = 0
       }
       return {
-        updateTime: '',
-        reservationId: '123',
+        createTime: '',
+        reservationId: '',
         orderStatus: '',
         product: [{
           id: '',
           createTime: '',
           status: '',
-          price: '123'
+          price: '',
+          intentionFee: ''
         }],
         customerId: '',
         dealer: [{
-          name: '一直加班公司',
-          telephone: '010-888888',
+          name: '',
+          telephone: '',
           totalAmount: ''
         }],
         payment: [{
@@ -77,14 +78,15 @@
           payChannel: ''
         }],
         dates: dates,
-        userid: '123'
+        userid: '123',
+        carName: ''
       }
     },
     ready: function () {
       this.initOrderDetail()
     },
     created () {
-      this.userid = this.$route.params.userid
+      this.carName = this.$route.query.carName
     },
     methods: {
       initOrderDetail () {
@@ -93,15 +95,32 @@
             console.log(response.data)
             console.log(response.data.product)
             console.log(response.data.dealer)
-            this.product[0].price = response.data.product.price
+            var cdate = new Date(response.data.createTime)
+            var year = cdate.getFullYear()
+            var month = cdate.getMonth() + 1
+            var date = cdate.getDate()
+            this.createTime = [year, month, date].join('-')
             this.reservationId = response.data.reservationId
+            this.product[0].intentionFee = response.data.product.intentionFee
             this.dealer[0].name = response.data.dealer.name
-            this.dealer[0].phone = response.data.dealer.phone
+            this.dealer[0].telephone = response.data.dealer.telephone
             this.payment[0].amount = response.data.payment.amount
           }
         }).catch((response) => {
           console.log(response)
         })
+      },
+      cancelMyDear () {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/cancel/').then((response) => {
+          if (response.data != null) {
+            this.$router.go({name: 'cancelmydear'})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
+      jump () {
+        this.$router.go({name: 'createmydear'})
       }
     }
   }

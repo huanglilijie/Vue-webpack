@@ -154,10 +154,28 @@ router.map({
       require(['./components/OrderFundraisingFinish.vue'], resolve)
     }
   },
+  '/orderrefunded': {
+    name: 'orderrefunded',
+    component: function (resolve) {
+      require(['./components/OrderRefunded.vue'], resolve)
+    }
+  },
   '/myfundraising': {
     name: 'myfundraising',
     component: function (resolve) {
       require(['./components/MyFundraising.vue'], resolve)
+    }
+  },
+  '/cancelmydear': {
+    name: 'cancelmydear',
+    component: function (resolve) {
+      require(['./components/CancelMyDear.vue'], resolve)
+    }
+  },
+  '/refundsubmit': {
+    name: 'refundsubmit',
+    component: function (resolve) {
+      require(['./components/RefundSubmit.vue'], resolve)
     }
   }
 })

@@ -134,8 +134,9 @@
       },
       getCode () {
         if (!this.userText && !this.phoneText) {
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/captcha', {mobile: this.phone}).then((response) => {
+          this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha', {mobile: this.phone}).then((response) => {
             if (response.data != null) {
+              console.log(response.data)
               this.$set('returnCode', response.data)
               this.start()
             }
@@ -169,7 +170,7 @@
             this.$alert('请先阅读活动用户协议')
             return false
           }
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/register', {mobile: this.phone, captcha: this.telCode, realName: this.username, openid: Golab.openid}).then((response) => {
+          this.$http.post(Config.API_ROOT + 'ecommerce/user/register', {mobile: this.phone, captcha: this.telCode, realName: this.username, openid: Golab.openid}).then((response) => {
               // 验证码校验是否通过
             // console.log(response)
             if (response.ok) {
@@ -183,7 +184,6 @@
           }).catch((response) => {
             console.log(response)
           })
-          /* this.$router.go({name: 'itempayinfo', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})*/
         }
       }
     },

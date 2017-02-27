@@ -8,53 +8,109 @@
 	  <p>* 感谢您对奔驰的支持</p>
     </div>
     <div class="car-style">
-	  <ul>
-	    <li class="car-message clearfloat">
-		  <label for="">订单编号:</label>
-		  <div>BJ08318129201</div>
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">预定时间:</label>
-		  <div>2017-1-03</div>	
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">车型信息:</label>
-		  <div>全新smart forfour 4门4座车</div>
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">经销商信息:</label>
-		  <div>
-			<p>北京波士瑞达</p>
-			<p>010-88587676</p>
-		  </div>
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">订单金额:</label>
-		  <div>666元</div>
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">当前筹款金额:</label>
-		  <div>800元</div>
-	    </li>
-	    <li class="car-message clearfloat">
-		  <label for="">当前获得礼包:</label>
-		  <div>1000元补贴 </div>
-	    </li>
-	  </ul>
-  	  <div class="benz-location">
-	    <p>奔驰世界，无限精彩</p>
-	    <p>https://estore.mercedes-benz.com.cn</p>
-	  </div>
-    </div>				
+      <ul>
+        <li class="car-message clearfloat">
+          <label for="">订单编号:</label>
+          <div>{{reservationId}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">预定时间:</label>
+          <div>{{createTime}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">车型信息:</label>
+          <div>{{carName}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">经销商信息:</label>
+          <div>
+            <p>{{dealer[0].name}}</p>
+            <p>{{dealer[0].telephone}}</p>
+          </div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">订单金额:</label>
+          <div>{{product[0].intentionFee}}元</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">当前筹款金额:</label>
+          <div>元</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">当前获得礼包:</label>
+          <div>元补贴</div>
+        </li>
+      </ul>
+    <div class="benz-location">
+      <p>奔驰世界，无限精彩</p>
+      <p>https://estore.mercedes-benz.com.cn</p>
+    </div>
   </div>
   <div class="btn-more">
-	<input type="button" value="我的宠爱值"/>
-	<input type="button" value="再见"/>
+    <input type="button" value="我的宠爱值"/>
+    <input type="button" value="再见"/>
   </div>
 </template>
 <script>
+  import Config from '../../config/config'
+  export default {
+    name: 'orderfundraisingfinish',
+    data () {
+      return {
+        createTime: '',
+        reservationId: '',
+        orderStatus: '',
+        product: [{
+          id: '',
+          createTime: '',
+          status: '',
+          price: '',
+          intentionFee: ''
+        }],
+        customerId: '',
+        dealer: [{
+          name: '',
+          telephone: '',
+          totalAmount: ''
+        }],
+        userid: '123',
+        carName: ''
+      }
+    },
+    ready: function () {
+      this.initOrderDetail()
+    },
+    created () {
+      this.carName = this.$route.query.carName
+    },
+    methods: {
+      initOrderDetail () {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/funded/').then((response) => {
+          if (response.data != null) {
+            console.log(response.data)
+            console.log(response.data.product)
+            console.log(response.data.dealer)
+            var cdate = new Date(response.data.createTime)
+            var year = cdate.getFullYear()
+            var month = cdate.getMonth() + 1
+            var date = cdate.getDate()
+            this.createTime = [year, month, date].join('-')
+            this.reservationId = response.data.reservationId
+            this.product[0].intentionFee = response.data.product.intentionFee
+            this.dealer[0].name = response.data.dealer.name
+            this.dealer[0].telephone = response.data.dealer.telephone
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
+      cancelMyDear () {
+        this.$router.go({name: 'cancelmydear'})
+      }
+    }
+  }
 </script>
-<style scoped>
+<style>
 	* {
 	  margin: 0;
 	  padding: 0;

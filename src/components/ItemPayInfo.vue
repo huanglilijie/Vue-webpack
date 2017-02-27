@@ -80,7 +80,6 @@
           contactMobile: this.pageParam.userPhone}).then((response) => {
             if (response.data != null) {
               var data = response.data
-              // this.$set('returnCode', response.data)
               this.$router.go({name: 'itempay', query: {orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
             }
           }).catch((response) => {
