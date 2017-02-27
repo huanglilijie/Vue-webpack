@@ -177,6 +177,18 @@ router.map({
     component: function (resolve) {
       require(['./components/RefundSubmit.vue'], resolve)
     }
+  },
+  '/dealerlist': {
+    name: 'dealerlist',
+    component: function (resolve) {
+      require(['./components/DealerList.vue'], resolve)
+    }
+  },
+  '/fundraising': {
+    name: 'fundraising',
+    component: function (resolve) {
+      require(['./components/FunDraising.vue'], resolve)
+    }
   }
 })
 router.redirect({
