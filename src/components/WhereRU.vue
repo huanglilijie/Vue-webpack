@@ -247,7 +247,7 @@
         // 根据城市code、用户经纬度获取经销商列表
         getCityDealers (data) {
           this.currentCity = data.cityName
-          this.$http.get(Config.API_ROOT + 'ecommerce/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})
+          this.$http.get(Config.API_ROOT + 'ecommerce/customers/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})
             .then((response) => {
               var data = response.data
               for (var i in data) {
@@ -295,8 +295,8 @@
           // 重新加载地图
           var dealer = this.data[index]
           var param = {
-            latitude: dealer.lat,
-            longitude: dealer.lng,
+            latitude: dealer.latitude,
+            longitude: dealer.longitude,
             name: dealer.name
           }
           this.$refs.bmap.$emit('dealer-marker', param)

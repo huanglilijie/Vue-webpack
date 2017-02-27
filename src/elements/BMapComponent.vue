@@ -137,9 +137,9 @@
           for (var i in markerArr) {
             // 按照原数组的point格式将地图点坐标的经纬度分别提出来
             // 经度
-            var p0 = markerArr[i].lng
+            var p0 = markerArr[i].longitude
             // 纬度
-            var p1 = markerArr[i].lat
+            var p1 = markerArr[i].latitude
             // 循环生成新的地图点
             points[i] = new window.BMap.Point(p0, p1)
             // 按照地图点坐标生成标记
