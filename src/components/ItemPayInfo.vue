@@ -1,10 +1,10 @@
 <template>
   <div class="item-pay-info" id="item-pay-info">
-    <div class="car-style"> 支付定金：{{price}}</div>
+    <div class="car-style"> 支付定金：{{pageParam.carIntentionFee}}元</div>
     <div class="car-style2">
-    <div class="car-style"> 姓名:{{username}}</div>
+    <div class="car-style"> 姓名：{{pageParam.userName}}</div>
     <div class="car-style2"></div>
-    <div class="car-style"> 联系电话:{{phone}}</div>
+    <div class="car-style"> 联系电话：{{pageParam.userPhone}}</div>
     <div class="amount-activity">
       <p>距离活动结束还有<span>{{dates}}</span>天</p>
       <p>美好时光不等待，快支付订金呦!</p>
@@ -25,8 +25,8 @@
 
 <script type="text/babel">
   import Config from '../../config/config'
-  let rst = {
-  }
+  /* let rst = {
+  }*/
   export default {
     name: 'item-pay-info',
     data () {
@@ -37,45 +37,56 @@
         dates = 0
       }
       return {
-        paytype: '',
-        selectedItem: null,
-        afrensh: false,
-        username: '',
-        phone: '',
-        price: '',
         checks: false,
-        dates: dates
+        dates: dates,
+        pageParam: {}
       }
     },
     components: {
     },
     created () {
-      this.id = this.$route.params.id
-      this.token = this.$route.params.token
-      this.username = this.$route.query.username
-      this.phone = this.$route.query.phone
-      this.price = this.$route.query.price
+      // 获取页面传参
+      var carCode = this.$route.query.carCode
+      var carName = this.$route.query.carName
+      var carIntentionFee = this.$route.query.carIntentionFee
+      var dealerName = this.$route.query.dealerName
+      var dealerCode = this.$route.query.dealerCode
+      var dealerTelephone = this.$route.query.dealerTelephone
+      var userName = this.$route.query.userName
+      var userPhone = this.$route.query.userPhone
+      var param = {
+        carCode: carCode,
+        carName: carName,
+        carIntentionFee: carIntentionFee,
+        dealerName: dealerName,
+        dealerCode: dealerCode,
+        dealerTelephone: dealerTelephone,
+        userName: userName,
+        userPhone: userPhone
+      }
+      this.$set('pageParam', param)
       // 向服务器请求数据，返回结果如下
-      this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: 'this.price', photonum: 'this.phone'}
+      // this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: 'this.price', photonum: 'this.phone'}
     },
     watch: {
-      paytype () {
+      /* paytype () {
         this.selectedItem = true
-      }
+      }*/
     },
     methods: {
-      // 选中后页面跳转
+      // 确认订单跳转
       submit () {
-        this.$http.get(Config.API_ROOT + 'customers/' + this.username + '/orders/', {params: {productId: this.phone, dealerId: this.telCode, contactName: this.username,
-          contactMobile: this.phone}}).then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + this.username + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
+          contactMobile: this.pageParam.userPhone}).then((response) => {
             if (response.data != null) {
-              this.$set('returnCode', response.data)
-              this.$router.go({name: 'itempay', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})
+              var data = response.data
+              // this.$set('returnCode', response.data)
+              this.$router.go({name: 'itempay', query: {orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
             }
           }).catch((response) => {
             console.log(response)
           })
-        this.$router.go({name: 'itempay', query: {price: this.price, rst: rst}})
+        // this.$router.go({name: 'itempay', query: {price: this.price, rst: rst}})
       },
       pumpshow () {
         this.checks = !this.checks
@@ -87,7 +98,7 @@
   }
 </script>
 
-<style scoped>
+<style>
 .item-pay{
   margin-top: 15px;
 }

@@ -26,12 +26,12 @@ router.map({
       require(['./components/Home.vue'], resolve)
     }
   },
-  /* '/': {
+  '/authredirect': {
     name: 'authredirect',
     component: function (resolve) {
       require(['./components/AuthRedirect.vue'], resolve)
     }
-  },*/
+  },
   '/index': {
     name: 'home',
     component: function (resolve) {
@@ -152,6 +152,12 @@ router.map({
     name: 'orderfundraisingfinish',
     component: function (resolve) {
       require(['./components/OrderFundraisingFinish.vue'], resolve)
+    }
+  },
+  '/myfundraising': {
+    name: 'myfundraising',
+    component: function (resolve) {
+      require(['./components/MyFundraising.vue'], resolve)
     }
   }
 })

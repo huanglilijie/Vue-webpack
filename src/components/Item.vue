@@ -1,15 +1,14 @@
 <template>
   <div class="item">
   	<img src="/static/paysuccess-img.jpg"/>
-    <div class="car-style"> 车型信息：{{ rst.pname }}</div>
+    <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
     <div class="car-style2">
     	<p>经销商信息：</p>
     	<p>
-    		<div>{{ rst.dealer }}</div>
-    		<div class="phontnum">{{ rst.photonum }}</div>
+    		<div>{{ pageParam.dealerName }}</div>
+    		<div class="phontnum">{{ pageParam.dealerTelephone }}</div>
     	</p>
     </div>
-    <!--<div> {{ rst.price }}</div>-->
     <router-view></router-view>
   </div>
 </template>
@@ -18,7 +17,7 @@
   let data = {
     id: '',
     token: '',
-    rst: {}
+    pageParam: {}
   }
 
   export default {
@@ -27,11 +26,16 @@
       return data
     },
     created () {
-      this.id = this.$route.params.id
-      this.token = this.$route.params.token
-
-      // 向服务器请求数据，返回结果如下
-      this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
+      // 获取页面传参,页面跳转的时候，父子路由都可以获取页面的参数
+      var carName = this.$route.query.carName
+      var dealerName = this.$route.query.dealerName
+      var dealerTelephone = this.$route.query.dealerTelephone
+      var param = {
+        carName: carName,
+        dealerName: dealerName,
+        dealerTelephone: dealerTelephone
+      }
+      this.$set('pageParam', param)
     }
   }
 </script>

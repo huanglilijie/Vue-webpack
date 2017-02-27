@@ -2,7 +2,7 @@
   <div class="item-pay">
   	<div class="item_pay_money">
   		<p>需支付金额</p>
-	  	<p><span>{{rst.price}}</span>元</p>
+	  	<p><span>{{pageParam.carIntentionFee}}</span>元</p>
 	  	<p>订金可抵购车款。取消订单订金退还支付账户.</p>
   	</div>
     <div class="item_pay_way">
@@ -22,7 +22,7 @@
 
 <script>
   import Btn from '../elements/btn-footer'
-  let rst = {}
+  // let rst = {}
 
   export default {
     name: 'item-pay',
@@ -30,18 +30,30 @@
       return {
         paytype: '',
         selectedItem: null,
-        state: false
+        state: false,
+        pageParam: {}
       }
     },
     components: {
       'btn-footer': Btn
     },
     created () {
-      this.id = this.$route.params.id
-      this.token = this.$route.params.token
-
+      // 获取页面传参
+      var orderId = this.$route.query.orderId
+      var carName = this.$route.query.carName
+      var carIntentionFee = this.$route.query.carIntentionFee
+      var dealerName = this.$route.query.dealerName
+      var dealerTelephone = this.$route.query.dealerTelephone
+      var param = {
+        orderId: orderId,
+        carName: carName,
+        carIntentionFee: carIntentionFee,
+        dealerName: dealerName,
+        dealerTelephone: dealerTelephone
+      }
+      this.$set('pageParam', param)
       // 向服务器请求数据，返回结果如下
-      this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
+      // this.rst = {pname: carName, dealer: dealerName, price: carIntentionFee, photonum: dealerTelephone}
     },
     watch: {
       paytype () {
@@ -62,16 +74,17 @@
         // 这里发起支付请求
         // 请求成功后跳转到下个路由
         // 注意要使用token防止重复下单
+        // 需要调用支付接口
         this.$router.go({
           path: '/item/itemSuccess',
-          params: rst
+          query: this.pageParam
         })
       }
     }
   }
 </script>
 
-<style scoped>
+<style>
 .item-pay{
 	margin-top: 15px;
 }

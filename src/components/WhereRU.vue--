@@ -137,7 +137,7 @@
       <div class="top">
         <img src="/static/images/location.png"/>
         <h2>{{currentCity}}</h2>
-        <a href="#" @click="pumpshow()">更换城市</a>
+        <a href="#" @click="changeCity">更换城市</a>
       </div>
       <div class="middle">
         <b-map-component v-ref:bmap></b-map-component>
@@ -159,9 +159,7 @@
               </p>
             </li>
           </ul>
-          <p class="tip">我已阅读 <a href="###">关于上牌城市的说明</a>
-            <input type="checkbox" class= "input-checkbox"  v-model="checkState"/>
-          </p>
+          <p class="tip">我已阅读 <a href="###">关于上牌城市的说明</a><input type="checkbox" name="" id="" value="" /></p>
         </div>
       </div>
       <!-- 底部按钮 -->
@@ -169,8 +167,8 @@
       <div class="mask" v-if="mask">
         <div class="area">
           <div class="sureButton">
-            <span class="no" @click="pumpshow()">取消</span>
-            <span class="yes" @click="changeCity()">确认</span>
+            <span class="no">取消</span>
+            <span class="yes">确认</span>
           </div>
           <mt-picker :slots="slots" @change="demos"></mt-picker>
         </div>
@@ -190,13 +188,14 @@
           data: {},
           currentCity: '',
           selectedItem: null,
-          slots: [],
-          mask: false,
-          selectedIndex: 0,
-          checkState: false,
-          cityData: [],
-          cityNames: [],
-          pageParam: {}
+          cityList: [],
+          slots: [{
+            flex: 1,
+            values: ['北京', '上海', '郑州', '南京', '大哥大', '哈撒给'],
+            className: 'slot1',
+            textAlign: 'center'
+          }],
+          mask: false
         }
       },
       components: {
@@ -204,47 +203,21 @@
         'btn-footer': Btn
       },
       ready () {
-        // 获取页面传参
-        var carCode = this.$route.query.carCode
-        var carName = this.$route.query.carName
-        var carIntentionFee = this.$route.query.carIntentionFee
-        var param = {
-          carCode: carCode,
-          carName: carName,
-          carIntentionFee: carIntentionFee
-        }
-        this.$set('pageParam', param)
-        // 加载城市列表
-        this.getCities()
       },
       beforeDestroy () {},
       methods: {
         demos (picker, values) {
-          // 获取被选中的城市的索引
-          this.$set('selectedIndex', this.cityNames.indexOf(values[0]))
-        },
-        pumpshow () {
-          this.mask = !this.mask
         },
         // 选中后页面跳转
         submit () {
-          if (this.selectedItem === null) {
+          console.log(this.selectedItem)
+          if (!this.selectedItem) {
             this.$alert('请选择经销商')
-            return false
+            return
           }
-          if (!this.checkState) {
-            this.$alert('请先阅读关于上牌城市的说明')
-            return false
-          }
-          var selectedDealer = this.data[this.selectedItem]
-          this.pageParam.dealerName = selectedDealer.name
-          this.pageParam.dealerCode = selectedDealer.code
-          this.pageParam.dealerTelephone = selectedDealer.telephone
-          // console.log(this.pageParam)
           // 路由跳转页面带参数传递
-          this.$router.go({path: '/user', query: this.pageParam})
+          this.$router.go({path: '/user', query: {selectedItem: this.selectedItem}})
         },
-        // 根据城市code、用户经纬度获取经销商列表
         getCityDealers (data) {
           this.currentCity = data.cityName
           this.$http.get(Config.API_ROOT + 'ecommerce/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})
@@ -259,30 +232,6 @@
               this.$alert('获取经销商列表失败')
             })
         },
-        // 获取所有的城市api
-        getCities () {
-          this.$http.get(Config.API_ROOT + 'ecommerce/cities')
-            .then((response) => {
-              var data = response.data
-              var cityNames = []
-              var slots = [{
-                flex: 1,
-                values: [],
-                className: 'slot1',
-                textAlign: 'center'
-              }]
-              console.log(data)
-              for (var i in data) {
-                cityNames[i] = data[i].name
-              }
-              slots[0].values = cityNames
-              this.$set('cityData', data)
-              this.$set('cityNames', cityNames)
-              this.$set('slots', slots)
-            }).catch((response) => {
-              this.$alert('获取城市列表失败')
-            })
-        },
         selectDealer (index) {
           // 将已选择的置为未选择
           if (this.selectedItem != null) {
@@ -292,34 +241,18 @@
           this.data[index].selected = true
           // 将序列赋值给selectedItem
           this.selectedItem = index
-          // 重新加载地图
-          var dealer = this.data[index]
-          var param = {
-            latitude: dealer.lat,
-            longitude: dealer.lng,
-            name: dealer.name
-          }
-          this.$refs.bmap.$emit('dealer-marker', param)
         },
         changeCity () {
-          var city = this.cityData[this.selectedIndex]
           var param = {
-            cityId: city.code,
-            cityName: city.name,
-            latitude: city.lat,
-            longitude: city.lng
+            // 广州市
+            cityId: 257,
+            cityName: '广州市',
+            latitude: 23.134274,
+            longitude: 113.372867
           }
           this.$refs.bmap.$emit('change-city', param)
-          // 变更城市时加载经销商
+          // 加载变更城市经销商
           this.getCityDealers(param)
-          // 隐藏城市选择框
-          this.mask = !this.mask
-          // 初始化选择城市索引
-          this.$set('selectedIndex', 0)
-          // 初始化经销商未选中
-          this.selectedItem = null
-          // 初始化阅读上牌城市说明
-          this.checkState = false
         }
       },
       events: {
@@ -331,9 +264,6 @@
         },
         'change-current-city': function (data) {
           this.currentCity = data.cityName
-        },
-        'pump-show': function (data) {
-          this.pumpshow()
         }
       }
     }

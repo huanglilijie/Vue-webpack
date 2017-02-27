@@ -26,12 +26,12 @@
           <label for="">经销商信息:</label>
           <div>
             <p>{{dealer[0].name}}</p>
-            <p>{{dealer.telephone}}</p>
+            <p>{{dealer[0].telephone}}</p>
           </div>
         </li>
         <li class="car-message clearfloat">
           <label for="">订单金额:</label>
-          <div>{{product.price}}元</div>
+          <div>{{product[0].price}}元</div>
         </li>
       </ul>
       <p class="text"><span>已成功预订</span><span>即刻开启筹款</span></p>
@@ -45,8 +45,9 @@
   </div>
 </template>
 <script>
+  import Config from '../../config/config'
   export default {
-    name: 'payment',
+    name: 'orderpayment',
     data () {
       var nd = new Date()
       var ld = new Date('2017-04-30')
@@ -75,7 +76,32 @@
           payStatus: '',
           payChannel: ''
         }],
-        dates: dates
+        dates: dates,
+        userid: '123'
+      }
+    },
+    ready: function () {
+      this.initOrderDetail()
+    },
+    created () {
+      this.userid = this.$route.params.userid
+    },
+    methods: {
+      initOrderDetail () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/', {params: {userid: this.userid}}).then((response) => {
+          if (response.data != null) {
+            console.log(response.data)
+            console.log(response.data.product)
+            console.log(response.data.dealer)
+            this.product[0].price = response.data.product.price
+            this.reservationId = response.data.reservationId
+            this.dealer[0].name = response.data.dealer.name
+            this.dealer[0].phone = response.data.dealer.phone
+            this.payment[0].amount = response.data.payment.amount
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }

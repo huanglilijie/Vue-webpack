@@ -3,7 +3,7 @@
     <!-- 列表页 -->
     <ul class="p-list">
       <li class="p-list-item" v-for="item in lists" @click="select($index)">
-        <div :class="['p-list-item-label',{'p-list-item-label-change': selected[$index]}]">
+        <div :class="['p-list-item-label',{'p-list-item-label-change': item.selected}]">
           <div class="p-list-item-title"></div>
           <div class="p-list-item-price">
             <h4></h4>
@@ -30,7 +30,6 @@
   let data = {
     lists: [],
     selectedItem: null,
-    selected: [false, false, false],
     orders_number: 0,
     price: 0
   }
@@ -56,7 +55,7 @@
         this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
         .then((response) => {
           this.$set('orders_number', response.data)
-          console.log(this.orders_number)
+          // console.log(this.orders_number)
           if (this.orders_number >= 400) {
             this.$router.go({path: '/listsfullquota/'})
           }
@@ -66,7 +65,11 @@
         // 获取车型列表
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/vehicles/models')
         .then((response) => {
-          this.$set('lists', response.data)
+          var data = response.data
+          for (var i in data) {
+            data[i].selected = false
+          }
+          this.$set('lists', data)
         }).catch((response) => {
           console.log(response)
         })
@@ -74,10 +77,10 @@
       select (index) {
         // 将已选择的置为未选择
         if (this.selectedItem != null) {
-          this.selected.$set(this.selectedItem, false)
+          this.lists[this.selectedItem].selected = false
         }
         // 将本次选择的置为选中
-        this.selected.$set(index, true)
+        this.lists[index].selected = true
         // 将序列赋值给selectedItem
         this.selectedItem = index
       },
@@ -95,7 +98,7 @@
           return false
         }
         // 路由跳转页面带参数传递
-        this.$router.go({name: 'whereru', query: {id: selected.id, price: '66666'}})
+        this.$router.go({path: '/whereru', query: {carCode: selected.code, carName: selected.name, carIntentionFee: selected.intentionFee}})
       }
     }
   }

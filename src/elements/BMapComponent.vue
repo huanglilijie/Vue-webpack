@@ -12,7 +12,8 @@
           height: this.mapHeight + 'px'
         },
         mapData: {},
-        location: {}
+        location: {},
+        isGrant: false
       }
     },
     props: {
@@ -37,15 +38,17 @@
       }
     },
     ready () {
-      // 获取定位
+      // 判断浏览器是否支持地理位置接口
       if (navigator.geolocation) {
+        // 支持
         this.agree_obtain_location()
       } else {
+        // 不支持
         this.$dispatch('show-subs-alert', '不支持地理位置接口,定位失败，默认北京市')
         //  默认北京
         var location = {
-          latitude: this.latitude,
-          longitude: this.longitude
+          longitude: this.longitude,
+          latitude: this.latitude
         }
         this.getCity(location)
       }
@@ -60,6 +63,8 @@
         navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
       },
       geoSuccess (event) {
+        // 用户同意授权
+        this.isGrant = true
         var location = {
           latitude: event.coords.latitude,
           longitude: event.coords.longitude
@@ -70,13 +75,16 @@
         this.getCity(location)
       },
       geoError (event) {
-        this.$dispatch('show-subs-alert', '获取位置信息失败')
+        // 用户拒绝授权
+        // this.$dispatch('show-subs-alert', '获取位置信息失败')
         //  默认北京
         var location = {
-          latitude: 39.929986,
-          longitude: 116.395645
+          longitude: this.longitude,
+          latitude: this.latitude
         }
         this.getCity(location)
+        // 弹出城市选择
+        this.$dispatch('pump-show')
       },
       initMap (data) {
         // var markerArr = data
@@ -89,10 +97,11 @@
         } else {
           point = new BMap.Point(this.longitude, this.latitude)
         }
-        var marker = new BMap.Marker(point, 13)
-        map.addOverlay(marker)
+        // map.setCenter('北京')
+        /* var marker = new BMap.Marker(point, 13)
+        map.addOverlay(marker)*/
         // 初始化地图,设置中心点坐标和地图级别。
-        map.centerAndZoom(point, 13)
+        map.centerAndZoom(point, 11)
         // 向地图中添加缩放控件
         var ctrlNav = new window.BMap.NavigationControl({
           anchor: 'BMAP_ANCHOR_BOTTOM_LEFT',
@@ -112,7 +121,7 @@
         map.enableScrollWheelZoom(true)
         map.enableInertialDragging(true)
         map.enableContinuousZoom(true)
-        this.myMap = map
+        this.$set('mapData', map)
       },
       mapDealerShow (data) {
         var markerArr = data
@@ -125,19 +134,21 @@
         // 存放检索信息窗口对象的数组
         // var searchInfoWindow = new Array()
         if (data) {
-          for (var i = 0; i < markerArr.length; i++) {
-            var p0 = markerArr[i].lat
+          for (var i in markerArr) {
             // 按照原数组的point格式将地图点坐标的经纬度分别提出来
-            var p1 = markerArr[i].lng
+            // 经度
+            var p0 = markerArr[i].lng
+            // 纬度
+            var p1 = markerArr[i].lat
             // 循环生成新的地图点
             points[i] = new window.BMap.Point(p0, p1)
             // 按照地图点坐标生成标记
-            markers[i] = new window.BMap.Marker(points[i])
-            this.myMap.addOverlay(markers[i])
+            markers[i] = new window.BMap.Marker(points[i], 11)
+            this.mapData.addOverlay(markers[i])
             // 跳动的动画
             // markers[i].setAnimation(BMAP_ANIMATION_BOUNCE)
-            var label = new window.BMap.Label(markerArr[i].name, { offset: new window.BMap.Size(20, -10) })
-            markers[i].setLabel(label)
+            // var label = new window.BMap.Label(markerArr[i].name, { offset: new window.BMap.Size(20, -10) })
+            // markers[i].setLabel(label)
           }
         }
       },
@@ -150,7 +161,7 @@
         } else {
           // 默认北京市代码
           cityId = 131
-          cityName = '北京市'
+          cityName = '北京'
         }
         var param = {
           cityId: cityId,
@@ -171,20 +182,43 @@
         // 获得切换城市后的地图中心点坐标
         var changedPoint = new BMap.Point(data.longitude, data.latitude)
         // 初始化地图,设置中心点坐标和地图级别。
-        this.myMap.centerAndZoom(changedPoint, 13)
-        this.myMap.panTo(changedPoint, 0)
+        this.mapData.centerAndZoom(changedPoint, 11)
+        this.mapData.panTo(changedPoint, 0)
+      },
+      selectDealer (data) {
+        this.mapData.clearOverlays()
+        if (this.isGrant) {
+          var userPoint = new BMap.Point(this.longitude, this.latitude)
+          this.mapData.centerAndZoom(userPoint, 13)
+          var userMarker = new window.BMap.Marker(userPoint, 13)
+          this.mapData.addOverlay(userMarker)
+        }
+        // 获得切换城市后的地图中心点坐标
+        var dealerPoint = new BMap.Point(data.longitude, data.latitude)
+        // 初始化地图,设置中心点坐标和地图级别。
+        this.mapData.centerAndZoom(dealerPoint, 13)
+        // 按照地图点坐标生成标记
+        var dealerMarker = new window.BMap.Marker(dealerPoint, 13)
+        this.mapData.addOverlay(dealerMarker)
+        /* var infoWindow = new BMap.InfoWindow(data.name)
+        this.mapData.openInfoWindow(infoWindow, dealerPoint)
+        var label = new window.BMap.Label(data.name, { offset: new window.BMap.Size(10, -10) })
+        dealerMarker.setLabel(label)*/
+        this.mapData.panTo(dealerPoint, 0)
       }
     },
     events: {
       'show-bmap': function (data) {
         this.data = data
-        // this.initMap()
       },
       'show-dealers-onmap': function (data) {
         this.mapDealerShow(data)
       },
       'change-city': function (data) {
         this.cityChanged(data)
+      },
+      'dealer-marker': function (data) {
+        this.selectDealer(data)
       }
     }
 }

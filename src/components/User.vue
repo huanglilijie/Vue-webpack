@@ -40,6 +40,7 @@
 <script>
   import Btn from '../elements/btn-footer'
   import Config from '../../config/config'
+  import Golab from '../libs/golab'
   let data = {
     id: '',
     username: '',
@@ -63,7 +64,8 @@
     isChinaMobile: '',
     isChinaUnion: '',
     isChinaTelcom: '',
-    isOtherTelphone: ''
+    isOtherTelphone: '',
+    pageParam: {}
   }
   export default {
     name: 'user',
@@ -81,6 +83,22 @@
       this.isChinaUnion = /^(?:13[0-2]|145|15[56]|176|18[56])\d{8}$/
       this.isChinaTelcom = /^(?:133|153|177|18[019])\d{8}$/
       this.isOtherTelphone = /^170([059])\d{7}$/
+      // 获取页面传参
+      var carCode = this.$route.query.carCode
+      var carName = this.$route.query.carName
+      var carIntentionFee = this.$route.query.carIntentionFee
+      var dealerName = this.$route.query.dealerName
+      var dealerCode = this.$route.query.dealerCode
+      var dealerTelephone = this.$route.query.dealerTelephone
+      var param = {
+        carCode: carCode,
+        carName: carName,
+        carIntentionFee: carIntentionFee,
+        dealerName: dealerName,
+        dealerCode: dealerCode,
+        dealerTelephone: dealerTelephone
+      }
+      this.$set('pageParam', param)
     },
     props: {
       second: {
@@ -106,7 +124,7 @@
       },
       timer: function () {
         this.againClick = true
-        console.log('开始了')
+        // console.log('开始了')
         if (this.time > 0) {
           this.time--
           setTimeout(this.timer, 1000)
@@ -116,7 +134,7 @@
       },
       getCode () {
         if (!this.userText && !this.phoneText) {
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/captcha', {params: {mobile: this.phone}}).then((response) => {
+          this.$http.get(Config.API_ROOT + 'ecommerce/user/captcha', {mobile: this.phone}).then((response) => {
             if (response.data != null) {
               this.$set('returnCode', response.data)
               this.start()
@@ -151,16 +169,21 @@
             this.$alert('请先阅读活动用户协议')
             return false
           }
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/register', {params: {mobile: this.phone, captcha: this.telCode, realName: this.username, openid: '123456'}}).then((response) => {
+          this.$http.get(Config.API_ROOT + 'ecommerce/user/register', {mobile: this.phone, captcha: this.telCode, realName: this.username, openid: Golab.openid}).then((response) => {
               // 验证码校验是否通过
-            console.log(response)
+            // console.log(response)
             if (response.ok) {
-              this.$router.go({name: 'itempayinfo', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})
+              this.pageParam.userName = this.username
+              this.pageParam.userPhone = this.phone
+              this.$router.go({name: 'itempayinfo', query: this.pageParam})
+            } else {
+              this.errormeg = '验证码不正确'
+              this.codeText = true
             }
           }).catch((response) => {
             console.log(response)
           })
-          this.$router.go({name: 'itempayinfo', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})
+          /* this.$router.go({name: 'itempayinfo', query: {id: this.id, username: this.username, phone: this.phone, price: this.price}})*/
         }
       }
     },

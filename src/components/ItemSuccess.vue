@@ -1,6 +1,6 @@
 <template>
   <div class="item-success">
-    <p class="pay_mon">支付订金：{{rst.price}} 元</p>
+    <p class="pay_mon">支付订金：{{pageParam.carIntentionFee}} 元</p>
     <div class="pay_success">
     	<p>已成功预订 即刻开启筹款</p>
 	    <p>距离活动结束还有<span>{{dates}}</span>天</p>
@@ -26,15 +26,31 @@
         dates = 0
       }
       return {
-        dates: dates
+        dates: dates,
+        pageParam: {}
       }
     },
     created () {
-      this.id = this.$route.params.id
-      this.token = this.$route.params.token
+      // 获取页面传参
+      var orderId = this.$route.query.orderId
+      var carName = this.$route.query.carName
+      var carIntentionFee = this.$route.query.carIntentionFee
+      var dealerName = this.$route.query.dealerName
+      var dealerTelephone = this.$route.query.dealerTelephone
+      var param = {
+        orderId: orderId,
+        carName: carName,
+        carIntentionFee: carIntentionFee,
+        dealerName: dealerName,
+        dealerTelephone: dealerTelephone
+      }
+      this.$set('pageParam', param)
+
+      // this.id = this.$route.params.id
+      // this.token = this.$route.params.token
 
       // 向服务器请求数据，返回结果如下
-      this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
+      // this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: '666', photonum: '010-232323'}
     },
     methods: {
       jump () {
