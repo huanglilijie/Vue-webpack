@@ -118,7 +118,7 @@
           if (response.data != null) {
             this.$router.go({
               name: 'cancelmydear',
-              query: this.pageParam})
+              query: {'reservationId': this.reservationId}})
           }
         }).catch((response) => {
           console.log(response)

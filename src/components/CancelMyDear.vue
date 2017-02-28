@@ -4,18 +4,33 @@
     <div>
       <img src="/static/images/car-img.png" alt="" />
     </div>
-    <a href="###" class="continue" @click="toBeContinue">继续宠爱之旅</a>
-    <a href="###" class="abandon" @click="refundSubmit">确认放弃</a>
+    <a href="" class="continue" @click="toBeContinue">继续宠爱之旅</a>
+    <a class="abandon" @click="refund">确认放弃</a>
   </div>
 </template>
 <script>
+  import Golab from '../libs/golab'
+  import Config from '../../config/config'
   export default {
     name: 'cancelmydear',
     data () {
+      return {
+        reservationId: ''
+      }
+    },
+    created () {
+      var reservationId = this.$route.query.reservationId
+      this.$set('reservationId', reservationId)
     },
     methods: {
-      refundSubmit () {
-        this.$router.go({name: 'refundsubmit'})
+      refund () {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.reservationid + '/refund/').then((response) => {
+          if (response.data != null) {
+            this.$router.go({name: 'refundsubmit'})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       },
       toBeContinue () {
         this.$router.go({name: 'home'})

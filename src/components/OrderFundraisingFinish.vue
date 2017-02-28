@@ -34,11 +34,11 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">当前筹款金额:</label>
-          <div>元</div>
+          <div>{{totalamount}}元</div>
         </li>
         <li class="car-message clearfloat">
           <label for="">当前获得礼包:</label>
-          <div>元补贴</div>
+          <div>{{present}}</div>
         </li>
       </ul>
     <div class="benz-location">
@@ -74,12 +74,13 @@
           telephone: '',
           totalAmount: ''
         }],
-        userid: '123',
-        carName: ''
+        totalamount: 0,
+        present: ''
       }
     },
     ready: function () {
       this.initOrderDetail()
+      this.initOrderAmount()
     },
     methods: {
       initOrderDetail () {
@@ -100,8 +101,31 @@
           console.log(response)
         })
       },
-      cancelMyDear () {
-        this.$router.go({name: 'cancelmydear'})
+      initOrderAmount () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          var data = response.data
+          var totalamount = 0
+          for (var i in data) {
+            totalamount += data[i].amount
+          }
+          var present
+          if (totalamount < Golab.gradeamount_1) {
+            present = '无'
+          }
+          if (totalamount < Golab.gradeamount_2 && totalamount >= Golab.gradeamount_1) {
+            present = Golab.packageamount_1 + '元'
+          }
+          if (totalamount < Golab.gradeamount_3 && totalamount >= Golab.gradeamount_2) {
+            present = Golab.packageamount_2 + '元'
+          }
+          if (totalamount >= Golab.gradeamount_3) {
+            present = Golab.packageamount_3 + '元'
+          }
+          this.$set('totalamount', totalamount)
+          this.$set('present', present)
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }
