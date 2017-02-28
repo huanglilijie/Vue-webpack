@@ -171,9 +171,12 @@
             this.$alert('请先阅读活动用户协议')
             return false
           }
-          this.$http.post(Config.API_ROOT + 'ecommerce/user/register', {mobile: this.phone, captcha: this.telCode, realName: this.username, openid: Golab.openid}).then((response) => {
+          this.$http.post(Config.API_ROOT + 'ecommerce/user/register', {'mobile': this.phone, 'captcha': this.telCode, 'realName': this.username, 'openid': Golab.openid}).then((response) => {
               // 验证码校验是否通过
-            // console.log(response)
+            console.log(response)
+            var data = response.data
+            // 将注册获取的uid保存
+            Config.uid = data.uid
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
