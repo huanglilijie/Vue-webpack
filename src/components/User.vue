@@ -134,7 +134,7 @@
       },
       getCode () {
         if (!this.userText && !this.phoneText) {
-          this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha', {mobile: this.phone}).then((response) => {
+          this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha', {'mobile': this.phone}).then((response) => {
             console.log(response)
             if (response.data != null) {
               console.log(response.data)
