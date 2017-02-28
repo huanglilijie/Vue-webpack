@@ -5,9 +5,9 @@
  */
 export default {
   // 用户微信openid
-  openid: '',
+  openid: '111111',
   // 用户微信userid
-  userid: '',
+  userid: '222222',
   // 活动名额
   activequota: 50,
   // 活动开始时间
