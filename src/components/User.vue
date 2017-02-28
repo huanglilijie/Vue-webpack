@@ -175,7 +175,7 @@
               // 验证码校验是否通过
             console.log(response)
             var data = response.data
-            // 将注册获取的uid保存
+            // 将注册获取uid存储
             Config.uid = data.uid
             if (response.ok) {
               this.pageParam.userName = this.username

@@ -15,7 +15,7 @@ export default {
   // 活动开始时间
   startDate: '2017-02-28',
   // 活动结束时间
-  endDate: '2017-03-02',
+  endDate: '2017-02-27',
   // 1000金额等级
   gradeamount_1: 1000,
   // 3000金额等级

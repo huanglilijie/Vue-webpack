@@ -59,31 +59,42 @@
         this.$router.go({path: '/point/'})
       }
       // 二、判断用户是否存在订单信息
-      // 1、根据openid获取用户的userid
+      // 1、根据openid获取用户的uid(uid是在用户注册的时候产生的)
       /* this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
       .then((response) => {
         var data = response.data
-        // 2、根据userid获取用户的最新订单
-        var userid = data.userid
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + userid + '/orders/')
+        // 2、根据uid获取用户的最新订单
+        var uid = data.uid
+        if () {
+        }
+        Golab.uid = uid
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders/')
         .then((response) => {
           var orderInfo = response.data
           if (response.data != null) {
             var orderStatus = orderInfo.orderStatus
-            // 待支付订单，跳转到选择付款方式页
+            // 当我有一个未支付的订单，再次进入活动时，我可以直接看到支付确认页
             if (orderStatus === 'WAITING_FOR_PAYMENT') {
               this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee}})
             }
-            // 已付款订单，跳转到支付成功页
+            // 支付完成后未创建筹款页，再次进入活动会直接进入支付成功的订单详情页
             if (orderStatus === 'PAID') {
               this.$router.go({path: '/item/itemSuccess'})
             }
-            // 筹款中订单，跳转到筹款进度页面
+            // 当我开始筹款，我进入活动入口可以默认浏览筹款进度页
+            if (orderStatus === 'FUNDING') {
+              this.$router.go({path: '/myfundraising'})
+            }
+            // 当筹款完成或活动结束，我进入活动可以默认显示已完成的筹款进度页
+            if (orderStatus === 'FUNDING') {
+              this.$router.go({path: '/myfundraising'})
+            }
+            // 筹款完成
             if (orderStatus === 'FUNDING') {
               this.$router.go({path: '/myfundraising'})
             }
           } else {
-            // 客户无订单进入活动首页，不做任何跳转
+            // 在未存在订单的情况下通过活动入口进入活动，可以正常浏览活动首页
           }
         }).catch((response) => {
           console.log(response)
