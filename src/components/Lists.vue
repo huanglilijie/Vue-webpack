@@ -31,7 +31,6 @@
   let data = {
     lists: [],
     selectedItem: null,
-    orders_number: 0,
     price: 0
   }
 
@@ -52,16 +51,6 @@
     methods: {
       // 选中一个item
       setData: function () {
-        // 获取订单数量
-        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
-        .then((response) => {
-          this.$set('orders_number', response.data)
-          if (this.orders_number >= Golab.activequota) {
-            this.$router.go({path: '/listsfullquota/'})
-          }
-        }).catch((response) => {
-          console.log(response)
-        })
         // 获取车型列表
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/vehicles/models')
         .then((response) => {
@@ -100,9 +89,8 @@
         // 400单是否已满
         this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
         .then((response) => {
-          this.$set('orders_number', response.data)
-          // console.log(this.orders_number)
-          if (this.orders_number >= Golab.activequota) {
+          var ordersNumber = response.data
+          if (ordersNumber >= Golab.activequota) {
             this.$alert('活动名额已满')
             this.$router.go({path: '/listsfullquota/'})
           } else {

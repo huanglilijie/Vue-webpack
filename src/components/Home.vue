@@ -9,14 +9,24 @@
 </template>
 
 <script>
-  // import Config from '../../config/config'
+  import Config from '../../config/config'
   import Golab from '../libs/golab'
   export default {
     name: 'smart-family',
     methods: {
       submit () {
-        console.log(new Date())
-        this.$router.go({path: '/lists/'})
+        // 判断活动名额是否已满
+        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
+        .then((response) => {
+          var ordersNumber = response.data
+          if (ordersNumber >= Golab.activequota) {
+            this.$router.go({path: '/listsfullquota/'})
+          } else {
+            this.$router.go({path: '/lists/'})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     },
     data: function () {
