@@ -44,7 +44,8 @@
       </div>
       <div class="write-code">
         <div>如果您忘记了核销码，点此重新发送</div>
-        <input type="button" value="重新发送核销码" class="resend" />
+        <input v-if="resendtime == 0" type="button" value="重新发送核销码" class="resend" @click ="resendCode" :disabled ='isdisable'/>
+        <span v-if="resendtime != 0" class="resend" id="timeText">{{resendtime}}s</span>
       </div>
     </div>
   <div class="btn-more">
@@ -58,6 +59,7 @@
     name: 'orderfundraisingend',
     data () {
       return {
+        resendtime: 0,
         createTime: '',
         reservationId: '',
         orderStatus: '',
@@ -83,8 +85,27 @@
     },
     created () {
       this.carName = this.$route.query.carName
+      this.orderid = this.$route.query.orderid
+    },
+    props: {
+      second: {
+        type: Number,
+        default: 60
+      }
     },
     methods: {
+      start: function () {
+        this.resendtime = this.second
+        this.timer()
+      },
+      timer: function () {
+        if (this.resendtime > 0) {
+          this.resendtime--
+          setTimeout(this.timer, 1000)
+        } else {
+          this.disabled = false
+        }
+      },
       initOrderDetail () {
         this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/funded/').then((response) => {
           if (response.data != null) {
@@ -110,6 +131,15 @@
       },
       viweMyDear () {
         this.$router.go({name: 'fundraising'})
+      },
+      resendCode () {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/redeem-code/').then((response) => {
+          if (response) {
+            this.start()
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }
@@ -216,6 +246,18 @@
     height: 30px;
     border: none;
     background-color: #599C31;
+    color: #FFFFFF;
+    border-radius: 5px;
+    font-size: 10px;
+    float: right;
+  }
+  .write-code span {
+    display: inline-block;
+    -webkit-appearance: none;
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: rgb(150,157,163);
     color: #FFFFFF;
     border-radius: 5px;
     font-size: 10px;

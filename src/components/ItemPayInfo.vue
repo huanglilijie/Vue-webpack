@@ -25,6 +25,7 @@
 
 <script type="text/babel">
   import Config from '../../config/config'
+  import Golab from '../libs/golab'
   /* let rst = {
   }*/
   export default {
@@ -76,7 +77,7 @@
     methods: {
       // 确认订单跳转
       submit () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + this.username + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
           contactMobile: this.pageParam.userPhone}).then((response) => {
             if (response.data != null) {
               var data = response.data
