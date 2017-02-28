@@ -2,11 +2,18 @@
   <div class="wrap">
     <p>您的订单退款申请已提交，<br />
     请耐心等待客服处理！</p>
-    <a href="###" class="continue">查看详情</a>
-    <a href="###" class="abandon">再见</a>
+    <a href="" class="continue" @click="orderDetail">查看详情</a>
+    <a href="" class="abandon">再见</a>
   </div>
 </template>
 <script>
+  export default {
+    methods: {
+      orderDetail () {
+        this.$router.go({name: 'orderrefunded'})
+      }
+    }
+  }
 </script>
 <style>
   * {

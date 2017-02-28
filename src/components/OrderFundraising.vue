@@ -62,7 +62,6 @@
           id: '',
           createTime: '',
           name: '',
-          status: '',
           price: '',
           intentionFee: ''
         }],
@@ -88,7 +87,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
           if (response.data != null) {
             console.log(response.data)
             console.log(response.data.product)
@@ -100,6 +99,7 @@
             this.createTime = [year, month, date].join('-')
             this.reservationId = response.data.reservationId
             this.product[0].intentionFee = response.data.product.intentionFee
+            this.product[0].name = response.data.product.name
             this.dealer[0].name = response.data.dealer.name
             this.dealer[0].telephone = response.data.dealer.telephone
             this.payment[0].amount = response.data.payment.amount

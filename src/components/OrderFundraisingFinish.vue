@@ -19,7 +19,7 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">车型信息:</label>
-          <div>{{carName}}</div>
+          <div>{{product[0].name}}</div>
         </li>
         <li class="car-message clearfloat">
           <label for="">经销商信息:</label>
@@ -52,6 +52,7 @@
   </div>
 </template>
 <script>
+  import Golab from '../libs/golab'
   import Config from '../../config/config'
   export default {
     name: 'orderfundraisingfinish',
@@ -63,7 +64,7 @@
         product: [{
           id: '',
           createTime: '',
-          status: '',
+          name: '',
           price: '',
           intentionFee: ''
         }],
@@ -80,21 +81,16 @@
     ready: function () {
       this.initOrderDetail()
     },
-    created () {
-      this.carName = this.$route.query.carName
-    },
     methods: {
       initOrderDetail () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/funded/').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
           if (response.data != null) {
-            console.log(response.data)
-            console.log(response.data.product)
-            console.log(response.data.dealer)
             var cdate = new Date(response.data.createTime)
             var year = cdate.getFullYear()
             var month = cdate.getMonth() + 1
             var date = cdate.getDate()
             this.createTime = [year, month, date].join('-')
+            this.product[0].name = response.data.product.name
             this.reservationId = response.data.reservationId
             this.product[0].intentionFee = response.data.product.intentionFee
             this.dealer[0].name = response.data.dealer.name

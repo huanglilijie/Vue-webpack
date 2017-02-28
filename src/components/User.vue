@@ -186,6 +186,8 @@
               this.codeText = true
             }
           }).catch((response) => {
+            this.errormeg = response.data.message
+            this.codeText = true
             console.log(response)
           })
         }

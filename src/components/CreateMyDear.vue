@@ -83,7 +83,7 @@
         }
         this.makshow()
         // 调用邀请函创建api
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/' + this.orderId + '/funding', {memo: this.selected.thankway}).then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/funding', {memo: this.selected.thankway}).then((response) => {
           // console.log(response)
         }).catch((response) => {
           console.log(response)

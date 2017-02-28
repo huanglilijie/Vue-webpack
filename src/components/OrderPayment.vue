@@ -95,7 +95,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/', {params: {userid: Golab.userid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
           if (response.data != null) {
             console.log(response.data)
             var cdate = new Date(response.data.createTime)
@@ -114,7 +114,7 @@
         })
       },
       cancelMyDear () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/' + this.orderId + '/cancel/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/cancel/').then((response) => {
           if (response.data != null) {
             this.$router.go({
               name: 'cancelmydear',

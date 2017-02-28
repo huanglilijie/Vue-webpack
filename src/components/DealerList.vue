@@ -103,7 +103,7 @@ export default {
     },
     getfunds () {
       // 根据订单号获取筹款明细
-      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
       .then((response) => {
         var data = response.data
         var totalamount = 0
