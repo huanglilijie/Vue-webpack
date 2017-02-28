@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="wrap">
+  <div class="wrap3">
       <div class="content_title">
           <h2>您还没有筹到款</h2>
           <p>不要灰心？再接再厉吧。</p>
@@ -8,14 +8,22 @@
           <img src="/static/images/circle.png" alt="">
       </div>
       <div class="content_btn">
-          <input type="button" value="还不够，离梦想再进一步">
-          <input type="button" value="OK , 确认完成">
+          <input type="button" value="还不够，离梦想再进一步" @click="goback()">
+          <input type="button" value="OK , 确认完成" @click="submit()">
       </div>
   </div>
 </template>
 
 <script>
   export default {
+    methods: {
+      submit () {
+        this.$router.go({name: 'fundraising'})
+      },
+      goback () {
+        this.$router.go({name: 'dealerlist'})
+      }
+    }
   }
 </script>
 
@@ -26,7 +34,7 @@ html,body{
     font-family: 微软雅黑;
     font-size: 12px;
 }
-.wrap{
+.wrap3{
     width:100%;
     background: url("/static/images/bg-over.png") no-repeat;
   background-size: 100%;

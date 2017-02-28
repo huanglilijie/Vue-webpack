@@ -47,15 +47,18 @@
         orderId: ''
       }
     },
-    created () {
+    create () {
       // 初始化lists
       // 获取页面传参
       var orderId = this.$route.query.orderId
-      this.orderId = orderId
+      this.$set('orderId', orderId)
     },
     components: {
     },
-    ready: function () {
+    ready () {
+      // setTimeout(function () {
+      //   console.log(123)
+      // }, 3000)
     },
     methods: {
       select (index) {
@@ -72,26 +75,32 @@
       getSelected () {
         if (this.selectedItem == null) {
           this.$alert('请选择答谢方式')
+          this.checks = false
           return false
         }
         return this.lists[this.selectedItem]
       },
       submit () {
+        var self = this
         const selected = this.getSelected()
         if (!selected) {
           return false
         }
         this.makshow()
         // 调用邀请函创建api
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/funding', {memo: this.selected.thankway}).then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/' + this.orderId + '/funding', {memo: this.selected.thankway}).then((response) => {
           // console.log(response)
         }).catch((response) => {
           console.log(response)
         })
-        setTimeout(this.$router.go({name: 'dealerlist', query: {orderId: this.orderId, isfirst: true}}), '5000')
+        setTimeout(function () {
+          self.$router.go({name: 'dealerlist', query: {orderId: self.orderId, isfirst: true}})
+        }, 2000)
+        // setTimout(() => {this.$router.go({name: 'dealerlist', query: {orderId: this.orderId, isfirst: true}})}, 1000)
       },
       makshow () {
-        this.checks = !this.checks
+        var self = this
+        self.checks = !self.checks
       }
     }
   }
@@ -177,14 +186,6 @@
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
   }
-/*	.pump{
-    width: 85%;
-    margin: 0 auto;
-    position: absolute;
-    top: 5vh;
-    left: 7.5%;
-
-	}*/
   .pump{
     position: absolute;
     top: 28vh;

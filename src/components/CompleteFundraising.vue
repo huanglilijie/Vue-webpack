@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="wrap">
+  <div class="wrap1">
       <div class="content">
-          <h1>您已筹得<span>8800</span>元</h1>
-          <p>将获得2000元购车补贴</p>
+          <h1>您已筹得<span>{{pageParam.totalamount}}</span>元</h1>
+          <p>将获得{{howMoney}}元购车补贴</p>
       </div>
       <div class="content_btn">
           <input type="button" value="OK , 我的smart已在路上" @click="submit()">
@@ -11,8 +11,42 @@
   </div>
 </template>
 <script>
+import Golab from '../libs/golab'
 export default {
   name: '',
+  data () {
+    return {
+      pageParam: {},
+      howMoney: {}
+    }
+  },
+  created () {
+    // 获取页面传参
+    var totalamount = this.$route.query.totalamount
+    console.log(totalamount)
+    var param = {
+      totalamount: totalamount
+    }
+    this.$set('pageParam', param)
+    var packageamount1 = Golab.packageamount_1
+    var packageamount2 = Golab.packageamount_2
+    var packageamount3 = Golab.packageamount_3
+    var gradeamount1 = Golab.gradeamount_1
+    var gradeamount2 = Golab.gradeamount_2
+    var gradeamount3 = Golab.gradeamount_3
+    var gradeamount4 = Golab.gradeamount_4
+    if (totalamount < 1000) {
+      this.$set('howMoney', 0)
+    } else if (totalamount >= gradeamount1 && totalamount < gradeamount2) {
+      this.$set('howMoney', packageamount1)
+    } else if (totalamount >= gradeamount2 && totalamount < gradeamount3) {
+      this.$set('howMoney', packageamount2)
+    } else if (totalamount >= gradeamount3 && totalamount <= gradeamount4) {
+      this.$set('howMoney', packageamount3)
+    } else {
+      this.$set('howMoney', 100)
+    }
+  },
   methods: {
     submit () {
       this.$router.go({name: 'fundraising'})
@@ -38,7 +72,7 @@ html,body{
     }
   }
 h1{color:white;}
-  .wrap{
+  .wrap1{
       width:100%;
       height:100%;
       background: url("/static/images/redpacket.png") no-repeat;
@@ -54,7 +88,7 @@ div{text-align: center;}
       line-height: 30px;
       width:80%;
       height:30px;
-      background:url("/static/images/title-bg.png") no-repeat ;
+      background:url("/static/images/title-bg.png") no-repeat;
       background-size: 100%;
       font-size: 1.5rem;
   }
