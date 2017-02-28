@@ -59,7 +59,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Config from '../../config/config'
 import Golab from '../libs/golab'
@@ -72,13 +71,10 @@ export default {
       mask: false,
       totalamount: 0,
       lists: [],
-      dates: 0,
-      orderId: ''
+      dates: 0
     }
   },
-  created () {
-    var orderId = this.$route.query.orderId
-    this.orderId = orderId
+  create () {
   },
   ready () {
     // 判断是不是创建邀请函第一次进入页面
@@ -89,21 +85,26 @@ export default {
     this.getfunds()
   },
   methods: {
+    // 页面跳转穿参数
     submit () {
-      this.$router.go({name: 'completefundraising'})
+      var totalamount = this.totalamount
+      if (totalamount === 0) {
+        this.$router.go({name: 'endfundraising'})
+      } else if (totalamount > 1000) {
+        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount}})
+      } else if (totalamount > 0 && totalamount < 1000) {
+        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount}})
+      }
     },
     viewDetails () {
-      console.log(this.orderId)
-      this.$router.go({
-        name: 'orderfundraising',
-        query: {'orderId': this.orderId}})
+      this.$router.go({name: 'orderfundraising'})
     },
     pumpshow () {
       this.mask = !this.mask
     },
     getfunds () {
       // 根据订单号获取筹款明细
-      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
       .then((response) => {
         var data = response.data
         var totalamount = 0
@@ -134,7 +135,8 @@ export default {
         }, 20)
       }).catch((response) => {
         console.log(response)
-      })
+      }
+    )
       // 获取活动剩余天数
       var nd = new Date()
       var ld = new Date(Golab.endDate)
@@ -147,7 +149,6 @@ export default {
   }
 }
 </script>
-
 <style lang="css">
 html,body,ul{
     margin:0;
@@ -180,7 +181,7 @@ font-size: 10px !important;
 ul{list-style: none}
 .wrap{
     width: 100%;
-    background:url('/static/images/bg.png') no-repeat;
+    background:url('/static/images/bg.png') no-repeat #fff;
     background-size: 100%;
     padding-top: 10px;
 }
@@ -302,7 +303,7 @@ ul{list-style: none}
     margin-top: 30px;
      -webkit-appearance : none ;
 }
-.more_input{overflow: hidden;margin:30px 0;}
+.more_input{overflow: hidden;padding:30px 0;}
 
 .more_input input{
     width:48%;
