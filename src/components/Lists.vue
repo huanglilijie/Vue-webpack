@@ -23,6 +23,7 @@
 <script>
   import Btn from '../elements/btn-footer'
   import Config from '../../config/config'
+  import Golab from '../libs/golab'
   /**
    * 填充数据的方法
    * data.lists = JSON
@@ -55,8 +56,7 @@
         this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
         .then((response) => {
           this.$set('orders_number', response.data)
-          // console.log(this.orders_number)
-          if (this.orders_number >= 400) {
+          if (this.orders_number >= Golab.activequota) {
             this.$router.go({path: '/listsfullquota/'})
           }
         }).catch((response) => {
@@ -97,8 +97,21 @@
         if (!selected) {
           return false
         }
-        // 路由跳转页面带参数传递
-        this.$router.go({path: '/whereru', query: {carCode: selected.code, carName: selected.name, carIntentionFee: selected.intentionFee}})
+        // 400单是否已满
+        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
+        .then((response) => {
+          this.$set('orders_number', response.data)
+          // console.log(this.orders_number)
+          if (this.orders_number >= Golab.activequota) {
+            this.$alert('活动名额已满')
+            this.$router.go({path: '/listsfullquota/'})
+          } else {
+            // 路由跳转页面带参数传递
+            this.$router.go({path: '/whereru', query: {carCode: selected.code, carName: selected.name, carIntentionFee: selected.intentionFee}})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }

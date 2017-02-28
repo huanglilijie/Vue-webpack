@@ -29,11 +29,8 @@
   </div>
 </template>
 <script type='text/babel'>
-  /**
-   * 填充数据的方法
-   * data.lists = JSON
-   */
-
+  import Config from '../../config/config'
+  import Golab from '../libs/golab'
   export default {
     name: 'lists',
     data () {
@@ -46,11 +43,15 @@
         selectedItem: null,
         selected: [false, false, false],
         orders_number: 0,
-        checks: false
+        checks: false,
+        orderId: ''
       }
     },
     create () {
       // 初始化lists
+      // 获取页面传参
+      var orderId = this.$route.query.orderId
+      this.$set('orderId', orderId)
     },
     components: {
     },
@@ -81,6 +82,13 @@
           return false
         }
         this.makshow()
+        // 调用邀请函创建api
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/' + this.orderId + '/funding', {memo: this.selected.thankway}).then((response) => {
+          // console.log(response)
+        }).catch((response) => {
+          console.log(response)
+        })
+        setTimeout(this.$router.go({name: 'dealerlist', query: {orderId: this.orderId, isfirst: true}}), '5000')
       },
       makshow () {
         this.checks = !this.checks

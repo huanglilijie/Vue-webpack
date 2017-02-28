@@ -1,14 +1,21 @@
 <template>
-  <div id="app">
-    <img class="wechat-logo" src="/static/wechat-logo.png">
-    <p>只支持微信打开呦~</p>
-    <a href="###" class="btn" >点击跳转微信</a>
-    <p>如果跳转失败，请您点击“复制链接”按钮</p>
-    <p>并换其他浏览器尝试唤起微信</p>
-    <a href="###" class="btn btn-last">复制链接</a>
-    <router-view v-if="aa"></router-view>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title></title>
+  <div class="wrap">
+    <div class="content">
+        <p class="text-bg">>>smart&nbsp;&nbsp;全家宠爱 !</p>
+        <img src="/static/images/cloud.png" alt=""  class="cloud"/>
+        <p class="text">发起我的筹款，集全家宠爱于一身</p>
+        <div class="line"></div>
+        <p class="text">还能享受smart购车大礼包</p>
+        <div class="code">
+            <img src="/static/images/ma.png" />
+        </div>
+        <p class="text1">亲，活动只能于微信端参与<br />
+            微信长按识别或扫描二维码呗</p>
+    </div>
   </div>
-  
 </template>
 
 <script>
@@ -17,62 +24,92 @@ export default {
 }
 </script>
 
-<style scoped>
-*{
-	margin: 0;
-	padding: 0;
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
 }
-html,body{
-	font-family: "微软雅黑";
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,
+body {
+    font-size: 12px;
+    font-family: "微软雅黑";
+    width: 100%;
+    height: 100%;
 }
 
-.wechat-logo{
-	display:block;
-	width:40%;
-	margin: 0 auto;
+ul,
+li {
+    list-style: none;
+}
 
+img {
+    display: block;
+    width: 100%;
 }
-#app p:nth-child(2){	
-		font-size:10px ;
-		margin: 0 auto;
-		margin-top: 20px;	
+
+@media (max-width: 350px) {
+    html,
+    body {
+        font-size: 10px !important;
+    }
 }
-.btn{
-	display: block;
-	width: 90%;
-	margin: 0 auto;
-	height: 40px;
-	line-height: 40px;
-	background-color: #1AAC19;
-	border-radius: 5px;
-	color: #fff;
-	text-decoration: none;
-	font-weight: 700;
-	letter-spacing: 2px;
-	font-size: 16px;
-	margin-top: 30px;
+.wrap{
+    width: 100%;
+    height: 100%;
+    background-color: #F6BA38;
 }
-#app p:nth-child(4),#app p:nth-child(5){
-		width:70%;
-		margin:0 auto;
-		font-size: 12px;
-		margin-top: 30px;
+.content .text-bg{
+    text-align: center;
+    font-weight: bold;
+    font-size:2.4rem;
+    color: #ffffff;
+    padding-top: 20%;
 }
-#app p:nth-child(5){
-	margin-top: 5px;
+.cloud{
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 10px;
 }
-.btn-last{
-	width: 40%;
-	margin: 0 auto;
-	margin-top: 20px;
-	background-color: #CCCCCC;
+.content .text{
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    font-size:1.6rem;
+    color: #ffffff;    
+    margin-bottom: 5px;        
 }
+.content .line{
+    width: 80%;
+    margin: 0 auto;
+    height: 0;
+    border-bottom: 1px dashed #FFFFFF;
+    margin-bottom: 5px;
+}        
+.code{
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+    background: url(/static/images/ma-bg.png) no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    padding:15% 25% 20%;
+    margin-top: 20px;
+}
+.content .text1{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-size:1.4rem;
+    color: #000000;    
+    margin-top: 10px;
+}
+@media (max-height: 480px) {
+    .wrap{
+    width: 100%;
+    height: 100%;
+    padding-bottom: 50px;
+    background-color: #F6BA38;
+}
+}
+    
 </style>

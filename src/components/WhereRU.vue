@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   *{
     margin: 0;
     padding: 0;
@@ -135,7 +135,7 @@
   <body>
     <div class="wrap">
       <div class="top">
-        <img src="/static/images/location.png"/>
+        <img src="/static/images/location.png" @click="obtain_location()"/>
         <h2>{{currentCity}}</h2>
         <a href="#" @click="pumpshow()">更换城市</a>
       </div>
@@ -219,6 +219,9 @@
       },
       beforeDestroy () {},
       methods: {
+        obtain_location () {
+          this.$refs.bmap.$emit('obtain-location')
+        },
         demos (picker, values) {
           // 获取被选中的城市的索引
           this.$set('selectedIndex', this.cityNames.indexOf(values[0]))

@@ -38,22 +38,25 @@
       }
     },
     ready () {
-      // 判断浏览器是否支持地理位置接口
-      if (navigator.geolocation) {
-        // 支持
-        this.agree_obtain_location()
-      } else {
-        // 不支持
-        this.$dispatch('show-subs-alert', '不支持地理位置接口,定位失败，默认北京市')
-        //  默认北京
-        var location = {
-          longitude: this.longitude,
-          latitude: this.latitude
-        }
-        this.getCity(location)
-      }
+      this.obtain_location()
     },
     methods: {
+      obtain_location () {
+        // 判断浏览器是否支持地理位置接口
+        if (navigator.geolocation) {
+          // 支持
+          this.agree_obtain_location()
+        } else {
+          // 不支持
+          this.$dispatch('show-subs-alert', '不支持地理位置接口,定位失败，默认北京市')
+          //  默认北京
+          var location = {
+            longitude: this.longitude,
+            latitude: this.latitude
+          }
+          this.getCity(location)
+        }
+      },
       agree_obtain_location () {
         var option = {
           enableHighAccuracy: true,
@@ -219,6 +222,9 @@
       },
       'dealer-marker': function (data) {
         this.selectDealer(data)
+      },
+      'obtain-location': function () {
+        this.obtain_location()
       }
     }
 }

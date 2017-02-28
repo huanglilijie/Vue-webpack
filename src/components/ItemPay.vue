@@ -84,7 +84,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .item-pay{
 	margin-top: 15px;
 }

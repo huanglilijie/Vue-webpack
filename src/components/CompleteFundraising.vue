@@ -5,13 +5,22 @@
           <p>将获得2000元购车补贴</p>
       </div>
       <div class="content_btn">
-          <input type="button" value="OK , 我的smart已在路上">
-          <input type="button" value="还不够，再多宠爱我一点">
+          <input type="button" value="OK , 我的smart已在路上" @click="submit()">
+          <input type="button" value="还不够，再多宠爱我一点" @click="goback()">
       </div>
   </div>
 </template>
 <script>
 export default {
+  name: '',
+  methods: {
+    submit () {
+      this.$router.go({name: 'fundraising'})
+    },
+    goback () {
+      this.$router.go({name: 'dealerlist'})
+    }
+  }
 }
 </script>
 <style lang="css">

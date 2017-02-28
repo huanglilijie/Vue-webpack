@@ -48,7 +48,7 @@
       </div>
     </div>
   <div class="btn-more">
-    <input type="button" value="我的宠爱值" />
+    <input type="button" value="我的宠爱值" @click="viweMyDear()"/>
     <input type="button" @click="cancelMyDear" value="放弃宠爱之旅"/>
   </div>
 </template>
@@ -107,6 +107,9 @@
       },
       cancelMyDear () {
         this.$router.go({name: 'cancelmydear'})
+      },
+      viweMyDear () {
+        this.$router.go({name: 'fundraising'})
       }
     }
   }

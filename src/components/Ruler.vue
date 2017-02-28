@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="wrap">
-      <img src="/static/ruler.png" alt="" />
+      <img src="/static/images/ruler.png" alt="" />
       <a href="###" class="btn">知道了</a>
     </div>
   </body>

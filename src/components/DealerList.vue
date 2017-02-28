@@ -1,72 +1,143 @@
 <template lang="html">
   <div class="wrap">
+    <div class="clock">
+      <div class="loveresult">宠爱值：</div>
       <div class="clock">
-          <div class="loveresult">宠爱值：</div>
-          <div class="clock">
-            <div class="clock-bg">
-              <img src="/static/images/clock.png" alt="">
-              <div style="width:95%;margin:0 auto;height:auto;">
-                <img src="/static/images/pointer.png" alt="" class="zhizhen" :style="{transform:'rotate('+rotate+'deg)'}">
+        <div class="clock-bg">
+          <img src="/static/images/clock.png" alt="">
+          <div style="width:95%;margin:0 auto;height:auto;">
+            <img src="/static/images/pointer.png" alt="" class="zhizhen" :style="{transform:'rotate('+rotate+'deg)'}">
+          </div>
+        </div>
+        <div class="money">
+            <span>{{totalamount}}</span><span>元</span>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <ul>
+          <li>1.筹款达到1000-2999时，会补贴1000元</li>
+          <li>2.筹款达到3000-4999时，会补贴1500元</li>
+          <li>3.筹款达到5000-8800时，会补贴2000元</li>
+      </ul>
+    </div>
+    <div class="rest" v-if="totalamount > 0">
+      <h2>距离活动结束还有<span style="font-size:2.0rem">{{dates}}</span>天</h2>
+      <p> -------- 已有<span>{{lists.length}}</span>位好友为你筹款 --------</p>
+      <ul>
+          <li v-for="item in lists">
+              <div class="tuxiang"><img :src="item.wechat.headImgUrl" alt=""></div>
+              <div>
+                  <span class="nickname">{{item.wechat.nickName}}</span>
+                  <span class=" money_collecting"> 为你筹款<span>{{item.amount}}元</span></span>
+                  <span class="time_date">{{item.md}}</span>
+                  <span class="time_time">{{item.hm}}</span>
               </div>
-            </div>
-            <div class="money">
-                <span>{{shu}}</span><span>元</span>
-            </div>
-          </div>
-      </div>
-      <div class="list">
-          <ul>
-              <li>1.筹款达到1000-2999时，会补贴1000元</li>
-              <li>2.筹款达到3000-4999时，会补贴1500元</li>
-              <li>3.筹款达到5000-8800时，会补贴2000元</li>
-          </ul>
-      </div>
-      <div class="rest">
-          <h2>距离活动结束还有<span style="font-size:2.0rem">8</span>天</h2>
-          <p> -------- 已有<span>1</span>位好友为你筹款 --------</p>
-          <ul>
-              <li>
-                  <div class="tuxiang"><img src="/static/images/mayun.png" alt=""></div>
-                  <div>
-                      <span class="nickname">Dan</span>
-                      <span class=" money_collecting"> 为你筹款<span>200元</span></span>
-                      <span class="time_date">01-15</span>
-                      <span class="time_time">11:35</span>
-                  </div>
 
-              </li>
-          </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="rest" v-else>
+      <h2>距离活动结束还有<span style="font-size:2.0rem">{{dates}}</span>天</h2>
+      <p> -------- 还没有好友为你筹款 --------</p>
+      <p>加油哦，快去分享吧！大礼包在等着你</p>
+    </div>
+    <hr style="width: 90%;margin:0 auto;" v-show="totalamount > 0">
+    <div class="submit">
+        <input class="heart" type="button" value="心满意足" @click="submit()">
+        <div class="more_input">
+            <input type="button" value="查看详情" @click="viewDetails()">
+            <input type="button" value="再撒个娇" @click="pumpshow()">
+        </div>
+    </div>
+    <div class="mask" v-if = "mask">
+      <div class="mask_1" @click="pumpshow()">
       </div>
-      <hr style="width: 90%;margin:0 auto;">
-      <div class="submit">
-          <input class="heart" type="button" value="心满意足">
-          <div class="more_input">
-              <input type="button" value="查看详情">
-              <input type="button" value="再撒个娇">
-          </div>
+      <div class="mask_2">
+        <img src="/static/images/mask.png" alt="">
       </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Config from '../../config/config'
+import Golab from '../libs/golab'
 export default {
   data () {
     return {
       rotate: 0,
-      shu: 7000
+      shu: 7000,
+      isfirst: false,
+      mask: false,
+      totalamount: 0,
+      lists: [],
+      dates: 0
     }
   },
+  create () {
+  },
   ready () {
-    var self = this
-    var i = self.shu / 31
-    setInterval(function () {
-      self.rotate++
-      if (self.rotate > i) {
-        self.rotate = i
-      }
-    }, 20)
+    // 判断是不是创建邀请函第一次进入页面
+    var isfirst = this.$route.query.isfirst
+    if (isfirst) {
+      this.$set('mask', isfirst)
+    }
+    this.getfunds()
   },
   methods: {
+    submit () {
+      this.$router.go({name: 'completefundraising'})
+    },
+    viewDetails () {
+      this.$router.go({name: 'orderfundraising'})
+    },
+    pumpshow () {
+      this.mask = !this.mask
+    },
+    getfunds () {
+      // 根据订单号获取筹款明细
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
+      .then((response) => {
+        var data = response.data
+        var totalamount = 0
+        for (var i in data) {
+          totalamount += data[i].amount
+          var cdate = new Date(data[i].createTime)
+          var month = cdate.getMonth() + 1
+          var date = cdate.getDate()
+          var hours = cdate.getHours()
+          var minutes = cdate.getMinutes()
+          month = month < 10 ? '0' + month : month
+          date = date < 10 ? '0' + date : date
+          hours = hours < 10 ? '0' + hours : hours
+          minutes = minutes < 10 ? '0' + minutes : minutes
+          data[i].md = [month, date].join('-')
+          data[i].hm = [hours, minutes].join(':')
+        }
+        this.$set('lists', data)
+        this.$set('totalamount', totalamount)
+        var self = this
+        var n = totalamount / 31
+        // console.log(n)
+        setInterval(function () {
+          self.rotate++
+          if (self.rotate > n) {
+            self.rotate = n
+          }
+        }, 20)
+      }).catch((response) => {
+        console.log(response)
+      })
+      // 获取活动剩余天数
+      var nd = new Date()
+      var ld = new Date(Golab.endDate)
+      var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+      if (dates <= 0) {
+        dates = 0
+      }
+      this.$set('dates', dates)
+    }
   }
 }
 </script>
@@ -235,4 +306,25 @@ ul{list-style: none}
 }
 .more_input input:nth-child(1){float: left}
 .more_input input:nth-child(2){float: right}
+/*蒙板*/
+.mask_1{
+    background-color:rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    text-align: center;
+}
+.mask_2{
+    width: 100%;
+    position: fixed;
+    top: 5vh;
+    z-index: 20;
+    text-align: center;
+}
+.mask_2 img{
+    width:80%;
+}
 </style>

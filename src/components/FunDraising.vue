@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="money">
-                <span>{{shu}}</span><span>元</span>
+                <span>{{totalamount}}</span><span>元</span>
             </div>
           </div>
       </div>
@@ -23,41 +23,23 @@
       </div>
       <div class="rest">
           <h1>筹款结束</h1>
-          <p> -------- 已有<span>3</span>位好友为你筹款 --------</p>
+          <p> -------- 已有<span>{{lists.length}}</span>位好友为你筹款 --------</p>
           <ul>
-              <li>
-                  <div class="tuxiang"><img src="/static/images/mayun.png" alt=""></div>
+              <li v-for="item in lists">
+                  <div class="tuxiang"><img :src="item.wechat.headImgUrl" alt=""></div>
                   <div>
-                      <span class="nickname">Dan</span>
-                      <span class=" money_collecting"> 为你筹款<span>200元</span></span>
-                      <span class="time_date">01-15</span>
-                      <span class="time_time">11:35</span>
-                  </div>
-              </li>
-               <li>
-                 <div class="tuxiang"><img src="/static/images/mayun.png" alt=""></div>
-                  <div>
-                      <span class="nickname">Dan</span>
-                      <span class=" money_collecting"> 为你筹款<span>200元</span></span>
-                      <span class="time_date">01-15</span>
-                      <span class="time_time">11:35</span>
-                  </div>
-              </li>
-               <li>
-                 <div class="tuxiang"><img src="/static/images/mayun.png" alt=""></div>
-                  <div>
-                      <span class="nickname">Dan</span>
-                      <span class=" money_collecting">为你筹款<span>200元</span></span>
-                      <span class="time_date">01-15</span>
-                      <span class="time_time">11:35</span>
+                      <span class="nickname">{{item.wechat.nickName}}</span>
+                      <span class=" money_collecting"> 为你筹款<span>{{item.amount}}元</span></span>
+                      <span class="time_date">{{item.md}}</span>
+                      <span class="time_time">{{item.hm}}</span>
                   </div>
               </li>
           </ul>
-          <h1>距离活动结束还有 <span>8</span> 天</h1>
+          <h1>距离活动结束还有 <span>{{dates}}</span> 天</h1>
       </div>
       <div class="submit">
           <div class="more_input">
-              <input type="button" value="查看详情">
+              <input type="button" value="查看详情" @click="viewDetails()">
               <div class="share"  @click="pumpshow()">
                 <span>邀请好友参与</span>
                 <span>“全家宠爱”</span>
@@ -66,36 +48,85 @@
       </div>
       <div class="mask" v-if = "mask">
         <div class="mask_1" @click="pumpshow()">
-     </div>
-     <div class="mask_2">
-       <img src="/static/images/mask.png" alt="">
-     </div>
+        </div>
+        <div class="mask_2">
+          <img src="/static/images/mask.png" alt="">
+        </div>
       </div>
   </div>
 </template>
 
 <script>
+import Config from '../../config/config'
+import Golab from '../libs/golab'
 export default {
   data () {
     return {
       rotate: 0,
-      shu: 5000,
-      mask: false
+      isfirst: false,
+      mask: false,
+      totalamount: 0,
+      lists: [],
+      dates: 0
     }
   },
+  create () {
+  },
   ready () {
-    var self = this
-    var i = self.shu / 31
-    setInterval(function () {
-      self.rotate++
-      if (self.rotate > i) {
-        self.rotate = i
-      }
-    }, 20)
+    this.getfunds()
   },
   methods: {
+    submit () {
+      this.$router.go({name: 'completefundraising'})
+    },
+    viewDetails () {
+      this.$router.go({name: 'orderfundraisingend'})
+    },
     pumpshow () {
       this.mask = !this.mask
+    },
+    getfunds () {
+      // 根据订单号获取筹款明细
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
+      .then((response) => {
+        var data = response.data
+        var totalamount = 0
+        for (var i in data) {
+          totalamount += data[i].amount
+          var cdate = new Date(data[i].createTime)
+          var month = cdate.getMonth() + 1
+          var date = cdate.getDate()
+          var hours = cdate.getHours()
+          var minutes = cdate.getMinutes()
+          month = month < 10 ? '0' + month : month
+          date = date < 10 ? '0' + date : date
+          hours = hours < 10 ? '0' + hours : hours
+          minutes = minutes < 10 ? '0' + minutes : minutes
+          data[i].md = [month, date].join('-')
+          data[i].hm = [hours, minutes].join(':')
+        }
+        this.$set('lists', data)
+        this.$set('totalamount', totalamount)
+        var self = this
+        var n = totalamount / 31
+        // console.log(n)
+        setInterval(function () {
+          self.rotate++
+          if (self.rotate > n) {
+            self.rotate = n
+          }
+        }, 20)
+      }).catch((response) => {
+        console.log(response)
+      })
+      // 获取活动剩余天数
+      var nd = new Date()
+      var ld = new Date(Golab.endDate)
+      var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+      if (dates <= 0) {
+        dates = 0
+      }
+      this.$set('dates', dates)
     }
   }
 }

@@ -10,7 +10,7 @@
 
 <script>
   // import Config from '../../config/config'
-  // import Golab from '../libs/golab'
+  import Golab from '../libs/golab'
   export default {
     name: 'smart-family',
     methods: {
@@ -20,9 +20,14 @@
       }
     },
     data: function () {
-      // 判断是否在活动期内
+      // 判断活动是否开始
       var nd = new Date()
-      var ld = new Date('2017-04-30')
+      var sd = new Date(Golab.startDate)
+      if (sd.getTime() > nd.getTime()) {
+        this.$alert('活动未开始')
+      }
+      // 判断是否在活动期内
+      var ld = new Date(Golab.endDate)
       var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
       if (dates <= 0) {
         dates = 0
@@ -80,7 +85,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 *{
 	margin: 0;
 	padding: 0;
