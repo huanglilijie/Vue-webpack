@@ -47,11 +47,11 @@
         orderId: ''
       }
     },
-    create () {
+    created () {
       // 初始化lists
       // 获取页面传参
       var orderId = this.$route.query.orderId
-      this.$set('orderId', orderId)
+      this.orderId = orderId
     },
     components: {
     },

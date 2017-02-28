@@ -22,8 +22,6 @@
 
 <script>
   import Btn from '../elements/btn-footer'
-  // let rst = {}
-
   export default {
     name: 'item-pay',
     data () {

@@ -72,10 +72,13 @@ export default {
       mask: false,
       totalamount: 0,
       lists: [],
-      dates: 0
+      dates: 0,
+      orderId: ''
     }
   },
-  create () {
+  created () {
+    var orderId = this.$route.query.orderId
+    this.orderId = orderId
   },
   ready () {
     // 判断是不是创建邀请函第一次进入页面
@@ -90,7 +93,10 @@ export default {
       this.$router.go({name: 'completefundraising'})
     },
     viewDetails () {
-      this.$router.go({name: 'orderfundraising'})
+      console.log(this.orderId)
+      this.$router.go({
+        name: 'orderfundraising',
+        query: {'orderId': this.orderId}})
     },
     pumpshow () {
       this.mask = !this.mask

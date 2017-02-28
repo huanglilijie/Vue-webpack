@@ -48,7 +48,9 @@
     },
     methods: {
       jump () {
-        this.$router.go({name: 'createmydear'})
+        this.$router.go({
+          name: 'createmydear',
+          query: this.pageParam})
       },
       orderDetail () {
         this.$router.go({

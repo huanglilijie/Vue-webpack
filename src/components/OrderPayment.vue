@@ -20,7 +20,7 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">车型信息:</label>
-          <div>{{carName}}</div>
+          <div>{{pageParam.carName}}</div>
         </li>
         <li class="car-message clearfloat">
           <label for="">经销商信息:</label>
@@ -46,6 +46,7 @@
 </template>
 <script>
   import Config from '../../config/config'
+  import Golab from '../libs/golab'
   export default {
     name: 'orderpayment',
     data () {
@@ -58,11 +59,8 @@
       return {
         createTime: '',
         reservationId: '',
-        orderStatus: '',
         product: [{
           id: '',
-          createTime: '',
-          status: '',
           price: '',
           intentionFee: ''
         }],
@@ -78,23 +76,28 @@
           payChannel: ''
         }],
         dates: dates,
-        userid: '123',
-        carName: ''
+        pageParam: {}
       }
     },
     ready: function () {
       this.initOrderDetail()
     },
     created () {
-      this.carName = this.$route.query.carName
+      var orderId = this.$route.query.orderId
+      var carName = this.$route.query.carName
+      var carIntentionFee = this.$route.query.carIntentionFee
+      var param = {
+        orderId: orderId,
+        carName: carName,
+        carIntentionFee: carIntentionFee
+      }
+      this.$set('pageParam', param)
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/', {params: {userid: this.userid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/', {params: {userid: Golab.userid}}).then((response) => {
           if (response.data != null) {
             console.log(response.data)
-            console.log(response.data.product)
-            console.log(response.data.dealer)
             var cdate = new Date(response.data.createTime)
             var year = cdate.getFullYear()
             var month = cdate.getMonth() + 1
@@ -111,16 +114,20 @@
         })
       },
       cancelMyDear () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/cancel/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/' + this.orderId + '/cancel/').then((response) => {
           if (response.data != null) {
-            this.$router.go({name: 'cancelmydear'})
+            this.$router.go({
+              name: 'cancelmydear',
+              query: this.pageParam})
           }
         }).catch((response) => {
           console.log(response)
         })
       },
       jump () {
-        this.$router.go({name: 'createmydear'})
+        this.$router.go({
+          name: 'createmydear',
+          query: this.pageParam})
       }
     }
   }

@@ -19,7 +19,7 @@
 		</li>
 		<li class="car-message clearfloat">
 		  <label for="">车型信息:</label>
-		  <div>{{carName}}</div>
+		  <div>{{product[0].name}}</div>
 		</li>
 		<li class="car-message clearfloat">
 		  <label for="">经销商信息:</label>
@@ -50,6 +50,7 @@
 </template>
 <script>
   import Config from '../../config/config'
+  import Golab from '../libs/golab'
   export default {
     name: 'orderfundraising',
     data () {
@@ -60,6 +61,7 @@
         product: [{
           id: '',
           createTime: '',
+          name: '',
           status: '',
           price: '',
           intentionFee: ''
@@ -74,20 +76,19 @@
           amount: '',
           payStatus: '',
           payChannel: ''
-        }],
-        userid: '123',
-        carName: ''
+        }]
       }
     },
     ready: function () {
       this.initOrderDetail()
     },
     created () {
-      this.carName = this.$route.query.carName
+      var orderId = this.$route.query.orderId
+      this.orderId = orderId
     },
     methods: {
       initOrderDetail () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + '123' + '/orders/' + '234' + '/funding/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/').then((response) => {
           if (response.data != null) {
             console.log(response.data)
             console.log(response.data.product)
