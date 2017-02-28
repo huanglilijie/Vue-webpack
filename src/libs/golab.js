@@ -5,11 +5,11 @@
  */
 export default {
   // 用户微信openid
-  openid: '1231',
+  openid: '',
   // 用户微信userid
-  userid: '1231',
+  userid: '',
   // 活动名额
-  activequota: 30,
+  activequota: 10,
   // 活动开始时间
   startDate: '2017-04-01',
   // 活动结束时间
