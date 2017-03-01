@@ -177,10 +177,11 @@
             var data = response.data
             // 将注册获取uid存储
             Golab.uid = data.uid
-            console.log('Golab.uid:' + Golab.uid)
+            console.log('uid:' + data.uid)
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
+              this.pageParam.uid = data.uid
               this.$router.go({name: 'itempayinfo', query: this.pageParam})
             } else {
               this.errormeg = '验证码不正确'

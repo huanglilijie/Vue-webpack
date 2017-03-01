@@ -55,6 +55,7 @@
       var dealerTelephone = this.$route.query.dealerTelephone
       var userName = this.$route.query.userName
       var userPhone = this.$route.query.userPhone
+      var uid = this.$route.query.uid
       var param = {
         carCode: carCode,
         carName: carName,
@@ -63,7 +64,8 @@
         dealerCode: dealerCode,
         dealerTelephone: dealerTelephone,
         userName: userName,
-        userPhone: userPhone
+        userPhone: userPhone,
+        uid: uid
       }
       this.$set('pageParam', param)
     },
@@ -84,12 +86,12 @@
           } else {
             // 创建订单
             console.log(Golab.uid)
-            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + this.pageParam.uid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
               contactMobile: this.pageParam.userPhone}).then((response) => {
                 if (response.data != null) {
                   var data = response.data
                   console.log(response.data)
-                  this.$router.go({name: 'itempay', query: {orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
+                  this.$router.go({name: 'itempay', query: {uid: this.pageParam.uid, orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
                 }
               }).catch((response) => {
                 console.log(response)

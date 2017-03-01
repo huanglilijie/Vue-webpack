@@ -22,7 +22,7 @@
           if (ordersNumber >= Golab.activequota) {
             this.$router.go({path: '/listsfullquota/'})
           } else {
-            this.$router.go({path: '/lists/'})
+            this.$router.go({path: '/lists/', query: {uid: this.uid}})
           }
         }).catch((response) => {
           console.log(response)
@@ -44,11 +44,13 @@
       }
       if (dates === 0) {
         return {
-          is_in_activity: false
+          is_in_activity: false,
+          uid: null
         }
       } else {
         return {
-          is_in_activity: true
+          is_in_activity: true,
+          uid: null
         }
       }
     },
@@ -68,6 +70,7 @@
         var uid = data.uid
         if (uid != null) {
           Golab.uid = uid
+          this.uid = uid
           this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders/')
           .then((response) => {
             console.log(response)
