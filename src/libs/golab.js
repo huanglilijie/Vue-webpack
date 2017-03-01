@@ -5,7 +5,7 @@
  */
 export default {
   // 用户微信openid
-  openid: '111111',
+  openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqD9w',
   // 用户微信userid
   userid: '222222',
   // 用户uid
