@@ -9,14 +9,14 @@
             <span v-if="userText">请填写您的姓名</span>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label>* 手机号码</label>
-        <div>
-          <input v-model.number="phone" name= "phone" v-validate:phone="['phone']" type="number" initial="off" detect-change="off">
-          <button v-if="time == 0" :class="['code', {'codeLight': islight}]" @click="getCode()" id ="timeBtn" :disabled ='isdisable'>{{text}}</button>
-          <span v-if="time != 0" class="code" id="timeText">{{time}}s</span>
-          <span v-if="phoneText || $validation_info.phone.invalid">{{tel}}</span>
+        <div class="form-group">
+          <label>* 手机号码</label>
+          <div>
+            <input v-model.number="phone" name= "phone" v-validate:phone="['phone']" type="number" initial="off" detect-change="off">
+            <button v-if="time == 0" :class="['code', {'codeLight': islight}]" @click="getCode()" id ="timeBtn" :disabled ='isdisable'>{{text}}</button>
+            <span v-if="time != 0" class="code" id="timeText">{{time}}s</span>
+            <span v-if="phoneText || $validation_info.phone.invalid">{{tel}}</span>
+          </div>
         </div>
         <div class="form-group">
           <label>* 手机验证码</label>
@@ -158,7 +158,9 @@
       getCode () {
         if (!this.userText && !this.phoneText) {
           this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha', {'mobile': this.phone}).then((response) => {
+            console.log(response)
             if (response.data != null) {
+              console.log(response.data)
               this.$set('returnCode', response.data)
               this.start()
             }
@@ -197,14 +199,10 @@
             console.log(response)
             var data = response.data
             // 将注册获取uid存储
-            Golab.uid = data.uid
-            console.log('uid:' + data.uid)
-            window.localStorage.setItem('uid', data.uid)
-            console.log('localStorage:' + window.localStorage.getItem('uid'))
+            Config.uid = data.uid
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
-              this.pageParam.uid = data.uid
               this.$router.go({name: 'itempayinfo', query: this.pageParam})
             } else {
               this.errormeg = '验证码不正确'
@@ -234,7 +232,6 @@
         if (this.phone.length >= 11) {
           if (this.isChinaMobile.test(this.phone) || this.isChinaUnion.test(this.phone) || this.isChinaTelcom.test(this.phone) || this.isOtherTelphone.test(this.phone)) {
             this.phoneText = false
-            this.$validation_info.phone.invalid = false
             this.isdisable = false
             this.islight = !this.isdisable
           } else {
@@ -242,6 +239,10 @@
             this.isdisable = true
             this.islight = !this.isdisable
           }
+        } else {
+          this.phoneText = false
+          this.isdisable = true
+          this.islight = !this.isdisable
         }
       },
       username: function () {
