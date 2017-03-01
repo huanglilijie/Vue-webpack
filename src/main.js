@@ -17,9 +17,11 @@ Vue.use(Alert)
 Vue.validator('phone', function (val) {
   if (val.length === 0) {
     return true
-  } else {
-    return /^134[0-8]\d{7}$|^(?:13[5-9]|147|15[0-27-9]|178|18[2-478])\d{8}$/.test(val)
   }
+  if (val.length < 11) {
+    return false
+  }
+  return true
 })
 const router = new VueRouter({
   hashbang: false,
