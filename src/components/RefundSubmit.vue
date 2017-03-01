@@ -2,8 +2,8 @@
   <div class="wrap">
     <p>您的订单退款申请已提交，<br />
     请耐心等待客服处理！</p>
-    <a href="" class="continue" @click="orderDetail">查看详情</a>
-    <a href="" class="abandon">再见</a>
+    <a class="continue" @click="orderDetail">查看详情</a>
+    <a class="abandon">再见</a>
   </div>
 </template>
 <script>

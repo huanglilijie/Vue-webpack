@@ -14,7 +14,7 @@
           <input v-model.number="phone" name= "phone" v-validate:phone="['phone']" type="number" initial="off" detect-change="off">
           <button v-if="time == 0" :class="['code', {'codeLight': islight}]" @click="getCode()" id ="timeBtn" :disabled ='isdisable'>{{text}}</button>
           <span v-if="time != 0" class="code" id="timeText">{{time}}s</span>
-          <span v-if="phoneText">{{tel}}</span>
+          <span v-if="phoneText || $validation_info.phone.invalid">{{tel}}</span>
         </div>
       </div>
       <div class="form-group">
@@ -209,6 +209,7 @@
         if (this.phone.length >= 11) {
           if (this.isChinaMobile.test(this.phone) || this.isChinaUnion.test(this.phone) || this.isChinaTelcom.test(this.phone) || this.isOtherTelphone.test(this.phone)) {
             this.phoneText = false
+            this.$validation_info.phone.invalid = false
             this.isdisable = false
             this.islight = !this.isdisable
           } else {
@@ -216,10 +217,6 @@
             this.isdisable = true
             this.islight = !this.isdisable
           }
-        } else {
-          this.phoneText = false
-          this.isdisable = true
-          this.islight = !this.isdisable
         }
       },
       username: function () {

@@ -14,6 +14,13 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Alert)
 
+Vue.validator('phone', function (val) {
+  if (val.length === 0) {
+    return true
+  } else {
+    return /^1[34578]\d{9}$/.test(val)
+  }
+})
 const router = new VueRouter({
   hashbang: false,
   history: true

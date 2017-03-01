@@ -4,7 +4,7 @@
     <div>
       <img src="/static/images/car-img.png" alt="" />
     </div>
-    <a href="" class="continue" @click="toBeContinue">继续宠爱之旅</a>
+    <a class="continue" @click="toBeContinue()">继续宠爱之旅</a>
     <a class="abandon" @click="refund">确认放弃</a>
   </div>
 </template>
@@ -33,7 +33,7 @@
         })
       },
       toBeContinue () {
-        this.$router.go({name: 'home'})
+        this.$router.go(-1)
       }
     }
   }
