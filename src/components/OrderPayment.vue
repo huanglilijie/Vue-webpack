@@ -95,7 +95,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders').then((response) => {
           console.log(response)
           if (response.data != null) {
             console.log(response.data)
