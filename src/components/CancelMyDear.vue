@@ -9,7 +9,6 @@
   </div>
 </template>
 <script>
-  import Golab from '../libs/golab'
   import Config from '../../config/config'
   export default {
     name: 'cancelmydear',
@@ -24,7 +23,7 @@
     },
     methods: {
       refund () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.reservationid + '/refund/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.reservationid + '/refund/').then((response) => {
           console.log(response)
           if (response.status === 200) {
             this.$router.go({name: 'refundsubmit', query: {reservationId: this.reservationId}})

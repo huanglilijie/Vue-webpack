@@ -30,7 +30,6 @@
 </template>
 <script type='text/babel'>
   import Config from '../../config/config'
-  import Golab from '../libs/golab'
   export default {
     name: 'lists',
     data () {
@@ -89,7 +88,7 @@
         this.makshow()
         // 调用邀请函创建api
         // console.log(selected.thankway)
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/funding', {memo: selected.thankway}).then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/funding', {memo: selected.thankway}).then((response) => {
           console.log(response)
         }).catch((response) => {
           console.log(response)

@@ -109,7 +109,7 @@
         }
       },
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/').then((response) => {
           if (response.data != null) {
             var cdate = new Date(response.data.createTime)
             var year = cdate.getFullYear()
@@ -161,7 +161,7 @@
         this.$router.go({name: 'fundraising', query: {orderId: this.reservationId}})
       },
       resendCode () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.reservationId + '/redeem-code/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.reservationId + '/redeem-code/').then((response) => {
           if (response) {
             this.start()
           }

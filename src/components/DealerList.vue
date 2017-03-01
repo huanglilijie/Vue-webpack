@@ -76,7 +76,6 @@ export default {
     }
   },
   created () {
-
   },
   ready () {
     // 判断是不是创建邀请函第一次进入页面

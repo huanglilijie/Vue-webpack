@@ -95,7 +95,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/').then((response) => {
           console.log(response)
           if (response.data != null) {
             console.log(response.data)
@@ -116,7 +116,7 @@
       },
       cancelMyDear () {
         this.$router.go({name: 'cancelmydear', query: {'reservationId': this.reservationId}})
-        /* this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/cancel/').then((response) => {
+        /* this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/cancel/').then((response) => {
           if (response.data != null) {
             this.$router.go({
               name: 'cancelmydear',

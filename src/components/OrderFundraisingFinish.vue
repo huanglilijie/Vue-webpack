@@ -84,7 +84,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/', {params: {userid: window.localStorage.getItem('uid')}}).then((response) => {
           if (response.data != null) {
             var cdate = new Date(response.data.createTime)
             var year = cdate.getFullYear()

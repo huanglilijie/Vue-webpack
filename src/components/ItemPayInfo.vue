@@ -85,8 +85,7 @@
             this.$router.go({path: '/listsfullquota/'})
           } else {
             // 创建订单
-            console.log(Golab.uid)
-            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + this.pageParam.uid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
               contactMobile: this.pageParam.userPhone}).then((response) => {
                 if (response.data != null) {
                   var data = response.data
