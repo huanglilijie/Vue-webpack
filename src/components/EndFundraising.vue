@@ -8,7 +8,7 @@
           <img src="/static/images/circle.png" alt="">
       </div>
       <div class="content_btn">
-          <input type="button" value="还不够，离梦想再进一步" @click="goback()">
+          <input type="button" value="还不够，离梦想再进一步" @click="window.history.go(-1)">
           <input type="button" value="OK , 确认完成" @click="submit()">
       </div>
   </div>
@@ -16,9 +16,26 @@
 
 <script>
   export default {
+    name: '',
+    data () {
+      return {
+        pageParam: {}
+      }
+    },
+    created () {
+      // 获取页面传参
+      var totalamount = this.$route.query.totalamount
+      var orderId = this.$route.query.orderId
+      console.log(totalamount)
+      var param = {
+        totalamount: totalamount,
+        orderId: orderId
+      }
+      this.$set('pageParam', param)
+    },
     methods: {
       submit () {
-        this.$router.go({name: 'fundraising'})
+        this.$router.go({name: 'fundraising', query: this.pageParam})
       },
       goback () {
         this.$router.go({name: 'dealerlist'})

@@ -67,27 +67,31 @@ export default {
       mask: false,
       totalamount: 0,
       lists: [],
-      dates: 0
+      dates: 0,
+      orderId: ''
     }
   },
-  create () {
+  created () {
+    var isfirst = this.$route.query.isfirst
+    var orderId = this.$route.query.orderId
+    if (isfirst) {
+      this.$set('mask', isfirst)
+    }
+    this.$set('orderId', orderId)
   },
   ready () {
     this.getfunds()
   },
   methods: {
-    submit () {
-      this.$router.go({name: 'completefundraising'})
-    },
     viewDetails () {
-      this.$router.go({name: 'orderfundraisingend'})
+      this.$router.go({name: 'orderfundraisingend', query: {orderId: this.orderId}})
     },
     pumpshow () {
       this.mask = !this.mask
     },
     getfunds () {
       // 根据订单号获取筹款明细
-      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
       .then((response) => {
         var data = response.data
         var totalamount = 0

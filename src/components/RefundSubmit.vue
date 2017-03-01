@@ -8,9 +8,19 @@
 </template>
 <script>
   export default {
+    name: 'refundsubmit',
+    data () {
+      return {
+        reservationId: ''
+      }
+    },
+    created () {
+      var reservationId = this.$route.query.reservationId
+      this.$set('reservationId', reservationId)
+    },
     methods: {
       orderDetail () {
-        this.$router.go({name: 'orderrefunded'})
+        this.$router.go({name: 'orderrefunded', query: {reservationId: this.reservationId}})
       }
     }
   }

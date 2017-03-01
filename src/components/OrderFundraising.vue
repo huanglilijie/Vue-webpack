@@ -90,7 +90,7 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
           if (response.data != null) {
             console.log(response.data)
             console.log(response.data.product)
@@ -143,7 +143,7 @@
           query: {'reservationId': this.reservationId}})
       },
       viewMyDear () {
-        this.$router.go({name: 'dealerlist'})
+        this.$router.go({name: 'dealerlist', query: {orderId: this.reservationId}})
       }
     }
   }

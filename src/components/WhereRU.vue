@@ -182,6 +182,7 @@
     import BMapComponent from '../elements/BMapComponent.vue'
     import Btn from '../elements/btn-footer'
     import Config from '../../config/config'
+    import Golab from '../libs/golab'
     // var selectedItem
     module.exports = {
       name: 'whereru',
@@ -245,7 +246,26 @@
           this.pageParam.dealerTelephone = selectedDealer.telephone
           // console.log(this.pageParam)
           // 路由跳转页面带参数传递
-          this.$router.go({path: '/user', query: this.pageParam})
+          // 需要判断客户是否已经留资,根据openid获取用户信息
+          this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
+          .then((response) => {
+            console.log(response)
+            // var data = response.data
+            // 从未留资，进留资页面
+            this.$router.go({path: '/user', query: this.pageParam})
+            /* if (data.uid != null) {
+              // 已经留资，直接到订单确认页
+              Golab.uid = data.uid
+              this.pageParam.userName = data.realName
+              this.pageParam.userPhone = data.mobile
+              this.$router.go({name: 'itempayinfo', query: this.pageParam})
+            } else {
+              // 从未留资，进留资页面
+              this.$router.go({path: '/user', query: this.pageParam})
+            }*/
+          }).catch((response) => {
+            console.log(response)
+          })
         },
         // 根据城市code、用户经纬度获取经销商列表
         getCityDealers (data) {

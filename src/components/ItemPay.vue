@@ -22,6 +22,8 @@
 
 <script>
   import Btn from '../elements/btn-footer'
+  import Golab from '../libs/golab'
+  import Config from '../../config/config'
   export default {
     name: 'item-pay',
     data () {
@@ -50,8 +52,6 @@
         dealerTelephone: dealerTelephone
       }
       this.$set('pageParam', param)
-      // 向服务器请求数据，返回结果如下
-      // this.rst = {pname: carName, dealer: dealerName, price: carIntentionFee, photonum: dealerTelephone}
     },
     watch: {
       paytype () {
@@ -69,13 +69,24 @@
           this.$alert('请先阅读意向金规则')
           return false
         }
-        // 这里发起支付请求
-        // 请求成功后跳转到下个路由
-        // 注意要使用token防止重复下单
-        // 需要调用支付接口
-        this.$router.go({
-          path: '/item/itemSuccess',
-          query: this.pageParam
+        // 400单校验
+        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
+        .then((response) => {
+          var ordersNumber = response.data
+          if (ordersNumber >= Golab.activequota) {
+            this.$router.go({path: '/listsfullquota/'})
+          } else {
+            // 这里发起支付请求
+            // 请求成功后跳转到下个路由
+            // 注意要使用token防止重复下单
+            // 需要调用支付接口
+            this.$router.go({
+              path: '/item/itemSuccess',
+              query: this.pageParam
+            })
+          }
+        }).catch((response) => {
+          console.log(response)
         })
       }
     }

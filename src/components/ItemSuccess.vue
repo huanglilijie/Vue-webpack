@@ -16,11 +16,12 @@
 
 <script>
   import Btn from '../elements/btn-footer'
+  import Golab from '../libs/golab'
   export default {
     name: 'item-success',
     data () {
       var nd = new Date()
-      var ld = new Date('2017-04-30')
+      var ld = new Date(Golab.endDate)
       var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
       if (dates <= 0) {
         dates = 0

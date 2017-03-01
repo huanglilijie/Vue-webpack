@@ -18,7 +18,7 @@ Vue.validator('phone', function (val) {
   if (val.length === 0) {
     return true
   } else {
-    return /^1[34578]\d{9}$/.test(val)
+    return /^134[0-8]\d{7}$|^(?:13[5-9]|147|15[0-27-9]|178|18[2-478])\d{8}$/.test(val)
   }
 })
 const router = new VueRouter({
@@ -195,6 +195,12 @@ router.map({
     name: 'fundraising',
     component: function (resolve) {
       require(['./components/FunDraising.vue'], resolve)
+    }
+  },
+  '/smallfundrais': {
+    name: 'smallfundrais',
+    component: function (resolve) {
+      require(['./components/SmallFundrais.vue'], resolve)
     }
   }
 })

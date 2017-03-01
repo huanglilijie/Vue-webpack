@@ -17,7 +17,7 @@
       	</li>
       	<li class="car-message clearfloat">
       	  <label for="">车型信息:</label>
-      	  <div>{{carName}}</div>
+      	  <div>{{product[0].name}}</div>
       	</li>
       	<li class="car-message clearfloat">
       	  <label for="">经销商信息:</label>
@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="btn-more">
-    <input v-if="refunded" type="button" value="重启宠爱之旅"/>
+    <input v-if="refunded" type="button" value="重启宠爱之旅" @click="gohome()"/>
     <input type="button" value="再见"/>
   </div>
 </template>
@@ -64,7 +64,8 @@
           createTime: '',
           status: '',
           price: '',
-          intentionFee: ''
+          intentionFee: '',
+          name: ''
         }],
         customerId: '',
         dealer: [{
@@ -81,11 +82,11 @@
       this.initOrderAmount()
     },
     created () {
-      this.carName = this.$route.query.carName
+      this.reservationId = this.$route.query.reservationId
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
           if (response.data != null) {
             console.log(response.data)
             console.log(response.data.product)
@@ -110,13 +111,14 @@
             this.product[0].intentionFee = response.data.product.intentionFee
             this.dealer[0].name = response.data.dealer.name
             this.dealer[0].telephone = response.data.dealer.telephone
+            this.product[0].name = response.data.product.name
           }
         }).catch((response) => {
           console.log(response)
         })
       },
       initOrderAmount () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.reservationId + '/funds').then((response) => {
           var data = response.data
           var totalamount = 0
           for (var i in data) {
@@ -141,10 +143,8 @@
           console.log(response)
         })
       },
-      cancelMyDear () {
-        this.$router.go({
-          name: 'cancelmydear',
-          query: {'reservationId': this.reservationId}})
+      gohome () {
+        this.$router.go({name: 'home'})
       }
     }
   }
