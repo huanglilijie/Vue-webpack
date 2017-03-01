@@ -250,8 +250,10 @@
           this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
           .then((response) => {
             console.log(response)
-            var data = response.data
-            if (data.uid != null) {
+            // var data = response.data
+            // 从未留资，进留资页面
+            this.$router.go({path: '/user', query: this.pageParam})
+            /* if (data.uid != null) {
               // 已经留资，直接到订单确认页
               Golab.uid = data.uid
               this.pageParam.userName = data.realName
@@ -260,7 +262,7 @@
             } else {
               // 从未留资，进留资页面
               this.$router.go({path: '/user', query: this.pageParam})
-            }
+            }*/
           }).catch((response) => {
             console.log(response)
           })
