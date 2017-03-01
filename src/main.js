@@ -189,6 +189,12 @@ router.map({
     component: function (resolve) {
       require(['./components/FunDraising.vue'], resolve)
     }
+  },
+  '/smallfundrais': {
+    name: 'smallfundrais',
+    component: function (resolve) {
+      require(['./components/SmallFundrais.vue'], resolve)
+    }
   }
 })
 router.redirect({

@@ -32,7 +32,7 @@
     name: 'item-pay-info',
     data () {
       var nd = new Date()
-      var ld = new Date('2017-04-30')
+      var ld = new Date(Golab.endDate)
       var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
       if (dates <= 0) {
         dates = 0
@@ -66,8 +66,6 @@
         userPhone: userPhone
       }
       this.$set('pageParam', param)
-      // 向服务器请求数据，返回结果如下
-      // this.rst = {pname: 'smarty two', dealer: '北京波士瑞达', price: 'this.price', photonum: 'this.phone'}
     },
     watch: {
       /* paytype () {
@@ -77,16 +75,28 @@
     methods: {
       // 确认订单跳转
       submit () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
-          contactMobile: this.pageParam.userPhone}).then((response) => {
-            if (response.data != null) {
-              var data = response.data
-              console.log(response.data)
-              this.$router.go({name: 'itempay', query: {orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
-            }
-          }).catch((response) => {
-            console.log(response)
-          })
+        // 增加400单校验
+        this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
+        .then((response) => {
+          var ordersNumber = response.data
+          if (ordersNumber >= Golab.activequota) {
+            this.$router.go({path: '/listsfullquota/'})
+          } else {
+            // 创建订单
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
+              contactMobile: this.pageParam.userPhone}).then((response) => {
+                if (response.data != null) {
+                  var data = response.data
+                  console.log(response.data)
+                  this.$router.go({name: 'itempay', query: {orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
+                }
+              }).catch((response) => {
+                console.log(response)
+              })
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
         // this.$router.go({name: 'itempay', query: {price: this.price, rst: rst}})
       },
       pumpshow () {

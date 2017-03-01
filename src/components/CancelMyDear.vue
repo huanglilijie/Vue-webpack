@@ -4,7 +4,7 @@
     <div>
       <img src="/static/images/car-img.png" alt="" />
     </div>
-    <a href="" class="continue" @click="toBeContinue">继续宠爱之旅</a>
+    <a class="continue" onclick="window.history.go(-1)">继续宠爱之旅</a>
     <a class="abandon" @click="refund">确认放弃</a>
   </div>
 </template>
@@ -25,8 +25,9 @@
     methods: {
       refund () {
         this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.reservationid + '/refund/').then((response) => {
-          if (response.data != null) {
-            this.$router.go({name: 'refundsubmit'})
+          console.log(response)
+          if (response.status === 200) {
+            this.$router.go({name: 'refundsubmit', query: {reservationId: this.reservationId}})
           }
         }).catch((response) => {
           console.log(response)

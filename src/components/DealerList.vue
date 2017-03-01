@@ -71,41 +71,48 @@ export default {
       mask: false,
       totalamount: 0,
       lists: [],
-      dates: 0
+      dates: 0,
+      orderId: ''
     }
   },
-  create () {
+  created () {
+
   },
   ready () {
     // 判断是不是创建邀请函第一次进入页面
     var isfirst = this.$route.query.isfirst
+    var orderId = this.$route.query.orderId
     if (isfirst) {
       this.$set('mask', isfirst)
     }
+    this.$set('orderId', orderId)
     this.getfunds()
   },
   methods: {
     // 页面跳转穿参数
     submit () {
+      // 需要再次获取一次筹款明细
+      this.getfunds()
       var totalamount = this.totalamount
       if (totalamount === 0) {
-        this.$router.go({name: 'endfundraising'})
-      } else if (totalamount > 1000) {
-        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount}})
-      } else if (totalamount > 0 && totalamount < 1000) {
-        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount}})
+        this.$router.go({name: 'endfundraising', query: {orderId: this.orderId}})
+      } else if (totalamount >= Golab.gradeamount_1) {
+        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
+      } else if (totalamount > 0 && totalamount < Golab.gradeamount_1) {
+        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount, orderId: this.orderId}})
       }
     },
     viewDetails () {
-      this.$router.go({name: 'orderfundraising'})
+      this.$router.go({name: 'orderfundraising', query: {orderId: this.orderId}})
     },
     pumpshow () {
       this.mask = !this.mask
     },
     getfunds () {
       // 根据订单号获取筹款明细
-      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
       .then((response) => {
+        console.log(response)
         var data = response.data
         var totalamount = 0
         for (var i in data) {

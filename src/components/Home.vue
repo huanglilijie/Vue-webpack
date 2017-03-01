@@ -60,48 +60,53 @@
       }
       // 二、判断用户是否存在订单信息
       // 1、根据openid获取用户的uid(uid是在用户注册的时候产生的)
-      /* this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
+      this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
       .then((response) => {
+        console.log(response)
         var data = response.data
         // 2、根据uid获取用户的最新订单
         var uid = data.uid
-        if () {
+        if (uid != null) {
+          Golab.uid = uid
+          this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders/')
+          .then((response) => {
+            console.log(response)
+            var orderInfo = response.data
+            if (response.data != null) {
+              var orderStatus = orderInfo.orderStatus
+              // 当我有一个未支付的订单，再次进入活动时，我可以直接看到支付选择页
+              if (orderStatus === 'WAITING_FOR_PAYMENT') {
+                this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee}})
+              }
+              // 支付完成后未创建筹款页，再次进入活动会直接进入创建邀请函
+              if (orderStatus === 'PAID') {
+                var param = {
+                  orderId: orderInfo.reservationId
+                }
+                this.$router.go({path: '/createmydear', query: param})
+              }
+              // 当我开始筹款，我进入活动入口可以默认浏览筹款进度页
+              if (orderStatus === 'FUNDING') {
+                this.$router.go({path: '/dealerlist', query: {orderId: orderInfo.reservationId}})
+              }
+              // 当筹款完成或活动结束，我进入活动可以默认显示已完成的筹款进度页
+              if (orderStatus === 'FUNDED') {
+                this.$router.go({path: '/fundraising', query: {orderId: orderInfo.reservationId}})
+              }
+              // 当我在退款中的状态进入活动，默认显示退款中的订单详情页
+              if (orderStatus === 'REFUNDING') {
+                this.$router.go({path: '/orderrefunded', query: {reservationId: orderInfo.reservationId}})
+              }
+            } else {
+              // 在未存在订单的情况下通过活动入口进入活动，可以正常浏览活动首页
+            }
+          }).catch((response) => {
+            console.log(response)
+          })
         }
-        Golab.uid = uid
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders/')
-        .then((response) => {
-          var orderInfo = response.data
-          if (response.data != null) {
-            var orderStatus = orderInfo.orderStatus
-            // 当我有一个未支付的订单，再次进入活动时，我可以直接看到支付确认页
-            if (orderStatus === 'WAITING_FOR_PAYMENT') {
-              this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee}})
-            }
-            // 支付完成后未创建筹款页，再次进入活动会直接进入支付成功的订单详情页
-            if (orderStatus === 'PAID') {
-              this.$router.go({path: '/item/itemSuccess'})
-            }
-            // 当我开始筹款，我进入活动入口可以默认浏览筹款进度页
-            if (orderStatus === 'FUNDING') {
-              this.$router.go({path: '/myfundraising'})
-            }
-            // 当筹款完成或活动结束，我进入活动可以默认显示已完成的筹款进度页
-            if (orderStatus === 'FUNDING') {
-              this.$router.go({path: '/myfundraising'})
-            }
-            // 筹款完成
-            if (orderStatus === 'FUNDING') {
-              this.$router.go({path: '/myfundraising'})
-            }
-          } else {
-            // 在未存在订单的情况下通过活动入口进入活动，可以正常浏览活动首页
-          }
-        }).catch((response) => {
-          console.log(response)
-        })
       }).catch((response) => {
         console.log(response)
-      })*/
+      })
     }
   }
 </script>

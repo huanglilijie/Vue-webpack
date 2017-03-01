@@ -87,7 +87,7 @@
       this.initOrderAmount()
     },
     created () {
-      this.orderid = this.$route.query.orderid
+      this.reservationId = this.$route.query.orderId
     },
     props: {
       second: {
@@ -109,7 +109,7 @@
         }
       },
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
           if (response.data != null) {
             var cdate = new Date(response.data.createTime)
             var year = cdate.getFullYear()
@@ -127,7 +127,7 @@
         })
       },
       initOrderAmount () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.reservationId + '/funds').then((response) => {
           var data = response.data
           var totalamount = 0
           for (var i in data) {
@@ -158,10 +158,10 @@
           query: {'reservationId': this.reservationId}})
       },
       viweMyDear () {
-        this.$router.go({name: 'fundraising'})
+        this.$router.go({name: 'fundraising', query: {orderId: this.reservationId}})
       },
       resendCode () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + '234' + '/redeem-code/').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.reservationId + '/redeem-code/').then((response) => {
           if (response) {
             this.start()
           }

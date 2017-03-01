@@ -51,7 +51,7 @@
     name: 'orderpayment',
     data () {
       var nd = new Date()
-      var ld = new Date('2017-04-30')
+      var ld = new Date(Golab.endDate)
       var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
       if (dates <= 0) {
         dates = 0
@@ -95,7 +95,8 @@
     },
     methods: {
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.userid + '/orders/', {params: {userid: Golab.uid}}).then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/').then((response) => {
+          console.log(response)
           if (response.data != null) {
             console.log(response.data)
             var cdate = new Date(response.data.createTime)
@@ -114,7 +115,8 @@
         })
       },
       cancelMyDear () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/cancel/').then((response) => {
+        this.$router.go({name: 'cancelmydear', query: {'reservationId': this.reservationId}})
+        /* this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + Golab.uid + '/orders/' + this.orderId + '/cancel/').then((response) => {
           if (response.data != null) {
             this.$router.go({
               name: 'cancelmydear',
@@ -122,7 +124,7 @@
           }
         }).catch((response) => {
           console.log(response)
-        })
+        })*/
       },
       jump () {
         this.$router.go({

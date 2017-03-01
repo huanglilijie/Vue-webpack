@@ -6,7 +6,7 @@
       </div>
       <div class="content_btn">
           <input type="button" value="OK , 我的smart已在路上" @click="submit()">
-          <input type="button" value="还不够，再多宠爱我一点" @click="goback()">
+          <input type="button" value="还不够，再多宠爱我一点" onclick="window.history.go(-1)">
       </div>
   </div>
 </template>
@@ -23,9 +23,11 @@ export default {
   created () {
     // 获取页面传参
     var totalamount = this.$route.query.totalamount
+    var orderId = this.$route.query.orderId
     console.log(totalamount)
     var param = {
-      totalamount: totalamount
+      totalamount: totalamount,
+      orderId: orderId
     }
     this.$set('pageParam', param)
     var packageamount1 = Golab.packageamount_1
@@ -35,7 +37,7 @@ export default {
     var gradeamount2 = Golab.gradeamount_2
     var gradeamount3 = Golab.gradeamount_3
     var gradeamount4 = Golab.gradeamount_4
-    if (totalamount < 1000) {
+    if (totalamount < Golab.gradeamount_1) {
       this.$set('howMoney', 0)
     } else if (totalamount >= gradeamount1 && totalamount < gradeamount2) {
       this.$set('howMoney', packageamount1)
@@ -43,13 +45,11 @@ export default {
       this.$set('howMoney', packageamount2)
     } else if (totalamount >= gradeamount3 && totalamount <= gradeamount4) {
       this.$set('howMoney', packageamount3)
-    } else {
-      this.$set('howMoney', 100)
     }
   },
   methods: {
     submit () {
-      this.$router.go({name: 'fundraising'})
+      this.$router.go({name: 'fundraising', query: this.pageParam})
     },
     goback () {
       this.$router.go({name: 'dealerlist'})
