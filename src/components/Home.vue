@@ -55,11 +55,6 @@
       }
     },
     ready: function () {
-      // 一、判断是否微信浏览器打开，需要确认这个判断放在哪个页面，也就是活动的入口
-      var ua = window.navigator.userAgent.toLowerCase()
-      if (!ua.indexOf('micromessenger') < 0) {
-        this.$router.go({path: '/point/'})
-      }
       // 二、判断用户是否存在订单信息
       // 1、根据openid获取用户的uid(uid是在用户注册的时候产生的)
       this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
@@ -67,6 +62,8 @@
         console.log(response)
         var data = response.data
         // 2、根据uid获取用户的最新订单
+        window.localStorage.setItem('uid', data.uid)
+        console.log('localStorage:' + window.localStorage.getItem('uid'))
         var uid = data.uid
         if (uid != null) {
           Golab.uid = uid

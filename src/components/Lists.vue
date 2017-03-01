@@ -87,7 +87,7 @@
           return false
         }
         // 路由跳转页面带参数传递
-        this.$router.go({path: '/whereru', query: {carCode: selected.code, carName: selected.name, carIntentionFee: selected.intentionFee}})
+        this.$router.go({path: '/whereru', query: {carCode: selected.id, carName: selected.name, carIntentionFee: selected.intentionFee}})
       }
     }
   }

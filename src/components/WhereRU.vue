@@ -242,7 +242,7 @@
           }
           var selectedDealer = this.data[this.selectedItem]
           this.pageParam.dealerName = selectedDealer.name
-          this.pageParam.dealerCode = selectedDealer.code
+          this.pageParam.dealerCode = selectedDealer.id
           this.pageParam.dealerTelephone = selectedDealer.telephone
           // console.log(this.pageParam)
           // 路由跳转页面带参数传递

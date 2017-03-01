@@ -176,6 +176,8 @@
             // 将注册获取uid存储
             Golab.uid = data.uid
             console.log('uid:' + data.uid)
+            window.localStorage.setItem('uid', data.uid)
+            console.log('localStorage:' + window.localStorage.getItem('uid'))
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
