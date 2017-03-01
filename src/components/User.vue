@@ -176,7 +176,8 @@
             console.log(response)
             var data = response.data
             // 将注册获取uid存储
-            Config.uid = data.uid
+            Golab.uid = data.uid
+            console.log('Golab.uid:' + Golab.uid)
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
