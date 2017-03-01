@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="wrap">
+  <div class="wrap-dealerlist">
     <div class="clock">
       <div class="loveresult">宠爱值：</div>
       <div class="clock">
@@ -43,9 +43,9 @@
       <p>加油哦，快去分享吧！大礼包在等着你</p>
     </div>
     <hr style="width: 90%;margin:0 auto;" v-show="totalamount > 0">
-    <div class="submit">
+    <div class="submit-dealer1">
         <input class="heart" type="button" value="心满意足" @click="submit()">
-        <div class="more_input">
+        <div class="more_input_dealerlist">
             <input type="button" value="查看详情" @click="viewDetails()">
             <input type="button" value="再撒个娇" @click="pumpshow()">
         </div>
@@ -71,8 +71,7 @@ export default {
       mask: false,
       totalamount: 0,
       lists: [],
-      dates: 0,
-      orderId: ''
+      dates: 0
     }
   },
   created () {
@@ -80,38 +79,33 @@ export default {
   ready () {
     // 判断是不是创建邀请函第一次进入页面
     var isfirst = this.$route.query.isfirst
-    var orderId = this.$route.query.orderId
     if (isfirst) {
       this.$set('mask', isfirst)
     }
-    this.$set('orderId', orderId)
     this.getfunds()
   },
   methods: {
     // 页面跳转穿参数
     submit () {
-      // 需要再次获取一次筹款明细
-      this.getfunds()
       var totalamount = this.totalamount
       if (totalamount === 0) {
-        this.$router.go({name: 'endfundraising', query: {orderId: this.orderId}})
-      } else if (totalamount >= Golab.gradeamount_1) {
-        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
-      } else if (totalamount > 0 && totalamount < Golab.gradeamount_1) {
-        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount, orderId: this.orderId}})
+        this.$router.go({name: 'endfundraising'})
+      } else if (totalamount > 1000) {
+        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount}})
+      } else if (totalamount > 0 && totalamount < 1000) {
+        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount}})
       }
     },
     viewDetails () {
-      this.$router.go({name: 'orderfundraising', query: {orderId: this.orderId}})
+      this.$router.go({name: 'orderfundraising'})
     },
     pumpshow () {
       this.mask = !this.mask
     },
     getfunds () {
       // 根据订单号获取筹款明细
-      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
+      this.$http.get(Config.API_ROOT + 'ecommerce/order/' + '111' + '/funds')
       .then((response) => {
-        console.log(response)
         var data = response.data
         var totalamount = 0
         for (var i in data) {
@@ -185,7 +179,7 @@ font-size: 10px !important;
     left:0;
 }
 ul{list-style: none}
-.wrap{
+.wrap-dealerlist{
     width: 100%;
     background:url('/static/images/bg.png') no-repeat #fff;
     background-size: 100%;
@@ -292,11 +286,11 @@ ul{list-style: none}
 .rest ul li div:nth-child(2) span{
     margin:0 2.5%;
 }
-.submit{
+.submit-dealer1{
     width:90%;
     margin: 0 auto;
 }
-.submit input{
+.submit-dealer1 input{
     border: none;
     font-size: 1.5rem;
     height:50px;
@@ -309,16 +303,16 @@ ul{list-style: none}
     margin-top: 30px;
      -webkit-appearance : none ;
 }
-.more_input{overflow: hidden;padding:30px 0;}
+.more_input_dealerlist{overflow: hidden;padding:30px 0;}
 
-.more_input input{
+.more_input_dealerlist input{
     width:48%;
     background-color: #599c2f;
     border-radius: 5px;
     -webkit-appearance : none ;
 }
-.more_input input:nth-child(1){float: left}
-.more_input input:nth-child(2){float: right}
+.more_input_dealerlist input:nth-child(1){float: left}
+.more_input_dealerlist input:nth-child(2){float: right}
 /*蒙板*/
 .mask_1{
     background-color:rgba(0,0,0,.5);

@@ -27,7 +27,6 @@
       // 获取页面传参
       var totalamount = this.$route.query.totalamount
       var orderId = this.$route.query.orderId
-      console.log(totalamount)
       var param = {
         totalamount: totalamount,
         orderId: orderId
@@ -54,12 +53,12 @@ html,body{
 }
 .wrap2{
     width:100%;
-    background: url("/static/images/bg-over.png") no-repeat;
-  background-size: 100%;
-  padding-bottom: 80%;
-
+    background: url("/static/images/bg-over.png") no-repeat #fff;
+    background-size: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
 }
-div{text-align: center;}
 .content_title{
   padding-top: 80px;
 }

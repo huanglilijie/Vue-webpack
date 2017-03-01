@@ -1,16 +1,19 @@
 <template>
-  <div class="item">
-  	<img src="/static/paysuccess-img.jpg"/>
-    <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
-    <div class="car-style2">
-    	<p>经销商信息：</p>
-    	<p>
-    		<div>{{ pageParam.dealerName }}</div>
-    		<div class="phontnum">{{ pageParam.dealerTelephone }}</div>
-    	</p>
+  <body>
+    <div class="item">
+    	<img src="/static/paysuccess-img.jpg"/>
+      <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
+      <div class="car-style2">
+      	<p>经销商信息：</p>
+      	<p>
+      		<div>{{ pageParam.dealerName }}</div>
+      		<div class="phontnum">{{ pageParam.dealerTelephone }}</div>
+      	</p>
+      </div>
+      <router-view></router-view>
     </div>
-    <router-view></router-view>
-  </div>
+  </body>
+
 </template>
 
 <script>
@@ -43,6 +46,8 @@
 <style scoped>
   .item{
     background-color: #fff;
+    position: absolute;
+    height: 100%;
   }
 	.item img:nth-child(1){
 		width: 100%;

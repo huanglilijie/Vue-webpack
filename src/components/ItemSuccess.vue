@@ -90,7 +90,7 @@
 }
  .btn-footer-1{
     position: fixed;
-    bottom:55px;
+    bottom:65px;
     left: 5%;
     width: 90%;
     border-radius:10px;
@@ -102,7 +102,7 @@
   }
   .btn-footer-2{
   	 position: fixed;
-    bottom:0;
+    bottom:10px;
     left: 5%;
     width: 90%;
     border-radius:10px;

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="wrap">
+  <div class="wrap-fundraising">
       <div class="clock">
           <div class="loveresult">宠爱值：</div>
           <div class="clock">
@@ -38,7 +38,7 @@
           <h1>距离活动结束还有 <span>{{dates}}</span> 天</h1>
       </div>
       <div class="submit">
-          <div class="more_input">
+          <div class="more_input_fundrais">
               <input type="button" value="查看详情" @click="viewDetails()">
               <div class="share"  @click="pumpshow()">
                 <span>邀请好友参与</span>
@@ -142,7 +142,7 @@ html,body,ul{
     padding: 0;
     font-family: 微软雅黑;
     font-size: 12px;
-    background: #fff;
+    /*background: #fff;*/
 }
  @media (max-width: 350px) {
 html,body {
@@ -167,9 +167,9 @@ font-size: 10px !important;
     left:0;
 }
 ul{list-style: none}
-.wrap{
+.wrap-fundraising{
     width: 100%;
-    background:url('/static/images/bg.png') no-repeat;
+    background:url('/static/images/bg.png') no-repeat #fff;
     background-size: 100%;
     padding-top: 10px;
 }
@@ -296,16 +296,16 @@ ul{list-style: none}
     margin-top: 30px;
      -webkit-appearance : none ;
 }
-.more_input{overflow: hidden;margin:0 0 30px 0;}
+.more_input_fundrais{overflow: hidden;padding:0 0 30px 0;}
 
-.more_input input{
+.more_input_fundrais input{
    font-size: 1.5rem;
     width:48%;
     background-color: #F6BA38;
     border-radius: 5px;
     -webkit-appearance : none ;
 }
-.more_input>div{
+.more_input_fundrais>div{
     height:60px;
    width:48%;
      color:#FFFFFF;
@@ -315,13 +315,13 @@ ul{list-style: none}
     -webkit-appearance : none ;
     text-align: center;
 }
- .more_input>div span{
+ .more_input_fundrais>div span{
   display: block;
   height: 30px;
   line-height: 30px;
  }
-.more_input input:nth-child(1){float: left}
-.more_input>div:nth-child(2){float: right}
+.more_input_fundrais input:nth-child(1){float: left}
+.more_input_fundrais>div:nth-child(2){float: right}
  /*蒙板*/
 .mask_1{
     background-color:rgba(0,0,0,.5);

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap-mydear">
     <img src="/static/title-img.jpg" alt="" />
     <div class="bottom">
       <div class="text1">
@@ -17,7 +17,7 @@
       </li>
       <p class="text3">*内容确定后不能修改哦</p>
     </div>
-    <a class="btn" @click="submit">开启宠爱之旅</a>
+    <a class="btn-mydear" @click="submit">开启宠爱之旅</a>
     <div v-if='checks'>
       <div class="mask" @click="submit"></div>
 <!--       <img class="mask-img" src="/static/images/pump-bg.png"/> -->
@@ -55,9 +55,6 @@
     components: {
     },
     ready () {
-      // setTimeout(function () {
-      //   console.log(123)
-      // }, 3000)
     },
     methods: {
       select (index) {
@@ -114,7 +111,7 @@
 			font-size: 10px !important;
 		}
   }
-  .wrap img{
+  .wrap-mydear img{
   	width: 100%;
   	display: block;
   }
@@ -151,7 +148,7 @@
 	  background-color: rgba(0,0,0,0);
   	color: #000;
 	}
-  .btn{
+  .btn-mydear{
 		display: block;
 		width: 90%;
 		margin: 0 auto;

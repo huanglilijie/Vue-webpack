@@ -1,13 +1,15 @@
 <template>
-  <div class="user">
-    <validator name ="validation_info">
-      <div class="form-group">
-        <label>* 你的姓名</label>
-        <div>
-          <input v-model="username" v-validate:username="{required : true}" type="text" initial="off" detect-change="off">
-          <span v-if="userText">请填写您的姓名</span>
+  <body>
+    <div class="user">
+      <validator name ="validation_info">
+        <div class="form-group">
+          <label>* 你的姓名</label>
+          <div>
+            <input v-model="username" v-validate:username="{required : true}" type="text" initial="off" detect-change="off">
+            <span v-if="userText">请填写您的姓名</span>
+          </div>
         </div>
-      </div>  
+      </div>
       <div class="form-group">
         <label>* 手机号码</label>
         <div>
@@ -16,25 +18,42 @@
           <span v-if="time != 0" class="code" id="timeText">{{time}}s</span>
           <span v-if="phoneText || $validation_info.phone.invalid">{{tel}}</span>
         </div>
-      </div>
-      <div class="form-group">
-        <label>* 手机验证码</label>
-        <div>
-          <input v-model="telCode" name= "telCode" v-validate:telCode="{required : true}">
-          <span v-if="codeText">{{code}}</span>
+        <div class="form-group">
+          <label>* 手机验证码</label>
+          <div>
+            <input v-model="telCode" name= "telCode" v-validate:telCode="{required : true}">
+            <span v-if="codeText">{{code}}</span>
+          </div>
         </div>
-      </div>
-      <div class="bottom-content">
-        <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" alt="" /></p>
-        <p>https://estore.mercedes-benz.com.cn</p>
-        <p class="user-agreement">
-          <span>我同意</span><a>活动用户协议</a>
-          <input type="checkbox" class= "input-checkbox" name="" v-model="state" />
-        </p>
-      </div>
-    </validator>
-    <btn-footer is-item-selected="selectedItem" >这就是我</btn-footer>
-  </div>
+        <div class="bottom-content">
+          <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" alt="" /></p>
+          <p>https://estore.mercedes-benz.com.cn</p>
+          <p class="user-agreement">
+            <span>我同意</span><a @click="pumpshow2 ()">活动用户协议</a>
+            <input type="checkbox" class= "input-checkbox" name="" v-model="state" />
+          </p>
+        </div>
+
+        <div class="ciry" v-if="ciry">
+          <div class="content">
+            <div class="content_title">
+              <h2>上牌城市的说明</h2>
+            </div>
+            <div class="line"></div>
+            <div class="content_word">
+              <p>为了保证服务质量，请您购车后在该活动中提
+      交意向金时选定的上牌城市上牌，如您选择在
+      购车经销商所在城市以外的地区上牌，具体事
+      宜请于该经销商协商。</p>
+            </div>
+          </div>
+          <a class="btn1" @click="pumpshow2()">知道了</a>
+        </div>
+
+      </validator>
+      <btn-footer is-item-selected="selectedItem" >这就是我</btn-footer>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -65,7 +84,8 @@
     isChinaUnion: '',
     isChinaTelcom: '',
     isOtherTelphone: '',
-    pageParam: {}
+    pageParam: {},
+    ciry: false
   }
   export default {
     name: 'user',
@@ -111,6 +131,9 @@
       }
     },
     methods: {
+      pumpshow2 () {
+        this.ciry = !this.ciry
+      },
       run: function () {
         this.$emit('run')
       },
@@ -236,6 +259,9 @@
 </script>
 
 <style scoped>
+body{
+  background-color: #000;
+}
   .form-group {
     margin: 40px 12% 0 12%;
   }
@@ -289,5 +315,51 @@
   }
   .user-agreement a{
     color: #000000;
+  }
+  .user-agreement a{
+    text-decoration: underline;
+  }
+  /*上牌城市遮罩*/
+  .ciry {
+    width: 100%;
+    height: 100%;
+    background: url(/static/images/wherebg.png) no-repeat #fff;
+    background-size: 100%;
+    padding-top: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+  }
+  .content {
+    width: 80%;
+    min-height: 90%;
+    margin: 0 auto;
+    background: url(/static/images/pumpbg.png) no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+    padding-top: 35%;
+  }
+ .btn1{
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #f6ba38;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+  }
+  .line{
+    width:100%;
+    height:0px;
+    border-bottom: 2px white dashed;
+    margin: 10px auto;
+  }
+  .content_title{
+    text-align: center;
+  }
+  .content_word{
+    box-sizing: border-box;
+    padding: 0px 10px;
   }
 </style>

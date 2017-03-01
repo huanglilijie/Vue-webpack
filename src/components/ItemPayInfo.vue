@@ -224,11 +224,10 @@ img{
 .btn{
   display: block;
   width: 90%;
-  height: 50px;
-  line-height: 50px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 18px;
   text-decoration: none;
+  padding:10px 0;
   color: #FFFFFF;
   border-radius: 10px;
 }
@@ -240,7 +239,7 @@ img{
 }
 .submit{
   position: fixed;
-  bottom: 70px;
+  bottom: 65px;
   background-color: #F6BA38;
   left: 5%;
   margin-top: 20px;

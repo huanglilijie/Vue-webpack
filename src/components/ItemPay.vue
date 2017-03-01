@@ -13,8 +13,25 @@
       	<label><img src="/static/images/wechatpay.png"/></label><input type="radio" value="wechat" v-model="paytype">
       </div>
     </div>
+
+    <div class="ciry" v-if="ciry">
+      <div class="content">
+        <div class="content_title">
+          <h2>上牌城市的说明</h2>
+        </div>
+        <div class="line"></div>
+        <div class="content_word">
+          <p>为了保证服务质量，请您购车后在该活动中提
+  交意向金时选定的上牌城市上牌，如您选择在
+  购车经销商所在城市以外的地区上牌，具体事
+  宜请于该经销商协商。</p>
+        </div>
+      </div>
+      <a class="btn1" @click="pumpshow2()">知道了</a>
+    </div>
+
    	<p class="agreen">
-   		<span>我同意</span><a href="">意向金规则</a><input type="checkbox" v-model="state"/>
+   		<span>我同意</span><a @click="pumpshow2 ()">意向金规则</a><input type="checkbox" v-model="state"/>
    	</p>
     <btn-footer :is-item-selected="selectedItem">开启宠爱之旅</btn-footer>
   </div>
@@ -31,7 +48,8 @@
         paytype: '',
         selectedItem: null,
         state: false,
-        pageParam: {}
+        pageParam: {},
+        ciry: false
       }
     },
     components: {
@@ -61,6 +79,9 @@
       }
     },
     methods: {
+      pumpshow2 () {
+        this.ciry = !this.ciry
+      },
       // 选中后页面跳转
       submit () {
         if (!this.selectedItem) {
@@ -165,5 +186,51 @@
 .agreen input{
 	width: 15px;
 	height: 15px;
+}
+.agreen a{
+  text-decoration: underline;
+}
+/*上牌城市遮罩*/
+.ciry {
+  width: 100%;
+  height: 100%;
+  background: url(/static/images/wherebg.png) no-repeat #fff;
+  background-size: 100%;
+  padding-top: 50px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+.content {
+  width: 80%;
+  min-height: 90%;
+  margin: 0 auto;
+  background: url(/static/images/pumpbg.png) no-repeat;
+  background-size: 100%;
+  box-sizing: border-box;
+  padding-top: 35%;
+}
+.btn1{
+  position: fixed !important;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #f6ba38;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+}
+.line{
+  width:100%;
+  height:0px;
+  border-bottom: 2px white dashed;
+  margin: 10px auto;
+}
+.content_title{
+  text-align: center;
+}
+.content_word{
+  box-sizing: border-box;
+  padding: 0px 10px;
 }
 </style>

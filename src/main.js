@@ -127,6 +127,12 @@ router.map({
       require(['./components/EndFundraising.vue'], resolve)
     }
   },
+  '/smallfundrais': {
+    name: 'smallfundrais',
+    component: function (resolve) {
+      require(['./components/SmallFundrais.vue'], resolve)
+    }
+  },
   '/completefundraising': {
     name: 'completefundraising',
     component: function (resolve) {
@@ -197,12 +203,6 @@ router.map({
     name: 'fundraising',
     component: function (resolve) {
       require(['./components/FunDraising.vue'], resolve)
-    }
-  },
-  '/smallfundrais': {
-    name: 'smallfundrais',
-    component: function (resolve) {
-      require(['./components/SmallFundrais.vue'], resolve)
     }
   }
 })
