@@ -50,7 +50,7 @@
             <input type="button" value="再撒个娇" @click="pumpshow()">
         </div>
     </div>
-    <div class="mask" v-if = "mask">
+    <div v-if ="mask" class="mask">
       <div class="mask_1" @click="pumpshow()">
       </div>
       <div class="mask_2">
@@ -67,7 +67,7 @@ export default {
     return {
       rotate: 0,
       shu: 7000,
-      isfirst: false,
+      isfirst: true,
       mask: false,
       totalamount: 0,
       lists: [],
@@ -77,15 +77,28 @@ export default {
   },
   created () {
   },
-  ready () {
+  ready: function () {
     // 判断是不是创建邀请函第一次进入页面
-    var isfirst = this.$route.query.isfirst
     var orderId = this.$route.query.orderId
-    if (isfirst) {
-      this.mask = isfirst
+    var flag = window.localStorage.getItem('isfirst')
+    console.log(flag)
+    if (flag) {
+      this.$set('mask', flag)
+      console.log(this.mask)
+    }
+    if (flag != null) {
+      this.$set('mask', false)
+      console.log(this.mask)
+    }
+    if (flag == null) {
+      window.localStorage.setItem('isfirst', false)
+      this.$set('mask', true)
+      console.log(this.mask)
     }
     this.orderId = orderId
     this.getfunds()
+    // var isfirst = this.$route.query.isfirst
+    // this.$set('mask', isfirst)
   },
   methods: {
     // 页面跳转穿参数

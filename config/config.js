@@ -4,5 +4,5 @@
  * 定义api_root的接口地址
  */
 export default {
-  API_ROOT: 'http://localhost:8081/api/'
+  API_ROOT: 'http://192.168.6.135:8081/api/'
 }

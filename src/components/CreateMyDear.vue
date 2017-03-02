@@ -66,7 +66,7 @@
         this.selected.$set(index, true)
         // 将序列赋值给selectedItem
         this.selectedItem = index
-        console.log(this.selectedItem)
+        console.log(this.selectedItem + 'item')
       },
       getSelected () {
         if (this.selectedItem == null) {
@@ -86,13 +86,19 @@
         // 调用邀请函创建api
         // console.log(selected.thankway)
         this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/funding', {memo: selected.thankway}).then((response) => {
-          console.log(response)
+          if (response != null) {
+            console.log(response)
+            var isfirst = window.localStorage.getItem('isfirst')
+            if (isfirst == null) {
+              isfirst = true
+            }
+            setTimeout(function () {
+              self.$router.go({name: 'dealerlist', query: {orderId: self.orderId, isfirst: isfirst}})
+            }, 2000)
+          }
         }).catch((response) => {
           console.log(response)
         })
-        setTimeout(function () {
-          self.$router.go({name: 'dealerlist', query: {orderId: self.orderId, isfirst: true}})
-        }, 2000)
       },
       makshow () {
         var self = this
