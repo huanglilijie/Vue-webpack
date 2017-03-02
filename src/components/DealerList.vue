@@ -103,12 +103,14 @@ export default {
   methods: {
     // 页面跳转穿参数
     submit () {
+      // 需要再次获取一次筹款明细
+      this.getfunds()
       var totalamount = this.totalamount
       if (totalamount === 0) {
         this.$router.go({name: 'endfundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
-      } else if (totalamount > 1000) {
+      } else if (totalamount > Golab.gradeamount_1) {
         this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
-      } else if (totalamount > 0 && totalamount < 1000) {
+      } else if (totalamount > 0 && totalamount < Golab.gradeamount_1) {
         this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount, orderId: this.orderId}})
       }
     },
