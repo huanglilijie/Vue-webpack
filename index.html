@@ -7,7 +7,20 @@
   <head>
     <meta charset="utf-8">
     <title>mobile</title>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7lh8KwUPQ90fmt0qEjnTFKkuxp2cq4h1"></script>
+    <script type="text/javascript">
+      // 一、判断是否微信浏览器打开
+      var ua = window.navigator.userAgent.toLowerCase()
+      var path = document.URL
+      console.log('ua:' + ua)
+      console.log(document.URL)
+      if (ua.indexOf('micromessenger') < 0) {
+        // 判断只有point非微信浏览器提示页，不做跳转，其他页面均跳转
+        if (path.indexOf('/point') < 0) {
+          window.location.href = '/point'
+        }
+      }
+    </script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=746SyotrLh8f2O2t6GBt0x9YE1EtVhwf"></script>
   </head>
   <body>
     <app></app>

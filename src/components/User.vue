@@ -203,6 +203,7 @@
             console.log(response.headers.map['MME-TOKEN'])
             if (response.headers.map['MME-TOKEN']) {
               console.log(response.headers.map['MME-TOKEN'][0])
+              window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
               Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
             }
             // 将注册获取uid存储

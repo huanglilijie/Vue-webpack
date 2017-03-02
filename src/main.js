@@ -14,6 +14,8 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Alert)
 
+Vue.http.headers.common['MME-TOKEN'] = window.localStorage.getItem('MME-TOKEN')
+
 Vue.validator('phone', function (val) {
   if (val.length === 0) {
     return true
