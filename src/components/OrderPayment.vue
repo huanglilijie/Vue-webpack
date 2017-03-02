@@ -3,7 +3,7 @@
     <div class="toporderpayment">
       <div>
           <p>已支付</p>
-          <div><img src="/static/images/headset.png" alt="" /></div>    
+          <div><img src="/static/images/headset.png" alt="" /></div>
       </div>
       <p>恭喜，你已成功参与smart购车筹款活动，快分享给全家人，
 赢得他们的宠爱，2000元购车补贴在等着你哦！</p>
@@ -16,7 +16,7 @@
         </li>
         <li class="car-message clearfloat">
           <label for="">预定时间:</label>
-          <div>{{createTime}}</div>    
+          <div>{{createTime}}</div>
         </li>
         <li class="car-message clearfloat">
           <label for="">车型信息:</label>
@@ -41,7 +41,7 @@
         <input type="button" @click="jump" value="创建我的宠爱之旅"/>
         <input type="button" @click="cancelMyDear" value="放弃宠爱之旅"/>
       </div>
-    </div>    
+    </div>
   </div>
 </template>
 <script>
@@ -144,7 +144,7 @@
       font-size: 12px;
       font-family: "微软雅黑";
       width: 100%;
-      height: 100%;
+      /*height: 100%;*/
     }
     ul,li{
         list-style: none;
@@ -201,7 +201,7 @@
         content:"";
         visibility:hidden;
         height:0
-    } 
+    }
     .car-message{
         border-bottom: 1px dashed #000000;
         font-size: 1.2rem;
@@ -219,7 +219,7 @@
     .car-style li:last-child{
         border-bottom: none;
     }
-    
+
     .text{
         width: 85%;
         margin: 0 auto;
@@ -240,11 +240,11 @@
         width: 80%;
         font-size: 1.2rem;
         margin: 0 auto;
-        text-align: center;            
+        text-align: center;
     }
     .text1 span{
         font-size: 2.0rem;
-        font-weight: 600;    
+        font-weight: 600;
     }
     .btn-more{
             margin: 0 auto;

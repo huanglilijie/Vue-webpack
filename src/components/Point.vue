@@ -2,7 +2,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title></title>
-  <div class="wrap">
+  <div class="wrap-point">
     <div class="content">
         <p class="text-bg">>>smart&nbsp;&nbsp;全家宠爱 !</p>
         <img src="/static/images/cloud.png" alt=""  class="cloud"/>
@@ -53,38 +53,38 @@ img {
         font-size: 10px !important;
     }
 }
-.wrap{
+.wrap-point{
     width: 100%;
     height: 100%;
     background-color: #F6BA38;
 }
-.content .text-bg{
+.wrap-point .content .text-bg{
     text-align: center;
     font-weight: bold;
     font-size:2.4rem;
     color: #ffffff;
     padding-top: 20%;
 }
-.cloud{
+.wrap-point .cloud{
     width: 98%;
     margin: 0 auto;
     margin-top: 10px;
 }
-.content .text{
+.wrap-point .content .text{
     width: 80%;
     margin: 0 auto;
     text-align: left;
     font-size:1.6rem;
-    color: #ffffff;    
-    margin-bottom: 5px;        
+    color: #ffffff;
+    margin-bottom: 5px;
 }
-.content .line{
+.wrap-point .content .line{
     width: 80%;
     margin: 0 auto;
     height: 0;
     border-bottom: 1px dashed #FFFFFF;
     margin-bottom: 5px;
-}        
+}
 .code{
     box-sizing: border-box;
     width: 80%;
@@ -100,7 +100,7 @@ img {
     margin: 0 auto;
     text-align: center;
     font-size:1.4rem;
-    color: #000000;    
+    color: #000000;
     margin-top: 10px;
 }
 @media (max-height: 480px) {
@@ -111,5 +111,5 @@ img {
     background-color: #F6BA38;
 }
 }
-    
+
 </style>

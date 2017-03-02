@@ -3,7 +3,7 @@
 	<div class="toporderf">
 	  <div>
 		<p>宠爱ing</p>
-		<div><img src="/static/images/headset.png" alt="" /></div>	
+		<div><img src="/static/images/headset.png" alt="" /></div>
 	  </div>
 	  <p>* 您可以提前完成筹款并与经销商沟通</p>
 	</div>
@@ -15,7 +15,7 @@
 		</li>
 		<li class="car-message clearfloat">
 		  <label for="">预定时间:</label>
-		  <div>{{createTime}}</div>	
+		  <div>{{createTime}}</div>
 		</li>
 		<li class="car-message clearfloat">
 		  <label for="">车型信息:</label>
@@ -159,7 +159,7 @@
 	  font-size: 12px;
 	  font-family: "微软雅黑";
 	  width: 100%;
-	  height: 100%;
+	  /*height: 100%;*/
 	}
 	ul,li{
 		list-style: none;
@@ -215,7 +215,7 @@
 		content:"";
 		visibility:hidden;
 		height:0
-	} 
+	}
 	.car-message{
 		border-bottom: 1px dashed #000000;
 		font-size: 1.2rem;

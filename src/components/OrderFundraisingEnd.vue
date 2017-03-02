@@ -182,7 +182,7 @@
     font-size: 12px;
     font-family: "微软雅黑";
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
   }
   ul,
   li {
@@ -295,8 +295,8 @@
   }
   .btn-more {
 	/*width: 100%;*/
-	
-	
+
+
     margin: 0 auto;
     margin-top: 50px;
     padding-bottom: 20px;

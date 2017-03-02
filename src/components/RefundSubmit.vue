@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap-refundsubmit">
     <p>您的订单退款申请已提交，<br />
     请耐心等待客服处理！</p>
     <a class="continue" @click="orderDetail">查看详情</a>
@@ -50,13 +50,13 @@
       font-size: 10px !important;
     }
   }
-  .wrap{
+  .wrap-refundsubmit{
     background: url(/static/images/bg2-img.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     height: 100%;
   }
-  .wrap p{
+  .wrap-refundsubmit p{
     width: 58%;
     margin: 0 auto;
     text-align: left;
@@ -78,11 +78,11 @@
     border-radius: 5px;
   }
   .abandon{
-    bottom: 10px;	
+    bottom: 10px;
     background-color: #969DA3;
   }
-  .continue{				
-    bottom: 70px;			
-    background-color: #F6BA38;				
+  .continue{
+    bottom: 70px;
+    background-color: #F6BA38;
   }
 </style>

@@ -3,7 +3,7 @@
     <div class="top">
 	  <div>
 	    <p>已拥有万千宠爱</p>
-	    <div><img src="/static/images/headset.png" alt="" /></div>	
+	    <div><img src="/static/images/headset.png" alt="" /></div>
 	  </div>
 	  <p>* 感谢您对奔驰的支持</p>
     </div>
@@ -140,7 +140,7 @@
 	  font-size: 12px;
 	  font-family: "微软雅黑";
 	  width: 100%;
-	  height: 100%;
+	  /*height: 100%;*/
 	}
 	ul,li{
 		list-style: none;
@@ -195,7 +195,7 @@
 		content:"";
 		visibility:hidden;
 		height:0
-	} 
+	}
 	.car-message{
 		border-bottom: 1px dashed #000000;
 		font-size: 1.2rem;
@@ -225,7 +225,7 @@
 		margin: 0 auto;
 		margin-top: 50px;
 		padding-bottom: 20px;
-		
+
 	}
 	.btn-more input{
 		display: block;

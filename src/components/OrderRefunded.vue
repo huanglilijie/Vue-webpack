@@ -5,7 +5,7 @@
       	<p>{{state}}</p>
       	<img src="/static/images/headset.png" alt="" />
       </div>
-     	<p>{{stateDetail}}</p> 
+     	<p>{{stateDetail}}</p>
     </div>
     <div class="car-style">
       <ul>
@@ -162,7 +162,7 @@
     font-family: "微软雅黑";
     background: #ffffff;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
   }
   ul,li{
     list-style: none;
@@ -224,7 +224,7 @@
     content:"";
     visibility:hidden;
     height:0
-  } 
+  }
   .car-message{
     border-bottom: 1px dashed #000000;
     font-size: 1.2rem;
@@ -274,7 +274,7 @@
     .btn-more input:first-child{
       background-color: #F6BA38;
       margin-top: 80px;
-    }		
+    }
     .btn-more input:last-child{
       background-color: #969DA3;
       margin-top: 10px;

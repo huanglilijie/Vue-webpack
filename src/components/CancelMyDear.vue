@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap-cancelmydear">
   	<p>smart和远方怎能少了你...</p>
     <div>
       <img src="/static/images/car-img.png" alt="" />
@@ -63,19 +63,19 @@
       font-size: 10px !important;
     }
   }
-  .wrap{
+  .wrap-cancelmydear{
     background: url(/static/images/bg-img.png) no-repeat;
     background-position: center;
     background-size: cover;
     height: 100%;
   }
-  .wrap p{
+  .wrap-cancelmydear p{
     text-align: center;
     font-size: 1.6rem;
     font-weight: 600;
     padding-top: 15vh;
   }
-  .wrap div{
+  .wrap-cancelmydear div{
     width: 80%;
     margin: 0 auto;
     margin-top: 10vh;
@@ -92,12 +92,12 @@
     font-size: 1.6rem;
     border-radius: 5px;
   }
-  .abandon{				
-    bottom: 10px;	
+  .abandon{
+    bottom: 10px;
     background-color: #969DA3;
   }
-  .continue{				
-    bottom: 70px;			
-    background-color: #F6BA38;				
+  .continue{
+    bottom: 70px;
+    background-color: #F6BA38;
   }
 </style>
