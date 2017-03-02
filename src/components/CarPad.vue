@@ -2,7 +2,7 @@
   <div class="wrap">
 
     <div class="content">
-      <div class="content_title">
+      <div class="content_titlepad">
         <h2>上牌城市的说明</h2>
       </div>
       <div class="line"></div>
@@ -52,7 +52,7 @@ html,body{
   border-bottom: 2px white dashed;
   margin: 10px auto;
 }
-.content_title{
+.content_titlepad{
   text-align: center;
 }
 

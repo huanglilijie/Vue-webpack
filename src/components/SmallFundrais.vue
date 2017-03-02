@@ -74,6 +74,8 @@ html,body{
 .content_img{margin-top: 30px;}
 .content_img img{
     width:40%;
+    display: block;
+    margin: 0 auto;
 }
 .content_btn{
     width: 90%;

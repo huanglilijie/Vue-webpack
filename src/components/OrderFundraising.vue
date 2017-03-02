@@ -1,6 +1,6 @@
 <template>
-  <div class="wrap">
-	<div class="top">
+  <div class="wrap-orderfundraising">
+	<div class="toporderf">
 	  <div>
 		<p>宠爱ing</p>
 		<div><img src="/static/images/headset.png" alt="" /></div>	
@@ -170,39 +170,39 @@
 	    font-size: 10px !important;
 	  }
 	}
-	.wrap {
+	.wrap-orderfundraising {
 	  width: 100%;
 	  height: 80%;
 	  background: #ffffff;
 	}
-	.wrap .top {
+	.wrap-orderfundraising .toporderf {
 	  width: 90%;
 	  margin: 0 auto;
 	  padding: 15px 0;
 	  text-align: center;
 	  border-bottom: 1px solid #000000;
 	}
-	.wrap .top p {
+	.wrap-orderfundraising .toporderf p {
 	  margin-top: 5px;
 	  font-size: 1.2rem;
 	  font-weight: 600;
 	}
-	.wrap .top div {
+	.wrap-orderfundraising .toporderf div {
 	  vertical-align: middle;
 	}
-	.wrap .top div p {
+	.wrap-orderfundraising .toporderf div p {
 	  height: 30px;
 	  line-height: 30px;
 	  font-size: 1.8rem;
 	  font-weight: 600;
 	  display: inline-block;
 	}
-	.wrap .top div div {
+	.wrap-orderfundraising .toporderf div div {
 	  width: 10%;
 	  display: inline-block;
 	  margin-left: 10px;
 	}
-	.wrap .top div div img {
+	.wrap-orderfundraising .toporderf div div img {
 	  width: 100%;
 	}
 	.car-style{

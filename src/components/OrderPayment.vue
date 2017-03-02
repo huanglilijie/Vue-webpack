@@ -1,6 +1,6 @@
 <template>
-  <div class="wrap">
-    <div class="top">
+  <div class="wrap-orderpayment">
+    <div class="toporderpayment">
       <div>
           <p>已支付</p>
           <div><img src="/static/images/headset.png" alt="" /></div>    
@@ -155,40 +155,40 @@
         font-size: 10px !important;
       }
     }
-    .wrap {
+    .wrap-orderpayment {
       width: 100%;
       height: 80%;
       background: #ffffff;
     }
-    .wrap .top {
+    .wrap-orderpayment .toporderpayment {
       width: 90%;
       margin: 0 auto;
       padding: 15px 0;
       text-align: center;
       border-bottom: 1px solid #000000;
     }
-    .wrap .top p {
+    .wrap-orderpayment .toporderpayment p {
       margin-top: 5px;
       font-size: 1.2rem;
       font-weight: 600;
       text-align: left;
     }
-    .wrap .top div {
+    .wrap-orderpayment .toporderpayment div {
       vertical-align: middle;
     }
-    .wrap .top div p {
+    .wrap-orderpayment .toporderpayment div p {
       height: 30px;
       line-height: 30px;
       font-size: 1.8rem;
       font-weight: 600;
       display: inline-block;
     }
-    .wrap .top div div {
+    .wrap-orderpayment .toporderpayment div div {
       width: 10%;
       display: inline-block;
       margin-left: 10px;
     }
-    .wrap .top div div img {
+    .wrap-orderpayment .toporderpayment div div img {
       width: 100%;
     }
     .car-style{

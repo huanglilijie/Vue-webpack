@@ -1,9 +1,11 @@
 <template>
-  <div class="wrap">
-    <div class="top">
-      <p>{{state}}</p>
-      <div><img src="/static/images/headset.png" alt="" /></div>
-      <p>{{stateDetail}}</p>
+  <div class="orderrefunded">
+    <div class="orderrefundedtop">
+      <div class="unsubscribe">
+      	<p>{{state}}</p>
+      	<img src="/static/images/headset.png" alt="" />
+      </div>
+     	<p>{{stateDetail}}</p> 
     </div>
     <div class="car-style">
       <ul>
@@ -158,6 +160,7 @@
   body {
     font-size: 12px;
     font-family: "微软雅黑";
+    background: #ffffff;
     width: 100%;
     height: 100%;
   }
@@ -170,40 +173,45 @@
       font-size: 10px !important;
     }
   }
-  .wrap {
+  .orderrefunded {
     width: 100%;
     height: 80%;
     background: #ffffff;
   }
-  .wrap .top {
+  .orderrefunded .orderrefundedtop {
     width: 90%;
     margin: 0 auto;
     padding: 15px 0;
     text-align: center;
     border-bottom: 1px solid #000000;
   }
-  .wrap .top p {
+  .orderrefunded .unsubscribe img{
+  	display: inline-block;
+  	width: 6%;
+  	margin-left: 6px;
+  }
+  .orderrefunded .orderrefundedtop p {
     margin-top: 5px;
     font-size: 1.2rem;
     font-weight: 600;
     text-align: left;
   }
-  .wrap .top div {
+  .orderrefunded .orderrefundedtop div {
     vertical-align: middle;
   }
-  .wrap .top div p {
+  .orderrefunded .orderrefundedtop div p {
     height: 30px;
     line-height: 30px;
     font-size: 1.8rem;
     font-weight: 600;
     display: inline-block;
   }
-  .wrap .top div div {
+  .orderrefunded .orderrefundedtop div div {
     width: 10%;
     display: inline-block;
     margin-left: 10px;
   }
-  .wrap .top div div img {
+  .orderrefunded .orderrefundedtop div div img {
     width: 100%;
   }
   .car-style{
