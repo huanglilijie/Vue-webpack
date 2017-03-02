@@ -82,9 +82,9 @@ export default {
     var isfirst = this.$route.query.isfirst
     var orderId = this.$route.query.orderId
     if (isfirst) {
-      this.$set('mask', isfirst)
+      this.mask = isfirst
     }
-    this.$set('orderId', orderId)
+    this.orderId = orderId
     this.getfunds()
   },
   methods: {
@@ -107,6 +107,7 @@ export default {
     },
     getfunds () {
       // 根据订单号获取筹款明细
+      console.log(this.orderId)
       this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds')
       .then((response) => {
         var data = response.data

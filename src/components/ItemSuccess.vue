@@ -45,7 +45,7 @@
         carIntentionFee: carIntentionFee,
         dealerName: dealerName,
         dealerTelephone: dealerTelephone,
-        uid: uid
+        uid:uid
       }
       this.$set('pageParam', param)
     },
@@ -90,7 +90,7 @@
 }
  .btn-footer-1{
     position: fixed;
-    bottom:65px;
+    bottom:55px;
     left: 5%;
     width: 90%;
     border-radius:10px;
@@ -102,7 +102,7 @@
   }
   .btn-footer-2{
   	 position: fixed;
-    bottom:10px;
+    bottom:0;
     left: 5%;
     width: 90%;
     border-radius:10px;
