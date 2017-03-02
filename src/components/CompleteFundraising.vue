@@ -11,51 +11,58 @@
   </div>
 </template>
 <script>
-import Golab from '../libs/golab'
-export default {
-  name: '',
-  data () {
-    return {
-      pageParam: {},
-      howMoney: {}
-    }
-  },
-  created () {
-    // 获取页面传参
-    var totalamount = this.$route.query.totalamount
-    var orderId = this.$route.query.orderId
-    console.log(totalamount)
-    var param = {
-      totalamount: totalamount,
-      orderId: orderId
-    }
-    this.$set('pageParam', param)
-    var packageamount1 = Golab.packageamount_1
-    var packageamount2 = Golab.packageamount_2
-    var packageamount3 = Golab.packageamount_3
-    var gradeamount1 = Golab.gradeamount_1
-    var gradeamount2 = Golab.gradeamount_2
-    var gradeamount3 = Golab.gradeamount_3
-    var gradeamount4 = Golab.gradeamount_4
-    if (totalamount < Golab.gradeamount_1) {
-      this.$set('howMoney', 0)
-    } else if (totalamount >= gradeamount1 && totalamount < gradeamount2) {
-      this.$set('howMoney', packageamount1)
-    } else if (totalamount >= gradeamount2 && totalamount < gradeamount3) {
-      this.$set('howMoney', packageamount2)
-    } else if (totalamount >= gradeamount3 && totalamount <= gradeamount4) {
-      this.$set('howMoney', packageamount3)
-    }
-  },
-  methods: {
-    submit () {
-      this.$router.go({name: 'fundraising', query: this.pageParam})
+  import Golab from '../libs/golab'
+  import Config from '../../config/config'
+  export default {
+    name: '',
+    data () {
+      return {
+        pageParam: {},
+        howMoney: {}
+      }
     },
-    goback () {
-      this.$router.go({name: 'dealerlist'})
+    created () {
+      // 获取页面传参
+      var totalamount = this.$route.query.totalamount
+      var orderId = this.$route.query.orderId
+      var param = {
+        totalamount: totalamount,
+        orderId: orderId
+      }
+      this.$set('pageParam', param)
+      var packageamount1 = Golab.packageamount_1
+      var packageamount2 = Golab.packageamount_2
+      var packageamount3 = Golab.packageamount_3
+      var gradeamount1 = Golab.gradeamount_1
+      var gradeamount2 = Golab.gradeamount_2
+      var gradeamount3 = Golab.gradeamount_3
+      var gradeamount4 = Golab.gradeamount_4
+      if (totalamount < Golab.gradeamount_1) {
+        this.$set('howMoney', 0)
+      } else if (totalamount >= gradeamount1 && totalamount < gradeamount2) {
+        this.$set('howMoney', packageamount1)
+      } else if (totalamount >= gradeamount2 && totalamount < gradeamount3) {
+        this.$set('howMoney', packageamount2)
+      } else if (totalamount >= gradeamount3 && totalamount <= gradeamount4) {
+        this.$set('howMoney', packageamount3)
+      }
+    },
+    methods: {
+      submit () {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/refund').then((response) => {
+          console.log(response)
+          if (response.status === 200) {
+            this.$router.go({name: 'fundraising', query: this.pageParam})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
+      goback () {
+        this.$router.go({name: 'dealerlist'})
+      }
     }
   }
-}
 </script>
 <style lang="css">
 html,body{

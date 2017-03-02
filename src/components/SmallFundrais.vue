@@ -16,6 +16,7 @@
 </template>
 
 <script>
+  import Config from '../../config/config'
   export default {
     name: '',
     data () {
@@ -35,7 +36,14 @@
     },
     methods: {
       submit () {
-        this.$router.go({name: 'fundraising', query: this.pageParam})
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/refund').then((response) => {
+          console.log(response)
+          if (response.status === 200) {
+            this.$router.go({name: 'fundraising', query: this.pageParam})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       },
       goback () {
         this.$router.go({name: 'dealerlist'})
