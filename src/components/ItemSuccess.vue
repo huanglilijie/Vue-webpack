@@ -45,7 +45,7 @@
         carIntentionFee: carIntentionFee,
         dealerName: dealerName,
         dealerTelephone: dealerTelephone,
-        uid:uid
+        uid: uid
       }
       this.$set('pageParam', param)
     },
