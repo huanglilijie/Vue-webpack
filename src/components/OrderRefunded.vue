@@ -163,6 +163,7 @@
     background: #ffffff;
     width: 100%;
     /*height: 100%;*/
+    background-color: #fff;
   }
   ul,li{
     list-style: none;

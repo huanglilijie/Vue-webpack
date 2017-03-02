@@ -145,6 +145,7 @@
       font-family: "微软雅黑";
       width: 100%;
       /*height: 100%;*/
+      background: #fff
     }
     ul,li{
         list-style: none;
