@@ -56,6 +56,7 @@
       }
     },
     ready: function () {
+      console.log('根据openid获取用户信息')
       // 二、判断用户是否存在订单信息
       // 1、根据openid获取用户的uid(uid是在用户注册的时候产生的)
       this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
@@ -84,7 +85,7 @@
               var orderStatus = orderInfo.orderStatus
               // 当我有一个未支付的订单，再次进入活动时，我可以直接看到支付选择页
               if (orderStatus === 'WAITING_FOR_PAYMENT') {
-                this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee, dealerCode: orderInfo.dealer.code}})
+                this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.intentionFee, dealerCode: orderInfo.dealer.code}})
               }
               // 支付完成后未创建筹款页，再次进入活动会直接进入创建邀请函
               if (orderStatus === 'PAID') {
