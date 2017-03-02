@@ -189,7 +189,7 @@
             <li v-for="item in data" @click="selectDealer($index)" :class="[{'checked':item.selected}]">
               <p class="distance">
                 <label>{{item.name}}</label>
-                <span>距离{{item.distance}}米</span>
+                <span v-if="userisGrant">距离{{item.distance}}米</span>
               </p>
               <p>
                 <label>地址：</label>
@@ -257,7 +257,10 @@
           cityData: [],
           cityNames: [],
           pageParam: {},
-          ciry: false
+          ciry: false,
+          userlongitude: null,
+          userlatitude: null,
+          userisGrant: false
         }
       },
       components: {
@@ -330,10 +333,16 @@
             console.log(response)
           })
         },
-        // 根据城市code、用户经纬度获取经销商列表
+        // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {
           this.currentCity = data.cityName
-          this.$http.get(Config.API_ROOT + 'ecommerce/customers/dealers', {params: {city: data.cityId, lat: data.latitude, lng: data.longitude}})
+          var param
+          if (this.userisGrant) {
+            param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
+          } else {
+            param = {city: data.cityId}
+          }
+          this.$http.get(Config.API_ROOT + 'ecommerce/customers/dealers', {params: param})
             .then((response) => {
               var data = response.data
               for (var i in data) {
@@ -406,6 +415,11 @@
           this.selectedItem = null
           // 初始化阅读上牌城市说明
           this.checkState = false
+        },
+        editData (data) {
+          this.userlongitude = data.userlongitude
+          this.userlatitude = data.userlatitude
+          this.userisGrant = data.userisGrant
         }
       },
       events: {
@@ -420,6 +434,9 @@
         },
         'pump-show': function (data) {
           this.pumpshow()
+        },
+        'edit-data': function (data) {
+          this.editData(data)
         }
       }
     }

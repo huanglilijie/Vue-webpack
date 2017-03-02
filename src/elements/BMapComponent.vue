@@ -12,8 +12,7 @@
           height: this.mapHeight + 'px'
         },
         mapData: {},
-        location: {},
-        isGrant: false
+        location: {}
       }
     },
     props: {
@@ -35,6 +34,10 @@
       description: {
         type: String,
         default: '北京'
+      },
+      isGrant: {
+        type: Boolean,
+        default: false
       }
     },
     ready () {
@@ -75,6 +78,13 @@
         // 经纬度初始值
         this.longitude = location.longitude
         this.latitude = location.latitude
+        var param = {
+          userlongitude: location.longitude,
+          userlatitude: location.latitude,
+          userisGrant: this.isGrant
+        }
+        // 将用户经纬度传给父组件
+        this.$dispatch('edit-data', param)
         this.getCity(location)
       },
       geoError (event) {
