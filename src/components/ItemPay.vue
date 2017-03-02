@@ -62,6 +62,7 @@
       var carIntentionFee = this.$route.query.carIntentionFee
       var dealerName = this.$route.query.dealerName
       var dealerTelephone = this.$route.query.dealerTelephone
+      var dealerCode = this.$route.query.dealerCode
       var uid = this.$route.query.uid
       var param = {
         orderId: orderId,
@@ -69,7 +70,8 @@
         carIntentionFee: carIntentionFee,
         dealerName: dealerName,
         dealerTelephone: dealerTelephone,
-        uid: uid
+        uid: uid,
+        dealerCode: dealerCode
       }
       this.$set('pageParam', param)
     },
@@ -103,9 +105,15 @@
             // 请求成功后跳转到下个路由
             // 注意要使用token防止重复下单
             // 需要调用支付接口
-            this.$router.go({
-              path: '/item/itemSuccess',
-              query: this.pageParam
+            console.log(this.paytype)
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/payment', {subject: '支付意向金', body: this.pageParam.carName, limit_pay: this.paytype, total_fee: this.pageParam.carIntentionFee, return_url: 'http://192.168.6.250:1080/reservation', dealer_code: this.pageParam.dealerCode}).then((response) => {
+              console.log(response)
+              this.$router.go({
+                path: '/item/itemSuccess',
+                query: this.pageParam
+              })
+            }).catch((response) => {
+              console.log(response)
             })
           }
         }).catch((response) => {

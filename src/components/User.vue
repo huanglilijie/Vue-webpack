@@ -60,6 +60,7 @@
   import Btn from '../elements/btn-footer'
   import Config from '../../config/config'
   import Golab from '../libs/golab'
+  import Vue from 'vue'
   let data = {
     id: '',
     username: '',
@@ -157,7 +158,7 @@
       },
       getCode () {
         if (!this.userText && !this.phoneText) {
-          this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha', {'mobile': this.phone}).then((response) => {
+          this.$http.post(Config.API_ROOT + 'ecommerce/user/captcha?action=register', {'mobile': this.phone}).then((response) => {
             console.log(response)
             if (response.data != null) {
               console.log(response.data)
@@ -198,6 +199,12 @@
               // 验证码校验是否通过
             console.log(response)
             var data = response.data
+            console.log(response.headers)
+            console.log(response.headers.map['MME-TOKEN'])
+            if (response.headers.map['MME-TOKEN']) {
+              console.log(response.headers.map['MME-TOKEN'][0])
+              Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+            }
             // 将注册获取uid存储
             Config.uid = data.uid
             if (response.ok) {

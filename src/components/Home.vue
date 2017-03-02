@@ -11,6 +11,7 @@
 <script>
   import Config from '../../config/config'
   import Golab from '../libs/golab'
+  import Vue from 'vue'
   export default {
     name: 'smart-family',
     methods: {
@@ -68,7 +69,13 @@
         if (uid != null) {
           Golab.uid = uid
           this.uid = uid
-          this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders/')
+          console.log(response.headers)
+          console.log(response.headers.map['MME-TOKEN'])
+          if (response.headers.map['MME-TOKEN']) {
+            console.log(response.headers.map['MME-TOKEN'][0])
+            Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+          }
+          this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + uid + '/orders')
           .then((response) => {
             console.log(response)
             var orderInfo = response.data
@@ -76,7 +83,7 @@
               var orderStatus = orderInfo.orderStatus
               // 当我有一个未支付的订单，再次进入活动时，我可以直接看到支付选择页
               if (orderStatus === 'WAITING_FOR_PAYMENT') {
-                this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee}})
+                this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.product.intentionFee, dealerCode: orderInfo.dealer.code}})
               }
               // 支付完成后未创建筹款页，再次进入活动会直接进入创建邀请函
               if (orderStatus === 'PAID') {

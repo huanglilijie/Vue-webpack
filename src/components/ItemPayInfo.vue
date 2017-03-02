@@ -87,10 +87,11 @@
             // 创建订单
             this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders', {productId: this.pageParam.carCode, dealerId: this.pageParam.dealerCode, contactName: this.pageParam.userName,
               contactMobile: this.pageParam.userPhone}).then((response) => {
+                console.log(response)
                 if (response.data != null) {
                   var data = response.data
                   console.log(response.data)
-                  this.$router.go({name: 'itempay', query: {uid: this.pageParam.uid, orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee}})
+                  this.$router.go({name: 'itempay', query: {uid: this.pageParam.uid, orderId: data.id, carName: this.pageParam.carName, dealerName: this.pageParam.dealerName, dealerTelephone: this.pageParam.dealerTelephone, carIntentionFee: this.pageParam.carIntentionFee, dealerCode: data.dealer.code}})
                 }
               }).catch((response) => {
                 console.log(response)
