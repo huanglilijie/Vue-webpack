@@ -59,7 +59,6 @@
       var carIntentionFee = this.$route.query.carIntentionFee
       var dealerName = this.$route.query.dealerName
       var dealerTelephone = this.$route.query.dealerTelephone
-      var dealerCode = this.$route.query.dealerCode
       var uid = this.$route.query.uid
       var param = {
         orderId: orderId,
@@ -67,8 +66,7 @@
         carIntentionFee: carIntentionFee,
         dealerName: dealerName,
         dealerTelephone: dealerTelephone,
-        uid: uid,
-        dealerCode: dealerCode
+        uid: uid
       }
       this.$set('pageParam', param)
     },
