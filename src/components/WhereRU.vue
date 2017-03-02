@@ -338,20 +338,20 @@
           this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
           .then((response) => {
             console.log(response)
-            // var data = response.data
+            var data = response.data
+            // 已经留资，直接到订单确认页
+            window.localStorage.setItem('uid', data.uid)
+            if (response.headers.map['MME-TOKEN']) {
+              console.log(response.headers.map['MME-TOKEN'][0])
+              window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
+              Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+            }
+            this.pageParam.userName = data.realName
+            this.pageParam.userPhone = data.mobile
+            this.$router.go({name: 'itempayinfo', query: this.pageParam})
+          }).catch((response) => {
             // 从未留资，进留资页面
             this.$router.go({path: '/user', query: this.pageParam})
-            /* if (data.uid != null) {
-              // 已经留资，直接到订单确认页
-              Golab.uid = data.uid
-              this.pageParam.userName = data.realName
-              this.pageParam.userPhone = data.mobile
-              this.$router.go({name: 'itempayinfo', query: this.pageParam})
-            } else {
-              // 从未留资，进留资页面
-              this.$router.go({path: '/user', query: this.pageParam})
-            }*/
-          }).catch((response) => {
             console.log(response)
           })
         },
