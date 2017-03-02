@@ -92,11 +92,11 @@ export default {
     submit () {
       var totalamount = this.totalamount
       if (totalamount === 0) {
-        this.$router.go({name: 'endfundraising'})
+        this.$router.go({name: 'endfundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
       } else if (totalamount > 1000) {
-        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount}})
+        this.$router.go({name: 'completefundraising', query: {totalamount: this.totalamount, orderId: this.orderId}})
       } else if (totalamount > 0 && totalamount < 1000) {
-        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount}})
+        this.$router.go({name: 'smallfundrais', query: {totalamount: this.totalamount, orderId: this.orderId}})
       }
     },
     viewDetails () {
