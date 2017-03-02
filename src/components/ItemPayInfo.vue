@@ -160,8 +160,8 @@ img{
   border-bottom: none;
 }
 .amount-activity{
-  padding-bottom: 130px;
-  margin: 20px 0;
+  padding-bottom: 125px;
+  margin: 10px 0 0;
 }
 .amount-activity p{
   font-size: 1.2rem;
@@ -197,7 +197,7 @@ img{
   width: 80%;
   text-align: center;
   left: 10%;
-  top: 17vh;
+  top: 20vh;
 }
 .pump a{
   position: absolute;
@@ -206,7 +206,7 @@ img{
   height: 50px;
   line-height: 50px;
   left: 20%;
-  top: 20vh;
+  top: 23vh;
   border: 2px dashed #FFFFFF;
   border-radius: 5px;
   text-decoration: none;

@@ -130,7 +130,7 @@
   	width: 60%;
   	margin: 0 auto;
   	text-align: left;
-  	margin-top:20px;
+  	margin-top:10px;
   	font-size: 1.4rem;
   	font-weight: 600;
   }

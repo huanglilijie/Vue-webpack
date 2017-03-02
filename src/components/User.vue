@@ -1,50 +1,41 @@
 <template>
   <body>
     <div class="user">
+      <p class="top-title">
+        为了提供更好的服务,请认真填写姓名和联系方式
+      </p>
       <validator name ="validation_info">
         <div class="form-group">
-          <label>* 你的姓名</label>
+          <!-- <label>* 你的姓名</label> -->
           <div>
-            <input v-model="username" v-validate:username="{required : true}" type="text" initial="off" detect-change="off">
+            <input v-model="username" v-validate:username="{required : true}" type="text" initial="off" detect-change="off" placeholder="* 姓名">
             <span v-if="userText">请填写您的姓名</span>
           </div>
         </div>
         <div class="form-group">
-          <label>* 手机号码</label>
+          <!-- <label>* 手机号码</label> -->
           <div>
-            <input v-model.number="phone" name= "phone" v-validate:phone="['phone']" type="number" initial="off" detect-change="off">
+            <input v-model.number="phone" name= "phone" v-validate:phone="['phone']" type="number" initial="off" detect-change="off" placeholder="* 手机号码">
             <button v-if="time == 0" :class="['code', {'codeLight': islight}]" @click="getCode()" id ="timeBtn" :disabled ='isdisable'>{{text}}</button>
             <span v-if="time != 0" class="code" id="timeText">{{time}}s</span>
             <span v-if="phoneText || $validation_info.phone.invalid">{{tel}}</span>
           </div>
         </div>
         <div class="form-group">
-          <label>* 手机验证码</label>
+          <!-- <label>* 手机验证码</label> -->
           <div>
-            <input v-model="telCode" name= "telCode" v-validate:telCode="{required : true}">
+            <input v-model="telCode" name= "telCode" v-validate:telCode="{required : true}" placeholder="* 手机验证码">
             <span v-if="codeText">{{code}}</span>
           </div>
         </div>
-        <div class="bottom-content">
-          <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" alt="" /></p>
-          <p>https://estore.mercedes-benz.com.cn</p>
-          <p class="user-agreement">
-            <span>我同意</span><a @click="pumpshow2 ()">活动用户协议</a>
-            <input type="checkbox" class= "input-checkbox" name="" v-model="state" />
-          </p>
-        </div>
-
         <div class="ciry" v-if="ciry">
           <div class="content">
             <div class="content_title">
-              <h2>上牌城市的说明</h2>
+              <h2>活动用户协议</h2>
             </div>
             <div class="line"></div>
             <div class="content_word">
-              <p>为了保证服务质量，请您购车后在该活动中提
-      交意向金时选定的上牌城市上牌，如您选择在
-      购车经销商所在城市以外的地区上牌，具体事
-      宜请于该经销商协商。</p>
+              <p>活动用户协议文案待定</p>
             </div>
           </div>
           <a class="btn1" @click="pumpshow2()">知道了</a>
@@ -52,6 +43,14 @@
 
       </validator>
       <btn-footer is-item-selected="selectedItem" >这就是我</btn-footer>
+    </div>
+    <div class="bottom-content">
+      <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" alt="" /></p>
+      <p>https://estore.mercedes-benz.com.cn</p>
+      <p class="user-agreement">
+        <span>我同意</span><a @click="pumpshow2 ()">活动用户协议</a>
+        <input type="checkbox" class= "input-checkbox" name="" v-model="state" />
+      </p>
     </div>
   </body>
 </template>
@@ -270,11 +269,21 @@
 </script>
 
 <style scoped>
-body{
+html{
   background-color: #000;
 }
+.user{
+  background: url(/static/images/userBanyellow.png) no-repeat;
+  background-size: 100%;
+  padding-bottom: 22%;
+}
+.user .top-title{
+  text-align: center;
+  padding:90px 0 0;
+  font-size:13px;
+}
   .form-group {
-    margin: 40px 12% 0 12%;
+    margin: 35px 14% 0 14%;
   }
   .form-group > div {
     margin-top: 5px;
@@ -282,14 +291,16 @@ body{
   }
   .form-group input {
     width: 100%;
-    height: 50px;
+    height: 40px;
     border-width: 0;
-    font-size: 20px;
+    font-size: 1rem;
     padding: 0 5px;
     outline: none;
+    color:#999;
+    line-height: 40px
   }
    .bottom-content{
-    margin-top: 40px;
+    /*margin-top: 40px;*/
    }
   .bottom-content p{
     text-align: center;
@@ -302,16 +313,17 @@ body{
     width: 10%;
   }
   .code {
-    height: 48px;
-    width: 100px;
+    height: 38px;
+    width: 80px;
     position: absolute;
     right: -8px;
     top: 1px;
     background-color: rgb(150,157,163);
     text-align: center;
-    line-height: 48px;
-    color: #fff;
+    line-height: 38px;
+    color: #fff !important;
     border-radius: 3px;
+    border:none;
   }
   .codeLight {
     background-color: #F7B835;
@@ -322,7 +334,7 @@ body{
     bottom:-25px;
   }
   .user-agreement {
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .user-agreement a{
     color: #000000;

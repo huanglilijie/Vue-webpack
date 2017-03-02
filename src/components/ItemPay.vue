@@ -17,14 +17,11 @@
     <div class="ciry" v-if="ciry">
       <div class="content">
         <div class="content_title">
-          <h2>上牌城市的说明</h2>
+          <h2>意向金规则</h2>
         </div>
         <div class="line"></div>
         <div class="content_word">
-          <p>为了保证服务质量，请您购车后在该活动中提
-  交意向金时选定的上牌城市上牌，如您选择在
-  购车经销商所在城市以外的地区上牌，具体事
-  宜请于该经销商协商。</p>
+          <p>意向金规则文案待定</p>
         </div>
       </div>
       <a class="btn1" @click="pumpshow2()">知道了</a>
@@ -188,7 +185,7 @@
 	width: 25px;
 }
 .agreen{
-	margin-top: 15px;
+	margin-top: 10px;
 	text-align: center;
 	vertical-align: middle;
   margin-bottom: 50px;

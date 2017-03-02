@@ -4,16 +4,17 @@
     	<img src="/static/paysuccess-img.jpg"/>
       <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
       <div class="car-style2">
-      	<p>经销商信息：</p>
+      	<!-- <p>经销商信息：</p>
       	<p>
       		<div>{{ pageParam.dealerName }}</div>
       		<div class="phontnum">{{ pageParam.dealerTelephone }}</div>
-      	</p>
+      	</p> -->
+        <p><i>经销商信息：</i><span>{{ pageParam.dealerName }}</span></p>
+        <p><i></i><span>{{ pageParam.dealerTelephone }}</span></p>
       </div>
       <router-view></router-view>
     </div>
   </body>
-
 </template>
 
 <script>
@@ -63,19 +64,25 @@
 		width: 90%;
 		margin: 0 auto;
 		border-bottom: 1px dashed #000000;
-		padding: 10px 0;
+		padding: 10px 0 0;
 		font-size: 16px;
 		overflow:hidden;
 	}
   .car-style2 p{
-      margin:0 auto;
+    height: 36px;
+    font-size: 16px;
   }
-	.car-style2 p:first-child{
-		float: left;
-	}
-	.car-style2 p:last-child{
-		float: left;
-	}
+  .car-style2 p i{
+    font-style: normal;
+    width: 29%;
+    display: inline-block;
+    float: left;
+  }
+  .car-style2 p span{
+    width: 70%;
+    display: inline-block;
+    float: right;
+  }
 	.phontnum{
 		margin-left: 100px;
 	}

@@ -6,7 +6,7 @@
 body {
   width: 100%;
   font-family: "微软雅黑";
-  font-size: 14px;
+  font-size: 12px;
   background-color: rgb(240,240,240);
   margin:0;
 }
@@ -44,4 +44,7 @@ body {
             transform: translateY(-100%);
         }
     }
+}
+.picker-center-highlight:before, .picker-center-highlight:after{
+  background-color: #666 !important;
 }

@@ -4,7 +4,7 @@
     padding: 0;
   }
   html,body{
-    font-size: 12px;
+    font-size: 12px !important;
     font-family: "微软雅黑";
   }
   @media (max-width: 350px) {
@@ -16,19 +16,37 @@
     }
   }
   .top{
-    display: flex;
     justify-content: space-around;
     align-items: center;
     height: 40px;
     line-height: 40px;
+    position: relative;
   }
   .top img{
     display: block;
     width: 5%;
+    position: absolute;
+    left: 20px;
+    line-height: 40px;
+    top: 10px;
   }
   .top a{
     color: #000000;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    position: absolute;
+    right: 20px;
+    line-height: 40px;
+    top: 0;
+  }
+  .top h2{
+    font-size: 1rem;
+    font-weight: 600;
+    width: 20%;
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    line-height: 40px;
+    top: 0;
   }
   .middle{
     background-color: #F5F5F5;
@@ -43,7 +61,7 @@
     margin: 0 auto;
   }
   .select-agency>p:first-child{
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     margin-top: 10px;
   }
@@ -58,12 +76,15 @@
     width: 94%;
     margin: 3px auto;
   }
+  .select-agency ul li p .phoneh{
+    text-decoration: underline;
+  }
   .distance{
     overflow: hidden;
   }
   .distance label{
     float: left;
-    font-size: 1.2rem;
+    font-size:.9rem;
     font-weight: 600;
   }
   .distance span{
@@ -92,6 +113,7 @@
   }
   .checked{
     background-color: #F6BA38 !important;
+    color:#fff;
   }
   .mask{
     position: fixed;
@@ -115,7 +137,7 @@
     height: 40px;
     color: blue;
     line-height: 40px;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .area .sureButton span.no{
     float: left;
@@ -197,7 +219,7 @@
               </p>
               <p>
                 <label>电话：</label>
-                <span>{{item.telephone}}</span>
+                <span class="phoneh">{{item.telephone}}</span>
               </p>
             </li>
           </ul>
@@ -212,7 +234,7 @@
         <div class="area">
           <div class="sureButton">
             <span class="no" @click="pumpshow()">取消</span>
-            <span class="yes" @click="changeCity()">确认</span>
+            <span class="yes" @click="changeCity()">完成</span>
           </div>
           <mt-picker :slots="slots" @change="demos"></mt-picker>
         </div>
@@ -385,6 +407,7 @@
           }
           // 将本次选择的置为选中
           this.data[index].selected = true
+          // this.style = "{'color': #fff}"
           // 将序列赋值给selectedItem
           this.selectedItem = index
           // 重新加载地图

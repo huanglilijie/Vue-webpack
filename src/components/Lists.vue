@@ -1,16 +1,9 @@
 <template>
   <div class="lists">
     <!-- 列表页 -->
-    <ul class="p-list">
+    <ul class="p-list" :style="{height:''+height+'px'}">
       <li class="p-list-item" v-for="item in lists" @click="select($index)">
         <div :class="['p-list-item-label',{'p-list-item-label-change': item.selected}]">
-          <div class="p-list-item-title"></div>
-          <div class="p-list-item-price">
-            <h4></h4>
-            <p></p>
-            <p></p>
-            <img class="p-list-item-color" :src=""/>
-          </div>
         </div>
         <img class="p-list-item-img" :src="item.picture">
       </li>
@@ -19,7 +12,10 @@
     <btn-footer :is-item-selected="selectedItem">就它啦</btn-footer>
   </div>
 </template>
-
+<!-- <div class="p-list-item-title"></div> -->
+<!-- <div class="p-list-item-price"> -->
+  <!-- <img class="p-list-item-color" :src=""/> -->
+<!-- </div> -->
 <script>
   import Btn from '../elements/btn-footer'
   import Config from '../../config/config'
@@ -31,7 +27,8 @@
   let data = {
     lists: [],
     selectedItem: null,
-    price: 0
+    price: 0,
+    height: 0
   }
 
   export default {
@@ -47,6 +44,10 @@
     },
     ready: function () {
       this.setData()
+      var Isheight = document.documentElement.clientHeight
+      this.height = Isheight - 55
+      console.log(this.height)
+      // console.log(Isheight)
     },
     methods: {
       // 选中一个item
@@ -105,7 +106,8 @@
   .p-list-item {
     position: relative;
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom:1px;
+    height: 33%
   }
   .p-list-item-title {
     font-size: 18px;
