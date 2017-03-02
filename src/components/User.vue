@@ -206,10 +206,12 @@
               Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
             }
             // 将注册获取uid存储
-            Config.uid = data.uid
+            // Config.uid = data.uid
+            window.localStorage.setItem('uid', data.uid)
             if (response.ok) {
               this.pageParam.userName = this.username
               this.pageParam.userPhone = this.phone
+              this.pageParam.uid = data.uid
               this.$router.go({name: 'itempayinfo', query: this.pageParam})
             } else {
               this.errormeg = '验证码不正确'
