@@ -264,6 +264,7 @@
     import Btn from '../elements/btn-footer'
     import Config from '../../config/config'
     import Golab from '../libs/golab'
+    import Vue from 'vue'
     // var selectedItem
     module.exports = {
       name: 'whereru',
