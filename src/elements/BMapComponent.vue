@@ -61,12 +61,44 @@
         }
       },
       agree_obtain_location () {
-        var option = {
+        var this_ = this
+        /* var option = {
           enableHighAccuracy: true,
           timeout: Infinity,
           maximumAge: 0
         }
-        navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
+        navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)*/
+        var geolocation = new BMap.Geolocation()
+        console.log(geolocation)
+        var location = {
+          longitude: this.longitude,
+          latitude: this.latitude
+        }
+        geolocation.getCurrentPosition(function (r) {
+          if (this.getStatus() === 0) {
+            console.log(r)
+            location.latitude = r.point.lat
+            location.longitude = r.point.lng
+            console.log(location)
+            // 用户同意授权
+            this_.isGrant = true
+            // 经纬度初始值
+            this_.longitude = location.longitude
+            this_.latitude = location.latitude
+            var param = {
+              userlongitude: location.longitude,
+              userlatitude: location.latitude,
+              userisGrant: true
+            }
+            // 将用户经纬度传给父组件
+            this_.$dispatch('edit-data', param)
+            this_.getCity(location)
+          } else {
+            this_.getCity(location)
+            // 弹出城市选择
+            this_.$dispatch('pump-show')
+          }
+        })
       },
       geoSuccess (event) {
         // 用户同意授权
