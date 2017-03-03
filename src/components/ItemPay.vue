@@ -105,11 +105,6 @@
             // 请求成功后跳转到下个路由
             // 注意要使用token防止重复下单
             // 需要调用支付接口
-            this.$http.get('https://www.baidu.com').then((response) => {
-              console.log(response)
-            }).catch((response) => {
-              console.log(response)
-            })
             console.log(this.paytype)
             this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/payment', {subject: '支付意向金', body: this.pageParam.carName, limit_pay: this.paytype, total_fee: this.pageParam.carIntentionFee, return_url: 'http://192.168.6.122/item/itempay?carIntentionFee=' + this.pageParam.carIntentionFee + '&carName=' + this.pageParam.carName + '&dealerCode=' + this.pageParam.dealerCode + '&dealerName=' + this.pageParam.dealerName + '&dealerTelephone=' + this.pageParam.dealerTelephone + '&orderId=' + this.pageParam.orderId + '&uid=' + window.localStorage.getItem('uid'), dealer_code: this.pageParam.dealerCode}).then((response) => {
               console.log(response)
