@@ -418,6 +418,7 @@
             longitude: dealer.longitude,
             name: dealer.name
           }
+          console.log('经销商：' + dealer.longitude + ' , ' + dealer.latitude)
           this.$refs.bmap.$emit('dealer-marker', param)
         },
         changeCity () {

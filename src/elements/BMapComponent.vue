@@ -24,12 +24,12 @@
       // 经度
       longitude: {
         type: Number,
-        default: 116.395645
+        default: 116.40387397
       },
       // 纬度
       latitude: {
         type: Number,
-        default: 39.929986
+        default: 39.91488908
       },
       description: {
         type: String,
@@ -86,8 +86,8 @@
             this_.longitude = location.longitude
             this_.latitude = location.latitude
             var param = {
-              userlongitude: location.longitude,
-              userlatitude: location.latitude,
+              userlongitude: r.point.lng,
+              userlatitude: r.point.lat,
               userisGrant: true
             }
             // 将用户经纬度传给父组件
@@ -107,6 +107,7 @@
           latitude: event.coords.latitude,
           longitude: event.coords.longitude
         }
+        console.log('用户:' + location.longitude + ' , ' + location.latitude)
         // 经纬度初始值
         this.longitude = location.longitude
         this.latitude = location.latitude
