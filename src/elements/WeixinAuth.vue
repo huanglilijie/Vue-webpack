@@ -47,7 +47,7 @@
               }
               console.log('openid:' + Golab.openid)
               // 需要判断后台是否已经存储了用户信息，若存储则不再存储
-              this.$http.post(Config.API_ROOT + 'ecommerce//user/wechat-user/' + Golab.openid).then((response) => {
+              this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid).then((response) => {
                 if (response.data != null) {
                   // 已经存储了用户信息
                   this.$router.go({path: '/index'})
