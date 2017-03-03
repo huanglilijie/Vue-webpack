@@ -263,8 +263,8 @@
     import BMapComponent from '../elements/BMapComponent.vue'
     import Btn from '../elements/btn-footer'
     import Config from '../../config/config'
-    import Golab from '../libs/golab'
-    import Vue from 'vue'
+    // import Golab from '../libs/golab'
+    // import Vue from 'vue'
     // var selectedItem
     module.exports = {
       name: 'whereru',
@@ -336,7 +336,10 @@
           // console.log(this.pageParam)
           // 路由跳转页面带参数传递
           // 需要判断客户是否已经留资,根据openid获取用户信息
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
+          // 从未留资，进留资页面
+          this.$router.go({path: '/user', query: this.pageParam})
+          // console.log(response)
+          /* this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
           .then((response) => {
             console.log(response)
             var data = response.data
@@ -354,7 +357,7 @@
             // 从未留资，进留资页面
             this.$router.go({path: '/user', query: this.pageParam})
             console.log(response)
-          })
+          })*/
         },
         // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {
