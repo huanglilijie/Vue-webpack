@@ -90,6 +90,7 @@
               userlatitude: r.point.lat,
               userisGrant: true
             }
+            console.log('用户:' + r.point.lng + ' , ' + r.point.lat)
             // 将用户经纬度传给父组件
             this_.$dispatch('edit-data', param)
             this_.getCity(location)
