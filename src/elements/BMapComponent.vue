@@ -24,12 +24,12 @@
       // 经度
       longitude: {
         type: Number,
-        default: 116.40387397
+        default: 116.489635
       },
       // 纬度
       latitude: {
         type: Number,
-        default: 39.91488908
+        default: 40.000384
       },
       description: {
         type: String,
