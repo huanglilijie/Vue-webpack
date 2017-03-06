@@ -4,50 +4,50 @@
       <div>
         <p>宠爱之旅完成</p>
         <div><img src="/static/images/headset.png" alt="" /></div>
-        </div>
-        <p>* 请尽快到店提车拿礼包</p>
       </div>
-      <div class="car-style">
-        <ul>
-          <li class="car-message clearfloat">
-            <label for="">订单编号:</label>
-            <div>{{reservationId}}</div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">预定时间:</label>
-            <div>{{createTime}}</div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">车型信息:</label>
-            <div>{{product[0].name}}</div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">经销商信息:</label>
-            <div>
-              <p>{{dealer[0].name}}</p>
-              <p>{{dealer[0].telephone}}</p>
-            </div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">订单金额:</label>
-            <div>{{product[0].intentionFee}}元</div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">当前筹款金额:</label>
-            <div>{{totalamount}}元</div>
-          </li>
-          <li class="car-message clearfloat">
-            <label for="">当前获得礼包:</label>
-            <div>{{present}}</div>
-          </li>
-        </ul>
-      </div>
-      <div class="write-code">
-        <div>如果您忘记了核销码，点此重新发送</div>
-        <input v-if="resendtime == 0" type="button" value="重新发送核销码" class="resend" @click ="resendCode" :disabled ='isdisable'/>
-        <span v-if="resendtime != 0" class="resend" id="timeText">{{resendtime}}s</span>
-      </div>
+      <p>* 请尽快到店提车拿礼包</p>
     </div>
+    <div class="car-style">
+      <ul>
+        <li class="car-message clearfloat">
+          <label for="">订单编号:</label>
+          <div>{{reservationId}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">预定时间:</label>
+          <div>{{createTime}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">车型信息:</label>
+          <div>{{product[0].name}}</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">经销商信息:</label>
+          <div>
+            <p>{{dealer[0].name}}</p>
+            <p>{{dealer[0].telephone}}</p>
+          </div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">订单金额:</label>
+          <div>{{product[0].intentionFee}}元</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">当前筹款金额:</label>
+          <div>{{totalamount}}元</div>
+        </li>
+        <li class="car-message clearfloat">
+          <label for="">当前获得礼包:</label>
+          <div>{{present}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="write-code">
+      <div>如果您忘记了核销码，点此重新发送</div>
+      <input v-if="resendtime == 0" type="button" value="重新发送核销码" class="resend" @click ="resendCode" :disabled ='isdisable'/>
+      <span v-if="resendtime != 0" class="resend" id="timeText">{{resendtime}}s</span>
+    </div>
+  </div>
   <div class="btn-more">
     <input type="button" value="我的宠爱值" @click="viweMyDear()"/>
     <input type="button" @click="cancelMyDear" value="放弃宠爱之旅"/>

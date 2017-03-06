@@ -82,18 +82,12 @@ export default {
     var orderId = this.$route.query.orderId
     var flag = window.localStorage.getItem('isfirst')
     console.log(flag)
-    if (flag) {
-      this.$set('mask', flag)
-      console.log(this.mask)
-    }
     if (flag != null) {
       this.$set('mask', false)
-      console.log(this.mask)
     }
     if (flag == null) {
       window.localStorage.setItem('isfirst', false)
       this.$set('mask', true)
-      console.log(this.mask)
     }
     this.orderId = orderId
     this.getfunds()
@@ -145,7 +139,6 @@ export default {
         this.$set('totalamount', totalamount)
         var self = this
         var n = totalamount / 31
-        // console.log(n)
         setInterval(function () {
           self.rotate++
           if (self.rotate > n) {

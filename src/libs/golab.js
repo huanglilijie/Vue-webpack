@@ -13,9 +13,9 @@ export default {
   // 活动名额
   activequota: 50,
   // 活动开始时间
-  startDate: '2017-02-28',
+  startDate: '2017-03-5',
   // 活动结束时间
-  endDate: '2017-03-05',
+  endDate: '2017-03-10',
   // 1000金额等级
   gradeamount_1: 1000,
   // 3000金额等级
