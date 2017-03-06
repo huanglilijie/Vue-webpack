@@ -1,4 +1,5 @@
 <template>
+  <wechatshare></wechatshare>
   <div id='smart-family' v-if='is_in_activity'>
     <img class='smart-familyimg' src='/static/smart-faimily.jpg'>
       <img class='smart-familybtn' src='/static/family-btn.png' @click='submit()'>
@@ -12,8 +13,12 @@
   import Config from '../../config/config'
   import Golab from '../libs/golab'
   import Vue from 'vue'
+  import WeChatShare from '../elements/WeChatShare.vue'
   export default {
     name: 'smart-family',
+    components: {
+      'wechatshare': WeChatShare
+    },
     methods: {
       submit () {
         // 判断活动名额是否已满
