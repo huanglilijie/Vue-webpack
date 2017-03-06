@@ -87,12 +87,14 @@
               if (orderStatus === 'WAITING_FOR_PAYMENT') {
                 this.$router.go({name: 'itempay', query: {orderId: orderInfo.reservationId, carName: orderInfo.product.name, dealerName: orderInfo.dealer.name, dealerTelephone: orderInfo.dealer.telephone, carIntentionFee: orderInfo.intentionFee, dealerCode: orderInfo.dealer.code}})
               }
-              // 支付完成后未创建筹款页，再次进入活动会直接进入创建邀请函
+              // 支付完成后未创建筹款页，再次进入活动会直接进入支付成功的订单详情页
               if (orderStatus === 'PAID') {
                 var param = {
-                  orderId: orderInfo.reservationId
+                  orderId: orderInfo.reservationId,
+                  carName: orderInfo.product.name,
+                  carIntentionFee: orderInfo.intentionFee
                 }
-                this.$router.go({path: '/createmydear', query: param})
+                this.$router.go({path: '/orderpayment', query: param})
               }
               // 当我开始筹款，我进入活动入口可以默认浏览筹款进度页
               if (orderStatus === 'FUNDING') {
