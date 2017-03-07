@@ -263,8 +263,8 @@
     import BMapComponent from '../elements/BMapComponent.vue'
     import Btn from '../elements/btn-footer'
     import Config from '../../config/config'
-    // import Golab from '../libs/golab'
-    // import Vue from 'vue'
+    import Golab from '../libs/golab'
+    import Vue from 'vue'
     // var selectedItem
     module.exports = {
       name: 'whereru',
@@ -339,29 +339,39 @@
           // 从未留资，进留资页面
           this.$router.go({path: '/user', query: this.pageParam})
           // console.log(response)
-          /* this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
+          this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
           .then((response) => {
             console.log(response)
             var data = response.data
-            // 已经留资，直接到订单确认页
-            window.localStorage.setItem('uid', data.uid)
-            if (response.headers.map['MME-TOKEN']) {
-              console.log(response.headers.map['MME-TOKEN'][0])
-              window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
-              Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+            var uid = data.uid
+            var mobile = data.uid
+            var realName = data.realName
+            // uid/mobile/realName不为空，说明已经留资
+            if (uid === '' || uid === null || mobile === '' || mobile === null || realName === '' || realName === null) {
+              // 从未留资，进留资页面
+              this.$router.go({path: '/user', query: this.pageParam})
+            } else {
+              // 已经留资，直接到订单确认页
+              window.localStorage.setItem('uid', data.uid)
+              if (response.headers.map['MME-TOKEN']) {
+                console.log(response.headers.map['MME-TOKEN'][0])
+                window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
+                Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+              }
+              this.pageParam.userName = data.realName
+              this.pageParam.userPhone = data.mobile
+              this.$router.go({name: 'itempayinfo', query: this.pageParam})
             }
-            this.pageParam.userName = data.realName
-            this.pageParam.userPhone = data.mobile
-            this.$router.go({name: 'itempayinfo', query: this.pageParam})
           }).catch((response) => {
             // 从未留资，进留资页面
             this.$router.go({path: '/user', query: this.pageParam})
             console.log(response)
-          })*/
+          })
         },
         // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {
           this.currentCity = data.cityName
+          this.$alert('用户:' + this.userlatitude + ' , ' + this.userlongitude)
           var param
           if (this.userisGrant) {
             param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
