@@ -10,7 +10,7 @@
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
       <p class="text">宠爱我一次<br/>为了答谢你，我会：</p>
       <div class="text-bg">{{memo}}</div>
-      <p class="text-bottom">----------已有5位好友为我筹款-----------</p>
+      <p class="text-bottom">----------已有{{friendsSum}}位好友为我筹款-----------</p>
       <a class="btn" @click="rewardSend">发个红包宠爱他</a>
       <a class="btn btn-bottom" @click="newDream">创建我的宠爱之旅</a>
     </div>
@@ -40,7 +40,8 @@
           payStatus: '',
           payChannel: ''
         }],
-        memo: ''
+        memo: '',
+        friendsSum: ''
       }
     },
     created () {
@@ -63,6 +64,19 @@
             console.log(response.data.dealer)
             this.product[0].name = response.data.product.name
             this.memo = response.data.memo
+            this.orderId = response.data.reservationId
+            this.initFundDetail()
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
+      initFundDetail () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            this.friendsSum = data.length
+            console.log(data)
           }
         }).catch((response) => {
           console.log(response)
