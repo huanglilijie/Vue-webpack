@@ -13,12 +13,28 @@
 	    带你兜风带你飞，带你去见谁谁谁
       </div>
       <p class="text-bottom">----------已有5位好友为我筹款-----------</p>
-      <a href="" class="btn">发个红包宠爱他</a>
-      <a href="" class="btn btn-bottom">创建我的宠爱之旅</a>
+      <a class="btn" @click="rewardSend">发个红包宠爱他</a>
+      <a class="btn btn-bottom" @click="newDream">创建我的宠爱之旅</a>
     </div>
   </div>
 </template>
 <script>
+  export default {
+    data () {
+      return {
+      }
+    },
+    created () {
+    },
+    methods: {
+      rewardSend () {
+        this.$router.go({name: 'rewardsend'})
+      },
+      newDream () {
+        this.$router.go({name: 'home'})
+      }
+    }
+  }
 </script>
 <style>
   * {

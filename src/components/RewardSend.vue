@@ -13,39 +13,70 @@
       <ul class="pay-style">
         <li>
           <span></span>
-          <input type="radio" value="alipay" name="pay"/>
+          <input type="radio" value="alipay" name="pay" v-model="paytype"/>
         </li>
         <li>
           <span></span>
-          <input type="radio" value="wechat" name="pay"/>
+          <input type="radio" value="wechat" name="pay" v-model="paytype"/>
         </li>
       </ul>
     </div>			
     <div class="agreen">我同意 <a href="">打赏规则</a>
-      <input type="checkbox" name="" id="consent" value="" />
+      <input type="checkbox" id="consent" v-model="state" />
     </div>
-    <a href="" class="btn">送出心意</a>
+    <a class="btn" @click="submit">送出心意</a>
     <div v-if='checks'>
       <div class="pump">
         <p>别把TA宠坏了，300元足矣。</p>
         <p>知道了，就给300</p>
       </div>
-      <div class="mask" @click="submit"></div>	
+      <div class="mask"></div>	
     </div> 
   </div>
 </template>
 <script>
+  import Btn from '../elements/btn-footer'
   export default {
     name: 'rewardsend',
     data () {
       return {
-        checks: false
+        paytype: '',
+        selectedItem: null,
+        state: false,
+        checks: false,
+        moneyFlag: true
       }
     },
+    components: {
+      'btn-footer': Btn
+    },
     methods: {
+      pumpshow () {
+        this.checks = !this.checks
+      },
       makshow () {
         var self = this
         self.checks = !self.checks
+      },
+      submit () {
+        if (!this.selectedItem) {
+          this.$alert('请选择支付方式')
+          return false
+        }
+        if (!this.state) {
+          this.$alert('请先阅读打赏规则')
+          return false
+        }
+        if (!this.moneyFlag) {
+          console.log('aa')
+          this.pumpshow()
+        }
+        this.$router.go({name: 'rewardarrive'})
+      }
+    },
+    watch: {
+      paytype () {
+        this.selectedItem = true
       }
     }
   }

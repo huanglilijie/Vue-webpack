@@ -1,16 +1,25 @@
 <template>
   <div class="wrap">
-    <img src="/static/images/title-img.jpg"/>
+    <img src="/static/images/imgtitle.jpg"/>
     <div class="content">
       <div class="content-pic">感谢可爱又美好的你<br />我的smart已在路上
       </div>
       <div class="btn-group">
-        <a href="">创建我的宠爱之旅</a>
-        <a href="">再见</a>
+        <a @click="newDream">创建我的宠爱之旅</a>
+        <a>再见</a>
       </div>
     </div>
   </div>
 </template>
+<script>
+  export default {
+    methods: {
+      newDream () {
+        this.$router.go({name: 'home'})
+      }
+    }
+  }
+</script>
 <style>
   * {
     margin: 0;

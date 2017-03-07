@@ -206,6 +206,36 @@ router.map({
     component: function (resolve) {
       require(['./components/FunDraising.vue'], resolve)
     }
+  },
+  '/friendsdream': {
+    name: 'friendsdream',
+    component: function (resolve) {
+      require(['./components/FriendsDream.vue'], resolve)
+    }
+  },
+  '/rewardsend': {
+    name: 'rewardsend',
+    component: function (resolve) {
+      require(['./components/RewardSend.vue'], resolve)
+    }
+  },
+  '/rewardarrive': {
+    name: 'rewardarrive',
+    component: function (resolve) {
+      require(['./components/RewardArrive.vue'], resolve)
+    }
+  },
+  '/friendsdreamfinish': {
+    name: 'friendsdreamfinish',
+    component: function (resolve) {
+      require(['./components/FriendsDreamFinish.vue'], resolve)
+    }
+  },
+  '/friendsactivityend': {
+    name: 'friendsactivityend',
+    component: function (resolve) {
+      require(['./components/FriendsActivityEnd.vue'], resolve)
+    }
   }
 })
 router.redirect({

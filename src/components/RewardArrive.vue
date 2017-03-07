@@ -6,13 +6,25 @@
         <p>TA的smart已在路上，你的呢</p>
       </div>
     </div>
-    <a href="" class="btn">送出心意</a>
+    <a class="btn" @click="rewardSend">送出心意</a>
     <div class="form-group">
-      <a href="">创建我的宠爱之旅</a>
-      <a href="">返回</a>
+      <a @click="newDream">创建我的宠爱之旅</a>
+      <a>返回</a>
     </div>
   </div>
 </template>
+<script>
+  export default {
+    methods: {
+      rewardSend () {
+        this.$router.go({name: 'rewardsend'})
+      },
+      newDream () {
+        this.$router.go({name: 'home'})
+      }
+    }
+  }
+</script>
 <style>
   * {
     margin: 0;
