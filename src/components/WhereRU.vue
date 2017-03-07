@@ -371,7 +371,7 @@
         // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {
           this.currentCity = data.cityName
-          this.$alert('用户:' + this.userlatitude + ' , ' + this.userlongitude)
+          // this.$alert('用户:' + this.userlatitude + ' , ' + this.userlongitude)
           var param
           if (this.userisGrant) {
             param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
