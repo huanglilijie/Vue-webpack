@@ -29,7 +29,7 @@
               <div class="tuxiang"><img :src="item.wechat.headImgUrl" alt=""></div>
               <div>
                   <span class="nickname">{{item.wechat.nickName}}</span>
-                  <span class=" money_collecting"> 为你筹款<span>{{item.amount}}元</span></span>
+                  <span class="money_collecting">为你筹款{{item.amount}}元</span>
                   <span class="time_date">{{item.md}}</span>
                   <span class="time_time">{{item.hm}}</span>
               </div>
@@ -122,7 +122,7 @@ export default {
         var data = response.data
         var totalamount = 0
         for (var i in data) {
-          totalamount += data[i].amount
+          totalamount = totalamount + data[i].amount
           var cdate = new Date(data[i].createTime)
           var month = cdate.getMonth() + 1
           var date = cdate.getDate()
@@ -136,7 +136,7 @@ export default {
           data[i].hm = [hours, minutes].join(':')
         }
         this.$set('lists', data)
-        this.$set('totalamount', totalamount)
+        this.$set('totalamount', totalamount.toFixed(2))
         var self = this
         var n = totalamount / 31
         setInterval(function () {
@@ -219,9 +219,7 @@ ul{list-style: none}
     width: 20%;
     height: 30px;
     line-height: 30px;
-    background-color: red;
     color: #ffd201;
-    background: url("/static/images/numbg.png") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     left: 50%;
@@ -229,7 +227,7 @@ ul{list-style: none}
     bottom: 15%;
 }
 .money span:nth-child(1){
-    font-size: 1.5rem;
+    font-size: 1.1rem;
 }
 .list{
     margin-top: 30px;
@@ -282,21 +280,43 @@ ul{list-style: none}
     line-height: 40px;
 }
 .rest ul li div:nth-child(1){
-    width:10%;
+    width:30px;
+    height: 30px;
     float: left;
-    margin-left: 2.5%;
+    border-radius: 20px;
 }
 .rest ul li div:nth-child(1) img{
     border-radius: 50%;
     height: 100%;
+    width: 100%;
+    vertical-align:middle;
 }
 .rest ul li div:nth-child(2){
-    width:80%;
+    /*width:80%;*/
     text-align: center;
-    float: right;
+    float: left;
+    display: inline-block;
 }
 .rest ul li div:nth-child(2) span{
-    margin:0 2.5%;
+    display: inline-block;
+    width: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.nickname{
+  width: 65px !important;
+  padding-left:10px;
+}
+.money_collecting{
+  width: 115px !important;
+}
+.time_date{
+  width: 50px !important;
+}
+.time_time{
+  width: 32px !important;
 }
 .submit-dealer1{
     width:90%;
