@@ -337,7 +337,6 @@
           // 路由跳转页面带参数传递
           // 需要判断客户是否已经留资,根据openid获取用户信息
           // 从未留资，进留资页面
-          this.$router.go({path: '/user', query: this.pageParam})
           // console.log(response)
           this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
           .then((response) => {
