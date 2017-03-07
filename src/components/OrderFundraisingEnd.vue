@@ -164,8 +164,8 @@
         this.$router.go({name: 'fundraising', query: {orderId: this.reservationId}})
       },
       resendCode () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.reservationId + '/redeem-code').then((response) => {
-          if (response) {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.reservationId + '/redeem-code', {}).then((response) => {
+          if (response.status === 200) {
             this.start()
           }
         }).catch((response) => {
