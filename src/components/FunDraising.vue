@@ -109,8 +109,11 @@ export default {
           data[i].md = [month, date].join('-')
           data[i].hm = [hours, minutes].join(':')
         }
+        if (totalamount !== 0) {
+          totalamount = totalamount.toFixed(2)
+        }
         this.$set('lists', data)
-        this.$set('totalamount', totalamount.toFixed(2))
+        this.$set('totalamount', totalamount)
         var self = this
         var n = totalamount / 31
         // console.log(n)
