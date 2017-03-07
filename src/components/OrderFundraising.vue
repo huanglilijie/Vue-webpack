@@ -118,6 +118,7 @@
           for (var i in data) {
             totalamount += data[i].amount
           }
+          totalamount = totalamount.toFixed(2)
           var present
           if (totalamount < Golab.gradeamount_1) {
             present = '无'
