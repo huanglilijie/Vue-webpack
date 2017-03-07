@@ -36,7 +36,7 @@
     },
     methods: {
       submit () {
-        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/refund').then((response) => {
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/funded').then((response) => {
           console.log(response)
           if (response.status === 200) {
             this.$router.go({name: 'fundraising', query: this.pageParam})
