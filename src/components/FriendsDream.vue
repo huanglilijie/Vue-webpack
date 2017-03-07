@@ -6,12 +6,10 @@
     <div class="content">
       <img src="/static/images/img-road.png" />
       <p class="text text-top">嘿！我打算买一辆</p>
-      <p class="text1">全新smart forfour 4门4座车</p>
+      <p class="text1">{{product[0].name}}</p>
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
       <p class="text">宠爱我一次<br/>为了答谢你，我会：</p>
-      <div class="text-bg">
-	    带你兜风带你飞，带你去见谁谁谁
-      </div>
+      <div class="text-bg">{{memo}}</div>
       <p class="text-bottom">----------已有5位好友为我筹款-----------</p>
       <a class="btn" @click="rewardSend">发个红包宠爱他</a>
       <a class="btn btn-bottom" @click="newDream">创建我的宠爱之旅</a>
@@ -19,12 +17,36 @@
   </div>
 </template>
 <script>
+  import Config from '../../config/config'
   export default {
     data () {
       return {
+        orderId: '',
+        uid: '111111',
+        product: [{
+          id: '',
+          createTime: '',
+          name: '',
+          price: '',
+          intentionFee: ''
+        }],
+        dealer: [{
+          name: '',
+          telephone: '',
+          totalAmount: ''
+        }],
+        payment: [{
+          amount: '',
+          payStatus: '',
+          payChannel: ''
+        }],
+        memo: ''
       }
     },
     created () {
+    },
+    ready: function () {
+      this.initOrderDetail()
     },
     methods: {
       rewardSend () {
@@ -32,6 +54,19 @@
       },
       newDream () {
         this.$router.go({name: 'home'})
+      },
+      initOrderDetail () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + this.uid + '/orders').then((response) => {
+          if (response.data != null) {
+            console.log(response.data)
+            console.log(response.data.product)
+            console.log(response.data.dealer)
+            this.product[0].name = response.data.product.name
+            this.memo = response.data.memo
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }

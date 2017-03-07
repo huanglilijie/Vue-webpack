@@ -77,7 +77,8 @@
           payChannel: ''
         }],
         totalamount: 0,
-        present: ''
+        present: '',
+        orderId: ''
       }
     },
     ready: function () {
