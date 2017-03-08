@@ -35,7 +35,7 @@
       var nd = new Date()
       var sd = new Date(Golab.startDate)
       if (sd.getTime() > nd.getTime()) {
-        this.$alert('活动未开始')
+        this.$alert('活动还未开始')
       }
       // 判断是否在活动期内
       var ld = new Date(Golab.endDate)
