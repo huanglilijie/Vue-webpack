@@ -6,7 +6,7 @@
 	    <p>距离活动结束还有<span>{{dates}}</span>天</p>
 	    <p>快去筹款吧！</p>
 	  </div>
-	  <div>
+	  <div class="items-foot">
 	 		<p class="btn-footer-1" @click="jump">马上行动</p>
 	 		<p class="btn-footer-2" @click="orderDetail">查看详情</p>
 	  </div>
@@ -68,8 +68,11 @@
 </script>
 
 <style scoped>
+.item{
+  height: 100%;
+}
 .item-success{
-	margin-top:15px ;
+	margin-top:15px;
 }
 .pay_success{
 	text-align: center;
@@ -77,38 +80,43 @@
 	margin-top:20px ;
 }
 .pay_success p:nth-child(1){
-	font-size: 20px;
-	font-weight: 700;
+	font-size: .72rem;
+	font-weight: 500;
+}
+.pay_success p:nth-child(2){
+	font-size: .4rem;
+	/*font-weight: 700;*/
 }
 .pay_success p:nth-child(2) span{
-	font-size: 16px ;
+	font-size: 1.2rem ;
 	font-weight: 700;
+  padding:0 .2rem;
 }
 .pay_success p:nth-child(3){
-	font-size:20px ;
-	font-weight: 700;
+	font-size:.72rem ;
+	font-weight: 500;
 }
  .btn-footer-1{
     position: fixed;
-    bottom:55px;
+    bottom:2rem;
     left: 5%;
     width: 90%;
-    border-radius:10px;
+    border-radius:.2rem;
     padding: 10px 0;
     background-color: #F6BA35;
-    font-size: 18px;
+    font-size: .5rem;
     text-align: center;
     color: #fff;
   }
   .btn-footer-2{
   	 position: fixed;
-    bottom:0;
+    bottom:.36rem;
     left: 5%;
     width: 90%;
-    border-radius:10px;
+    border-radius:.2rem;
     padding: 10px 0;
     background-color:#7FC782;
-    font-size: 18px;
+    font-size: .5rem;
     text-align: center;
     color: #fff;
   }
@@ -116,5 +124,8 @@
   	width: 90%;
 		margin: 0 auto;
 		font-size: 16px;
+  }
+  .items-foot{
+    height: 4.5rem
   }
 </style>

@@ -70,7 +70,6 @@
     padding: 0;
   }
   html,body{
-      font-size: 12px;
       font-family: 微软雅黑;
   }
   .lists>p{

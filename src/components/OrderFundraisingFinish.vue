@@ -140,10 +140,7 @@
 	}
 	html,
 	body {
-	  font-size: 12px;
 	  font-family: "微软雅黑";
-	  width: 100%;
-	  /*height: 100%;*/
     background-color: #fff
 	}
 	ul,li{

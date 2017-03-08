@@ -17,7 +17,6 @@
       </li>
       <p class="text3">*内容确定后不能修改哦</p>
     </div>
-    <a class="btn-mydear" @click="submit">开启宠爱之旅</a>
     <div v-if='checks'>
       <div class="mask" @click="submit"></div>
 <!--       <img class="mask-img" src="/static/images/pump-bg.png"/> -->
@@ -26,6 +25,7 @@
         <p>快让大家来宠爱你吧！</p>
       </div>
     </div>
+    <a class="btn-mydear" @click="submit">开启宠爱之旅</a>
   </div>
 </template>
 <script type='text/babel'>
@@ -108,30 +108,23 @@
   }
 </script>
 <style>
-	html,body{
-		font-size: 12px;
-		font-family: "微软雅黑";
-	}
-	@media (max-width: 350px) {
-		html,body {
-			font-size: 10px !important;
-		}
-  }
   .wrap-mydear img{
   	width: 100%;
   	display: block;
   }
   .bottom{
   	background: url(/static/img-bg.png) center center;
-  	background-size: contain;
-  	height: auto;
+  	background-size: 100% 100%;
+  	/*height: auto;*/
+    background-size: 100%;
+    /*padding-bottom: 1.6rem;*/
   }
   .bottom .text1{
   	width: 60%;
   	margin: 0 auto;
   	text-align: left;
   	margin-top:10px;
-  	font-size: 1.4rem;
+  	font-size: .5rem;
   	font-weight: 600;
   }
   .text2{
@@ -139,13 +132,11 @@
   	background: url(/static/text-bg.png) no-repeat center;
   	background-size: contain;
   	width: 85%;
-  	height: 40px;
   	text-align: center;
   	margin:  0 auto;
-  	font-size: 1.4rem;
-  	font-weight: 600;
+  	font-size: .5rem;
+  	font-weight: 500;
   	margin-top:20px ;
-  	line-height: 40px;
   }
   .sayMing{
   	display: inline;
@@ -155,29 +146,28 @@
   	color: #000;
 	}
   .btn-mydear{
-		display: block;
+		display: inline-block;
 		width: 90%;
 		margin: 0 auto;
-		height: 50px;
-		line-height: 50px;
+		height: 1.6rem;
+		line-height: 1.6rem;
 		text-align: center;
-		font-size: 1.5rem;
+		font-size: .6rem;
 		text-decoration: none;
 		color: #FFFFFF;
-		border-radius: 10px;
+		border-radius: .2rem;
 		background-color: #F7B835;
-		margin-top: 30px;
+		/*margin-top: 1rem;*/
     position: fixed;
     left: 5%;
-    bottom: 0;
+    bottom:.2rem;
 	}
 	.text3{
 		width: 40%;
 		text-align: center;
 		margin: 0 auto;
-		margin-top: 10px;
-		padding-bottom: 15px;
-    margin-bottom: 50px;
+    padding-bottom: 2rem;
+    font-size: .35rem;
 	}
 	.mask{
     position: fixed;
@@ -189,8 +179,8 @@
     z-index: 2;
   }
   .pump{
-    position: absolute;
-    top: 28vh;
+    position: fixed;
+    top: 2rem;
     height: 300px;
     width: 80%;
     text-align: center;
@@ -204,15 +194,15 @@
     text-align: center;
   }
   .pump p:first-child{
-    margin-top: 10px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height:300px;
+    margin-top: 4rem;
+    font-size: .5rem;
+    font-weight: 500;
+    /*line-height:3rem;*/
   }
   .pump p:last-child{
-    font-size: 1.4rem;
+    font-size: .5rem;
     font-weight: 600;
-    margin-top: -135px;
+    margin-top: 1rem;
   }
 	.text2-change{
 		background: url(/static/images/text-bg-checked.png) no-repeat center;

@@ -43,17 +43,10 @@
     margin: 0;
     padding: 0;
   }
-  html,
-  body {
-    font-size: 12px;
-    font-family: "微软雅黑";
-    width: 100%;
-    height: 100vh;
-  }
   ul,li{
     list-style: none;
   }
-  img{
+  .wrap-cancelmydear div img{
     display: block;
     width: 100%;
   }
@@ -71,7 +64,7 @@
   }
   .wrap-cancelmydear p{
     text-align: center;
-    font-size: 1.6rem;
+    font-size: .66rem;
     font-weight: 600;
     padding-top: 15vh;
   }
@@ -89,7 +82,7 @@
     line-height: 50px;
     text-align: center;
     color: #ffffff;
-    font-size: 1.6rem;
+    font-size: .5rem;
     border-radius: 5px;
   }
   .abandon{

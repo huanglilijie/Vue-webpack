@@ -161,11 +161,8 @@
   }
   html,
   body {
-    font-size: 12px;
     font-family: "微软雅黑";
     background: #ffffff;
-    width: 100%;
-    /*height: 100%;*/
     background-color: #fff;
   }
   ul,li{
@@ -190,25 +187,30 @@
     border-bottom: 1px solid #000000;
   }
   .orderrefunded .unsubscribe img{
-  	display: inline-block;
-  	width: 6%;
-  	margin-left: 6px;
+    width: 10%;
+    display: inline-block;
+    margin-left: 10px;
+    position: absolute;
+    top:0;
+    right:25%;
   }
   .orderrefunded .orderrefundedtop p {
     margin-top: 5px;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: .35rem;
+    font-weight: 500;
     text-align: left;
   }
   .orderrefunded .orderrefundedtop div {
     vertical-align: middle;
+    position:relative;
   }
   .orderrefunded .orderrefundedtop div p {
-    height: 30px;
-    line-height: 30px;
-    font-size: 1.8rem;
+    width: 100%;
+    margin:0;
+    text-align: center;
+    font-size: .7rem;
     font-weight: 600;
-    display: inline-block;
+    padding-bottom: .2rem;
   }
   .orderrefunded .orderrefundedtop div div {
     width: 10%;
@@ -231,9 +233,9 @@
   }
   .car-message{
     border-bottom: 1px dashed #000000;
-    font-size: 1.2rem;
+    font-size: .35rem;
     padding: 10px 0;
-    font-weight: 600;
+    font-weight: 500;
   }
   .car-message>label{
     float: left;
@@ -247,42 +249,33 @@
     border-bottom: 1px solid #000000;
   }
   .btn-more{
-    margin: 0 auto;
+    position: fixed;
+    bottom:.36rem;
+    left: 5%;
+    width: 90%;
+    border-radius:10px;
+    font-size: .5rem;
   }
   .btn-more input{
     display: block;
     -webkit-appearance : none ;
-    padding: 15px 0;
-    font-size: 1.5rem;
-    width:90%;
-    border-radius: 5px;
+    padding: 10px 0;
+    font-size: .5rem;
+    width:100%;
+    background-color: #F6BA38;
+    border-radius: .2rem;
     -webkit-appearance : none ;
     border: none;
     margin: 0 auto;
     color: #FFFFFF;
-    background-color: #969DA3;
-    margin-bottom: 40px;
+    font-weight: 600;
   }
   .btn-more input:last-child{
     background-color: #969DA3;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
   }
   .btn-more input:first-child{
     background-color: #F6BA38;
     margin-bottom: 10px;
-  }
-  @media (max-height: 667px) {
-    .btn-more{
-      padding-bottom: 40px;
-    }
-    .btn-more input:first-child{
-      background-color: #F6BA38;
-      margin-top: 80px;
-    }
-    .btn-more input:last-child{
-      background-color: #969DA3;
-      margin-top: 10px;
-      margin-bottom: 0;
-    }
   }
 </style>

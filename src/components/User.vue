@@ -275,15 +275,15 @@ html{
 .user{
   background: url(/static/images/userBanyellow.png) no-repeat;
   background-size: 100%;
-  padding-bottom: 22%;
+  padding-bottom: 25%;
 }
 .user .top-title{
   text-align: center;
-  padding:90px 0 0;
-  font-size:13px;
+  padding:2.76rem 0 0;
+  font-size:.4rem;
 }
   .form-group {
-    margin: 35px 14% 0 14%;
+    margin: .7rem 14% 0 14%;
   }
   .form-group > div {
     margin-top: 5px;
@@ -291,13 +291,13 @@ html{
   }
   .form-group input {
     width: 100%;
-    height: 40px;
+    height: 1.17rem;
     border-width: 0;
-    font-size: 1rem;
-    padding: 0 5px;
+    font-size: .4rem;
+    padding-left:.3rem;
     outline: none;
     color:#999;
-    line-height: 40px
+    line-height: 1.17rem;
   }
    .bottom-content{
     /*margin-top: 40px;*/
@@ -313,16 +313,16 @@ html{
     width: 10%;
   }
   .code {
-    height: 38px;
-    width: 80px;
+    height: .98rem;
+    width: 2.36rem;
     position: absolute;
-    right: -8px;
-    top: 1px;
+    right: -.2rem;
+    top: .45rem;
     background-color: rgb(150,157,163);
     text-align: center;
-    line-height: 38px;
+    line-height: .98rem;
     color: #fff !important;
-    border-radius: 3px;
+    border-radius: .2rem;
     border:none;
   }
   .codeLight {
@@ -331,7 +331,8 @@ html{
   .form-group > div span{
     position: absolute;
     color:red;
-    bottom:-25px;
+    bottom:-.6rem;
+    font-size:.4rem
   }
   .user-agreement {
     margin-top: 30px;
@@ -384,5 +385,11 @@ html{
   .content_word{
     box-sizing: border-box;
     padding: 0px 10px;
+  }
+  .content_title h2{
+    font-size: .45rem;
+  }
+  .content_word p{
+    font-size: .4rem;
   }
 </style>

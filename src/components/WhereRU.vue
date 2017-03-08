@@ -1,25 +1,9 @@
 <style scoped>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  html,body{
-    font-size: 12px !important;
-    font-family: "微软雅黑";
-  }
-  @media (max-width: 350px) {
-    html,body {
-      font-size: 10px !important;
-    }
-    li{
-      list-style: none;
-    }
-  }
   .top{
     justify-content: space-around;
     align-items: center;
-    height: 40px;
-    line-height: 40px;
+    height: 1.24rem;
+    line-height: 1.24rem;
     position: relative;
   }
   .top img{
@@ -32,14 +16,14 @@
   }
   .top a{
     color: #000000;
-    font-size: 1rem;
+    font-size: .35rem;
     position: absolute;
     right: 20px;
     line-height: 40px;
     top: 0;
   }
   .top h2{
-    font-size: 1rem;
+    font-size: .5rem;
     font-weight: 600;
     width: 20%;
     text-align: center;
@@ -50,7 +34,7 @@
   }
   .middle{
     background-color: #F5F5F5;
-    padding-bottom: 70px;
+    padding-bottom: 1.94rem;
   }
   .middle img:first-child{
     width: 100%;
@@ -61,20 +45,22 @@
     margin: 0 auto;
   }
   .select-agency>p:first-child{
-    font-size: 1rem;
+    font-size: .4rem;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: .24rem;
   }
   .select-agency ul li{
     width: 100%;
     background-color: #FFFFFF;
-    margin-top: 10px;-
-    margin-bottom: 10px;
+    margin: .2rem 0;
     padding: 5px 0;
+    display: inline-block;
   }
   .select-agency ul li p{
     width: 94%;
-    margin: 3px auto;
+    margin: .03px auto;
+    font-size:.35rem;
+    padding:0.15rem 0
   }
   .select-agency ul li p .phoneh{
     text-decoration: underline;
@@ -84,15 +70,17 @@
   }
   .distance label{
     float: left;
-    font-size:.9rem;
+    font-size:.4rem;
     font-weight: 600;
   }
   .distance span{
     float: right;
+    font-size:.35rem;
   }
   .tip{
     text-align: center;
-    margin-top: 30px;
+    margin-top: .3rem;
+    font-size: .35rem;
   }
   .tip a{
     color: #000000;
@@ -137,7 +125,7 @@
     height: 40px;
     color: blue;
     line-height: 40px;
-    font-size: 1rem;
+    font-size: .5rem;
   }
   .area .sureButton span.no{
     float: left;
@@ -189,22 +177,22 @@
     box-sizing: border-box;
     padding: 0px 10px;
   }
+  .content_title h2{
+    font-size: .45rem;
+  }
+  .content_word p{
+    font-size: .4rem;
+  }
 </style>
 <template>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
-    <title>在哪提车呢</title>
-  </head>
-  <body>
     <div class="wrap">
       <div class="top">
         <img src="/static/images/location.png" @click="obtain_location()"/>
         <h2>{{currentCity}}</h2>
         <a href="#" @click="pumpshow()">更换城市</a>
       </div>
+      <b-map-component v-ref:bmap></b-map-component>
       <div class="middle">
-        <b-map-component v-ref:bmap></b-map-component>
         <div class="select-agency">
           <p>选择经销商</p>
           <ul class="adders">
@@ -228,6 +216,7 @@
           </p>
         </div>
       </div>
+
       <!-- 底部按钮 -->
       <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
       <div class="mask" v-if="mask">
@@ -255,16 +244,14 @@
         </div>
         <a class="btn1" @click="pumpshow2()">知道了</a>
       </div>
-
     </div>
-  </body>
 </template>
 <script>
     import BMapComponent from '../elements/BMapComponent.vue'
     import Btn from '../elements/btn-footer'
     import Config from '../../config/config'
-    import Golab from '../libs/golab'
-    import Vue from 'vue'
+    // import Golab from '../libs/golab'
+    // import Vue from 'vue'
     // var selectedItem
     module.exports = {
       name: 'whereru',
@@ -338,34 +325,35 @@
           // 需要判断客户是否已经留资,根据openid获取用户信息
           // 从未留资，进留资页面
           // console.log(response)
-          this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
-          .then((response) => {
-            console.log(response)
-            var data = response.data
-            var uid = data.uid
-            var mobile = data.uid
-            var realName = data.realName
-            // uid/mobile/realName不为空，说明已经留资
-            if (uid === '' || uid === null || mobile === '' || mobile === null || realName === '' || realName === null) {
-              // 从未留资，进留资页面
-              this.$router.go({path: '/user', query: this.pageParam})
-            } else {
-              // 已经留资，直接到订单确认页
-              window.localStorage.setItem('uid', data.uid)
-              if (response.headers.map['MME-TOKEN']) {
-                console.log(response.headers.map['MME-TOKEN'][0])
-                window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
-                Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
-              }
-              this.pageParam.userName = data.realName
-              this.pageParam.userPhone = data.mobile
-              this.$router.go({name: 'itempayinfo', query: this.pageParam})
-            }
-          }).catch((response) => {
-            // 从未留资，进留资页面
-            this.$router.go({path: '/user', query: this.pageParam})
-            console.log(response)
-          })
+          // this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid)
+          // .then((response) => {
+          //   console.log(response)
+          //   var data = response.data
+          //   var uid = data.uid
+          //   var mobile = data.uid
+          //   var realName = data.realName
+          //   // uid/mobile/realName不为空，说明已经留资
+          //   if (uid === '' || uid === null || mobile === '' || mobile === null || realName === '' || realName === null) {
+          //     // 从未留资，进留资页面
+          //     this.$router.go({path: '/user', query: this.pageParam})
+          //   } else {
+          //     // 已经留资，直接到订单确认页
+          //     window.localStorage.setItem('uid', data.uid)
+          //     if (response.headers.map['MME-TOKEN']) {
+          //       console.log(response.headers.map['MME-TOKEN'][0])
+          //       window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
+          //       Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+          //     }
+          //     this.pageParam.userName = data.realName
+          //     this.pageParam.userPhone = data.mobile
+          //     this.$router.go({name: 'itempayinfo', query: this.pageParam})
+          //   }
+          // }).catch((response) => {
+          //   // 从未留资，进留资页面
+          //   this.$router.go({path: '/user', query: this.pageParam})
+          //   console.log(response)
+          // })
+          this.$router.go({path: '/user', query: this.pageParam})
         },
         // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {

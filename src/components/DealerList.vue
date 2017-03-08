@@ -22,7 +22,7 @@
       </ul>
     </div>
     <div class="rest" v-if="totalamount > 0">
-      <h2>距离活动结束还有<span style="font-size:2.0rem">{{dates}}</span>天</h2>
+      <h2>距离活动结束还有<span style="font-size:0.8rem">{{dates}}</span>天</h2>
       <p> -------- 已有<span>{{lists.length}}</span>位好友为你筹款 --------</p>
       <ul>
           <li v-for="item in lists">
@@ -38,7 +38,7 @@
       </ul>
     </div>
     <div class="rest" v-else>
-      <h2>距离活动结束还有<span style="font-size:2.0rem">{{dates}}</span>天</h2>
+      <h2>距离活动结束还有<span style="font-size:.8rem">{{dates}}</span>天</h2>
       <p> -------- 还没有好友为你筹款 --------</p>
       <p>加油哦，快去分享吧！大礼包在等着你</p>
     </div>
@@ -169,7 +169,6 @@ html,body,ul{
     margin:0;
     padding: 0;
     font-family: 微软雅黑;
-    font-size: 12px;
 }
  @media (max-width: 350px) {
 html,body {
@@ -215,7 +214,7 @@ ul{list-style: none}
     line-height: 30px;
     background:url("/static/images/loveresult.png") no-repeat;
     background-size: 100% 100%;
-    font-size: 1.3rem;
+    font-size: .6rem;
     color: white;
 }
 .money{
@@ -230,7 +229,10 @@ ul{list-style: none}
     bottom: 15%;
 }
 .money span:nth-child(1){
-    font-size: 1.1rem;
+    font-size: .4rem;
+}
+.money span:nth-child(2){
+    font-size: .36rem;
 }
 .list{
     margin-top: 30px;
@@ -251,17 +253,19 @@ ul{list-style: none}
     background: url("/static/images/car1.png") no-repeat;
     background-size: contain;
     float: left;
+    font-size:.36rem;
 }
 .list ul li:nth-child(2){
     background: url("/static/images/car2.png") no-repeat;
     background-size: contain;
     float: right;
-
+    font-size:.36rem;
 }
 .list ul li:nth-child(3){
     background: url("/static/images/car3.png") no-repeat;
     background-size: contain;
     float: left;
+    font-size:.36rem;
 }
 .rest{
     text-align:center;
@@ -271,55 +275,45 @@ ul{list-style: none}
 }
 .rest h2{
   padding:10px 0;
+  font-size:.6rem;
+  font-weight: 500;
+}
+.rest h2 span{
+  padding:0 .45rem;
 }
 .rest p{
   padding-bottom: 10px;
+  font-size: .4rem;
+  font-weight: 500;
 }
 .rest ul li{
     overflow: hidden;
+    border-bottom: 1px dashed #D5D5D5;
+    font-size: .36rem;
 }
 .rest ul li div{
-    height:40px;
-    line-height: 40px;
+    height:1.49rem;
+    line-height: 1.49rem;
 }
 .rest ul li div:nth-child(1){
-    width:30px;
-    height: 30px;
-    float: left;
-    border-radius: 20px;
+  float: left;
+  width: 20%;
+  height: 100%;
 }
 .rest ul li div:nth-child(1) img{
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    vertical-align:middle;
+    vertical-align: middle;
+    border-radius: 1rem;
+    width: 1.11rem;
+    height: 1.11rem;
 }
 .rest ul li div:nth-child(2){
-    /*width:80%;*/
+    width:80%;
     text-align: center;
-    float: left;
-    display: inline-block;
+    float: right;
+    font-size: .36rem;
 }
 .rest ul li div:nth-child(2) span{
-    display: inline-block;
-    width: 48px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-}
-.nickname{
-  width: 65px !important;
-  padding-left:10px;
-}
-.money_collecting{
-  width: 115px !important;
-}
-.time_date{
-  width: 50px !important;
-}
-.time_time{
-  width: 32px !important;
+    overflow:hidden;
 }
 .submit-dealer1{
     width:90%;
@@ -327,8 +321,9 @@ ul{list-style: none}
 }
 .submit-dealer1 input{
     border: none;
-    font-size: 1.5rem;
-    height:50px;
+    font-size: .5rem;
+    height:1.64rem;
+    line-height: 1.64rem;
     color:white;
 }
 .heart{
@@ -368,5 +363,27 @@ ul{list-style: none}
 }
 .mask_2 img{
     width:80%;
+}
+/*好友信息详细style*/
+.nickname{
+  display: inline-block;
+  width: 20%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.money_collecting{
+  width: 40%;
+  display: inline-block;
+  text-align: center;
+}
+.time_date{
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+}
+.time_time{
+  width: 15%;
+  display: inline-block;
+  text-align: center;
 }
 </style>

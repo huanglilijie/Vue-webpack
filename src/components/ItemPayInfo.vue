@@ -126,14 +126,14 @@ img{
 .car-style{
   width: 90%;
   margin: 0 auto;
-  padding:5px 0;
-  border-bottom: 1px dashed #000000;
-  font-size: 16px;
+  padding:.3rem 0;
+  border-bottom: .01rem dashed #000000;
+  font-size: .4rem;
 }
 .car-style2{
   width: 100%;
   margin: 0 auto;
-  font-size: 16px;
+  font-size: .4rem;
   overflow:hidden;
 }
 .clearfloat:after{
@@ -160,20 +160,21 @@ img{
   border-bottom: none;
 }
 .amount-activity{
-  padding-bottom: 125px;
+  padding-bottom: 4rem;
   margin: 10px 0 0;
+
 }
 .amount-activity p{
-  font-size: 1.2rem;
+  font-size: .5rem;
   font-weight: 600;
   text-align: center;
 }
 .amount-activity>p>span{
-  font-size: 2rem;
+  font-size: 1.1rem;
 }
 .amount-activity>p:last-child{
   margin-top: 10px;
-  font-size: 1.4rem;
+  font-size: .6rem;
 }
 .mask{
   position: absolute;
@@ -198,6 +199,7 @@ img{
   text-align: center;
   left: 10%;
   top: 20vh;
+  font-size: .5rem;
 }
 .pump a{
   position: absolute;
@@ -211,7 +213,7 @@ img{
   border-radius: 5px;
   text-decoration: none;
   color: #000000;
-  font-size: 1.5rem;
+  font-size: .6rem;
   font-weight: 600;
 
 }

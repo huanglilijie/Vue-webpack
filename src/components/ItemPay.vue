@@ -30,7 +30,18 @@
    	<p class="agreen">
    		<span>我同意</span><a @click="pumpshow2 ()">意向金规则</a><input type="checkbox" v-model="state"/>
    	</p>
-    <btn-footer :is-item-selected="selectedItem">开启宠爱之旅</btn-footer>
+    <!-- <btn-footer :is-item-selected="selectedItem">开启宠爱之旅</btn-footer> -->
+    <div v-if='checks'>
+      <div class="mask"></div>
+      <div class="pump">
+        <img src="/static/pump.png"/>
+        <p>你确定这样做吗?</p>
+        <a class="mask-reselect" @click="pumpshow()">再考虑一下</a>
+        <a class="mask-submit" @click="goBack()">确定</a>
+      </div>
+    </div>
+    <a class="btn submit" :is-item-selected="selectedItem" @click='submit'>开启宠爱之旅</a>
+    <a class="btn reselect" @click="pumpshow()">重新选择</a>
   </div>
 </template>
 
@@ -47,7 +58,8 @@
         state: false,
         pageParam: {},
         ciry: false,
-        code: null
+        code: null,
+        checks: false
       }
     },
     components: {
@@ -84,6 +96,12 @@
       pumpshow2 () {
         this.ciry = !this.ciry
       },
+      goBack () {
+        this.$router.go({name: 'home'})
+      },
+      pumpshow () {
+        this.checks = !this.checks
+      },
       // 选中后页面跳转
       submit () {
         if (!this.selectedItem) {
@@ -113,10 +131,10 @@
             }).catch((response) => {
               console.log(response)
             })
-            // this.$router.go({
-            //   path: '/item/itemSuccess',
-            //   query: this.pageParam
-            // })
+            this.$router.go({
+              path: '/item/itemSuccess',
+              query: this.pageParam
+            })
           }
         }).catch((response) => {
           console.log(response)
@@ -128,22 +146,23 @@
 
 <style scoped>
 .item-pay{
-	margin-top: 15px;
+	margin-top: .2rem;
+  padding-bottom: 2.5rem
 }
 .item_pay_money p{
 	text-align: center;
-	font-size:18px;
+	font-size:.45rem;
 }
-.item_pay_money p:nth-child(2){
+/*.item_pay_money p:nth-child(2){
 	margin-top: 5px;
-}
+}*/
 .item_pay_money p:nth-child(2) span{
-	font-size:30px;
+	font-size:1.5rem;
 	font-weight: 700;
 }
 .item_pay_money p:nth-child(3){
-	font-size:14px;
-	margin-top: 5px;
+	font-size:.35rem;
+	/*margin-top: 5px;*/
 }
 .item_pay_way{
 	margin-top: 10px;
@@ -192,6 +211,7 @@
 	text-align: center;
 	vertical-align: middle;
   margin-bottom: 50px;
+  font-size: .35rem
 }
 .agreen input{
 	width: 15px;
@@ -242,5 +262,85 @@
 .content_word{
   box-sizing: border-box;
   padding: 0px 10px;
+}
+.content_title h2{
+  font-size: .45rem;
+}
+.content_word p{
+  font-size: .4rem;
+}
+.btn{
+  display: block;
+  width: 90%;
+  text-align: center;
+  font-size: 18px;
+  text-decoration: none;
+  padding:10px 0;
+  color: #FFFFFF;
+  border-radius: 10px;
+}
+.reselect{
+  position: fixed;
+  bottom: 10px;
+  background-color: #969DA3;
+  left: 5%;
+}
+.submit{
+  position: fixed;
+  bottom: 65px;
+  background-color: #F6BA38;
+  left: 5%;
+  margin-top: 20px;
+}
+.mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.pump{
+  width: 85%;
+  margin: 0 auto;
+  position: fixed;;
+  top: 5vh;
+  left: 7.5%;
+  z-index: 3;
+}
+.pump img{
+  display: block;
+  width: 100%;
+}
+.pump p{
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 10%;
+  top: 20vh;
+  font-size: .5rem
+}
+.pump a{
+  position: absolute;
+  width: 60%;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  left: 20%;
+  top: 23vh;
+  border: 2px dashed #FFFFFF;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000000;
+  font-size: .6rem;
+  font-weight: 600;
+}
+.mask-reselect{
+  margin-top: 10px;
+  background-color: #FBE3AE;
+}
+.mask-submit{
+  margin-top: 70px;
 }
 </style>

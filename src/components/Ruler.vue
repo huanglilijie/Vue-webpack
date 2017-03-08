@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
-    <title>在哪提车呢</title>    
+    <title>在哪提车呢</title>
   </head>
   <body>
     <div class="wrap">
@@ -23,7 +23,6 @@ export default {
   padding: 0;
 }
 html,body{
-  font-size: 12px;
   font-family: "微软雅黑";
   }
   .wrap{
@@ -36,7 +35,7 @@ html,body{
     display: block;
   width: 90%;
   margin: 0 auto;
-  height: 50px; 
+  height: 50px;
   line-height: 50px;
   text-align: center;
   font-size: 1.5rem;

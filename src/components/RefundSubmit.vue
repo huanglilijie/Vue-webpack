@@ -32,23 +32,12 @@
   }
   html,
   body {
-    font-size: 12px;
     font-family: "微软雅黑";
     width: 100%;
     height: 100vh;
   }
   ul,li{
     list-style: none;
-  }
-  img{
-    display: block;
-    width: 100%;
-  }
-  @media (max-width: 350px) {
-    html,
-    body {
-      font-size: 10px !important;
-    }
   }
   .wrap-refundsubmit{
     background: url(/static/images/bg2-img.jpg) no-repeat;
@@ -57,32 +46,33 @@
     height: 100%;
   }
   .wrap-refundsubmit p{
-    width: 58%;
-    margin: 0 auto;
-    text-align: left;
+    width: 70%;
+    margin:0 auto;
+    text-align: center;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 500;
     padding-top: 15vh;
     color: #FFFFFF;
+    font-size:.4rem;
   }
   .abandon,.continue{
     position: fixed;
-    height: 50px;
+    height: 1.6rem;
     text-decoration: none;
     width: 90%;
     left: 5%;
-    line-height: 50px;
+    line-height: 1.6rem;
     text-align: center;
     color: #ffffff;
-    font-size: 1.6rem;
-    border-radius: 5px;
+    font-size: .5rem;
+    border-radius:5px;
   }
   .abandon{
-    bottom: 10px;
+    bottom: .38rem;
     background-color: #969DA3;
   }
   .continue{
-    bottom: 70px;
+    bottom: 2.3rem;
     background-color: #F6BA38;
   }
 </style>

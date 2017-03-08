@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
         <title>我的筹款</title>
     </head>
-    <body>   
+    <body>
         <div class="wrap">
             <div class="content">
                 <div class="clock">
@@ -53,7 +53,6 @@
         margin:0;
         padding: 0;
         font-family: 微软雅黑;
-        font-size: 12px;
     }
     @media (max-width: 350px) {
   html,body {

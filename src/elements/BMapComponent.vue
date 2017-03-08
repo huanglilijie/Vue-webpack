@@ -61,45 +61,48 @@
         }
       },
       agree_obtain_location () {
-        var this_ = this
-        /* var option = {
+        // var this_ = this
+        var option = {
           enableHighAccuracy: true,
           timeout: Infinity,
           maximumAge: 0
         }
-        navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)*/
-        var geolocation = new BMap.Geolocation()
-        console.log(geolocation)
-        var location = {
-          longitude: this.longitude,
-          latitude: this.latitude
-        }
-        geolocation.getCurrentPosition(function (r) {
-          if (this.getStatus() === 0) {
-            console.log(r)
-            location.latitude = r.point.lat
-            location.longitude = r.point.lng
-            console.log(location)
-            // 用户同意授权
-            this_.isGrant = true
-            // 经纬度初始值
-            this_.longitude = location.longitude
-            this_.latitude = location.latitude
-            var param = {
-              userlongitude: r.point.lng,
-              userlatitude: r.point.lat,
-              userisGrant: true
-            }
-            console.log('用户:' + r.point.lng + ' , ' + r.point.lat)
-            // 将用户经纬度传给父组件
-            this_.$dispatch('edit-data', param)
-            this_.getCity(location)
-          } else {
-            this_.getCity(location)
-            // 弹出城市选择
-            this_.$dispatch('pump-show')
-          }
-        })
+        navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
+        // var geolocation = new BMap.Geolocation()
+        // console.log(geolocation)
+        // var location = {
+        //   longitude: this.longitude,
+        //   latitude: this.latitude
+        // }
+        // this_.getCity(location)
+        // // 弹出城市选择
+        // this_.$dispatch('pump-show')
+        // geolocation.getCurrentPosition(function (r) {
+        //   if (this.getStatus() === 0) {
+        //     // console.log(r)
+        //     location.latitude = r.point.lat
+        //     location.longitude = r.point.lng
+        //     // console.log(location)
+        //     // 用户同意授权
+        //     // this_.isGrant = true
+        //     // 经纬度初始值
+        //     this_.longitude = location.longitude
+        //     this_.latitude = location.latitude
+        //     var param = {
+        //       userlongitude: r.point.lng,
+        //       userlatitude: r.point.lat,
+        //       userisGrant: true
+        //     }
+        //     // console.log('用户:' + r.point.lng + ' , ' + r.point.lat)
+        //     // 将用户经纬度传给父组件
+        //     this_.$dispatch('edit-data', param)
+        //     this_.getCity(location)
+        //   } else {
+        //     this_.getCity(location)
+        //     // 弹出城市选择
+        //     this_.$dispatch('pump-show')
+        //   }
+        // })
       },
       geoSuccess (event) {
         // 用户同意授权
@@ -273,8 +276,3 @@
     }
 }
 </script>
-
-<!--Add'scoped' attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

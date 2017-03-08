@@ -2,6 +2,28 @@
   <div id='smart-family' v-if='is_in_activity'>
     <img class='smart-familyimg' src='/static/smart-faimily.jpg'>
       <img class='smart-familybtn' src='/static/family-btn.png' @click='submit()'>
+
+      <div class="home-say">
+        <div class="home-title">
+          活动规则
+        </div>
+        <div class="home-say-content">
+          <p><i>1.</i><span>用户需支付666元订金开启活动,订金将在成功众筹并购车时抵扣购车款。</span></p>
+          <p><i>2.</i><span>用户需分享众筹链接到朋友圈或发送给好友,邀请好友以现金红包形式支持该用户购车。众筹款项将于众筹结束并购车时抵扣购车款。</span></p>
+          <p><i>3.</i><span>用户邀请帮助自己众筹购车的人数不限,但众筹总金额不超过8800元。</span></p>
+          <p class="specialP"><i>4. 奖励政策:</i>
+            <span>众筹金额大于等于1000元且小于3000元,将获得1000元补贴奖励;</span>
+            <span>众筹金额大于等于3000元且小于5000元,将获得1500元补贴奖励;</span>
+            <span style="width:auto">众筹金额大于等于5000元且小于等于8800元,将获得2000元购车补贴奖励;</span>
+            <span>注:补贴奖励可在购车时抵扣购车款。</span></p>
+          <p><i>5.</i><span>用户可在活动期随时结束众筹并购车,结束时众筹款项、订金、补帖(如果有)将于购车时抵扣购车款。如果未手动结束众筹活动到期或筹款额满后,将自动结束众筹,等待用户到店。</span></p>
+          <p><i>6.</i><span>用户可在未提车前取消众筹,取消后订金和好友支付的众筹款项将退回帐户,您将无法获得任何补贴。</span></p>
+          <p><i>7.</i><span>活动名额仅限400人,支付订金成功后即表示参加。</span></p>
+          <p><i>8.</i><span>活动时间：4月1日 – 4月30日。活动时间到后,所有未筹满款的用户将自动筹款结束。</span></p>
+          <p><i>9.</i><span>本活动最终解释权归戴姆勒-奔驰公司所有。</span></p>
+        </div>
+      </div>
+
   </div>
   <div id='smart-family' v-else>
     <img class='smart-familyimg' src='/static/smart-family-over.jpg'/>
@@ -140,11 +162,63 @@ html,body{
 }
 .smart-familyimg{
 	width: 100%;
+  display: block;
 }
 .smart-familybtn{
 	width: 50%;
 	position: absolute;
-	bottom: 41%;
+	bottom: 40%;
 	left:25% ;
+}
+.home-say{
+  position: absolute;
+  bottom:.1rem;
+  font-family: '微软雅黑';
+  /*height: 40%;*/
+  font-size:.33rem
+}
+.home-say .home-title{
+  text-align: center;
+  padding: .1rem;
+  width: 3rem;
+  margin-bottom: .2rem;
+  background: url(/static/images/home-title.png) no-repeat;
+  background-size: 100% 100%;
+  color:#fff;
+  font-size:.5rem;
+}
+.home-say-content{
+  width: 90%;
+  margin:0 auto;
+  word-wrap: break-word;
+  padding: .5rem 0;
+  background-color: rgba(255,255,255,.3);
+  border-radius: .5rem;
+}
+.home-say-content i{
+  font-style: normal;
+  margin-right: .2rem;
+}
+.home-say-content span{
+  text-align: left;
+}
+.home-say-content p{
+  /*padding:.2rem 0;*/
+  display: flex;
+  width: 93%;
+  margin:0 auto;
+}
+.home-say-content p.specialP{
+  display: block;
+}
+.home-say-content p.specialP i{
+  float: left;
+}
+.home-say-content p.specialP span{
+  display: inline-block;
+  width: 100%;
+  /*text-indent: 1em;*/
+  padding-left: 1em;
+  letter-spacing: 0;
 }
 </style>

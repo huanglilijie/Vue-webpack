@@ -144,7 +144,6 @@ html,body,ul{
     margin:0;
     padding: 0;
     font-family: 微软雅黑;
-    font-size: 12px;
     /*background: #fff;*/
 }
  @media (max-width: 350px) {
@@ -186,13 +185,13 @@ ul{list-style: none}
     width:75%;
 }
 .loveresult{
-    width:30% ;
-    height:30px;
-    line-height: 30px;
-    background:url("/static/images/loveresult.png") no-repeat;
-    background-size: 100% 100%;
-    font-size: 1.3rem;
-    color: white;
+  width:30% ;
+  height:30px;
+  line-height: 30px;
+  background:url("/static/images/loveresult.png") no-repeat;
+  background-size: 100% 100%;
+  font-size: .6rem;
+  color: white;
 }
 .money{
     width: 20%;
@@ -206,7 +205,10 @@ ul{list-style: none}
     bottom: 15%;
 }
 .money span:nth-child(1){
-    font-size: 1.1rem;
+    font-size: .4rem;
+}
+.money span:nth-child(2){
+    font-size: .36rem;
 }
 .list{
     margin-top: 30px;
@@ -224,20 +226,22 @@ ul{list-style: none}
     margin-top: 8px;
 }
 .list ul li:nth-child(1){
-    background: url("/static/images/car1.png") no-repeat;
-    background-size: contain;
-    float: left;
+  background: url("/static/images/car1.png") no-repeat;
+  background-size: contain;
+  float: left;
+  font-size: .36rem;
 }
 .list ul li:nth-child(2){
     background: url("/static/images/car2.png") no-repeat;
     background-size: contain;
     float: right;
-
+    font-size: .36rem;
 }
 .list ul li:nth-child(3){
     background: url("/static/images/car3.png") no-repeat;
     background-size: contain;
     float: left;
+    font-size: .36rem;
 }
 .rest{
     text-align:center;
@@ -247,58 +251,46 @@ ul{list-style: none}
 }
 .rest h1{
   margin:20px 0;
+  font-size: .6rem;
+  font-weight: 500;
 }
 .rest h2{
   padding:10px 0;
 }
 .rest p{
+  font-size: .4rem;
   padding-bottom: 10px;
+  font-weight: 500;
 }
 .rest ul li{
     overflow: hidden;
-    margin-bottom: 10px;
-    padding: 5px 0;
     border-bottom: 1px dashed #D5D5D5;
+    font-size: .36rem;
 }
 .rest ul li div{
-    height:40px;
-    line-height: 40px;
+    height:1.49rem;
+    line-height:1.49rem;
 }
 .rest ul li div:nth-child(1){
-    width:30px;
-    height: 30px;
-    float: left;
-    border-radius: 20px;
+  float: left;
+  /*margin-left: 2.5%;*/
+  width: 20%;
+  height: 100%;
 }
 .rest ul li div:nth-child(1) img{
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    vertical-align:middle;
+    vertical-align: middle;
+    border-radius: 1rem;
+    width: 1.11rem;
+    height: 1.11rem;
 }
 .rest ul li div:nth-child(2){
-    text-align: center;
+    width:80%;
+    text-align: left;
+    float: right;
+    font-size: .36rem;
 }
 .rest ul li div:nth-child(2) span{
-    display: inline-block;
-    width: 48px;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-}
-.nickname{
-  width: 65px !important;
-  padding-left:10px;
-}
-.money_collecting{
-  width: 115px !important;
-}
-.time_date{
-  width: 50px !important;
-}
-.time_time{
-  width: 32px !important;
 }
 .submit-dealer1{
     width:90%;
@@ -316,22 +308,23 @@ ul{list-style: none}
     margin-top: 30px;
      -webkit-appearance : none ;
 }
-.more_input_fundrais{overflow: hidden;padding:0 0 30px 0;}
+.more_input_fundrais{overflow: hidden;padding:0 0 30px 0;margin:0 auto;width: 90%;}
 
 .more_input_fundrais input{
-   font-size: 1.5rem;
+    font-size:.5rem;
     width:48%;
     background-color: #F6BA38;
-    border-radius: 5px;
+    border-radius: .1rem;
     -webkit-appearance : none ;
+    line-height: 1.65rem;
 }
 .more_input_fundrais>div{
     height:60px;
    width:48%;
      color:#FFFFFF;
     background-color: #F6BA38;
-     font-size: 1.5rem;
-    border-radius: 5px;
+     font-size:.5rem;
+    border-radius: .1rem;
     -webkit-appearance : none ;
     text-align: center;
 }
@@ -362,5 +355,27 @@ ul{list-style: none}
 }
 .mask_2 img{
     width:80%;
+}
+/*好友信息详细style*/
+.nickname{
+  display: inline-block;
+  width: 20%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.money_collecting{
+  width: 40%;
+  display: inline-block;
+  text-align: center;
+}
+.time_date{
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+}
+.time_time{
+  width: 15%;
+  display: inline-block;
+  text-align: center;
 }
 </style>

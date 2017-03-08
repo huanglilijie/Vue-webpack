@@ -45,7 +45,7 @@
     ready: function () {
       this.setData()
       var Isheight = document.documentElement.clientHeight
-      this.height = Isheight - 55
+      this.height = Isheight - 60
       console.log(this.height)
       // console.log(Isheight)
     },
@@ -101,7 +101,7 @@
     margin: 0;
   }
   .p-list {
-    margin-bottom: 55px;
+    /*margin-bottom: 1.94rem;*/
   }
   .p-list-item {
     position: relative;

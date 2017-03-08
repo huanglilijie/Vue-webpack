@@ -18,17 +18,11 @@
 </template>
 <style>
 html,body{
-    font-size: 12px;
     font-family: "微软雅黑";
     width:100%;
     height:100%;
     background-color: #fff;
     }
-@media (max-width: 350px) {
-    html,body {
-      font-size: 10px !important;
-      }
-  }
 .wrap{
   width:100%;
   height:100%;

@@ -48,38 +48,38 @@
   .item{
     background-color: #fff;
     position: absolute;
-    height: 100%;
+    /*height: 100%;*/
   }
 	.item img:nth-child(1){
 		width: 100%;
 	}
 	.car-style{
-		width: 90%;
-		margin: 0 auto;
-		border-bottom: 1px dashed #000000;
-		padding: 5px 0;
-		font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
+    padding:.3rem 0;
+    border-bottom: .01rem dashed #000000;
+    font-size: .4rem;
 	}
 	.car-style2{
 		width: 90%;
 		margin: 0 auto;
-		border-bottom: 1px dashed #000000;
-		padding: 10px 0 0;
-		font-size: 16px;
+		border-bottom: .01rem dashed #000000;
+		padding: .3rem 0 0;
+		font-size:.4rem;
 		overflow:hidden;
 	}
   .car-style2 p{
-    height: 36px;
-    font-size: 16px;
+      height: .8rem;
+    font-size:.4rem;
   }
   .car-style2 p i{
     font-style: normal;
-    width: 29%;
+    width: 25%;
     display: inline-block;
     float: left;
   }
   .car-style2 p span{
-    width: 70%;
+    width: 75%;
     display: inline-block;
     float: right;
   }

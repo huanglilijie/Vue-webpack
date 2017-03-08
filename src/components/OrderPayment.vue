@@ -34,7 +34,7 @@
           <div>{{product[0].intentionFee}}元</div>
         </li>
       </ul>
-      <p class="text"><span>已成功预订</span><span>即刻开启筹款</span></p>
+      <p class="text">已成功预订 即刻开启筹款</p>
       <p class="text1">距离活动结束还有<span>{{dates}}</span>天</p>
       <p class="text">快去筹款吧！</p>
       <div class="btn-more">
@@ -141,20 +141,11 @@
     }
     html,
     body {
-      font-size: 12px;
       font-family: "微软雅黑";
-      width: 100%;
-      /*height: 100%;*/
       background: #fff
     }
     ul,li{
         list-style: none;
-    }
-    @media (max-width: 350px) {
-      html,
-      body {
-        font-size: 10px !important;
-      }
     }
     .wrap-orderpayment {
       width: 100%;
@@ -170,24 +161,29 @@
     }
     .wrap-orderpayment .toporderpayment p {
       margin-top: 5px;
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: .35rem;
+      font-weight: 500;
       text-align: left;
     }
     .wrap-orderpayment .toporderpayment div {
       vertical-align: middle;
+      position:relative;
     }
     .wrap-orderpayment .toporderpayment div p {
-      height: 30px;
-      line-height: 30px;
-      font-size: 1.8rem;
+      width: 100%;
+      margin:0;
+      text-align: center;
+      font-size: .7rem;
       font-weight: 600;
-      display: inline-block;
+      padding-bottom: .2rem;
     }
     .wrap-orderpayment .toporderpayment div div {
       width: 10%;
       display: inline-block;
       margin-left: 10px;
+      position: absolute;
+      top:0;
+      right:25%;
     }
     .wrap-orderpayment .toporderpayment div div img {
       width: 100%;
@@ -205,9 +201,9 @@
     }
     .car-message{
         border-bottom: 1px dashed #000000;
-        font-size: 1.2rem;
+        font-size: .35rem;
         padding: 10px 0;
-        font-weight: 600;
+        font-weight: 500;
     }
     .car-message>label{
         float: left;
@@ -224,11 +220,11 @@
     .text{
         width: 85%;
         margin: 0 auto;
-        font-size: 2.0rem;
+        font-size: .72rem;
         text-align: center;
-        font-weight: 600;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        font-weight: 500;
+        margin: .5rem auto 0;
+        /*margin-top: .5rem;*/
         overflow: hidden;
     }
     .text span:first-child{
@@ -239,31 +235,36 @@
     }
     .text1{
         width: 80%;
-        font-size: 1.2rem;
+        font-size: .4rem;
         margin: 0 auto;
         text-align: center;
     }
     .text1 span{
-        font-size: 2.0rem;
+        font-size: 1.2rem;
         font-weight: 600;
+        padding:0 .2rem;
     }
     .btn-more{
-            margin: 0 auto;
-            margin-top: 50px;
-            padding-bottom: 20px;
+            position: fixed;
+            bottom:.36rem;
+            left: 5%;
+            width: 90%;
+            border-radius:10px;
+            font-size: .5rem;
     }
     .btn-more input{
         display: block;
         -webkit-appearance : none ;
-        padding: 15px 0;
-        font-size: 1.5rem;
+        padding: 10px 0;
+        font-size: .5rem;
         width:100%;
         background-color: #F6BA38;
-        border-radius: 5px;
+        border-radius: .2rem;
         -webkit-appearance : none ;
         border: none;
         margin: 0 auto;
         color: #FFFFFF;
+        font-weight: 600;
     }
     .btn-more input:first-child{
         margin-bottom: 10px;

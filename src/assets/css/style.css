@@ -3,12 +3,17 @@
     margin:0;
     padding:0;
 }
+html{
+  overflow-x: hidden;
+}
 body {
   width: 100%;
   font-family: "微软雅黑";
-  font-size: 12px;
   background-color: rgb(240,240,240);
   margin:0;
+}
+ul,li{
+  list-style:none;
 }
 #app{
     display: initial;

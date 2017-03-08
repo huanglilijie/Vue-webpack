@@ -182,10 +182,7 @@
   }
   html,
   body {
-    font-size: 12px;
     font-family: "微软雅黑";
-    width: 100%;
-    /*height: 100%;*/
     background-color: #fff
   }
   ul,
@@ -211,23 +208,28 @@
   }
   .orderFundraisingend .orderFundraisingendtop p {
     margin-top: 5px;
-    font-size: 1.2rem;
-    font-weight: 600;
+	  font-size: .35rem;
+	  font-weight: 500;
   }
   .orderFundraisingend .orderFundraisingendtop div {
     vertical-align: middle;
+    position:relative;
   }
   .orderFundraisingend .orderFundraisingendtop div p {
-    height: 30px;
-    line-height: 30px;
-    font-size: 1.8rem;
+    width: 100%;
+    margin:0;
+    text-align: center;
+    font-size: .7rem;
     font-weight: 600;
-    display: inline-block;
+    padding-bottom: .2rem;
   }
   .orderFundraisingend .orderFundraisingendtop div div {
     width: 10%;
     display: inline-block;
     margin-left: 10px;
+    position: absolute;
+    top:0;
+    right:18%;
   }
   .orderFundraisingend .orderFundraisingendtop div div img {
     width: 100%;
@@ -245,9 +247,9 @@
   }
   .car-message {
     border-bottom: 1px dashed #000000;
-    font-size: 1.2rem;
-    padding: 10px 0;
-    font-weight: 600;
+		font-size: .35rem;
+		padding: 10px 0;
+		font-weight: 500;
   }
   .car-message>label {
     float: left;
@@ -268,55 +270,57 @@
   }
   .write-code div {
     float: left;
-    height: 30px;
-    line-height: 30px;
+    margin-left:.5rem;
+    line-height: .7rem;
+    font-size:.35rem;
   }
   .write-code input {
     display: inline-block;
     -webkit-appearance: none;
-    width: 100px;
-    height: 30px;
+    width: 3rem;
+    height: .76rem;
     border: none;
     background-color: #599C31;
     color: #FFFFFF;
-    border-radius: 5px;
-    font-size: 10px;
+    border-radius:.2rem;
+    font-size: .35rem;
     float: right;
   }
   .write-code span {
     display: inline-block;
     -webkit-appearance: none;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
+    width: 3rem;
+    height: .76rem;
+    line-height: .76rem;
     text-align: center;
     border: none;
     background-color: rgb(150,157,163);
     color: #FFFFFF;
-    border-radius: 5px;
-    font-size: 10px;
+    border-radius: .2rem;
+    font-size: .35rem;
     float: right;
   }
   .btn-more {
-	/*width: 100%;*/
-
-
-    margin: 0 auto;
-    margin-top: 50px;
-    padding-bottom: 20px;
+    position: fixed;
+    bottom:.36rem;
+    left: 5%;
+    width: 90%;
+    border-radius:10px;
+    font-size: .5rem;
   }
   .btn-more input {
     display: block;
-    -webkit-appearance: none;
-    padding: 15px 0;
-    font-size: 1.5rem;
-    width: 90%;
+    -webkit-appearance : none ;
+    padding: 10px 0;
+    font-size: .5rem;
+    width:100%;
     background-color: #F6BA38;
-    border-radius: 5px;
-    -webkit-appearance: none;
+    border-radius: .2rem;
+    -webkit-appearance : none ;
     border: none;
     margin: 0 auto;
     color: #FFFFFF;
+    font-weight: 600;
   }
   .btn-more input:first-child {
     margin-bottom: 10px;
