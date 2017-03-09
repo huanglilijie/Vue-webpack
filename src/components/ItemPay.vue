@@ -74,9 +74,10 @@
       var dealerTelephone = this.$route.query.dealerTelephone
       var dealerCode = this.$route.query.dealerCode
       var uid = this.$route.query.uid
+      // 可以获取支付后回调链接的值，如果code为200则支付成功。
       var code = this.$route.query.code
       console.log(code)
-      this.$alert(code)
+      // this.$alert(code)
       var param = {
         orderId: orderId,
         carName: carName,
