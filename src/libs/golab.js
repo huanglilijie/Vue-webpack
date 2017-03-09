@@ -9,7 +9,7 @@ export default {
   // appsecret
   appsecret: '3ef552561e4249a982bfcf5fb9d46b73',
   // 用户微信openid
-  openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqA8w',
+  openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqA7w',
   // 用户微信userid
   userid: '222222',
   // 用户uid
