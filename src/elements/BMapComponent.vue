@@ -104,30 +104,46 @@
       geoSuccess (event) {
         // 用户同意授权
         this.isGrant = true
-        var h5latitude = event.coords.latitude
-        var h5longitude = event.coords.longitude
-        // http://api.map.baidu.com/geoconv/v1/?
-        var gpsPoint = new BMap.Point(h5longitude, h5latitude)
-        BMap.Convertor.translate(gpsPoint, 1, 5, function (point) {
-          this.$alert(point)
-          var location = {
-            latitude: event.coords.latitude,
-            longitude: event.coords.longitude
-          }
-          this.$alert('用户:' + h5longitude + ' , ' + h5latitude)
-          console.log('用户:' + h5longitude + ' , ' + h5latitude)
-          // 经纬度初始值
-          this.longitude = location.longitude
-          this.latitude = location.latitude
-          var param = {
-            userlongitude: location.longitude,
-            userlatitude: location.latitude,
-            userisGrant: this.isGrant
-          }
-          // 将用户经纬度传给父组件
-          this.$dispatch('edit-data', param)
-          this.getCity(location)
-        })
+        var location = {
+          latitude: event.coords.latitude,
+          longitude: event.coords.longitude
+        }
+        console.log('用户:' + location.longitude + ' , ' + location.latitude)
+        // 经纬度初始值
+        this.longitude = location.longitude
+        this.latitude = location.latitude
+        var param = {
+          userlongitude: location.longitude,
+          userlatitude: location.latitude,
+          userisGrant: this.isGrant
+        }
+        // 将用户经纬度传给父组件
+        this.$dispatch('edit-data', param)
+        this.getCity(location)
+        // var h5latitude = event.coords.latitude
+        // var h5longitude = event.coords.longitude
+        // // http://api.map.baidu.com/geoconv/v1/?
+        // var gpsPoint = new BMap.Point(h5longitude, h5latitude)
+        // BMap.Convertor.translate(gpsPoint, 1, 5, function (point) {
+        //   this.$alert(point)
+        //   var location = {
+        //     latitude: event.coords.latitude,
+        //     longitude: event.coords.longitude
+        //   }
+        //   this.$alert('用户:' + h5longitude + ' , ' + h5latitude)
+        //   console.log('用户:' + h5longitude + ' , ' + h5latitude)
+        //   // 经纬度初始值
+        //   this.longitude = location.longitude
+        //   this.latitude = location.latitude
+        //   var param = {
+        //     userlongitude: location.longitude,
+        //     userlatitude: location.latitude,
+        //     userisGrant: this.isGrant
+        //   }
+        //   // 将用户经纬度传给父组件
+        //   this.$dispatch('edit-data', param)
+        //   this.getCity(location)
+        // })
         /* var convertor = new BMap.Convertor()
         var pointArr = []
         pointArr.push(ggPoint)
