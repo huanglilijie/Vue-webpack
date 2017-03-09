@@ -81,7 +81,7 @@
       margin: 0;
   }
   .p-list {
-      margin-bottom: 10px;
+      /*margin-bottom: 10px;*/
   }
   .p-list-item {
       position: relative;
@@ -125,12 +125,12 @@
       color: #000;
   }
   .text1{
-      font-size: 1.5rem;
-      margin-top: 10px;
+      font-size: .45rem;
+      /*margin-top:.3rem;*/
   }
   .text2{
-      font-size: 1.2rem;
-      margin-top: 5px;
+      font-size: .35rem;
+      /*margin-top: .1rem;*/
   }
 
 </style>
