@@ -260,7 +260,7 @@ router.beforeEach(function (ref) {
     if (sUserAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
       router.go({path: '/point'})
     } else {
-      // router.go({path: '/smartpc'})
+      router.go({path: '/smartpc'})
     }
   } else {
     // 微信分享配置加载
