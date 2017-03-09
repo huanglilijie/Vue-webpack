@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="orderfundraisingfinish">
     <div class="top">
 	  <div>
 	    <p>已拥有万千宠爱</p>
@@ -138,119 +138,146 @@
   }
 </script>
 <style>
-	* {
-	  margin: 0;
-	  padding: 0;
-	}
-	html,
-	body {
-	  font-family: "微软雅黑";
-    background-color: #fff
-	}
-	ul,li{
-		list-style: none;
-	}
-	@media (max-width: 350px) {
-	  html,
-	  body {
-	    font-size: 10px !important;
-	  }
-	}
-	.wrap {
+	.orderfundraisingfinish {
 	  width: 100%;
 	  height: 88%;
 	}
-	.wrap .top {
-	  width: 90%;
-	  margin: 0 auto;
-	  padding: 15px 0;
-	  text-align: center;
-	  border-bottom: 1px solid #000000;
+	.orderfundraisingfinish .top {
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid #000000;
 	}
-	.wrap .top p {
-	  margin-top: 5px;
-	  font-size: 1.2rem;
-	  font-weight: 600;
+	.orderfundraisingfinish .top p {
+    margin-top: 5px;
+    font-size: .35rem;
+    font-weight: 500;
 	}
-	.wrap .top div {
-	  vertical-align: middle;
+	.orderfundraisingfinish .top div {
+    vertical-align: middle;
+    position:relative;
 	}
-	.wrap .top div p {
-	  height: 30px;
-	  line-height: 30px;
-	  font-size: 1.8rem;
-	  font-weight: 600;
-	  display: inline-block;
+	.orderfundraisingfinish .top div p {
+    width: 100%;
+    margin:0;
+    text-align: center;
+    font-size: .7rem;
+    font-weight: 600;
+    padding-bottom: .2rem;
 	}
-	.wrap .top div div {
-	  width: 10%;
-	  display: inline-block;
-	  margin-left: 10px;
+	.orderfundraisingfinish .top div div {
+    width: 10%;
+    display: inline-block;
+    margin-left: 10px;
+    position: absolute;
+    top:0;
+    right:15%;
 	}
-	.wrap .top div div img {
+	.orderfundraisingfinish .top div div img {
 	  width: 100%;
 	}
-	.car-style{
-		width: 90%;
-		margin: 0 auto;
-	}
-	.clearfloat:after{
-		display:block;
-		clear:both;
-		content:"";
-		visibility:hidden;
-		height:0
-	}
-	.car-message{
-		border-bottom: 1px dashed #000000;
-		font-size: 1.2rem;
+  .car-style {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .clearfloat:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
+  }
+  .car-message {
+    border-bottom: 1px dashed #000000;
+		font-size: .35rem;
 		padding: 10px 0;
-		font-weight: 600;
-	}
-	.car-message>label{
-		float: left;
-		letter-spacing: 1px;
-	}
-	.car-message>div{
-		float: left;
-		letter-spacing: 1px;
-	}
-	.car-style li:last-child{
-		border-bottom: 1px solid #000000;
-	}
-	.benz-location{
-		margin: 0 auto;
-		overflow: hidden;
-		margin-top: 20px;
-		text-align: center;
-		font-weight: 600;
-		font-size: 1.2rem;
-	}
-	.btn-more{
-		margin: 0 auto;
-		margin-top: 50px;
-		padding-bottom: 20px;
-
-	}
-	.btn-more input{
-		display: block;
-		-webkit-appearance : none ;
-		padding: 15px 0;
-		font-size: 1.5rem;
-		font-weight: 600;
-		width:90%;
-		background-color: #F6BA38;
-		border-radius: 5px;
-		-webkit-appearance : none ;
-		border: none;
-		margin: 0 auto;
-		color: #FFFFFF;
-	}
-	.btn-more input:first-child{
-		margin-bottom: 10px;
-	}
-	.btn-more input:last-child{
-		background-color: #969DA3;
-	}
+		font-weight: 500;
+  }
+  .car-message>label {
+    float: left;
+    letter-spacing: 1px;
+  }
+  .car-message>div {
+    float: left;
+    letter-spacing: 1px;
+  }
+  .car-style li:last-child {
+    border-bottom: 1px solid #000000;
+  }
+  .write-code {
+    width: 92%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .write-code div {
+    float: left;
+    margin-left:.5rem;
+    line-height: .7rem;
+    font-size:.35rem;
+  }
+  .write-code input {
+    display: inline-block;
+    -webkit-appearance: none;
+    width: 3rem;
+    height: .76rem;
+    border: none;
+    background-color: #599C31;
+    color: #FFFFFF;
+    border-radius:.2rem;
+    font-size: .35rem;
+    float: right;
+  }
+  .write-code span {
+    display: inline-block;
+    -webkit-appearance: none;
+    width: 3rem;
+    height: .76rem;
+    line-height: .76rem;
+    text-align: center;
+    border: none;
+    background-color: rgb(150,157,163);
+    color: #FFFFFF;
+    border-radius: .2rem;
+    font-size: .35rem;
+    float: right;
+  }
+  .btn-more {
+    position: fixed;
+    bottom:.36rem;
+    left: 5%;
+    width: 90%;
+    border-radius:10px;
+    font-size: .5rem;
+  }
+  .btn-more input {
+    display: block;
+    -webkit-appearance : none ;
+    padding: 10px 0;
+    font-size: .5rem;
+    width:100%;
+    background-color: #F6BA38;
+    border-radius: .2rem;
+    -webkit-appearance : none ;
+    border: none;
+    margin: 0 auto;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .btn-more input:first-child {
+    margin-bottom: 10px;
+  }
+  .btn-more input:last-child {
+    background-color: #969DA3;
+  }
+  .benz-location{
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: .8rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: .35rem;
+  }
 
 </style>

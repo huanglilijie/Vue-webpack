@@ -6,20 +6,20 @@
 	  <img src="/static/images/think.png" alt="" class="think-man"/>
 	  <p class="text1">奔驰世界，无限精彩<br />https://estore.mercedes-benz.com.cn</p>
 	  <a href="###" class="btn">再见</a>
-    </div>			
+    </div>
   </div>
 </template>
 <style>
   * {
     margin: 0;
     padding: 0;
-  }		
+  }
   html,body {
     font-size: 12px;
     font-family: "微软雅黑";
     width: 100%;
     height: 100%;
-  }		
+  }
   ul,li {
     list-style: none;
   }
@@ -34,7 +34,7 @@
   }
   .wrap{
     width: 100%;
-    height: 100%;				
+    height: 100%;
   }
   .content{
     box-sizing: content-box;
@@ -47,10 +47,11 @@
   }
   .content p{
     text-align: center;
+    font-size: .35rem;
   }
   .text{
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 500;
   }
   .think-man{
     width: 50%;
@@ -63,13 +64,13 @@
     display: block;
     text-decoration: none;
     color: #FFFFFF;
-    height: 50px;
-    line-height: 50px;
+    height: 1.64rem;
+    line-height: 1.64rem;
     text-align: center;
     background-color: #F6BA38;
-    margin-top: 10px;
-    font-size: 1.5rem;
-    border-radius: 5px;
+    margin-top: .7rem;
+    font-size: .6rem;
+    border-radius: .2rem;
   }
   .text1{
     margin-top: 10px;

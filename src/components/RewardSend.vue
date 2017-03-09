@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap-reward">
     <div class="content">
       <div class="top">
         <p>一千不多，一元不少</p>
@@ -9,7 +9,7 @@
         <br />不要给多了哟！</p>
       </div>
     </div>
-    <div>
+    <div class="reward-bottom">
       <ul class="pay-style">
         <li>
           <span></span>
@@ -20,18 +20,21 @@
           <input type="radio" value="wechat" name="pay" v-model="paytype"/>
         </li>
       </ul>
-    </div>			
-    <div class="agreen">我同意 <a href="">打赏规则</a>
-      <input type="checkbox" id="consent" v-model="state" />
-    </div>
-    <a class="btn" @click="submit">送出心意</a>
-    <div v-if='checks'>
-      <div class="pump">
-        <p>别把TA宠坏了，{{realMoney}}元足矣。</p>
-        <a @click="pumpshow()">知道了，就给{{realMoney}}</a>
+
+      <div class="agreen">我同意 <a href="">打赏规则</a>
+        <input type="checkbox" id="consent" v-model="state" />
       </div>
-      <div class="mask" @click="makshow"></div>	
-    </div> 
+      <a class="btn" @click="submit">送出心意</a>
+      <div v-if='checks'>
+        <div class="pump">
+          <p>别把TA宠坏了，{{realMoney}}元足矣。</p>
+          <a @click="pumpshow()">知道了，就给{{realMoney}}</a>
+        </div>
+        <div class="mask" @click="makshow"></div>
+      </div>
+
+    </div>
+
   </div>
 </template>
 <script>
@@ -82,7 +85,8 @@
             for (var i in data) {
               totalamount = totalamount + data[i].amount
             }
-            this.$set('realMoney', Golab.gradeamount_4 - totalamount.toFixed(2))
+            var realMoney = Golab.gradeamount_4 - totalamount
+            this.$set('realMoney', realMoney.toFixed(2))
             console.log('realMoney' + this.realMoney)
           }
         }).catch((response) => {
@@ -128,41 +132,26 @@
   }
 </script>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  html,body {
-    font-size: 12px;
-    font-family: "微软雅黑";
+  .reward-bottom{
+    position: fixed;
     width: 100%;
-    height: 100%;
+    bottom: 0;
+    background: #fff;
   }
-  ul,li {
-    list-style: none;
-  }
-  img {
-    display: block;
-    width: 100%;
-  }
-  @media (max-width: 350px) {
-    html,body {
-      font-size: 10px !important;
-    }
-  }
-  .wrap {
+  .wrap-reward {
     width: 100%;
     height: 100%;
     padding-bottom: 10px;
   }
-  .wrap .content {
+  .wrap-reward .content {
     width: 100%;
-    background: url(/static/images/imgtitle-bg.png) no-repeat;
+    background: url(/static/images/imgtitle-bg.png) no-repeat #fff;
     background-size: 100% 100%;
     min-height: 60%;
     padding-top: 20%;
+    padding-bottom: 60%;
   }
-  .wrap .content .top {
+  .wrap-reward .content .top {
     width: 90%;
     margin: 0 auto;
     background: url(/static/images/center-bg.png) no-repeat;
@@ -171,26 +160,32 @@
     padding: 30px 0;
     min-height: 150px;
   }
-  .wrap .content .top p {
+  .wrap-reward .content .top p {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: .48rem;
     color: #FFFFFF;
   }
-  .wrap .content .top .text-big {
+  .wrap-reward .content .top .text-big {
     width: 80%;
     margin: 0 auto;
-    font-size: 2.4rem;
+    font-size: .98rem;
     color: #F4DA9F;
     padding: 10px;
-    border-bottom: 2px solid #FFFFFF;
+    display: inherit;
+    background: none;
+    border: none;
+    text-align: center;
+    height: 1.15rem;
+    border-bottom: .03rem solid #fff;
+    outline: medium;
   }
-  .wrap .content .top p:last-child {
+  .wrap-reward .content .top p:last-child {
     margin-top: 10px;
   }
-  .wrap .pay-style {
+  .wrap-reward .pay-style {
     width: 100%;
   }
-  .wrap .pay-style li {
+  .wrap-reward .pay-style li {
     overflow: hidden;
     border-bottom: 1px solid #F1F1F5;
     padding: 10px 20px;
@@ -198,14 +193,14 @@
     align-items: center;
     justify-content: space-between;
   }
-  .wrap .pay-style li span {
-    background: url(/static/images/alipay.png) no-repeat;
+  .wrap-reward .pay-style li span {
+    background: url(/static/images/alipay.png) no-repeat center left;
     background-size: contain;
-    width: 20%;
-    height: 20px;
+    width: 26%;
+    height: 1rem;
     float: left;
   }
-  .wrap .pay-style li input {
+  .wrap-reward .pay-style li input {
     float: right;
     display: block;
     width: 20px;
@@ -213,55 +208,52 @@
     height: 20px;
     color: red;
   }
-  .wrap .pay-style li:first-child {
+  .wrap-reward .pay-style li:first-child {
     border-top: 1px solid #F1F1F5;
   }
-  .wrap .pay-style li:last-child span {
-    background: url(/static/images/wechat.png) no-repeat;
+  .wrap-reward .pay-style li:last-child span {
+    background: url(/static/images/wechat.png) no-repeat center;
     background-size: contain;
-    width: 20%;
-    height: 20px;
+    width: 26%;
+    height: .8rem;
     float: left;
   }
-  .wrap .agreen {
+  .wrap-reward .agreen {
     text-align: center;
     margin-top: 10px;
     height: 20px;
-    font-size: 1.2rem;
+    font-size: .35rem;
   }
-  .wrap .agreen a {
+  .wrap-reward .agreen a {
     color: #000000;
   }
-  .wrap .agreen #consent {
+  .wrap-reward .agreen #consent {
     vertical-align: middle;
     margin: auto;
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
   }
-  .wrap .btn {
+  .wrap-reward .btn {
     display: block;
     margin: 0 auto;
     width: 90%;
-    height: 50px;
-    line-height: 50px;
+    height: 1.64rem;
+    line-height: 1.64rem;
     text-align: center;
     background-color: #F6BA38;
-    border-radius: 5px;
-    margin-top: 10px;
-    color: #FFFFFF ;
-    font-size: 1.6rem;
+    border-radius: .2rem;
+    margin: .35rem auto;
+    color: #FFFFFF;
+    font-size: .6rem;
     text-decoration: none;
   }
-  @media (min-height: 730px) {
+  /*@media (min-height: 730px) {
     .wrap .btn{
       position: fixed;
       bottom: 10px;
       width: 90%;
       left: 5%;
     }
-  }
-  .mask{
+  }*/
+  .wrap-reward .mask{
     position: fixed;
     top: 0;
     left: 0;
@@ -270,23 +262,33 @@
     background-color: rgba(0,0,0,0.6);
     z-index: 2;
   }
-  .pump{
-    background: url(/static/images/pump-bg.png) no-repeat;
+  .wrap-reward .pump{
+    background: url(/static/pump.png) no-repeat;
     background-size: 100% 100%;
     min-height: 100px;
     padding-top:35%;
-    position: absolute;
+    position: fixed;
     top: 8vh;
     width: 80%;
     left: 10%;
     z-index: 3;
   }
-  .pump p{
+  .wrap-reward .pump p{
     text-align: center;
-    font-size: 1.4rem;
+    font-size: .6rem;
     font-weight: bold;
   }
-  .pump p:last-child{
+  .wrap-reward .pump a{
+    font-size: .6rem;
+    text-align: center;
+    display: inherit;
+    margin: .5rem auto;
+    width: 6.22rem;
+    height: 1.64rem;
+    line-height: 1.64rem;
+    border: .05rem dashed #fff;
+  }
+  .wrap-reward .pump p:last-child{
     width: 60%;
     margin: 0 auto;
     margin-top: 10px;

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="wrap">
+  <div class="wrap-pc">
     <div class="content-top">
       <ul>
         <li class="content-top-left">
@@ -24,7 +24,7 @@
             <div class="smart-group2">
               <img src="/static/images/wechat-logo.png" alt="" />
               <p>请用微信扫描二维码</p>
-            </div>						
+            </div>
           </div>
           <img src="/static/images/smart-list.png" alt=""  class="process"/>
           <img src="/static/images/red-car.png" class="car-img"/>
@@ -56,10 +56,152 @@
             </li>
           </ol>
         </div>
-      </div>	
+      </div>
     </div>
     <div class="content-bottom">
        北京梅赛德斯-奔驰销售服务有限公司对本活动享有最终解释权
     </div>
   </div>
 </template>
+
+<style media="screen">
+.wrap-pc {
+  width: 100%;
+  height: 100vh;
+  min-width: 1366px;
+  position: relative;
+}
+.wrap-pc .content-top {
+  height: 90px;
+  background-color: #E7A003;
+}
+.wrap-pc .content-top ul {
+  overflow: hidden;
+}
+.wrap-pc .content-top ul .content-top-left {
+  float: left;
+  /*line-height: 90px;*/
+  margin-left: 20%;
+  height: 90px;
+  width: 215px;
+  position: relative;
+}
+.wrap-pc .content-top ul .content-top-left img {
+  vertical-align: middle;
+}
+.wrap-pc .content-top ul .content-top-left img:first-child {
+  display: inline-block;
+  height: 65px;
+  position: absolute;
+  top: 13px;
+}
+.wrap-pc .content-top ul .content-top-left img:last-child {
+  position: absolute;
+    top: 30px;
+    right: 0;
+}
+.wrap-pc .content-top ul .content-top-right {
+  position: absolute;
+  right: 20%;
+  top: 0;
+  line-height: 13vh;
+  height: 13vh;
+}
+.wrap-pc .content-middle {
+  width: 100%;
+  height: 78.778vh;
+  background: url(/static/images/pc-bg.jpg) no-repeat;
+  background-size: 100% 100%;
+  background-position: top top;
+}
+.wrap-pc .content-middle .content-middle-box {
+  width: 54.583%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left {
+  float: left;
+  width: 50%;
+  height: 78.778vh;
+  position: relative;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .airballoon {
+  position: absolute;
+  top: 15%;
+  left: 0%;
+  width: 20%;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-img {
+  width: 90%;
+  margin-top:3.664%;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group {
+  overflow: hidden;
+  margin-top: 3.121%;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group .smart-group1 {
+  float: left;
+  margin-left: 20%;
+  width: 40%;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group .smart-group1 p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group .smart-group2 {
+  float: right;
+  margin-right: 10%;
+  width: 30%;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group .smart-group2 img {
+  width: 100%;
+  display: block;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .smart-group .smart-group2 p{
+  font-size: 12px;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .process {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-left .car-img {
+  width: 90%;
+  position: absolute;
+  right: -4%;
+  margin-top: 5px;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-right {
+  float: right;
+  width: 50%;
+  height: 78.778vh;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-right ol {
+  background-color: rgba(249, 207, 114, 0.5);
+  padding: 10px 20px;
+  padding-left: 30px;
+  border-radius: 10px;
+  margin-top: 10vh;
+  margin-left: 3vh;
+}
+.wrap-pc .content-middle .content-middle-box .content-middle-right ol li {
+  font-size: 12px;
+  margin-bottom: 1px;
+}
+.wrap-pc .content-bottom {
+  width: 100%;
+  height: 8.896vh;
+  background-color: #E7A003;
+  font-size: 18px;
+  text-align: center;
+  line-height: 8.896vh;
+}
+/*@media screen and (max-width: 1400px){
+  html,
+body {
+  font-size: 10px;
+}
+.content-middle-right li{
+  font-size: 1.2rem !important;
+}*/
+</style>

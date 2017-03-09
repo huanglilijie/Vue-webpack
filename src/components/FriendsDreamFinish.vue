@@ -4,9 +4,11 @@
     <div class="content">
       <div class="content-pic">感谢可爱又美好的你<br />我的smart已在路上
       </div>
-      <div class="btn-group">
-        <a @click="newDream">创建我的宠爱之旅</a>
-        <a>再见</a>
+      <div class="btn-finish">
+        <div class="btn-group">
+          <a @click="newDream">创建我的宠爱之旅</a>
+          <a>再见</a>
+        </div>
       </div>
     </div>
   </div>
@@ -56,34 +58,41 @@
     min-height: calc(background);
   }
   .content-pic{
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
     text-align: right;
     background: url(/static/images/text-bg.png) no-repeat;
     background-size: 100% 100%;
-    background-position: center bottom; 
-    min-height: 100px;
+    background-position: center bottom;
+    min-height: 3rem;
     padding-top: 30%;
     padding-right: 12%;
-    font-size: 1.2rem;
+    font-size: .5rem;
     color: #ffffff;
+    margin-bottom: 30%;
+  }
+  .btn-finish{
+    width: 100%;
+    background: #fff;
   }
   .btn-group{
     width: 90%;
     margin: 0 auto;
-    margin-top: 40px;
+    position: fixed;
+    left: 5%;
+    bottom: 0;
   }
   .btn-group a{
     width: 48%;
     display: block;
     text-decoration: none;
     color: #FFFFFF;
-    height: 50px;
-    line-height: 50px;
+    height: 1.64rem;
+    line-height: 1.64rem;
     text-align: center;
     background-color: #F6BA38;
-    font-size: 1.3rem;
-    border-radius: 5px;
+    font-size: .5rem;
+    border-radius: .2rem;
     margin-bottom: 30px;
   }
   .btn-group a:first-child{

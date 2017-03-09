@@ -9,11 +9,12 @@
       <p class="text1">{{product[0].name}}</p>
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
       <p class="text">宠爱我一次<br/>为了答谢你，我会：</p>
-      <div class="text-bg">{{memo}}</div>
+      <div class="text-bg">和可爱又美好的你一起去远方旅行</div>
       <p class="text-bottom">----------已有{{friendsSum}}位好友为我筹款-----------</p>
       <a class="btn" @click="rewardSend">发个红包宠爱他</a>
       <a class="btn btn-bottom" @click="newDream">创建我的宠爱之旅</a>
     </div>
+    <!-- {{memo}} -->
   </div>
 </template>
 <script>
@@ -84,28 +85,9 @@
   }
 </script>
 <style>
-  * {
-    margin: 0;
-	padding: 0;
-  }
-  html,body {
-    font-size: 12px;
-    font-family: "微软雅黑";
-    width: 100%;
-    height: 100%;
-  }
-  ul,li {
-    list-style: none;
-  }
-  img {
+  .top img {
     display: block;
     width: 100%;
-  }
-  @media (max-width: 350px) {
-    html,
-    body {
-      font-size: 10px !important;
-    }
   }
   .wrap {
     width: 100%;
@@ -133,10 +115,9 @@
   }
   .wrap .content .text {
     margin-bottom: 8px;
-    font-size: 1.2rem;
+    font-size: .45rem;
     font-weight: 600;
   }
-
   .wrap .content .text-top {
     margin-top: 8px;
   }
@@ -149,14 +130,15 @@
     text-align: center;
     margin: 0 auto;
     width: 90%;
-    height: 60px;
+    height: 2.35rem;
     background: url(/static/images/text-bg.jpg) no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    line-height: 60px;
+    line-height: 2.2rem;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: .5rem;
     text-align: center;
+    font-weight: 500;
   }
   .wrap .content .text-bottom {
     width: 90%;
@@ -165,18 +147,19 @@
     font-weight: bold;
     margin-top: 15px;
     margin-bottom: 15px;
+    font-size: .4rem;
   }
   .wrap .content .btn {
     width: 90%;
     margin: 0 auto;
     display: block;
-    height: 50px;
+    height: 1.64rem;
     background-color: #F6BA38;
     border-radius: 5px;
     text-decoration: none;
-    line-height: 50px;
+    line-height: 1.64rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: .5rem;
     font-weight: bold;
     color: #ffffff;
     letter-spacing: 2px;

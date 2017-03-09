@@ -25,32 +25,15 @@ export default {
 </script>
 
 <style type="text/css">
-* {
-    margin: 0;
-    padding: 0;
-}
 html,
 body {
     font-family: "微软雅黑";
     width: 100%;
     height: 100%;
 }
-
-ul,
-li {
-    list-style: none;
-}
-
-img {
+.code img {
     display: block;
     width: 100%;
-}
-
-@media (max-width: 350px) {
-    html,
-    body {
-        font-size: 10px !important;
-    }
 }
 .wrap-point{
     width: 100%;
@@ -60,7 +43,7 @@ img {
 .wrap-point .content .text-bg{
     text-align: center;
     font-weight: bold;
-    font-size:2.4rem;
+    font-size:1.01rem;
     color: #ffffff;
     padding-top: 20%;
 }
@@ -73,7 +56,7 @@ img {
     width: 80%;
     margin: 0 auto;
     text-align: left;
-    font-size:1.6rem;
+    font-size:.59rem;
     color: #ffffff;
     margin-bottom: 5px;
 }
@@ -98,9 +81,10 @@ img {
     width: 80%;
     margin: 0 auto;
     text-align: center;
-    font-size:1.4rem;
-    color: #000000;
-    margin-top: 10px;
+    font-size: .5rem;
+    color: #333;
+    margin-top: .65rem;
+    font-weight: 600;
 }
 @media (max-height: 480px) {
     .wrap{
