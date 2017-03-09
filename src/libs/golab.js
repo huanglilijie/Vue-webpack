@@ -15,7 +15,7 @@ export default {
   // 用户uid
   uid: null,
   // 活动名额
-  activequota: 50,
+  activequota: 30,
   // 活动开始时间
   startDate: '2017-03-5',
   // 活动结束时间
