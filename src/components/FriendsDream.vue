@@ -9,7 +9,7 @@
       <p class="text1">{{product[0].name}}</p>
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
       <p class="text">宠爱我一次<br/>为了答谢你，我会：</p>
-      <div class="text-bg">和可爱又美好的你一起去远方旅行</div>
+      <div class="text-bg">{{memo}}</div>
       <p class="text-bottom">----------已有{{friendsSum}}位好友为我筹款-----------</p>
       <a class="btn" @click="rewardSend">发个红包宠爱他</a>
       <a class="btn btn-bottom" @click="newDream">创建我的宠爱之旅</a>
