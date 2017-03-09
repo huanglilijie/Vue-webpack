@@ -68,61 +68,70 @@
           maximumAge: 0
         }
         navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
-        // var geolocation = new BMap.Geolocation()
-        // console.log(geolocation)
-        // var location = {
-        //   longitude: this.longitude,
-        //   latitude: this.latitude
-        // }
-        // this_.getCity(location)
-        // // 弹出城市选择
-        // this_.$dispatch('pump-show')
-        // geolocation.getCurrentPosition(function (r) {
-        //   if (this.getStatus() === 0) {
-        //     // console.log(r)
-        //     location.latitude = r.point.lat
-        //     location.longitude = r.point.lng
-        //     // console.log(location)
-        //     // 用户同意授权
-        //     // this_.isGrant = true
-        //     // 经纬度初始值
-        //     this_.longitude = location.longitude
-        //     this_.latitude = location.latitude
-        //     var param = {
-        //       userlongitude: r.point.lng,
-        //       userlatitude: r.point.lat,
-        //       userisGrant: true
-        //     }
-        //     // console.log('用户:' + r.point.lng + ' , ' + r.point.lat)
-        //     // 将用户经纬度传给父组件
-        //     this_.$dispatch('edit-data', param)
-        //     this_.getCity(location)
-        //   } else {
-        //     this_.getCity(location)
-        //     // 弹出城市选择
-        //     this_.$dispatch('pump-show')
-        //   }
-        // })
+        /* var geolocation = new BMap.Geolocation()
+        console.log(geolocation)
+        var location = {
+          longitude: this.longitude,
+          latitude: this.latitude
+        }
+        geolocation.getCurrentPosition(function (r) {
+          if (this.getStatus() === 0) {
+            console.log(r)
+            location.latitude = r.point.lat
+            location.longitude = r.point.lng
+            console.log(location)
+            // 用户同意授权
+            this_.isGrant = true
+            // 经纬度初始值
+            this_.longitude = location.longitude
+            this_.latitude = location.latitude
+            var param = {
+              userlongitude: r.point.lng,
+              userlatitude: r.point.lat,
+              userisGrant: true
+            }
+            console.log('用户:' + r.point.lng + ' , ' + r.point.lat)
+            // 将用户经纬度传给父组件
+            this_.$dispatch('edit-data', param)
+            this_.getCity(location)
+          } else {
+            this_.getCity(location)
+            // 弹出城市选择
+            this_.$dispatch('pump-show')
+          }
+        })*/
       },
       geoSuccess (event) {
         // 用户同意授权
         this.isGrant = true
-        var location = {
-          latitude: event.coords.latitude,
-          longitude: event.coords.longitude
-        }
-        console.log('用户:' + location.longitude + ' , ' + location.latitude)
-        // 经纬度初始值
-        this.longitude = location.longitude
-        this.latitude = location.latitude
-        var param = {
-          userlongitude: location.longitude,
-          userlatitude: location.latitude,
-          userisGrant: this.isGrant
-        }
-        // 将用户经纬度传给父组件
-        this.$dispatch('edit-data', param)
-        this.getCity(location)
+        var h5latitude = event.coords.latitude
+        var h5longitude = event.coords.longitude
+        // http://api.map.baidu.com/geoconv/v1/?
+        var gpsPoint = new BMap.Point(h5longitude, h5latitude)
+        BMap.Convertor.translate(gpsPoint, 1, 5, function (point) {
+          this.$alert(point)
+          var location = {
+            latitude: event.coords.latitude,
+            longitude: event.coords.longitude
+          }
+          this.$alert('用户:' + h5longitude + ' , ' + h5latitude)
+          console.log('用户:' + h5longitude + ' , ' + h5latitude)
+          // 经纬度初始值
+          this.longitude = location.longitude
+          this.latitude = location.latitude
+          var param = {
+            userlongitude: location.longitude,
+            userlatitude: location.latitude,
+            userisGrant: this.isGrant
+          }
+          // 将用户经纬度传给父组件
+          this.$dispatch('edit-data', param)
+          this.getCity(location)
+        })
+        /* var convertor = new BMap.Convertor()
+        var pointArr = []
+        pointArr.push(ggPoint)
+        convertor.translate(pointArr, 1, 5, translateCallback)*/
       },
       geoError (event) {
         // 用户拒绝授权

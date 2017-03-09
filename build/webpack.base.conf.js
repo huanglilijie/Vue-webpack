@@ -9,7 +9,8 @@ module.exports = {
     vendors: ['vue-resource']
   },
   externals: {
-    "BMap": "BMap"
+    "BMap": "BMap",
+    "wx": "jWeixin"
   },
   output: {
     path: config.build.assetsRoot,

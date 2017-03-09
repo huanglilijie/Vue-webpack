@@ -1,8 +1,15 @@
 <template>
   <div id='smart-family' v-if='is_in_activity'>
     <img class='smart-familyimg' src='/static/smart-faimily.jpg'>
+      <div v-if='checks'>
+        <div class="mask"></div>
+        <div class="pump">
+          <img src="/static/pump.png"/>
+          <p>活动还没开始，请4月01日再准时来参加！</p>
+          <a class="mask-submit" @click="pumpshow()">确定</a>
+        </div>
+      </div>
       <img class='smart-familybtn' src='/static/family-btn.png' @click='submit()'>
-
       <div class="home-say">
         <div class="home-title">
           活动规则
@@ -37,7 +44,17 @@
   export default {
     name: 'smart-family',
     methods: {
+      pumpshow () {
+        this.checks = !this.checks
+      },
       submit () {
+        // 判断活动是否开始
+        var nd = new Date()
+        var sd = new Date(Golab.startDate)
+        if (sd.getTime() > nd.getTime()) {
+          this.$set('checks', true)
+          return false
+        }
         // 判断活动名额是否已满
         this.$http.get(Config.API_ROOT + 'ecommerce/orders-number')
         .then((response) => {
@@ -55,26 +72,24 @@
     data: function () {
       // 判断活动是否开始
       var nd = new Date()
-      var sd = new Date(Golab.startDate)
-      if (sd.getTime() > nd.getTime()) {
-        this.$alert('活动还未开始')
-      }
+      // var sd = new Date(Golab.startDate)
+      // if (sd.getTime() > nd.getTime()) {
+      //   this.$alert('活动还未开始')
+      // }
       // 判断是否在活动期内
       var ld = new Date(Golab.endDate)
       var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+      var isinactivity
       if (dates <= 0) {
         dates = 0
-      }
-      if (dates === 0) {
-        return {
-          is_in_activity: false,
-          uid: null
-        }
+        isinactivity = false
       } else {
-        return {
-          is_in_activity: true,
-          uid: null
-        }
+        isinactivity = true
+      }
+      return {
+        is_in_activity: isinactivity,
+        uid: null,
+        checks: false
       }
     },
     ready: function () {
@@ -220,5 +235,54 @@ html,body{
   /*text-indent: 1em;*/
   padding-left: 1em;
   letter-spacing: 0;
+}
+.mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.pump{
+  width: 85%;
+  margin: 0 auto;
+  position: fixed;;
+  top: 5vh;
+  left: 7.5%;
+  z-index: 3;
+}
+.pump img{
+  display: block;
+  width: 100%;
+}
+.pump p{
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 10%;
+  top: 23vh;
+  font-size: .6rem;
+  color: #000000;
+  font-weight: 600;
+}
+.pump a{
+  position: absolute;
+  width: 60%;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  left: 20%;
+  top: 23vh;
+  border: 2px dashed #FFFFFF;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000000;
+  font-size: .6rem;
+  font-weight: 600;
+}
+.mask-submit{
+  margin-top: 70px;
 }
 </style>

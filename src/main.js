@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 import Validator from 'vue-validator'
 import VueResource from 'vue-resource'
 import Alert from './libs/alert'
+import Wechatshare from './libs/wechatshare.js'
 /* import router from './router' */
 import 'assets/css/style.css'
+// import Config from '../config/config'
 import { Picker } from 'mint-ui'
 Vue.component(Picker.name, Picker)
 
@@ -13,6 +15,7 @@ Vue.use(Validator)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Alert)
+// Vue.use(Wechatshare)
 
 Vue.http.headers.common['MME-TOKEN'] = window.localStorage.getItem('MME-TOKEN')
 
@@ -237,6 +240,35 @@ router.map({
       require(['./components/FriendsActivityEnd.vue'], resolve)
     }
   }
+})
+router.beforeEach(function (ref) {
+  var ua = window.navigator.userAgent.toLowerCase()
+  var path = document.URL
+  console.log('ua:' + ua)
+  console.log('path:' + path)
+  console.log(ref.to)
+  console.log(ref.from)
+  if (ua.indexOf('micromessenger') < 0) {
+    // 判断只有point非微信浏览器提示页，不做跳转，其他页面均跳转
+    router.go({path: '/point'})
+  } else {
+    // 微信分享配置加载
+    // Wechatshare.install()
+    Wechatshare.kong()
+    // 微信授权
+    // var openid = window.sessionStorage.getItem('openid')
+    // 已经获取到用户的openid，不需要授权
+    // if (openid !== null) {
+    // } else {
+    //   // 需要通过用户授权拉取用户信息
+    //   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+    // }
+  }
+  window.scrollTo(0, 0)
+  ref.next()
+})
+router.afterEach(function (transition) {
+
 })
 router.redirect({
   '*': '/index'

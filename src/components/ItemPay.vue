@@ -37,7 +37,7 @@
         <img src="/static/pump.png"/>
         <p>你确定这样做吗?</p>
         <a class="mask-reselect" @click="pumpshow()">再考虑一下</a>
-        <a class="mask-submit" @click="goBack()">确定</a>
+        <a class="mask-submit" @click="reselect()">确定</a>
       </div>
     </div>
     <a class="btn submit" :is-item-selected="selectedItem" @click='submit'>开启宠爱之旅</a>
@@ -96,8 +96,16 @@
       pumpshow2 () {
         this.ciry = !this.ciry
       },
-      goBack () {
-        this.$router.go({name: 'home'})
+      reselect () {
+        // 调用取消订单接口
+        this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/cancel', {}).then((response) => {
+          console.log(response)
+          if (response.status === 200) {
+            this.$router.go({name: 'home'})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       },
       pumpshow () {
         this.checks = !this.checks

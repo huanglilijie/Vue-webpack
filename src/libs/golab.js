@@ -4,8 +4,12 @@
  * 定义api_root的接口地址
  */
 export default {
+  // appid
+  appid: 'wx836245eaa68afe48',
+  // appsecret
+  appsecret: '3ef552561e4249a982bfcf5fb9d46b73',
   // 用户微信openid
-  openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqA9w',
+  openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqA8w',
   // 用户微信userid
   userid: '222222',
   // 用户uid
