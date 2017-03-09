@@ -48,12 +48,13 @@
   </div>
   <div class="btn-more">
     <input type="button" value="我的宠爱值"/>
-    <input type="button" value="再见"/>
+    <input type="button" value="再见" @click="closepage"/>
   </div>
 </template>
 <script>
   import Golab from '../libs/golab'
   import Config from '../../config/config'
+  import wx from 'wx'
   export default {
     name: 'orderfundraisingfinish',
     data () {
@@ -83,6 +84,9 @@
       this.initOrderAmount()
     },
     methods: {
+      closepage () {
+        wx.closeWindow()
+      },
       initOrderDetail () {
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders').then((response) => {
           if (response.data != null) {

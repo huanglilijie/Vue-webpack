@@ -442,9 +442,12 @@
           this.checkState = false
         },
         editData (data) {
-          this.userlongitude = data.userlongitude
-          this.userlatitude = data.userlatitude
-          this.userisGrant = data.userisGrant
+          this.$set('userlongitude', data.userlongitude)
+          this.$set('userlatitude', data.userlatitude)
+          this.$set('userisGrant', data.userisGrant)
+          // this.userlongitude = data.userlongitude
+          // this.userlatitude = data.userlatitude
+          // this.userisGrant = data.userisGrant
         }
       },
       events: {

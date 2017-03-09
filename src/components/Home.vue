@@ -5,7 +5,7 @@
         <div class="mask"></div>
         <div class="pump">
           <img src="/static/pump.png"/>
-          <p>活动还没开始，请4月01日再准时来参加！</p>
+          <p>活动还没开始，请{{startmonth}}月{{startdate}}日再准时来参加！</p>
           <a class="mask-submit" @click="pumpshow()">确定</a>
         </div>
       </div>
@@ -52,6 +52,12 @@
         var nd = new Date()
         var sd = new Date(Golab.startDate)
         if (sd.getTime() > nd.getTime()) {
+          var month = sd.getMonth() + 1
+          var date = sd.getDate()
+          // month = month < 10 ? '0' + month : month
+          date = date < 10 ? '0' + date : date
+          this.$set('startmonth', month)
+          this.$set('startdate', date)
           this.$set('checks', true)
           return false
         }
@@ -89,7 +95,9 @@
       return {
         is_in_activity: isinactivity,
         uid: null,
-        checks: false
+        checks: false,
+        startmonth: null,
+        startdate: null
       }
     },
     ready: function () {

@@ -3,10 +3,11 @@
     <p>您的订单退款申请已提交，<br />
     请耐心等待客服处理！</p>
     <a class="continue" @click="orderDetail">查看详情</a>
-    <a class="abandon">再见</a>
+    <a class="abandon" @click="closepage">再见</a>
   </div>
 </template>
 <script>
+  import wx from 'wx'
   export default {
     name: 'refundsubmit',
     data () {
@@ -19,6 +20,9 @@
       this.$set('reservationId', reservationId)
     },
     methods: {
+      closepage () {
+        wx.closeWindow()
+      },
       orderDetail () {
         this.$router.go({name: 'orderrefunded', query: {reservationId: this.reservationId}})
       }
