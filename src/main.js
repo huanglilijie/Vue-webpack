@@ -242,27 +242,40 @@ router.map({
   }
 })
 router.beforeEach(function (ref) {
-  var ua = window.navigator.userAgent.toLowerCase()
+  var sUserAgent = window.navigator.userAgent.toLowerCase()
+  var bIsIpad = sUserAgent.match(/ipad/i) === 'ipad'
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os'
+  var bIsMidp = sUserAgent.match(/midp/i) === 'midp'
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) === 'rv:1.2.3.4'
+  var bIsUc = sUserAgent.match(/ucweb/i) === 'ucweb'
+  var bIsAndroid = sUserAgent.match(/android/i) === 'android'
+  var bIsCE = sUserAgent.match(/windows ce/i) === 'windows ce'
+  var bIsWM = sUserAgent.match(/windows mobile/i) === 'windows mobile'
   var path = document.URL
-  console.log('ua:' + ua)
+  console.log('ua:' + sUserAgent)
   console.log('path:' + path)
   console.log(ref.to)
   console.log(ref.from)
-  if (ua.indexOf('micromessenger') < 0) {
-    // 判断只有point非微信浏览器提示页，不做跳转，其他页面均跳转
-    router.go({path: '/point'})
+  if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    if (sUserAgent.indexOf('micromessenger') < 0) {
+      // 判断只有point非微信浏览器提示页，不做跳转，其他页面均跳转
+      router.go({path: '/point'})
+    } else {
+      // 微信分享配置加载
+      // Wechatshare.install()
+      Wechatshare.kong()
+      // 微信授权
+      // var openid = window.sessionStorage.getItem('openid')
+      // 已经获取到用户的openid，不需要授权
+      // if (openid !== null) {
+      // } else {
+      //   // 需要通过用户授权拉取用户信息
+      //   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+      // }
+    }
   } else {
-    // 微信分享配置加载
-    // Wechatshare.install()
-    Wechatshare.kong()
-    // 微信授权
-    // var openid = window.sessionStorage.getItem('openid')
-    // 已经获取到用户的openid，不需要授权
-    // if (openid !== null) {
-    // } else {
-    //   // 需要通过用户授权拉取用户信息
-    //   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-    // }
+    console.log('here')
+    router.go({path: '/point'})
   }
   window.scrollTo(0, 0)
   ref.next()
