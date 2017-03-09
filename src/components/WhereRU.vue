@@ -199,7 +199,7 @@
             <li v-for="item in data" @click="selectDealer($index)" :class="[{'checked':item.selected}]">
               <p class="distance">
                 <label>{{item.name}}</label>
-                <span v-if="userisGrant">距离{{item.distance}}米</span>
+                <span v-if="userisGrant">距离{{item.distance}}km</span>
               </p>
               <p>
                 <label>地址：</label>
@@ -370,6 +370,7 @@
               var data = response.data
               for (var i in data) {
                 data[i].selected = false
+                data[i].distance = (data[i].distance / 1000).toFixed(2)
               }
               this.$set('data', data)
               this.$refs.bmap.$emit('show-dealers-onmap', data)
