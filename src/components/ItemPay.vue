@@ -76,6 +76,7 @@
       var uid = this.$route.query.uid
       var code = this.$route.query.code
       console.log(code)
+      this.$alert(code)
       var param = {
         orderId: orderId,
         carName: carName,
