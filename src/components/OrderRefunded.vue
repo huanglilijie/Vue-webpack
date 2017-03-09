@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="btn-more">
-    <input v-if="refunded" type="button" value="重启宠爱之旅" @click="gohome()"/>
+    <input v-if="false" type="button" value="重启宠爱之旅" @click="gohome()"/>
     <input type="button" value="再见"/>
   </div>
 </template>
@@ -55,7 +55,6 @@
     name: 'orderrefunded',
     data () {
       return {
-        refunded: false,
         state: '',
         stateDetail: '',
         createTime: '',
@@ -101,11 +100,9 @@
             console.log(response.data.orderStatus)
             console.log(response.data.orderStatus === 'REFUNDING')
             if (response.data.orderStatus === 'REFUNDING') {
-              this.refunded = false
               this.state = '退订中'
               this.stateDetail = '* 客服正在处理您的退订申请，请耐心等待'
             } else {
-              this.refunded = true
               this.state = '已退订'
               this.stateDetail = '您 的订单退款已成功受理，意向金将返还到您原支付账户,请在14个工作日内注意查收.'
             }
