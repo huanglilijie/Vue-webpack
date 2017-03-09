@@ -4,8 +4,8 @@
       <div class="top">
         <p>一千不多，一元不少</p>
         <p>心意送到，梦想开启</p>
-        <p class="text-big">0.00</p>
-        <p>王比尔还差800元就将达到筹款上限
+        <input v-model="reward" name="reward" class="text-big"></input>
+        <p>王比尔还差{{realMoney}}元就将达到筹款上限
         <br />不要给多了哟！</p>
       </div>
     </div>
@@ -27,14 +27,16 @@
     <a class="btn" @click="submit">送出心意</a>
     <div v-if='checks'>
       <div class="pump">
-        <p>别把TA宠坏了，300元足矣。</p>
-        <p>知道了，就给300</p>
+        <p>别把TA宠坏了，{{realMoney}}元足矣。</p>
+        <a @click="pumpshow()">知道了，就给{{realMoney}}</a>
       </div>
-      <div class="mask"></div>	
+      <div class="mask" @click="makshow"></div>	
     </div> 
   </div>
 </template>
 <script>
+  import Golab from '../libs/golab'
+  import Config from '../../config/config'
   import Btn from '../elements/btn-footer'
   export default {
     name: 'rewardsend',
@@ -44,19 +46,48 @@
         selectedItem: null,
         state: false,
         checks: false,
-        moneyFlag: true
+        payFlag: true,
+        money: 0,
+        realMoney: 0,
+        moneyRule: '',
+        reward: 0,
+        orderId: ''
       }
     },
     components: {
       'btn-footer': Btn
     },
+    created () {
+    },
+    ready: function () {
+      this.moneyRule = /^134[0-8]\d{7}$|^(?:13[5-9]|147|15[0-27-9]|178|18[2-478])\d{8}$/
+      this.orderId = this.$route.query.orderId
+      this.initFundDetail()
+    },
     methods: {
       pumpshow () {
+        this.reward = this.realMoney
         this.checks = !this.checks
+        this.submit()
       },
       makshow () {
         var self = this
         self.checks = !self.checks
+      },
+      initFundDetail () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            var totalamount = 0
+            for (var i in data) {
+              totalamount = totalamount + data[i].amount
+            }
+            this.$set('realMoney', Golab.gradeamount_4 - totalamount.toFixed(2))
+            console.log('realMoney' + this.realMoney)
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       },
       submit () {
         if (!this.selectedItem) {
@@ -67,11 +98,26 @@
           this.$alert('请先阅读打赏规则')
           return false
         }
-        if (!this.moneyFlag) {
-          console.log('aa')
-          this.pumpshow()
+        this.initFundDetail()
+        console.log(this.reward)
+        console.log(this.realMoney)
+        // 判断输入的金额 是否大于剩余筹款金额
+        if (this.reward > this.realMoney) {
+          this.$set('checks', true)
+          return false
         }
-        this.$router.go({name: 'rewardarrive'})
+        // 如果输入的金额等于剩余金额,那么筹款结束
+        if (this.reward === this.realMoney) {
+          this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/funded', {}).then((response) => {
+            if (response.status === 200) {
+              this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
+            }
+          }).catch((response) => {
+            console.log(response)
+          })
+        } else {
+          this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
+        }
       }
     },
     watch: {
@@ -222,7 +268,6 @@
     bottom: 0;
     right: 0;
     background-color: rgba(0,0,0,0.6);
-    display: none;
     z-index: 2;
   }
   .pump{
@@ -235,7 +280,6 @@
     width: 80%;
     left: 10%;
     z-index: 3;
-    display: none;
   }
   .pump p{
     text-align: center;

@@ -2,25 +2,87 @@
   <div class="wrap">
     <div class="content">
       <div class="top">
-        <p>您的心意800元已成功送达</p>
+        <p>您的心意{{pageParam.reward}}元已成功送达</p>
         <p>TA的smart已在路上，你的呢</p>
       </div>
     </div>
-    <a class="btn" @click="rewardSend">送出心意</a>
+    <a class="btn" @click="rewardSend">在宠一次</a>
     <div class="form-group">
       <a @click="newDream">创建我的宠爱之旅</a>
-      <a>返回</a>
+      <a @click="friendHome">返回</a>
     </div>
+    <div v-if='pageParam.pageFlag'>
+      <div class="pump">
+        <p>您的好友已经达到宠爱额度</p>
+      </div>
+      <div class="mask"></div>  
+    </div> 
   </div>
 </template>
 <script>
+  import Golab from '../libs/golab'
+  import Config from '../../config/config'
   export default {
+    data () {
+      return {
+        pageParam: {}
+      }
+    },
+    ready: function () {
+      var reward = this.$route.query.reward
+      console.log(reward)
+      var param = {
+        reward: reward,
+        pageFlag: false
+      }
+      this.$set('pageParam', param)
+    },
+    created () {
+    },
     methods: {
-      rewardSend () {
-        this.$router.go({name: 'rewardsend'})
-      },
       newDream () {
         this.$router.go({name: 'home'})
+      },
+      rewardSend () {
+        var self = this
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            var totalamount = 0
+            for (var i in data) {
+              totalamount = totalamount + data[i].amount
+            }
+            if (Golab.gradeamount_4 === totalamount.toFixed(2)) {
+              this.pageParam.pageFlag = !this.pageParam.pageFlag
+              setTimeout(function () {
+                self.$router.go({name: 'friendsdreamfinish'})
+              }, 2000)
+            } else {
+              this.$router.go({name: 'rewardsend', query: this.pageParam})
+            }
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
+      friendHome () {
+        var self = this
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            var totalamount = 0
+            for (var i in data) {
+              totalamount = totalamount + data[i].amount
+            }
+            if (Golab.gradeamount_4 === totalamount.toFixed(2)) {
+              self.$router.go({name: 'friendsdreamfinish'})
+            } else {
+              self.$router.go({name: 'friendsdream'})
+            }
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       }
     }
   }
@@ -141,5 +203,30 @@
       width: 90%;
       left: 5%;
     }
+  }
+  .mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 2;
+  }
+  .pump{
+    background: url(/static/images/pump-bg.png) no-repeat;
+    background-size: 100% 100%;
+    min-height: 100px;
+    padding-top:35%;
+    position: absolute;
+    top: 8vh;
+    width: 80%;
+    left: 10%;
+    z-index: 3;
+  }
+  .pump p{
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
   }			
 </style>

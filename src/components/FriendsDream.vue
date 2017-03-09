@@ -44,14 +44,12 @@
         friendsSum: ''
       }
     },
-    created () {
-    },
     ready: function () {
       this.initOrderDetail()
     },
     methods: {
       rewardSend () {
-        this.$router.go({name: 'rewardsend'})
+        this.$router.go({name: 'rewardsend', query: {orderId: this.orderId}})
       },
       newDream () {
         this.$router.go({name: 'home'})
