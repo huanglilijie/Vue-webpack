@@ -364,7 +364,7 @@
           var param
           if (this.userisGrant) {
             param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
-            this.$alert(this.userlongitude + ',' + this.userlatitude)
+            // this.$alert(this.userlongitude + ',' + this.userlatitude)
           } else {
             param = {city: data.cityId}
           }
