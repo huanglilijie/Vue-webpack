@@ -93,7 +93,7 @@
       }
       this.$set('pageParam', param)
       if (code !== null) {
-        if (code === '200') {
+        if (code === 200) {
           this.$router.go({path: '/item/itemSuccess', query: this.pageParam})
         } else {
           this.$alert(errmsg)
