@@ -149,10 +149,10 @@
               console.log(response)
             })
             // 页面跳转
-            this.$router.go({
-              path: '/item/itemSuccess',
-              query: this.pageParam
-            })
+            // this.$router.go({
+            //   path: '/item/itemSuccess',
+            //   query: this.pageParam
+            // })
           }
         }).catch((response) => {
           console.log(response)
