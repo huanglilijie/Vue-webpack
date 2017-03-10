@@ -299,9 +299,6 @@ html{
     color:#999;
     line-height: 1.17rem;
   }
-   .bottom-content{
-    /*margin-top: 40px;*/
-   }
   .bottom-content p{
     text-align: center;
     font-weight: 600;
@@ -317,7 +314,7 @@ html{
     width: 2.36rem;
     position: absolute;
     right: -.2rem;
-    top: .45rem;
+    top: .35rem;
     background-color: rgb(150,157,163);
     text-align: center;
     line-height: .98rem;
