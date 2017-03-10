@@ -125,8 +125,8 @@
         this.longitude = bd[0]
         this.latitude = bd[1]
         var param = {
-          userlongitude: location.longitude,
-          userlatitude: location.latitude,
+          userlongitude: this.longitude,
+          userlatitude: this.latitude,
           userisGrant: this.isGrant
         }
         // 将用户经纬度传给父组件
