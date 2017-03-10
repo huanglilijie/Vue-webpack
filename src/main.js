@@ -5,7 +5,6 @@ import Validator from 'vue-validator'
 import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 import Wechatshare from './libs/wechatshare.js'
-import Golab from './libs/golab.js'
 /* import router from './router' */
 import 'assets/css/style.css'
 // import Config from '../config/config'
@@ -211,6 +210,12 @@ router.map({
       require(['./components/FunDraising.vue'], resolve)
     }
   },
+  '/pagechoose': {
+    name: 'pagechoose',
+    component: function (resolve) {
+      require(['./components/pagechoose.vue'], resolve)
+    }
+  },
   '/friendsdream': {
     name: 'friendsdream',
     component: function (resolve) {
@@ -264,33 +269,17 @@ router.beforeEach(function (ref) {
       router.go({path: '/smartpc'})
     }
   } else {
-    console.log('ref.to:' + ref.to.name)
     // 微信分享配置加载
     // Wechatshare.install()
     Wechatshare.kong()
     // 微信授权
-    var openid
+    // var openid = window.sessionStorage.getItem('openid')
     // 已经获取到用户的openid，不需要授权
-    if (window.sessionStorage.getItem('openid') !== null) {
-      openid = window.sessionStorage.getItem('openid')
-    } else {
-      // 需要通过用户授权拉取用户信息
-      window.sessionStorage.setItem('openid', Golab.openid)
-      openid = window.sessionStorage.getItem('openid')
-      // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-    }
-    // 如果打开邀请函链接，判断是本人还是好友
-    if (ref.to.name === 'friendsdream') {
-      var useropenid = ref.to.query.useropenid
-      var reservationid = ref.to.query.reservationid
-      console.log('useropenid:' + useropenid)
-      console.log('reservationid:' + reservationid)
-      window.sessionStorage.setItem('useropenid', useropenid)
-      if (openid === useropenid) {
-        // 本人访问邀请函
-        router.go({path: '/home'})
-      }
-    }
+    // if (openid !== null) {
+    // } else {
+    //   // 需要通过用户授权拉取用户信息
+    //   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+    // }
   }
   window.scrollTo(0, 0)
   ref.next()

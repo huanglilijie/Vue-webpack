@@ -4,7 +4,7 @@
       <img src="/static/images/imgtitle.jpg" alt="" />
     </div>
     <div class="content">
-      <img src="/static/images/img-road.png" />
+      <img :src="headImgUrl" />
       <p class="text text-top">嘿！我打算买一辆</p>
       <p class="text1">{{product[0].name}}</p>
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
@@ -22,8 +22,11 @@
   export default {
     data () {
       return {
+        useropenid: '',
         orderId: '',
-        uid: '111111',
+        headImgUrl: '',
+        nickName: '',
+        uid: '',
         product: [{
           id: '',
           createTime: '',
@@ -46,7 +49,10 @@
       }
     },
     ready: function () {
-      this.initOrderDetail()
+      var useropenid = this.$route.query.useropenid
+      this.$set('useropenid', useropenid)
+      this.initWeChatInfo()
+      // this.initOrderDetail()
     },
     methods: {
       rewardSend () {
@@ -54,6 +60,19 @@
       },
       newDream () {
         this.$router.go({name: 'home'})
+      },
+      initWeChatInfo () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + this.useropenid).then((response) => {
+          if (response.data != null) {
+            console.log(response.data)
+            this.headImgUrl = response.data.headImgUrl
+            this.nickName = response.data.nickName
+            this.uid = response.data.uid
+            this.initOrderDetail()
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
       },
       initOrderDetail () {
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + this.uid + '/orders').then((response) => {
