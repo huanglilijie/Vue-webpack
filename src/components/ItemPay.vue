@@ -74,10 +74,10 @@
       var dealerTelephone = this.$route.query.dealerTelephone
       var dealerCode = this.$route.query.dealerCode
       var code = null
+      console.log(orderId)
       if (orderId.indexOf('?') > 0) {
         var arr = orderId.split('?')
         orderId = arr[0]
-        code = arr[1]
       }
       // 可以获取支付后回调链接的值，如果code为200则支付成功。
       var errmsg = this.$route.query.err_msg
@@ -92,8 +92,8 @@
         dealerCode: dealerCode
       }
       this.$set('pageParam', param)
-      if (code !== null) {
-        if (code === 200) {
+      if (errmsg) {
+        if (errmsg === '操作成功') {
           this.$router.go({path: '/item/itemSuccess', query: this.pageParam})
         } else {
           this.$alert(errmsg)
