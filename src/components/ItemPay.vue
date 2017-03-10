@@ -74,8 +74,12 @@
       var dealerTelephone = this.$route.query.dealerTelephone
       var dealerCode = this.$route.query.dealerCode
       var uid = this.$route.query.uid
+      var code = null
+      if (uid.indexOf('?') > 0) {
+        var arr = uid.split('?')
+        code = arr[1]
+      }
       // 可以获取支付后回调链接的值，如果code为200则支付成功。
-      var code = this.$route.query.code
       var errmsg = this.$route.query.err_msg
       console.log(code)
       // this.$alert(code)
@@ -85,14 +89,15 @@
         carIntentionFee: carIntentionFee,
         dealerName: dealerName,
         dealerTelephone: dealerTelephone,
-        uid: uid,
         dealerCode: dealerCode
       }
       this.$set('pageParam', param)
-      if (code === '200') {
-        this.$router.go({path: '/item/itemSuccess', query: this.pageParam})
-      } else {
-        this.$alert(errmsg)
+      if (code !== null) {
+        if (code === '200') {
+          this.$router.go({path: '/item/itemSuccess', query: this.pageParam})
+        } else {
+          this.$alert(errmsg)
+        }
       }
     },
     watch: {
