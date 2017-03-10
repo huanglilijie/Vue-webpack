@@ -153,6 +153,10 @@
               if (orderStatus === 'REFUNDING') {
                 this.$router.go({path: '/orderrefunded', query: {reservationId: orderInfo.reservationId}})
               }
+              // 当我在退款完成的状态进入活动，默认显示退款中的订单详情页
+              if (orderStatus === 'REFUNDED') {
+                this.$router.go({path: '/orderrefunded', query: {reservationId: orderInfo.reservationId}})
+              }
             } else {
               // 在未存在订单的情况下通过活动入口进入活动，可以正常浏览活动首页
             }
