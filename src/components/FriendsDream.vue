@@ -4,7 +4,9 @@
       <img src="/static/images/imgtitle.jpg" alt="" />
     </div>
     <div class="content">
-      <img :src="headImgUrl" />
+      <div class="friendC-title">
+        <img :src="headImgUrl" />
+      </div>
       <p class="text text-top">嘿！我打算买一辆</p>
       <p class="text1">{{product[0].name}}</p>
       <p class="text">开着它<br/>和可爱又美好的你一起去远方旅行</p>
@@ -124,8 +126,24 @@
     padding-top: 10px;
     padding-bottom: 20px;
   }
-  .wrap .content img {
+  .wrap .content .friendC-title{
     width: 100%;
+    background: url(/static/images/friendlongbg.png) no-repeat;
+    background-position: center;
+    background-size: 100%;
+    height: 1rem;
+    padding:.8rem 0;
+    position: relative;
+  }
+  .wrap .content .friendC-title img {
+    display: inline-block;
+    width: 2.19rem;
+    height: 2.19rem;
+    border: .18rem solid #f6ba35;
+    border-radius: 2rem;
+    position: absolute;
+    top: 0rem;
+    left: 10%;
   }
   .wrap .content p {
     width: 70%;
@@ -142,7 +160,7 @@
   }
   .wrap .content .text1 {
     margin-bottom: 8px;
-    font-size: 1.6rem;
+    font-size: .6rem;
     font-weight: 600;
   }
   .wrap .content .text-bg {
@@ -153,11 +171,11 @@
     background: url(/static/images/text-bg.jpg) no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    line-height: 2.2rem;
+    line-height: 2.4rem;
     font-weight: bold;
-    font-size: .5rem;
+    font-size: .45rem;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
   }
   .wrap .content .text-bottom {
     width: 90%;
