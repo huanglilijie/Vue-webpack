@@ -73,10 +73,10 @@
       var dealerName = this.$route.query.dealerName
       var dealerTelephone = this.$route.query.dealerTelephone
       var dealerCode = this.$route.query.dealerCode
-      var uid = this.$route.query.uid
       var code = null
-      if (uid.indexOf('?') > 0) {
-        var arr = uid.split('?')
+      if (orderId.indexOf('?') > 0) {
+        var arr = orderId.split('?')
+        orderId = arr[0]
         code = arr[1]
       }
       // 可以获取支付后回调链接的值，如果code为200则支付成功。
@@ -145,7 +145,7 @@
             // 注意要使用token防止重复下单
             // 需要调用支付接口
             console.log(this.paytype)
-            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/payment', {subject: '支付意向金', body: this.pageParam.carName, limit_pay: this.paytype, total_fee: this.pageParam.carIntentionFee, return_url: 'http://192.168.6.122/item/itempay?carIntentionFee=' + this.pageParam.carIntentionFee + '&carName=' + this.pageParam.carName + '&dealerCode=' + this.pageParam.dealerCode + '&dealerName=' + this.pageParam.dealerName + '&dealerTelephone=' + this.pageParam.dealerTelephone + '&orderId=' + this.pageParam.orderId + '&uid=' + window.localStorage.getItem('uid'), dealer_code: this.pageParam.dealerCode}).then((response) => {
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/payment', {subject: '支付意向金', body: this.pageParam.carName, limit_pay: this.paytype, total_fee: this.pageParam.carIntentionFee, return_url: 'http://192.168.6.122/item/itempay?carIntentionFee=' + this.pageParam.carIntentionFee + '&carName=' + this.pageParam.carName + '&dealerCode=' + this.pageParam.dealerCode + '&dealerName=' + this.pageParam.dealerName + '&dealerTelephone=' + this.pageParam.dealerTelephone + '&orderId=' + this.pageParam.orderId, dealer_code: this.pageParam.dealerCode}).then((response) => {
               console.log(response)
               console.log(response.data)
               window.open(response.data)
