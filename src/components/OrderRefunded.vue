@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="btn-more">
-    <input v-if="refunded" type="button" value="重启宠爱之旅" @click="gohome()"/>
+    <!-- <input v-if="refunded" type="button" value="重启宠爱之旅" @click="gohome()"/> -->
     <input type="button" value="再见" @click="closepage"/>
   </div>
 </template>
