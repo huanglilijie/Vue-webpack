@@ -7,17 +7,21 @@
       <div class="btn-finish">
         <div class="btn-group">
           <a @click="newDream">创建我的宠爱之旅</a>
-          <a>再见</a>
+          <a @click="closepage">再见</a>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import wx from 'wx'
   export default {
     methods: {
       newDream () {
         this.$router.go({name: 'home'})
+      },
+      closepage () {
+        wx.closeWindow()
       }
     }
   }

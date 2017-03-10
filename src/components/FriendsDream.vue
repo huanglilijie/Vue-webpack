@@ -21,6 +21,7 @@
 </template>
 <script>
   import Config from '../../config/config'
+  import Vue from 'vue'
   export default {
     data () {
       return {
@@ -58,7 +59,7 @@
     },
     methods: {
       rewardSend () {
-        this.$router.go({name: 'rewardsend', query: {orderId: this.orderId}})
+        this.$router.go({name: 'rewardsend', query: {orderId: this.orderId, useropenid: this.useropenid}})
       },
       newDream () {
         this.$router.go({name: 'home'})
@@ -79,6 +80,14 @@
       initOrderDetail () {
         this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + this.uid + '/orders').then((response) => {
           if (response.data != null) {
+            // 获取用的MME-TOKEN，自动结束筹款操作订单的时候需要用到
+            console.log(response.headers)
+            console.log(response.headers.map['MME-TOKEN'])
+            if (response.headers.map['MME-TOKEN']) {
+              console.log(response.headers.map['MME-TOKEN'][0])
+              window.localStorage.setItem('MME-TOKEN', response.headers.map['MME-TOKEN'][0])
+              Vue.http.headers.common['MME-TOKEN'] = response.headers.map['MME-TOKEN'][0]
+            }
             console.log(response.data)
             console.log(response.data.product)
             console.log(response.data.dealer)

@@ -362,11 +362,12 @@
           this.currentCity = data.cityName
           // this.$alert('用户:' + this.userlatitude + ' , ' + this.userlongitude)
           var param
-          if (this.userisGrant) {
-            param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
-          } else {
-            param = {city: data.cityId}
-          }
+          // if (this.userisGrant) {
+          //   param = {city: data.cityId, lat: this.userlatitude, lng: this.userlongitude}
+          // } else {
+          //   param = {city: data.cityId}
+          // }
+          param = {city: data.cityId, lat: '40.000384', lng: '116.489635'}
           this.$http.get(Config.API_ROOT + 'ecommerce/customers/dealers', {params: param})
             .then((response) => {
               var data = response.data

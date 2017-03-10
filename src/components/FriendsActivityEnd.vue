@@ -5,10 +5,20 @@
 	  <p class="text">活动已经结束<br />smart和远方要有，生活还要继续</p>
 	  <img src="/static/images/think.png" alt="" class="think-man"/>
 	  <p class="text1">奔驰世界，无限精彩<br />https://estore.mercedes-benz.com.cn</p>
-	  <a href="###" class="btn">再见</a>
+	  <a class="btn" @click="closepage">再见</a>
     </div>
   </div>
 </template>
+<script>
+  import wx from 'wx'
+  export default {
+    methods: {
+      closepage () {
+        wx.closeWindow()
+      }
+    }
+  }
+</script>
 <style>
   * {
     margin: 0;

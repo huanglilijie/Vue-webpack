@@ -4,7 +4,7 @@
       <div class="top">
         <p>一千不多，一元不少</p>
         <p>心意送到，梦想开启</p>
-        <input v-model="reward" name="reward" class="text-big"></input>
+        <input v-model="reward" name="reward" class="text-big" type="number"></input>
         <p>王比尔还差{{realMoney}}元就将达到筹款上限
         <br />不要给多了哟！</p>
       </div>
@@ -54,7 +54,8 @@
         realMoney: 0,
         moneyRule: '',
         reward: 0,
-        orderId: ''
+        orderId: '',
+        useropenid: ''
       }
     },
     components: {
@@ -65,6 +66,7 @@
     ready: function () {
       this.moneyRule = /^134[0-8]\d{7}$|^(?:13[5-9]|147|15[0-27-9]|178|18[2-478])\d{8}$/
       this.orderId = this.$route.query.orderId
+      this.useropenid = this.$route.query.useropenid
       this.initFundDetail()
     },
     methods: {
@@ -85,8 +87,8 @@
             for (var i in data) {
               totalamount = totalamount + data[i].amount
             }
-            var realMoney = Golab.gradeamount_4 - totalamount
-            this.$set('realMoney', realMoney.toFixed(2))
+            var realMoney = (Golab.gradeamount_4 - totalamount).toFixed(2)
+            this.$set('realMoney', realMoney)
             console.log('realMoney' + this.realMoney)
           }
         }).catch((response) => {
@@ -102,26 +104,47 @@
           this.$alert('请先阅读打赏规则')
           return false
         }
-        this.initFundDetail()
+        // 实时校验金额是否大于剩余金额
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            var totalamount = 0
+            for (var i in data) {
+              totalamount = totalamount + data[i].amount
+            }
+            var realMoney = (Golab.gradeamount_4 - totalamount).toFixed(2)
+            this.$set('realMoney', realMoney)
+            console.log('realMoney' + this.realMoney)
+          }
+          if (this.reward > this.realMoney) {
+            this.$set('checks', true)
+            return false
+          } else {
+            // 支付
+            // this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.sessionStorage.getItem('openid') + '/fund/' + this.orderId + '/payment', {}).then((response) => {
+            // }).catch((response) => {
+            //   console.log(response)
+            // })
+            this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward, 'useropenid': this.useropenid}})
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+        // this.initFundDetail()
         console.log(this.reward)
         console.log(this.realMoney)
-        // 判断输入的金额 是否大于剩余筹款金额
-        if (this.reward > this.realMoney) {
-          this.$set('checks', true)
-          return false
-        }
         // 如果输入的金额等于剩余金额,那么筹款结束
-        if (this.reward === this.realMoney) {
-          this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/funded', {}).then((response) => {
-            if (response.status === 200) {
-              this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
-            }
-          }).catch((response) => {
-            console.log(response)
-          })
-        } else {
-          this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
-        }
+        // if (this.reward.toFixed(2) === this.realMoney.toFixed(2)) {
+        //   this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.orderId + '/funded', {}).then((response) => {
+        //     if (response.status === 200) {
+        //       this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
+        //     }
+        //   }).catch((response) => {
+        //     console.log(response)
+        //   })
+        // } else {
+        //   this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
+        // }
       }
     },
     watch: {

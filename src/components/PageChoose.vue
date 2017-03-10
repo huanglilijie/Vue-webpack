@@ -7,12 +7,15 @@
     data () {
       return {
         useropenid: '',
-        uid: '123',
+        useruid: '',
         status: ''
       }
     },
     ready: function () {
-      this.$set('useropenid', 1231231)
+      var useruid = this.$route.query.useruid
+      var useropenid = this.$route.query.useropenid
+      this.$set('useruid', useruid)
+      this.$set('useropenid', useropenid)
       this.ifInactivity()
     },
     methods: {
@@ -28,7 +31,7 @@
         }
       },
       initOrderDetail () {
-        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + this.uid + '/orders').then((response) => {
+        this.$http.get(Config.API_ROOT + 'ecommerce/customers/' + this.useruid + '/orders').then((response) => {
           if (response.data != null) {
             console.log(response.data.orderStatus)
             this.status = response.data.orderStatus

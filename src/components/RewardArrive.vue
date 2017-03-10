@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="reward-bottom">
-    <a class="btn" @click="rewardSend">在宠一次</a>
+    <a class="btn" @click="rewardSend">再宠一次</a>
     <div class="form-group">
       <a @click="newDream">创建我的宠爱之旅</a>
       <a @click="friendHome">返回</a>
@@ -15,7 +15,8 @@
   </div>
     <div v-if='pageParam.pageFlag'>
       <div class="pump">
-        <p>您的好友已经达到宠爱额度</p>
+        <p v-if='isinactivity'>您的好友已经达到宠爱额度</p>
+        <p v-else>活动已结束</p>
       </div>
       <div class="mask"></div>
     </div>
@@ -27,64 +28,125 @@
   export default {
     data () {
       return {
-        pageParam: {}
+        pageParam: {},
+        isinactivity: true
       }
     },
     ready: function () {
       var reward = this.$route.query.reward
+      var orderId = this.$route.query.orderId
+      var useropenid = this.$route.query.useropenid
       console.log(reward)
       var param = {
         reward: reward,
-        pageFlag: false
+        orderId: orderId,
+        pageFlag: false,
+        useropenid: useropenid
       }
       this.$set('pageParam', param)
+      this.closeFundraising()
     },
     created () {
     },
     methods: {
+      closeFundraising () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.pageParam.orderId + '/funds').then((response) => {
+          if (response.data != null) {
+            var data = response.data
+            var totalamount = 0
+            for (var i in data) {
+              totalamount = totalamount + data[i].amount
+            }
+            if (totalamount.toFixed(2) >= Golab.gradeamount_4.toFixed(2)) {
+              // 筹款已达最高限额，自动结束筹款
+              // 注意操作订单需要MME-TOKEN,在好友进入邀请函首页，已获取
+              this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.localStorage.getItem('uid') + '/orders/' + this.pageParam.orderId + '/funded', {}).then((response) => {
+                if (response.status === 200) {
+                  this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward}})
+                }
+              }).catch((response) => {
+                console.log(response)
+              })
+            }
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
       newDream () {
         this.$router.go({name: 'home'})
       },
       rewardSend () {
         var self = this
-        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
-          if (response.data != null) {
-            var data = response.data
-            var totalamount = 0
-            for (var i in data) {
-              totalamount = totalamount + data[i].amount
+        // 判断活动日期
+        var nd = new Date()
+        var ld = new Date(Golab.endDate)
+        var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+        // 活动已结束
+        if (dates <= 0) {
+          this.$set('isinactivity', false)
+          this.pageParam.pageFlag = !this.pageParam.pageFlag
+          setTimeout(function () {
+            self.$router.go({name: 'friendsactivityend'})
+          }, 2000)
+        } else {
+          // 判断筹款是否已完成
+          this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.pageParam.orderId + '/funds').then((response) => {
+            if (response.data != null) {
+              var data = response.data
+              var totalamount = 0
+              for (var i in data) {
+                totalamount = totalamount + data[i].amount
+              }
+              if (totalamount.toFixed(2) >= Golab.gradeamount_4.toFixed(2)) {
+                this.pageParam.pageFlag = !this.pageParam.pageFlag
+                setTimeout(function () {
+                  self.$router.go({name: 'friendsdreamfinish'})
+                }, 2000)
+              } else {
+                this.$router.go({name: 'rewardsend', query: this.pageParam})
+              }
             }
-            if (Golab.gradeamount_4 === totalamount.toFixed(2)) {
-              this.pageParam.pageFlag = !this.pageParam.pageFlag
-              setTimeout(function () {
-                self.$router.go({name: 'friendsdreamfinish'})
-              }, 2000)
-            } else {
-              this.$router.go({name: 'rewardsend', query: this.pageParam})
-            }
-          }
-        }).catch((response) => {
-          console.log(response)
-        })
+          }).catch((response) => {
+            console.log(response)
+          })
+        }
       },
       friendHome () {
         var self = this
-        this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.orderId + '/funds').then((response) => {
-          if (response.data != null) {
-            var data = response.data
-            var totalamount = 0
-            for (var i in data) {
-              totalamount = totalamount + data[i].amount
+        // 判断活动日期
+        var nd = new Date()
+        var ld = new Date(Golab.endDate)
+        var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
+        // 活动已结束
+        if (dates <= 0) {
+          this.$set('isinactivity', false)
+          this.pageParam.pageFlag = !this.pageParam.pageFlag
+          setTimeout(function () {
+            self.$router.go({name: 'friendsactivityend'})
+          }, 2000)
+        } else {
+          // 判断筹款是否已完成
+          this.$http.get(Config.API_ROOT + 'ecommerce/order/' + this.pageParam.orderId + '/funds').then((response) => {
+            if (response.data != null) {
+              var data = response.data
+              var totalamount = 0
+              for (var i in data) {
+                totalamount = totalamount + data[i].amount
+              }
+              if (totalamount.toFixed(2) >= Golab.gradeamount_4.toFixed(2)) {
+                this.pageParam.pageFlag = !this.pageParam.pageFlag
+                setTimeout(function () {
+                  self.$router.go({name: 'friendsdreamfinish'})
+                }, 2000)
+              } else {
+                this.$router.go({name: 'friendsdream', query: this.pageParam})
+              }
             }
-            if (Golab.gradeamount_4 === totalamount.toFixed(2)) {
-              self.$router.go({name: 'friendsdreamfinish'})
-            } else {
-              self.$router.go({name: 'friendsdream'})
-            }
-          }
-        }).catch((response) => {
-          console.log(response)
-        })
+          }).catch((response) => {
+            console.log(response)
+          })
+        }
       }
     }
   }
