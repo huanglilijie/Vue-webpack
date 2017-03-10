@@ -161,8 +161,6 @@ img{
 }
 .amount-activity{
   padding-bottom: 4rem;
-  margin: 10px 0 0;
-
 }
 .amount-activity p{
   font-size: .5rem;
@@ -173,7 +171,7 @@ img{
   font-size: 1.1rem;
 }
 .amount-activity>p:last-child{
-  margin-top: 10px;
+  margin-top: .1rem;
   font-size: .6rem;
 }
 .mask{

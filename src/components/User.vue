@@ -314,7 +314,7 @@ html{
     width: 2.36rem;
     position: absolute;
     right: -.2rem;
-    top: .35rem;
+    top: .34rem;
     background-color: rgb(150,157,163);
     text-align: center;
     line-height: .98rem;
@@ -332,7 +332,7 @@ html{
     font-size:.4rem
   }
   .user-agreement {
-    margin-top: 30px;
+    margin-top: .5rem;
   }
   .user-agreement a{
     color: #000000;
