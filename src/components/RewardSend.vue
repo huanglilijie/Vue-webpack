@@ -21,7 +21,7 @@
         </li>
       </ul>
 
-      <div class="agreen">我同意 <a href="">打赏规则</a>
+      <div class="agreen">我同意 <a href="#" @click="pumpshow2()">打赏规则</a>
         <input type="checkbox" id="consent" v-model="state" />
       </div>
       <a class="btn" @click="submit">送出心意</a>
@@ -32,9 +32,19 @@
         </div>
         <div class="mask" @click="makshow"></div>
       </div>
-
     </div>
-
+  </div>
+  <div class="ciry" v-if="ciry">
+    <div class="content">
+      <div class="content_title">
+        <h2>打赏规则</h2>
+      </div>
+      <div class="line"></div>
+      <div class="content_word">
+        <p>打赏规则待定</p>
+      </div>
+    </div>
+    <a class="btn1" @click="pumpshow2()">知道了</a>
   </div>
 </template>
 <script>
@@ -55,7 +65,8 @@
         moneyRule: '',
         reward: 0,
         orderId: '',
-        useropenid: ''
+        useropenid: '',
+        ciry: false
       }
     },
     components: {
@@ -74,6 +85,9 @@
         this.reward = this.realMoney
         this.checks = !this.checks
         this.submit()
+      },
+      pumpshow2 () {
+        this.ciry = !this.ciry
       },
       makshow () {
         var self = this
@@ -317,5 +331,52 @@
     margin-top: 10px;
     border:2px dashed #FFFFFF ;
     padding: 13px;
+  }
+  .ciry {
+    width: 100%;
+    height: 100%;
+    background: url(/static/images/wherebg.png) no-repeat #fff;
+    background-size: 100%;
+    padding-top: 50px;
+    position: fixed;
+    top: 0;
+  }
+  .content {
+    width: 80%;
+    min-height: 90%;
+    margin: 0 auto;
+    background: url(/static/images/pumpbg.png) no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+    padding-top: 35%;
+  }
+ .btn1{
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #f6ba38;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+  }
+  .line{
+    width:100%;
+    height:0px;
+    border-bottom: 2px white dashed;
+    margin: 10px auto;
+  }
+  .content_title{
+    text-align: center;
+  }
+  .content_word{
+    box-sizing: border-box;
+    padding: 0px 10px;
+  }
+  .content_title h2{
+    font-size: .45rem;
+  }
+  .content_word p{
+    font-size: .4rem;
   }
 </style>
