@@ -8,6 +8,10 @@ export default {
   appid: 'wx836245eaa68afe48',
   // appsecret
   appsecret: '3ef552561e4249a982bfcf5fb9d46b73',
+  // 微信授权回调域名
+  redirect_uri: 'http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect',
+  // 活动首页
+  active_url: 'http://wxtest.beautyyan.cn',
   // 用户微信openid
   openid: 'oZx0fwPMqq5eHRR2tRBSE9YtqA7w',
   // 用户微信userid
@@ -17,7 +21,7 @@ export default {
   // 活动名额
   activequota: 30,
   // 活动开始时间
-  startDate: '2017-03-5',
+  startDate: '2017-03-14',
   // 活动结束时间
   endDate: '2017-03-20',
   // 1000金额等级
