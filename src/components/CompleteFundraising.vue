@@ -72,13 +72,13 @@
       background-size:100%;
       position: absolute;
   }
-div{text-align: center;}
   .content{
     padding-top: 50px;
   }
   .content h1{
     font-size: 1.05rem;
     color:#fff;
+    text-align: center;
   }
   .content p{
       margin: 0 auto;

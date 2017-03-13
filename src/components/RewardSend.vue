@@ -34,14 +34,22 @@
       </div>
     </div>
   </div>
-  <div class="ciry" v-if="ciry">
+  <div class="ciry-beyond" v-if="ciry">
     <div class="content">
       <div class="content_title">
         <h2>打赏规则</h2>
       </div>
-      <div class="line"></div>
       <div class="content_word">
-        <p>打赏规则待定</p>
+        <p>好友打赏是指用户在支付意向金开启活动后，分享活动 链接到朋友圈或好友对话中，邀请好友以打赏的形式支持该用户的购车计划。好友打赏的款项会在活动结束并购车时抵扣购车款。</p>
+        <p>好友打赏款项将托管在杭州驭缘网络科技有限公司（以下简称驭缘网络）支付宝/微信账号，驭缘网络为北京梅赛德斯-奔驰销售服务有限公司正式授权的本次活动运营方。</p>
+        <p>好友打赏具体有以下几点说明：</p>
+        <p>（一）好友打赏方式： 本次活动支持微信或支付宝支付；</p>
+        <p>（二）好友打赏金额： 单笔打赏金额上限为8800元，且用户总筹款不超过8800元；</p>
+        <p>（三）好友打赏退还规则： </p>
+        <p>1.	若用户未到店核销进行购车，可随时申请退款，审核通过后，平台会将好友打赏款项退还到好友支付时所使用的第三方平台帐号；<br/>
+        2.	退款到账时间请参考第三方支付平台的处理时间；<br/>
+        3.	若用户已与经销商签署购车协议并完成核销后发生违约，因好友打赏款项已作为购车款转入经销商账户，好友打赏款项的处置将由用户与经销商双方协调解决，活动方将不参与。
+        </p>
       </div>
     </div>
     <a class="btn1" @click="pumpshow2()">知道了</a>
@@ -325,32 +333,27 @@
     line-height: 1.64rem;
     border: .05rem dashed #fff;
   }
-  .wrap-reward .pump p:last-child{
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 10px;
-    border:2px dashed #FFFFFF ;
-    padding: 13px;
-  }
-  .ciry {
+  .ciry-beyond {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     background: url(/static/images/wherebg.png) no-repeat #fff;
     background-size: 100%;
-    padding-top: 50px;
-    position: fixed;
+    /*padding-top: 50px;*/
+    position: absolute;
     top: 0;
+    z-index: 10;
   }
-  .content {
+  .ciry-beyond .content {
     width: 80%;
-    min-height: 90%;
+    /*min-height: 90%;*/
     margin: 0 auto;
-    background: url(/static/images/pumpbg.png) no-repeat;
+    /*background: url(/static/images/pumpbg.png) no-repeat;*/
     background-size: 100%;
     box-sizing: border-box;
-    padding-top: 35%;
+    padding-top: 10%;
+    padding-bottom: 25%;
   }
- .btn1{
+  .ciry-beyond .btn1{
     position: fixed !important;
     bottom: 0;
     width: 100%;
@@ -360,23 +363,28 @@
     text-align: center;
     color: #fff;
   }
-  .line{
-    width:100%;
-    height:0px;
-    border-bottom: 2px white dashed;
-    margin: 10px auto;
-  }
-  .content_title{
+  .ciry-beyond .content_title{
     text-align: center;
+    background: url(/static/images/pumptop.png) no-repeat center;
+    height: 4.5rem;
+    background-size: 100% 100%;
+    line-height: 8rem;
   }
-  .content_word{
+  .ciry-beyond .content_word{
     box-sizing: border-box;
     padding: 0px 10px;
+    background: url(/static/images/pumpbottom.png) no-repeat bottom;
+    background-size: 100%;
+    background-color: #f6ba35;
+    border-top: 2px white dashed;
+    padding-top: 5%;
+    padding-bottom: 10%;
   }
-  .content_title h2{
+  .ciry-beyond .content_title h2{
     font-size: .45rem;
   }
-  .content_word p{
+  .ciry-beyond .content_word p{
     font-size: .4rem;
+    padding: .1rem;
   }
 </style>

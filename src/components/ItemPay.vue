@@ -14,14 +14,29 @@
       </div>
     </div>
 
-    <div class="ciry" v-if="ciry">
+    <div class="ciry-beyond" v-if="ciry">
       <div class="content">
         <div class="content_title">
           <h2>意向金规则</h2>
         </div>
-        <div class="line"></div>
         <div class="content_word">
-          <p>意向金规则文案待定</p>
+          <p>意向金是指用户在参加本次活动时，在选定商品后支付的用于表明购买该活动商品的意向的金额。</p>
+          <p>用户在提交活动意向订单时，需要完成意向金在线支付，请在支付前仔细确认所购车型名称、型号、联系方式、购买人姓名、经销商等信息。用户支付意向金后，意向金将托管在杭州驭缘网络科技有限公司（以下简称驭缘网络）支付宝/微信账号，驭缘网络为北京梅赛德斯-奔驰销售服务有限公司正式授权的本次活动运营商。</p>
+          <p>用户在线支付意向金后，会收到核销码。用户到店后与经销商达成购车意向、签订购车合同并支付购车余额时，需向经销商提供核销码进行核销。在核销码成功验证后，用户支付的意向金、好友打赏款项 、购车补贴  将转入经销商账户并抵扣车款，核销后，活动方和平台将不再介入用户和经销商之间的购车交易。</p>
+          <p>用户与经销商签订购车协议是用户和经销商之间建立的合同关系，仅对用户和经销商之间发生法律效力，本次活动方不作为合同任一方，不享有该合同约定的权利且不承担合同约定的义务。因合同和产品质量问题所产生的纠纷，用户应自行与经销商进行协商解决。</p>
+          <p>意向金的管理如下：</p>
+          <p>（一）意向金金额计算： 本次活动意向金金额为666元；</p>
+          <p>（二）意向金支付流程： 用户需在30分钟内活动结束前支付意向金，否则系统将自动取消该活动意向订单；</p>
+          <p>（三）意向金退还规则： </p>
+          <p>1.	若用户未核销，可随时申请退款，退款审核通过后，意向金、好友打赏款项将退还到客户和好友支付时所使用的第三方支付平台帐号；<br/>
+            2.	意向金和好友所筹款项退款到账时间请参考第三方支付平台；<br/>
+            3.	若用户已与经销商签署购车协议并完成核销后发生违约，因意向金已作为购车款转入经销商账户，意向金的处置由用户与经销商双方自行协调解决，活动方将不参与该意向金的处置协商；<br/>
+            4.	用户需在选定的城市上牌，如果由于用户未在已选定的城市上牌而导致无法交车，该责任由用户自行承担，经销商有权取消该订单，用户应自行与经销商协商意向金的处置。
+          </p>
+          <p>（四）意向金发票规则：</p>
+          <p>1.	用户在线支付意向金后，活动方作为意向金的暂时监管方  ，无法为意向金单独开具发票；<br/>
+            2.	在用户与经销商成功进行购车交易后，意向金将作为定金的一部分抵扣购车款，经销商开具给用户的发票将包含意向金。
+          </p>
         </div>
       </div>
       <a class="btn1" @click="pumpshow2()">知道了</a>
@@ -246,26 +261,27 @@
   text-decoration: underline;
 }
 /*上牌城市遮罩*/
-.ciry {
+.ciry-beyond {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
   background: url(/static/images/wherebg.png) no-repeat #fff;
   background-size: 100%;
-  padding-top: 50px;
-  position: fixed;
+  /*padding-top: 50px;*/
+  position: absolute;
   top: 0;
   z-index: 10;
 }
-.content {
+.ciry-beyond .content {
   width: 80%;
-  min-height: 90%;
+  /*min-height: 90%;*/
   margin: 0 auto;
-  background: url(/static/images/pumpbg.png) no-repeat;
+  /*background: url(/static/images/pumpbg.png) no-repeat;*/
   background-size: 100%;
   box-sizing: border-box;
-  padding-top: 35%;
+  padding-top: 10%;
+  padding-bottom: 25%;
 }
-.btn1{
+.ciry-beyond .btn1{
   position: fixed !important;
   bottom: 0;
   width: 100%;
@@ -275,24 +291,29 @@
   text-align: center;
   color: #fff;
 }
-.line{
-  width:100%;
-  height:0px;
-  border-bottom: 2px white dashed;
-  margin: 10px auto;
-}
-.content_title{
+.ciry-beyond .content_title{
   text-align: center;
+  background: url(/static/images/pumptop.png) no-repeat center;
+  height: 4.5rem;
+  background-size: 100% 100%;
+  line-height: 8rem;
 }
-.content_word{
+.ciry-beyond .content_word{
   box-sizing: border-box;
   padding: 0px 10px;
+  background: url(/static/images/pumpbottom.png) no-repeat bottom;
+  background-size: 100%;
+  background-color: #f6ba35;
+  border-top: 2px white dashed;
+  padding-top: 5%;
+  padding-bottom: 10%;
 }
-.content_title h2{
+.ciry-beyond .content_title h2{
   font-size: .45rem;
 }
-.content_word p{
+.ciry-beyond .content_word p{
   font-size: .4rem;
+  padding: .1rem;
 }
 .btn{
   display: block;

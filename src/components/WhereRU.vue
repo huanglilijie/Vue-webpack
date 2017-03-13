@@ -183,6 +183,18 @@
   .content_word p{
     font-size: .4rem;
   }
+  /*如果没有经销商数据*/
+  .isnohave{
+    width: 100%;
+    margin:0 auto;
+    background: url(/static/images/center-bg.png) no-repeat;
+    background-size:100% 100%;
+    padding: 27% 0;
+  }
+  .isnohave p{
+    font-size: .4rem;
+    text-align: center;
+  }
 </style>
 <template>
     <div class="wrap">
@@ -211,6 +223,9 @@
               </p>
             </li>
           </ul>
+          <div class="isnohave" v-if ='isnohave'>
+            <p>您所在的城市没有经销商<br/>请手动更换城市</p>
+          </div>
           <p class="tip">我已阅读 <a href="###" @click="pumpshow2()">关于上牌城市的说明</a>
             <input type="checkbox" class= "input-checkbox"  v-model="checkState"/>
           </p>
@@ -270,7 +285,8 @@
           ciry: false,
           userlongitude: null,
           userlatitude: null,
-          userisGrant: false
+          userisGrant: false,
+          isnohave: false
         }
       },
       components: {
@@ -380,6 +396,11 @@
                 data[i].distance = (data[i].distance / 1000).toFixed(2)
               }
               this.$set('data', data)
+              if (data.length === 0) {
+                this.isnohave = true
+              } else {
+                this.isnohave = false
+              }
               this.$refs.bmap.$emit('show-dealers-onmap', data)
             }).catch((response) => {
               this.$alert('获取经销商列表失败')

@@ -165,11 +165,6 @@ export default {
 }
 </script>
 <style lang="css">
-html,body,ul{
-    margin:0;
-    padding: 0;
-    font-family: 微软雅黑;
-}
  @media (max-width: 350px) {
 html,body {
 font-size: 10px !important;
