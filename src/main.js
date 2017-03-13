@@ -6,7 +6,6 @@ import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 import Wechatshare from './libs/wechatshare.js'
 /* import router from './router' */
-import Golab from './libs/golab.js'
 import 'assets/css/style.css'
 // import Config from '../config/config'
 import { Picker } from 'mint-ui'

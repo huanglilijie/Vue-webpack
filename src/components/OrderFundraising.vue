@@ -3,7 +3,7 @@
 	<div class="toporderf">
 	  <div>
 		<p>宠爱ing</p>
-		<div><img src="/static/images/headset.png" alt="" /></div>
+		<div ><img src="/static/images/headset.png" @click = "openUrl" /></div>
 	  </div>
 	  <p>* 您可以提前完成筹款并与经销商沟通</p>
 	</div>
@@ -148,6 +148,9 @@
       },
       viewMyDear () {
         this.$router.go({name: 'dealerlist', query: {orderId: this.reservationId}})
+      },
+      openUrl () {
+        window.open(Golab.customerUrl)
       }
     }
   }

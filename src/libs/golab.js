@@ -37,5 +37,7 @@ export default {
   // 3000<=amount<5000
   packageamount_2: 1500,
   // 5000<=amount<8800
-  packageamount_3: 2000
+  packageamount_3: 2000,
+  // 客服url
+  customerUrl: 'http://www.baidu.com'
 }

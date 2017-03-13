@@ -3,7 +3,7 @@
     <div class="orderrefundedtop">
       <div class="unsubscribe">
       	<p>{{state}}</p>
-      	<img src="/static/images/headset.png" alt="" />
+      	<img src="/static/images/headset.png" @click = "openUrl" />
       </div>
      	<p>{{stateDetail}}</p>
     </div>
@@ -154,6 +154,9 @@
       },
       gohome () {
         this.$router.go({name: 'home'})
+      },
+      openUrl () {
+        window.open(Golab.customerUrl)
       }
     }
   }

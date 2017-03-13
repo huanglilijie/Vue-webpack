@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <img src="/static/images/imgtitle.jpg" alt="" />
+      <img src="/static/images/imgtitle.jpg"/>
     </div>
     <div class="content">
       <div class="friendC-title">

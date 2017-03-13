@@ -3,7 +3,7 @@
     <div class="toporderpayment">
       <div>
           <p>已支付</p>
-          <div><img src="/static/images/headset.png" alt="" /></div>
+          <div><img src="/static/images/headset.png" @click = "openUrl" /></div>
       </div>
       <p>恭喜，你已成功参与smart购车筹款活动，快分享给全家人，
 赢得他们的宠爱，2000元购车补贴在等着你哦！</p>
@@ -130,6 +130,9 @@
         this.$router.go({
           name: 'createmydear',
           query: this.pageParam})
+      },
+      openUrl () {
+        window.open(Golab.customerUrl)
       }
     }
   }

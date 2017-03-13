@@ -1,11 +1,11 @@
 <template>
   <div class="orderfundraisingfinish">
     <div class="top">
-	  <div>
-	    <p>已拥有万千宠爱</p>
-	    <div><img src="/static/images/headset.png" alt="" /></div>
-	  </div>
-	  <p>* 感谢您对奔驰的支持</p>
+	    <div>
+	      <p>已拥有万千宠爱</p>
+	      <div><img src="/static/images/headset.png" @click = "openUrl" /></div>
+	    </div>
+	    <p>* 感谢您对奔驰的支持</p>
     </div>
     <div class="car-style">
       <ul>
@@ -133,6 +133,9 @@
         }).catch((response) => {
           console.log(response)
         })
+      },
+      openUrl () {
+        window.open(Golab.customerUrl)
       }
     }
   }
