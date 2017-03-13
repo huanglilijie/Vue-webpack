@@ -359,6 +359,9 @@
         },
         // 根据城市code、用户经纬度获取经销商列表，若获取不到用户定位，则不传用户经纬度，经销商列表按字母排序，列表不展示距离
         getCityDealers (data) {
+          // 初始化选择经销商和上牌城市选择
+          this.selectedItem = null
+          this.checkState = false
           this.currentCity = data.cityName
           // this.$alert('用户:' + this.userlatitude + ' , ' + this.userlongitude)
           var param

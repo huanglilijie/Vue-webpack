@@ -68,47 +68,6 @@
           maximumAge: 0
         }
         navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, option)
-        /* var this_ = this
-        var geolocation = new BMap.Geolocation()
-        console.log(geolocation)
-        var location = {
-          longitude: this.longitude,
-          latitude: this.latitude
-        }
-        geolocation.getCurrentPosition(function (r) {
-          if (this.getStatus() === 0) {
-            console.log(r)
-            location.latitude = r.point.lat
-            location.longitude = r.point.lng
-            console.log(location)
-            // 用户同意授权
-            this_.isGrant = true
-            // 经纬度初始值
-            this_.longitude = location.longitude
-            this_.latitude = location.latitude
-            var param = {
-              userlongitude: this_.longitude,
-              userlatitude: this_.latitude,
-              userisGrant: this_.isGrant
-            }
-            console.log('用户:' + this_.longitude + ' , ' + this_.latitude)
-            // 将用户经纬度传给父组件
-            this_.$dispatch('edit-data', param)
-            this_.getCity(location)
-          } else {
-            this.$alert('取消')
-            this_.isGrant = false
-            var param2 = {
-              userlongitude: this_.longitude,
-              userlatitude: this_.latitude,
-              userisGrant: this_.isGrant
-            }
-            this.$dispatch('edit-data', param2)
-            this_.getCity(location)
-            // 弹出城市选择
-            this_.$dispatch('pump-show')
-          }
-        })*/
       },
       geoSuccess (event) {
         // 用户同意授权
@@ -118,9 +77,6 @@
           longitude: event.coords.longitude
         }
         var bd = GeoTransform.wgs2bd(location.longitude, location.latitude)
-        // this.$alert(bd[0] + ',' + bd[1])
-        // console.log(bd)
-        // console.log('用户:' + location.longitude + ' , ' + location.latitude)
         // 经纬度初始值
         this.longitude = bd[0]
         this.latitude = bd[1]
@@ -132,38 +88,10 @@
         // 将用户经纬度传给父组件
         this.$dispatch('edit-data', param)
         this.getCity(location)
-        // var h5latitude = event.coords.latitude
-        // var h5longitude = event.coords.longitude
-        // // http://api.map.baidu.com/geoconv/v1/?
-        // var gpsPoint = new BMap.Point(h5longitude, h5latitude)
-        // BMap.Convertor.translate(gpsPoint, 1, 5, function (point) {
-        //   this.$alert(point)
-        //   var location = {
-        //     latitude: event.coords.latitude,
-        //     longitude: event.coords.longitude
-        //   }
-        //   this.$alert('用户:' + h5longitude + ' , ' + h5latitude)
-        //   console.log('用户:' + h5longitude + ' , ' + h5latitude)
-        //   // 经纬度初始值
-        //   this.longitude = location.longitude
-        //   this.latitude = location.latitude
-        //   var param = {
-        //     userlongitude: location.longitude,
-        //     userlatitude: location.latitude,
-        //     userisGrant: this.isGrant
-        //   }
-        //   // 将用户经纬度传给父组件
-        //   this.$dispatch('edit-data', param)
-        //   this.getCity(location)
-        // })
-        /* var convertor = new BMap.Convertor()
-        var pointArr = []
-        pointArr.push(ggPoint)
-        convertor.translate(pointArr, 1, 5, translateCallback)*/
       },
       geoError (event) {
         // 用户拒绝授权
-        // this.$dispatch('show-subs-alert', '获取位置信息失败')
+        this.$dispatch('show-subs-alert', '获取位置信息失败')
         //  默认北京
         var location = {
           longitude: this.longitude,
