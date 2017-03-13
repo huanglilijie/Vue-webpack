@@ -39,8 +39,8 @@
             if (this.status === 'FUNDING' || this.status === 'PAID') {
               this.$router.go({name: 'friendsdream', query: {useropenid: this.useropenid}})
             }
-            // 判断状态是否是筹款完成
-            if (this.status === 'FUNDED' || this.status === 'FUNDED') {
+            // 判断状态是否是筹款完成/已核销
+            if (this.status === 'FUNDED' || this.status === 'CONFIRMED') {
               this.$router.go({name: 'friendsdreamfinish'})
             }
           }

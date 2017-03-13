@@ -40,7 +40,8 @@
         dealer: [{
           name: '',
           telephone: '',
-          totalAmount: ''
+          totalAmount: '',
+          code: ''
         }],
         payment: [{
           amount: '',
@@ -59,7 +60,7 @@
     },
     methods: {
       rewardSend () {
-        this.$router.go({name: 'rewardsend', query: {orderId: this.orderId, useropenid: this.useropenid}})
+        this.$router.go({name: 'rewardsend', query: {orderId: this.orderId, useropenid: this.useropenid, carname: this.product[0].name, dealercode: this.dealer[0].code}})
       },
       newDream () {
         this.$router.go({name: 'home'})
@@ -92,6 +93,7 @@
             console.log(response.data.product)
             console.log(response.data.dealer)
             this.product[0].name = response.data.product.name
+            this.dealer[0].code = response.data.dealer.code
             this.memo = response.data.memo
             this.orderId = response.data.reservationId
             this.initFundDetail()

@@ -64,7 +64,7 @@ export default {
     wx.config({
       // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: Golab.appid, // 必填，公众号的唯一标识
-      timestamp: 1488988911, // 必填，生成签名的时间戳
+      timestamp: timestamp, // 必填，生成签名的时间戳
       nonceStr: nonceStr, // 必填，生成签名的随机串
       signature: signature, // 必填，签名，见附录1
       jsApiList: ['checkJsApi', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
@@ -80,12 +80,13 @@ export default {
       var title = 'smart全家宠爱'
       var desc = '生活不止有眼前的路还有smart和远方'
       var linkurl
-      if (path.indexOf('/dealerlist') > 0) {
-        linkurl = 'http://wxtest.beautyyan.cn/friendsdream?openid=oZx0fwPMqq5eHRR2tRBSE9YtqD5w'
+      if (path.indexOf('/dealerlist') > 0 || path.indexOf('/fundraising') > 0) {
+        linkurl = Golab.active_url + '/friendsdream?useruid=' + window.sessionStorage.getItem('uid') +
+        '&useropenid=' + window.sessionStorage.getItem('openid')
       } else {
-        linkurl = 'http://wxtest.beautyyan.cn'
+        linkurl = Golab.active_url
       }
-      var imgUrl = 'http://wxtest.beautyyan.cn/static/images/fenxianglogo.png'
+      var imgUrl = Golab.active_url + '/static/images/fenxianglogo.png'
       // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
       wx.onMenuShareAppMessage({
         title: title, // 分享标题

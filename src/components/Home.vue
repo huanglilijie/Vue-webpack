@@ -1,4 +1,5 @@
 <template>
+  <title>smart 全家宠爱</title>
   <div id='smart-family' v-if='is_in_activity'>
     <img class='smart-familyimg' src='/static/smart-faimily.jpg'>
       <div v-if='checks'>

@@ -3,7 +3,7 @@
 </template>
 <script>
   import Config from '../../config/config'
-  import Golab from '../libs/golab'
+  // import Golab from '../libs/golab'
   var data = {
   }
   export default {
@@ -41,27 +41,42 @@
           this.$http.get(userInfoUrl)
             .then((response) => {
               this.data = response.body
-              console.log(Golab.openid)
-              if (openid != null) {
-                Golab.openid = openid
-              }
-              console.log('openid:' + Golab.openid)
+              // console.log(Golab.openid)
+              // if (openid != null) {
+              //   Golab.openid = openid
+              // }
+              // console.log('openid:' + Golab.openid)
               // 需要判断后台是否已经存储了用户信息，若存储则不再存储
-              this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user/' + Golab.openid).then((response) => {
-                if (response.data != null) {
-                  // 已经存储了用户信息
-                  this.$router.go({path: '/index'})
+              this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + openid).then((response) => {
+                // 已经存储了用户信息
+                window.sessionStorage.setItem('openid', openid)
+                if (state === 'pagechoose') {
+                  // 分享链接打开授权
+                  var useropenid = window.sessionStorage.getItem('useropenid')
+                  var useruid = window.sessionStorage.getItem('useruid')
+                  this.$router.go({name: 'pagechoose', query: {useropenid: useropenid, useruid: useruid}})
                 } else {
-                  // 将获取的用户微信信息，存储到后台
-                  this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user', {'openid': this.data.openid, 'city': this.data.city, 'country': this.data.country, 'headImgUrl': this.data.headimgurl, 'nickName': this.data.nickname, 'province': this.data.province, 'sex': this.data.sex}).then((response) => {
-                    console.log(response.ok)
-                    this.$router.go({path: '/index'})
-                  }).catch((response) => {
-                    console.log(response)
-                  })
+                  // 活动主页打开授权
+                  this.$router.go({name: 'index'})
                 }
               }).catch((response) => {
                 console.log(response)
+                // 将获取的用户微信信息，存储到后台
+                this.$http.post(Config.API_ROOT + 'ecommerce/user/wechat-user', {'openid': this.data.openid, 'city': this.data.city, 'country': this.data.country, 'headImgUrl': this.data.headimgurl, 'nickName': this.data.nickname, 'province': this.data.province, 'sex': this.data.sex}).then((response) => {
+                  console.log(response.ok)
+                  window.sessionStorage.setItem('openid', openid)
+                  if (state === 'pagechoose') {
+                    // 分享链接打开授权
+                    var useropenid = window.sessionStorage.getItem('useropenid')
+                    var useruid = window.sessionStorage.getItem('useruid')
+                    this.$router.go({name: 'pagechoose', query: {useropenid: useropenid, useruid: useruid}})
+                  } else {
+                    // 活动主页打开授权
+                    this.$router.go({name: 'index'})
+                  }
+                }).catch((response) => {
+                  console.log(response)
+                })
               })
             }).catch((response) => {
               this.$alert('获取微信用户信息失败')

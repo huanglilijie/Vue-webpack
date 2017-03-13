@@ -74,7 +74,9 @@
         reward: 0,
         orderId: '',
         useropenid: '',
-        ciry: false
+        ciry: false,
+        carname: null,
+        dealercode: null
       }
     },
     components: {
@@ -86,6 +88,18 @@
       this.moneyRule = /^134[0-8]\d{7}$|^(?:13[5-9]|147|15[0-27-9]|178|18[2-478])\d{8}$/
       this.orderId = this.$route.query.orderId
       this.useropenid = this.$route.query.useropenid
+      this.carname = this.$route.query.carname
+      this.dealercode = this.$route.query.dealercode
+      // 可以获取支付后回调链接的值，如果code为200则支付成功。
+      var errmsg = this.$route.query.err_msg
+      var totalfee = this.$route.query.total_fee
+      if (errmsg) {
+        if (errmsg === '操作成功') {
+          this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': totalfee, 'useropenid': this.useropenid}})
+        } else {
+          this.$alert(errmsg)
+        }
+      }
       this.initFundDetail()
     },
     methods: {
@@ -143,11 +157,14 @@
             return false
           } else {
             // 支付
-            // this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.sessionStorage.getItem('openid') + '/fund/' + this.orderId + '/payment', {}).then((response) => {
-            // }).catch((response) => {
-            //   console.log(response)
-            // })
-            this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward, 'useropenid': this.useropenid}})
+            this.$http.post(Config.API_ROOT + 'ecommerce/customers/' + window.sessionStorage.getItem('openid') + '/fund/' + this.orderId + '/payment', {subject: '支付意向金', body: this.carname, limit_pay: this.paytype, total_fee: this.reward, return_url: 'http://192.168.6.122/rewardsend?orderId=' + this.orderId + '&useropenid=' + this.useropenid + '&carname=' + this.carname, dealer_code: this.dealercode}).then((response) => {
+              console.log(response)
+              console.log(response.data)
+              window.open(response.data)
+            }).catch((response) => {
+              console.log(response)
+            })
+            // this.$router.go({name: 'rewardarrive', query: {'orderId': this.orderId, 'reward': this.reward, 'useropenid': this.useropenid}})
           }
         }).catch((response) => {
           console.log(response)
