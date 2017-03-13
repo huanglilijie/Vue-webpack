@@ -276,33 +276,57 @@ router.beforeEach(function (ref) {
       router.go({path: '/smartpc'})
     }
   } else {
+    // 微信授权 authredirect
+    // 如果ref.to.name 不等于authredirect，需要判断用户是否授权
+    if (ref.to.name !== 'authredirect') {
+      var openid
+      // var state
+      // 1、打开邀请函链接，判断是本人还是好友
+      if (ref.to.name === 'pagechoose') {
+        var useropenid = ref.to.query.useropenid
+        var useruid = ref.to.query.useruid
+        window.sessionStorage.setItem('useropenid', useropenid)
+        window.sessionStorage.setItem('useruid', useruid)
+        console.log('useropenid:' + useropenid)
+        console.log('useruid:' + useruid)
+        // 已经获取到用户的openid，不需要授权
+        if (window.sessionStorage.getItem('openid') !== null) {
+          openid = window.sessionStorage.getItem('openid')
+        } else {
+          // 需要通过用户授权拉取用户信息
+          window.sessionStorage.setItem('openid', Golab.openid)
+          openid = window.sessionStorage.getItem('openid')
+          // state = 'pagechoose'
+          // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
+          // Golab.appid + '&redirect_uri=' + Golab.redirect_uri +
+          // '&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect'
+        }
+        console.log('openid:' + openid)
+        console.log('useropenid:' + useropenid)
+        console.log(openid === useropenid)
+        if (openid === useropenid) {
+          // 本人访问邀请函
+          router.go({path: '/home'})
+        }
+      } else {
+        // 2、打开活动链接
+        // 已经获取到用户的openid，不需要授权
+        if (window.sessionStorage.getItem('openid') !== null) {
+          openid = window.sessionStorage.getItem('openid')
+        } else {
+          // 需要通过用户授权拉取用户信息
+          window.sessionStorage.setItem('openid', Golab.openid)
+          openid = window.sessionStorage.getItem('openid')
+          // state = 'index'
+          // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
+          // Golab.appid + '&redirect_uri=' + Golab.redirect_uri +
+          // '&response_type=code&scope=snsapi_userinfo&state=' + state + '#wechat_redirect'
+        }
+      }
+    }
     // 微信分享配置加载
     // Wechatshare.install()
     Wechatshare.kong()
-    // 微信授权
-    var openid
-    // var openid = window.sessionStorage.getItem('openid')
-    // 已经获取到用户的openid，不需要授权
-    if (window.sessionStorage.getItem('openid') !== null) {
-      openid = window.sessionStorage.getItem('openid')
-    } else {
-      // 需要通过用户授权拉取用户信息
-      window.sessionStorage.setItem('openid', Golab.openid)
-      openid = window.sessionStorage.getItem('openid')
-      // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx836245eaa68afe48&redirect_uri=http%3A%2F%2Fwxtest.beautyyan.cn%2Fauthredirect&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-    }
-    // 如果打开邀请函链接，判断是本人还是好友
-    if (ref.to.name === 'pagechoose') {
-      var useropenid = ref.to.query.useropenid
-      var useruid = ref.to.query.useruid
-      console.log('useropenid:' + useropenid)
-      console.log('useruid:' + useruid)
-      // window.sessionStorage.setItem('useropenid', useropenid)
-      if (openid === useropenid) {
-        // 本人访问邀请函
-        router.go({path: '/home'})
-      }
-    }
   }
   window.scrollTo(0, 0)
   ref.next()
