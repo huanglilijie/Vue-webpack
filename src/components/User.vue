@@ -45,7 +45,7 @@
       <btn-footer is-item-selected="selectedItem" >这就是我</btn-footer>
     </div>
     <div class="bottom-content">
-      <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" alt="" /></p>
+      <p><span id="">奔驰世界，无限精彩</span><img src="/static/headset.png" @click = "openUrl" /></p>
       <p>https://estore.mercedes-benz.com.cn</p>
       <p class="user-agreement">
         <span>我同意</span><a @click="pumpshow2 ()">活动用户协议</a>
@@ -223,6 +223,9 @@
             console.log(response)
           })
         }
+      },
+      openUrl () {
+        window.open(Golab.customerUrl)
       }
     },
     computed: {

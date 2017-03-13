@@ -39,5 +39,5 @@ export default {
   // 5000<=amount<8800
   packageamount_3: 2000,
   // 客服url
-  customerUrl: 'http://www.baidu.com'
+  customerUrl: 'https://estore-int-bce.mercedes-benz.com.cn/webim/im.html?tenantId=19&xmppServer=estore-int-bce.mercedes-benz.com.cn&restServer=estore-int-bce.mercedes-benz.com.cn'
 }
