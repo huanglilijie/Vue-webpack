@@ -63,7 +63,7 @@
       },
       agree_obtain_location () {
         var option = {
-          // enableHighAccuracy: true,
+          enableHighAccuracy: true,
           timeout: Infinity,
           maximumAge: 0
         }
