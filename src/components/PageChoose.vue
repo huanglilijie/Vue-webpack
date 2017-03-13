@@ -43,6 +43,10 @@
             if (this.status === 'FUNDED' || this.status === 'CONFIRMED') {
               this.$router.go({name: 'friendsdreamfinish'})
             }
+            // 判断状态是否是退款中/退款完成
+            if (this.status === 'REFUNDING' || this.status === 'REFUNDED') {
+              this.$router.go({name: 'friendsdreamunsubscribe'})
+            }
           }
         }).catch((response) => {
           console.log(response)
