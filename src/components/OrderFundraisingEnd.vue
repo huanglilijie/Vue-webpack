@@ -13,7 +13,7 @@
           <label for="">订单编号:</label>
           <div>{{reservationId}}</div>
         </li>
-        <li class="car-message clearfloat"
+        <li class="car-message clearfloat">
           <label for="">预定时间:</label>
           <div>{{createTime}}</div>
         </li>
