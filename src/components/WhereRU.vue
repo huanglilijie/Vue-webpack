@@ -187,13 +187,14 @@
   .isnohave{
     width: 100%;
     margin:0 auto;
-    background: url(/static/images/center-bg.png) no-repeat;
-    background-size:100% 100%;
+    background: url(/static/images/center-bg2.png) no-repeat center;
+    background-size:90% 70%;
     padding: 27% 0;
   }
   .isnohave p{
     font-size: .4rem;
     text-align: center;
+    color:#fff;
   }
 </style>
 <template>

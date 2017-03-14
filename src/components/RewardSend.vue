@@ -198,28 +198,30 @@
 </script>
 <style>
   .reward-bottom{
-    position: fixed;
     width: 100%;
-    bottom: 0;
     background: #fff;
+    height: 40%;
   }
   .wrap-reward {
     width: 100%;
     height: 100%;
     padding-bottom: 10px;
+    background: url(/static/images/imgtitle-bg.png) no-repeat #fff;
+    background-size: 100%;
+    position: absolute;
+    z-index: -1;
   }
   .wrap-reward .content {
     width: 100%;
-    background: url(/static/images/imgtitle-bg.png) no-repeat #fff;
     background-size: 100% 100%;
-    min-height: 60%;
+    min-height: 50%;
     padding-top: 20%;
-    padding-bottom: 60%;
+    /*padding-bottom: 60%;*/
   }
   .wrap-reward .content .top {
     width: 90%;
     margin: 0 auto;
-    background: url(/static/images/center-bg.png) no-repeat;
+    background: url(/static/images/center-bg.png) no-repeat #fff;
     background-size: 100% 100%;
     background-position: center center;
     padding: 30px 0;

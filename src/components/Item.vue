@@ -1,7 +1,12 @@
 <template>
   <body>
     <div class="item">
-    	<img src="/static/paysuccess-img.jpg"/>
+    	<div class="no1-img">
+        <img src="/static/paysuccess-img.jpg"/>
+    	</div>
+      <div class="if-erj">
+        <span><a href="http://baidu.com"><img src="/static/headset.png"></a></span>
+      </div>
       <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
       <div class="car-style2">
       	<!-- <p>经销商信息：</p>
@@ -23,7 +28,6 @@
     token: '',
     pageParam: {}
   }
-
   export default {
     name: 'item',
     data () {
@@ -47,10 +51,13 @@
 <style scoped>
   .item{
     background-color: #fff;
-    position: absolute;
+    position: relative;
     /*height: 100%;*/
   }
-	.item img:nth-child(1){
+	.no1-img{
+		width: 100%;
+	}
+  .no1-img img{
 		width: 100%;
 	}
 	.car-style{
@@ -86,4 +93,10 @@
 	.phontnum{
 		margin-left: 100px;
 	}
+  .if-erj span img{
+    position: absolute;
+    width: 1rem;
+    top: .3rem;
+    right: 1rem;
+  }
 </style>
