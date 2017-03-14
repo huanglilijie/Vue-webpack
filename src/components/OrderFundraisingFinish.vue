@@ -1,4 +1,5 @@
 <template>
+  <title>我的宠爱之旅</title>
   <div class="orderfundraisingfinish">
     <div class="top">
 	    <div>

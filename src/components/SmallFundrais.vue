@@ -1,4 +1,5 @@
 <template lang="html">
+  <title>完成筹款</title>
   <div class="wrap2">
       <div class="content_title">
           <h2>您已筹得{{pageParam.totalamount}}元</h2>

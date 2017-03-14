@@ -1,4 +1,5 @@
 <template>
+  <title>提交成功</title>
   <div class="wrap-refundsubmit">
     <p>您的订单退款申请已提交，<br />
     请耐心等待客服处理！</p>

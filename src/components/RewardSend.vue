@@ -1,4 +1,5 @@
 <template>
+  <title>打赏</title>
   <div class="wrap-reward">
     <div class="content">
       <div class="top">

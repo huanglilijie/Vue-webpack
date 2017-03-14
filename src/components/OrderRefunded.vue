@@ -1,4 +1,5 @@
 <template>
+  <title>我的宠爱之旅</title>
   <div class="orderrefunded">
     <div class="orderrefundedtop">
       <div class="unsubscribe">

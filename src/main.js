@@ -5,6 +5,7 @@ import Validator from 'vue-validator'
 import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 import Wechatshare from './libs/wechatshare.js'
+import SetWechatTitle from './libs/setWechatTitle.js'
 /* import router from './router' */
 import Golab from './libs/golab.js'
 import 'assets/css/style.css'
@@ -37,18 +38,14 @@ const router = new VueRouter({
 router.map({
   '/': {
     name: 'home',
+    title: 'smart 全家宠爱',
     component: function (resolve) {
       require(['./components/Home.vue'], resolve)
     }
   },
-  '/authredirect': {
-    name: 'authredirect',
-    component: function (resolve) {
-      require(['./components/AuthRedirect.vue'], resolve)
-    }
-  },
   '/index': {
     name: 'home',
+    title: 'smart 全家宠爱',
     component: function (resolve) {
       require(['./components/Home.vue'], resolve)
     }
@@ -59,58 +56,43 @@ router.map({
       require(['./components/Point.vue'], resolve)
     }
   },
+  '/smartpc': {
+    name: 'smartpc',
+    component: function (resolve) {
+      require(['./components/SmartPC.vue'], resolve)
+    }
+  },
   '/lists': {
     name: 'lists',
+    title: '选择宠爱车型',
     component: function (resolve) {
       require(['./components/Lists.vue'], resolve)
     }
   },
-  '/listsfullquota': {
-    name: 'listsfullquota',
-    component: function (resolve) {
-      require(['./components/ListsFullQuota.vue'], resolve)
-    }
-  },
-  '/user': {
-    name: 'user',
-    component: function (resolve) {
-      require(['./components/User.vue'], resolve)
-    }
-  },
-  '/item': {
-    name: 'item',
-    component: function (resolve) {
-      require(['./components/Item.vue'], resolve)
-    },
-    subRoutes: {
-      'itempayinfo': {
-        name: 'itempayinfo',
-        component: function (resolve) {
-          require(['./components/ItemPayInfo.vue'], resolve)
-        }
-      },
-      'itempay': {
-        name: 'itempay',
-        component: function (resolve) {
-          require(['./components/ItemPay.vue'], resolve)
-        }
-      },
-      'itemSuccess': {
-        name: 'itemSuccess',
-        component: function (resolve) {
-          require(['./components/ItemSuccess.vue'], resolve)
-        }
-      }
-    }
-  },
   '/whereru': {
     name: 'whereru',
+    title: '在哪提车呢',
     component: function (resolve) {
       require(['./components/WhereRU.vue'], resolve)
     }
   },
+  '/carpad': {
+    name: 'carpad',
+    title: '在哪提车呢',
+    component: function (resolve) {
+      require(['./components/CarPad.vue'], resolve)
+    }
+  },
+  '/user': {
+    name: 'user',
+    title: '告诉我们你是谁',
+    component: function (resolve) {
+      require(['./components/User.vue'], resolve)
+    }
+  },
   '/orderconfirm': {
     name: 'orderconfirm',
+    title: '支付意向金',
     component: function (resolve) {
       require(['./components/OrderConfirm.vue'], resolve)
     }
@@ -121,94 +103,131 @@ router.map({
       require(['./components/Ruler.vue'], resolve)
     }
   },
+  '/item': {
+    name: 'item',
+    component: function (resolve) {
+      require(['./components/Item.vue'], resolve)
+    },
+    subRoutes: {
+      'itempayinfo': {
+        name: 'itempayinfo',
+        title: '支付意向金',
+        component: function (resolve) {
+          require(['./components/ItemPayInfo.vue'], resolve)
+        }
+      },
+      'itempay': {
+        name: 'itempay',
+        title: '支付意向金',
+        component: function (resolve) {
+          require(['./components/ItemPay.vue'], resolve)
+        }
+      },
+      'itemSuccess': {
+        name: 'itemSuccess',
+        title: '支付成功',
+        component: function (resolve) {
+          require(['./components/ItemSuccess.vue'], resolve)
+        }
+      }
+    }
+  },
   '/createmydear': {
     name: 'createmydear',
+    title: '创建我的宠爱之旅',
     component: function (resolve) {
       require(['./components/CreateMyDear.vue'], resolve)
     }
   },
+  '/dealerlist': {
+    name: 'dealerlist',
+    title: '我的宠爱之旅',
+    component: function (resolve) {
+      require(['./components/DealerList.vue'], resolve)
+    }
+  },
   '/endfundraising': {
     name: 'endfundraising',
+    title: '完成筹款',
     component: function (resolve) {
       require(['./components/EndFundraising.vue'], resolve)
     }
   },
-  '/smallfundrais': {
-    name: 'smallfundrais',
-    component: function (resolve) {
-      require(['./components/SmallFundrais.vue'], resolve)
-    }
-  },
   '/completefundraising': {
     name: 'completefundraising',
+    title: '完成筹款',
     component: function (resolve) {
       require(['./components/CompleteFundraising.vue'], resolve)
     }
   },
-  '/carpad': {
-    name: 'carpad',
+  '/smallfundrais': {
+    name: 'smallfundrais',
+    title: '完成筹款',
     component: function (resolve) {
-      require(['./components/CarPad.vue'], resolve)
+      require(['./components/SmallFundrais.vue'], resolve)
+    }
+  },
+  '/fundraising': {
+    name: 'fundraising',
+    title: '我的宠爱之旅',
+    component: function (resolve) {
+      require(['./components/FunDraising.vue'], resolve)
     }
   },
   '/orderpayment': {
     name: 'orderpayment',
+    title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderPayment.vue'], resolve)
     }
   },
   '/orderfundraising': {
     name: 'orderfundraising',
+    title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderFundraising.vue'], resolve)
     }
   },
   '/orderfundraisingend': {
     name: 'orderfundraisingend',
+    title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderFundraisingEnd.vue'], resolve)
     }
   },
   '/orderfundraisingfinish': {
     name: 'orderfundraisingfinish',
+    title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderFundraisingFinish.vue'], resolve)
     }
   },
   '/orderrefunded': {
     name: 'orderrefunded',
+    title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderRefunded.vue'], resolve)
     }
   },
   '/myfundraising': {
     name: 'myfundraising',
+    title: '我的筹款',
     component: function (resolve) {
       require(['./components/MyFundraising.vue'], resolve)
     }
   },
   '/cancelmydear': {
     name: 'cancelmydear',
+    title: '确认取消',
     component: function (resolve) {
       require(['./components/CancelMyDear.vue'], resolve)
     }
   },
   '/refundsubmit': {
     name: 'refundsubmit',
+    title: '提交成功',
     component: function (resolve) {
       require(['./components/RefundSubmit.vue'], resolve)
-    }
-  },
-  '/dealerlist': {
-    name: 'dealerlist',
-    component: function (resolve) {
-      require(['./components/DealerList.vue'], resolve)
-    }
-  },
-  '/fundraising': {
-    name: 'fundraising',
-    component: function (resolve) {
-      require(['./components/FunDraising.vue'], resolve)
     }
   },
   '/pagechoose': {
@@ -219,18 +238,21 @@ router.map({
   },
   '/friendsdream': {
     name: 'friendsdream',
+    title: '',
     component: function (resolve) {
       require(['./components/FriendsDream.vue'], resolve)
     }
   },
   '/rewardsend': {
     name: 'rewardsend',
+    title: '打赏',
     component: function (resolve) {
       require(['./components/RewardSend.vue'], resolve)
     }
   },
   '/rewardarrive': {
     name: 'rewardarrive',
+    title: '心意已送到',
     component: function (resolve) {
       require(['./components/RewardArrive.vue'], resolve)
     }
@@ -247,10 +269,16 @@ router.map({
       require(['./components/FriendsActivityEnd.vue'], resolve)
     }
   },
-  '/smartpc': {
-    name: 'smartpc',
+  '/authredirect': {
+    name: 'authredirect',
     component: function (resolve) {
-      require(['./components/SmartPC.vue'], resolve)
+      require(['./components/AuthRedirect.vue'], resolve)
+    }
+  },
+  '/listsfullquota': {
+    name: 'listsfullquota',
+    component: function (resolve) {
+      require(['./components/ListsFullQuota.vue'], resolve)
     }
   },
   '/friendsdreamunsubscribe': {
@@ -332,7 +360,8 @@ router.beforeEach(function (ref) {
   ref.next()
 })
 router.afterEach(function (transition) {
-
+  let title = transition.to.title
+  SetWechatTitle(title)
 })
 router.redirect({
   '*': '/index'

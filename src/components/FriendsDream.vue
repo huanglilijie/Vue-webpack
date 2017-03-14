@@ -1,4 +1,5 @@
 <template>
+  <title></title>
   <div class="wrap">
     <div class="top">
       <img src="/static/images/imgtitle.jpg"/>
@@ -22,6 +23,7 @@
 <script>
   import Config from '../../config/config'
   import Vue from 'vue'
+  import SetWechatTitle from '../libs/setWechatTitle.js'
   export default {
     data () {
       return {
@@ -56,7 +58,6 @@
       var useropenid = this.$route.query.useropenid
       this.$set('useropenid', useropenid)
       this.initWeChatInfo()
-      // this.initOrderDetail()
     },
     methods: {
       rewardSend () {
@@ -81,6 +82,7 @@
             this.nickName = response.data.nickName
             this.uid = response.data.uid
             this.initOrderDetail()
+            SetWechatTitle(this.nickName + '的梦想')
           }
         }).catch((response) => {
           console.log(response)

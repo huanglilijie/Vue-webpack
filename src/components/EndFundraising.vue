@@ -1,4 +1,5 @@
 <template lang="html">
+  <title>完成筹款</title>
   <div class="wrap3">
       <div class="content_title">
           <h2>您还没有筹到款</h2>
@@ -6,14 +7,13 @@
       </div>
       <div class="content_img">
           <img src="/static/images/circle.png" alt="">
-      </div>
+      </div
       <div class="content_btn">
           <input type="button" value="还不够，离梦想再进一步" onclick="window.history.go(-1)">
           <input type="button" value="OK , 确认完成" @click="submit()">
       </div>
   </div>
 </template>
-
 <script>
   import Config from '../../config/config'
   export default {

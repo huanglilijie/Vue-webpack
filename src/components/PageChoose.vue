@@ -8,7 +8,8 @@
       return {
         useropenid: '',
         useruid: '',
-        status: ''
+        status: '',
+        nickName: ''
       }
     },
     ready: function () {
@@ -16,16 +17,26 @@
       var useropenid = this.$route.query.useropenid
       this.$set('useruid', useruid)
       this.$set('useropenid', useropenid)
+      this.initWeChatInfo()
       this.ifInactivity()
     },
     methods: {
+      initWeChatInfo () {
+        this.$http.get(Config.API_ROOT + 'ecommerce/user/wechat-user/' + this.useropenid).then((response) => {
+          if (response.data != null) {
+            this.nickName = response.data.nickName
+          }
+        }).catch((response) => {
+          console.log(response)
+        })
+      },
       ifInactivity () {
         var nd = new Date()
         var ld = new Date(Golab.endDate)
         var dates = Math.ceil((ld.getTime() - nd.getTime()) / (1000 * 60 * 60 * 24)) + 1
         if (dates <= 0) {
           dates = 0
-          this.$router.go({name: 'friendsactivityend'})
+          this.$router.go({name: 'friendsactivityend', query: {nickName: this.nickName}})
         } else {
           this.initOrderDetail()
         }
@@ -39,9 +50,15 @@
             if (this.status === 'FUNDING' || this.status === 'PAID') {
               this.$router.go({name: 'friendsdream', query: {useropenid: this.useropenid}})
             }
+<<<<<<< Updated upstream
             // 判断状态是否是筹款完成/已核销
             if (this.status === 'FUNDED' || this.status === 'CONFIRMED') {
               this.$router.go({name: 'friendsdreamfinish'})
+=======
+            // 判断状态是否是筹款完成
+            if (this.status === 'FUNDED' || this.status === 'FUNDED') {
+              this.$router.go({name: 'friendsdreamfinish', query: {nickName: this.nickName}})
+>>>>>>> Stashed changes
             }
             // 判断状态是否是退款中/退款完成
             if (this.status === 'REFUNDING' || this.status === 'REFUNDED') {

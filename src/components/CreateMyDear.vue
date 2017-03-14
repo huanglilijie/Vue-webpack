@@ -1,4 +1,5 @@
 <template>
+  <title>创建我的宠爱之旅</title>
   <div class="wrap-mydear">
     <img src="/static/title-img.jpg" alt="" />
     <div class="bottom">

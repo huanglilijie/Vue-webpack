@@ -15,7 +15,18 @@
 </template>
 <script>
   import wx from 'wx'
+  import SetWechatTitle from '../libs/setWechatTitle.js'
   export default {
+    data () {
+      return {
+        nickName: ''
+      }
+    },
+    ready: function () {
+      var nickName = this.$route.query.nickName
+      this.$set('nickName', nickName)
+      SetWechatTitle(this.nickName + '的梦想之旅')
+    },
     methods: {
       newDream () {
         this.$router.go({name: 'home'})

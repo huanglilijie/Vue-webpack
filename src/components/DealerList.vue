@@ -1,4 +1,5 @@
 <template lang="html">
+  <title>我的宠爱之旅</title>
   <div class="wrap-dealerlist">
     <div class="clock">
       <div class="loveresult">宠爱值：</div>

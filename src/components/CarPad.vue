@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-
     <div class="content">
       <div class="content_titlepad">
         <h2>上牌城市的说明</h2>

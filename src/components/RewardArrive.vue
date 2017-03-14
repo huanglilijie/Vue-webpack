@@ -1,4 +1,5 @@
 <template>
+  <title>心意已送到</title>
   <div class="wrap-reward">
     <div class="content">
       <div class="top">
