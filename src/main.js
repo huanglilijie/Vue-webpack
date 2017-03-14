@@ -5,7 +5,7 @@ import Validator from 'vue-validator'
 import VueResource from 'vue-resource'
 import Alert from './libs/alert'
 import Wechatshare from './libs/wechatshare.js'
-import SetWechatTitle from './libs/setWechatTitle.js'
+// import SetWechatTitle from './libs/setWechatTitle.js'
 /* import router from './router' */
 import Golab from './libs/golab.js'
 import 'assets/css/style.css'
@@ -359,9 +359,9 @@ router.beforeEach(function (ref) {
   window.scrollTo(0, 0)
   ref.next()
 })
-router.afterEach(function (transition) {
-  let title = transition.to.title
-  SetWechatTitle(title)
+router.afterEach(function () {
+  // let title = transition.to.title
+  // SetWechatTitle(title)
 })
 router.redirect({
   '*': '/index'

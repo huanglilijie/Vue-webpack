@@ -21,7 +21,7 @@ export default {
   // 活动名额
   activequota: 30,
   // 活动开始时间
-  startDate: '2017-03-15',
+  startDate: '2017-03-14',
   // 活动结束时间
   endDate: '2017-03-20',
   // 1000金额等级
