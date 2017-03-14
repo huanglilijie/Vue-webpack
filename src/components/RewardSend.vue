@@ -6,7 +6,7 @@
         <p>一千不多，一元不少</p>
         <p>心意送到，梦想开启</p>
         <input v-model="reward" name="reward" class="text-big" type="number"></input>
-        <p>王比尔还差{{realMoney}}元就将达到筹款上限
+        <p>{{nickName}}还差{{realMoney}}元就将达到筹款上限
         <br />不要给多了哟！</p>
       </div>
     </div>
@@ -77,7 +77,8 @@
         useropenid: '',
         ciry: false,
         carname: null,
-        dealercode: null
+        dealercode: null,
+        nickName: null
       }
     },
     components: {
@@ -91,6 +92,7 @@
       this.useropenid = this.$route.query.useropenid
       this.carname = this.$route.query.carname
       this.dealercode = this.$route.query.dealercode
+      this.nickName = this.$route.query.nickName
       // 可以获取支付后回调链接的值，如果code为200则支付成功。
       var errmsg = this.$route.query.err_msg
       var totalfee = this.$route.query.total_fee
