@@ -50,15 +50,9 @@
             if (this.status === 'FUNDING' || this.status === 'PAID') {
               this.$router.go({name: 'friendsdream', query: {useropenid: this.useropenid}})
             }
-<<<<<<< Updated upstream
             // 判断状态是否是筹款完成/已核销
             if (this.status === 'FUNDED' || this.status === 'CONFIRMED') {
               this.$router.go({name: 'friendsdreamfinish'})
-=======
-            // 判断状态是否是筹款完成
-            if (this.status === 'FUNDED' || this.status === 'FUNDED') {
-              this.$router.go({name: 'friendsdreamfinish', query: {nickName: this.nickName}})
->>>>>>> Stashed changes
             }
             // 判断状态是否是退款中/退款完成
             if (this.status === 'REFUNDING' || this.status === 'REFUNDED') {
