@@ -2,10 +2,10 @@
   <body>
     <div class="item">
     	<div class="no1-img">
-        <img src="/static/paysuccess-img.jpg"/>
+        <img src="/static/images/paysuccess-img.jpg"/>
     	</div>
       <div class="if-erj">
-        <span><a href="http://baidu.com"><img src="/static/headset.png"></a></span>
+        <span><img src="/static/images/headset.png" @click="openUrl" ></span>
       </div>
       <div class="car-style"> 车型信息：{{ pageParam.carName }}</div>
       <div class="car-style2">
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import Golab from '../libs/golab'
   let data = {
     id: '',
     token: '',
@@ -44,6 +45,11 @@
         dealerTelephone: dealerTelephone
       }
       this.$set('pageParam', param)
+    },
+    methods: {
+      openUrl () {
+        window.open(Golab.customerUrl)
+      }
     }
   }
 </script>

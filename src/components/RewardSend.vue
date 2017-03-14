@@ -330,7 +330,7 @@
     z-index: 2;
   }
   .wrap-reward .pump{
-    background: url(/static/pump.png) no-repeat;
+    background: url(/static/images/pump.png) no-repeat;
     background-size: 100% 100%;
     min-height: 100px;
     padding-top:35%;

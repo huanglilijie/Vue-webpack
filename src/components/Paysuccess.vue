@@ -29,7 +29,7 @@ html,body{
 .pay-successbg{
 	width: 100%;
 	height: 423px;
-	background-image: url(/static/paysuccess-bg.png);
+	background-image: url(/static/images/paysuccess-bg.png);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	/*background-size: cover;*/

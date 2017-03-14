@@ -1,7 +1,7 @@
 <template>
   <title>创建我的宠爱之旅</title>
   <div class="wrap-mydear">
-    <img src="/static/title-img.jpg" alt="" />
+    <img src="/static/images/title-img.jpg" alt="" />
     <div class="bottom">
       <div class="text1">
         <p>我的生活有smart和远方</p>
@@ -114,7 +114,7 @@
   	display: block;
   }
   .bottom{
-  	background: url(/static/img-bg.png) center center;
+  	background: url(/static/images/img-bg.png) center center;
   	background-size: 100% 100%;
   	/*height: auto;*/
     background-size: 100%;
@@ -130,7 +130,7 @@
   }
   .text2{
   	padding: 25px 0px;
-  	background: url(/static/text-bg.png) no-repeat center;
+  	background: url(/static/images/text-bg-1.png) no-repeat center;
   	background-size: contain;
   	width: 85%;
   	text-align: center;

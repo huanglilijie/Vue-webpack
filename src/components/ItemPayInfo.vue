@@ -12,7 +12,7 @@
     <div v-if='checks'>
       <div class="mask"></div>
       <div class="pump">
-        <img src="/static/pump.png"/>
+        <img src="/static/images/pump.png"/>
         <p>你确定这样做吗?</p>
         <a class="mask-reselect" @click="pumpshow()">再考虑一下</a>
         <a class="mask-submit" @click="goBack()">确定</a>

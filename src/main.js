@@ -90,13 +90,6 @@ router.map({
       require(['./components/User.vue'], resolve)
     }
   },
-  '/orderconfirm': {
-    name: 'orderconfirm',
-    title: '支付意向金',
-    component: function (resolve) {
-      require(['./components/OrderConfirm.vue'], resolve)
-    }
-  },
   '/ruler': {
     name: 'ruler',
     component: function (resolve) {
@@ -207,13 +200,6 @@ router.map({
     title: '我的宠爱之旅',
     component: function (resolve) {
       require(['./components/OrderRefunded.vue'], resolve)
-    }
-  },
-  '/myfundraising': {
-    name: 'myfundraising',
-    title: '我的筹款',
-    component: function (resolve) {
-      require(['./components/MyFundraising.vue'], resolve)
     }
   },
   '/cancelmydear': {

@@ -43,7 +43,6 @@
       'btn-footer': Btn
     },
     ready: function () {
-      document.title = '选择宠爱车型'
       this.setData()
       var Isheight = document.documentElement.clientHeight
       this.height = Isheight - 60

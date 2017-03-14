@@ -1,15 +1,15 @@
 <template>
   <div id='smart-family' v-if='is_in_activity'>
-    <img class='smart-familyimg' src='/static/smart-faimily.jpg'>
+    <img class='smart-familyimg' src='/static/images/smart-faimily.jpg'>
       <div v-if='checks'>
         <div class="mask"></div>
         <div class="pump">
-          <img src="/static/pump.png"/>
+          <img src="/static/images/pump.png"/>
           <p>活动还没开始，请{{startmonth}}月{{startdate}}日再准时来参加！</p>
           <a class="mask-submit" @click="pumpshow()">确定</a>
         </div>
       </div>
-      <img class='smart-familybtn' src='/static/family-btn.png' @click='submit()'>
+      <img class='smart-familybtn' src='/static/images/family-btn.png' @click='submit()'>
       <div class="home-say">
         <div class="home-title">
           活动规则
@@ -33,7 +33,7 @@
 
   </div>
   <div id='smart-family' v-else>
-    <img class='smart-familyimg' src='/static/smart-family-over.jpg'/>
+    <img class='smart-familyimg' src='/static/images/smart-family-over.jpg'/>
   </div>
 </template>
 
