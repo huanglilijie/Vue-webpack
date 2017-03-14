@@ -198,37 +198,12 @@
 </style>
 <template>
   <title>在哪提车呢</title>
-  <div class="wrap">
-    <div class="top">
-      <img src="/static/images/location.png" @click="obtain_location()"/>
-      <h2>{{currentCity}}</h2>
-      <a href="#" @click="pumpshow()">更换城市</a>
-    </div>
-    <b-map-component v-ref:bmap></b-map-component>
-    <div class="middle">
-      <div class="select-agency">
-        <p>选择经销商</p>
-        <ul class="adders">
-          <li v-for="item in data" @click="selectDealer($index)" :class="[{'checked':item.selected}]">
-            <p class="distance">
-              <label>{{item.name}}</label>
-              <span v-if="userisGrant">距离{{item.distance}}km</span>
-            </p>
-            <p>
-              <label>地址：</label>
-              <span>{{item.address}}</span>
-            </p>
-            <p>
-              <label>电话：</label>
-              <span class="phoneh">{{item.telephone}}</span>
-            </p>
-          </li>
-        </ul>
-        <p class="tip">我已阅读 <a href="###" @click="pumpshow2()">关于上牌城市的说明</a>
-          <input type="checkbox" class= "input-checkbox"  v-model="checkState"/>
-        </p>
+    <div class="wrap">
+      <div class="top">
+        <img src="/static/images/location.png" @click="obtain_location()"/>
+        <h2>{{currentCity}}</h2>
+        <a href="#" @click="pumpshow()">更换城市</a>
       </div>
-<<<<<<< Updated upstream
       <b-map-component v-ref:bmap></b-map-component>
       <div class="middle">
         <div class="select-agency">
@@ -255,37 +230,37 @@
           <p class="tip">我已阅读 <a href="###" @click="pumpshow2()">关于上牌城市的说明</a>
             <input type="checkbox" class= "input-checkbox"  v-model="checkState"/>
           </p>
-=======
-    </div>
-    <!-- 底部按钮 -->
-    <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
-    <div class="mask" v-if="mask">
-      <div class="area">
-        <div class="sureButton">
-          <span class="no" @click="pumpshow()">取消</span>
-          <span class="yes" @click="changeCity()">完成</span>
->>>>>>> Stashed changes
-        </div>
-        <mt-picker :slots="slots" @change="demos"></mt-picker>
-      </div>
-    </div>
-    <!-- 上牌城市说明的遮罩块以及样式 -->
-    <div class="ciry" v-if="ciry">
-      <div class="content">
-        <div class="content_title">
-          <h2>上牌城市的说明</h2>
-        </div>
-        <div class="line"></div>
-        <div class="content_word">
-          <p>为了保证服务质量，请您购车后在该活动中提
-  交意向金时选定的上牌城市上牌，如您选择在
-  购车经销商所在城市以外的地区上牌，具体事
-  宜请于该经销商协商。</p>
         </div>
       </div>
-      <a class="btn1" @click="pumpshow2()">知道了</a>
+
+      <!-- 底部按钮 -->
+      <btn-footer is-item-selected="selectedItem">就这儿</btn-footer>
+      <div class="mask" v-if="mask">
+        <div class="area">
+          <div class="sureButton">
+            <span class="no" @click="pumpshow()">取消</span>
+            <span class="yes" @click="changeCity()">完成</span>
+          </div>
+          <mt-picker :slots="slots" @change="demos"></mt-picker>
+        </div>
+      </div>
+      <!-- 上牌城市说明的遮罩块以及样式 -->
+      <div class="ciry" v-if="ciry">
+        <div class="content">
+          <div class="content_title">
+            <h2>上牌城市的说明</h2>
+          </div>
+          <div class="line"></div>
+          <div class="content_word">
+            <p>为了保证服务质量，请您购车后在该活动中提
+    交意向金时选定的上牌城市上牌，如您选择在
+    购车经销商所在城市以外的地区上牌，具体事
+    宜请于该经销商协商。</p>
+          </div>
+        </div>
+        <a class="btn1" @click="pumpshow2()">知道了</a>
+      </div>
     </div>
-  </div>
 </template>
 <script>
     import BMapComponent from '../elements/BMapComponent.vue'

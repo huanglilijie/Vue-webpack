@@ -7,7 +7,7 @@
       </div>
       <div class="content_img">
           <img src="/static/images/circle.png" alt="">
-      </div
+      </div>
       <div class="content_btn">
           <input type="button" value="还不够，离梦想再进一步" onclick="window.history.go(-1)">
           <input type="button" value="OK , 确认完成" @click="submit()">
